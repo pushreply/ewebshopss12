@@ -1,1 +1,5 @@
-this a text.
+<<<<<<< .mine
+test=======
+this a text.>>>>>>> .r6
+
+probe
