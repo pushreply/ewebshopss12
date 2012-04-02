@@ -1,4 +1,7 @@
 package dto;
+
+import java.util.Collection;
+
 /**
  * @author roha0001
  *
@@ -6,16 +9,17 @@ package dto;
 public class DBCustomer {
 	private String login; 
 	private String password; 
-	private DBAddress mailadress;
 	private String nickname;
-	
-	public DBCustomer(String login, String password, DBAddress mailadress,
-			String nickname) {
+	private Collection<DBAddress> adresses;
+	private DBOrder order;
+	public DBCustomer(String login, String password, String nickname,
+			Collection<DBAddress> adresses, DBOrder order) {
 		super();
 		this.login = login;
 		this.password = password;
-		this.mailadress = mailadress;
 		this.nickname = nickname;
+		this.adresses = adresses;
+		this.order = order;
 	}
 	public String getLogin() {
 		return login;
@@ -29,25 +33,30 @@ public class DBCustomer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public DBAddress getMailadress() {
-		return mailadress;
-	}
-	public void setMailadress(DBAddress mailadress) {
-		this.mailadress = mailadress;
-	}
 	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	public Collection<DBAddress> getAdresses() {
+		return adresses;
+	}
+	public void setAdresses(Collection<DBAddress> adresses) {
+		this.adresses = adresses;
+	}
+	public DBOrder getOrder() {
+		return order;
+	}
+	public void setOrder(DBOrder order) {
+		this.order = order;
+	}
 	@Override
-	//maybe useful for logging.
 	public String toString() {
-		return "Customer [login=" + login + ", password=" + password
-				+ ", mailadress=" + mailadress + ", nickname=" + nickname + "]";
-	} 
+		return "DBCustomer [login=" + login + ", password=" + password
+				+ ", nickname=" + nickname + ", adresses=" + adresses
+				+ ", order=" + order + "]";
+	}
 	
 	
-
 }
