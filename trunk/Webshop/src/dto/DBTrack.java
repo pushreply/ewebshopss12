@@ -1,7 +1,6 @@
 package dto;
 
 import java.util.Date;
-import com.db4o.*;
 
 /**
  * @author roha0001
