@@ -1,5 +1,4 @@
 package dto;
-import com.db4o.*;
 /**
  * @author roha0001
  *
