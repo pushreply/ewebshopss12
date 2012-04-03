@@ -12,6 +12,7 @@ public class DBOrder {
 
 	public class Order {
 		
+		private int id_dborder;
 		private DBCustomer cust;
 		private Date datum;
 		private DBItems item;
@@ -57,6 +58,14 @@ public class DBOrder {
 		public void setState(int state) {
 			this.state = state;
 		}
+		
+		public int getId_dborder() {
+			return id_dborder;
+		}
+		public void setId_dborder(int id_dborder) {
+			this.id_dborder = id_dborder;
+		}
+		
 		@Override
 		//maybe useful for logging.
 		public String toString() {

@@ -9,7 +9,6 @@ import java.util.LinkedList;
 public class DBCustomer {
 	private String login; 
 	private String password; 
-	private String nickname;
 	
 	//A Customer has one or more addresses
 	LinkedList<DBAddress> address = new LinkedList<DBAddress>();
@@ -22,13 +21,11 @@ public class DBCustomer {
 		this.address = address;
 	}
 	
-	public DBCustomer(String login, String password, LinkedList<DBAddress> address,
-			String nickname) {
+	public DBCustomer(String login, String password, LinkedList<DBAddress> address) {
 		super();
 		this.login = login;
 		this.password = password;
 		this.address = address;
-		this.nickname = nickname;
 	}
 	
 	public String getLogin() {
@@ -47,19 +44,12 @@ public class DBCustomer {
 		this.password = password;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-	
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	
+
 	@Override
 	//maybe useful for logging.
 	public String toString() {
 		return "Customer [login=" + login + ", password=" + password
-				+ ", mailadress=" + address + ", nickname=" + nickname + "]";
+				+ ", mailadress=" + address + "]";
 	} 
 	
 	

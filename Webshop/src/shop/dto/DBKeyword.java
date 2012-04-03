@@ -8,6 +8,8 @@ package shop.dto;
  *
  */
 public class DBKeyword {
+	
+	private int id_dbkeyword;
 	private String keywordName;
 
 	public DBKeyword(String keywordName) {
@@ -21,6 +23,14 @@ public class DBKeyword {
 
 	public void setKeywordName(String keywordName) {
 		this.keywordName = keywordName;
+	}
+	
+	public int getId_dbkeyword() {
+		return id_dbkeyword;
+	}
+
+	public void setId_dbkeyword(int id_dbkeyword) {
+		this.id_dbkeyword = id_dbkeyword;
 	}
 
 	@Override
