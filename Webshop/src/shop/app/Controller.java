@@ -28,6 +28,13 @@ public class Controller extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response){			// service-Methode Anfang
 
 		System.out.println("Test");
+		//test zum taggen.... einkommentieren
+//		try {
+//			TaggingTest.starttest();
+//		} catch (FrameDamagedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		ObjectContainer db = null;
 	

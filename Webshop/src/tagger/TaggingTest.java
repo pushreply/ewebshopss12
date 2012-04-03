@@ -16,7 +16,7 @@ import de.vdheide.mp3.*;
 public class TaggingTest {
 	public static void starttest() throws FrameDamagedException {
 		MP3File file = null;
-		try {
+		try {	
 			file = new MP3File("C:\\projekt\\DB\\Webshop\\WebContent\\images", "wwm.mp3");
 		} catch (ID3v2WrongCRCException e) {
 			// TODO Auto-generated catch block

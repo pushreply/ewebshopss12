@@ -14,7 +14,7 @@ public class DBTrack {
 	private Date trackDate;
 	private String trackGenre;
 	private int trackNumber;
-	private String trackDiskNumber;
+	private int trackDiskNumber;
 	
 	public DBTrack() {
 		
@@ -22,7 +22,7 @@ public class DBTrack {
 	
 	public DBTrack(int tracknr, byte[] file, String trackTitle, String trackArtist,
 			Date trackDate, String trackGenre, int trackNumber,
-			String trackDiskNumber) {
+			int trackDiskNumber) {
 		super();
 		this.id_dbtrack = tracknr;
 		this.file = file;
@@ -78,10 +78,10 @@ public class DBTrack {
 	public void setTrackNumber(int trackNumber) {
 		this.trackNumber = trackNumber;
 	}
-	public String getTrackDiskNumber() {
+	public int getTrackDiskNumber() {
 		return trackDiskNumber;
 	}
-	public void setTrackDiskNumber(String trackDiskNumber) {
+	public void setTrackDiskNumber(int trackDiskNumber) {
 		this.trackDiskNumber = trackDiskNumber;
 	}
 
