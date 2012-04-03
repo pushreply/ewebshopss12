@@ -19,6 +19,14 @@ public class DBItems {
 	LinkedList<DBItems> album = new LinkedList<DBItems>();
 	
 
+	public LinkedList<DBItems> getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(LinkedList<DBItems> album) {
+		this.album = album;
+	}
+
 	public DBItems(int orderAmount) {
 		super();
 		this.orderAmount = orderAmount;
