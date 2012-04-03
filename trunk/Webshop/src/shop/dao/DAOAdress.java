@@ -25,7 +25,7 @@ public class DAOAdress {
 		}
 	}
 	
-public LinkedList<DBAddress> auslesen(ObjectContainer db) {
+	public LinkedList<DBAddress> auslesen(ObjectContainer db) {
 		
 		LinkedList<DBAddress> linkedListDBAddress= new LinkedList<DBAddress>();
 		
