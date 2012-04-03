@@ -1,6 +1,6 @@
 package shop.dao;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import shop.dto.DBTrack;
 
@@ -31,9 +31,9 @@ public class DAOTrack {
 		
 	}
 	
-	public ArrayList<DBTrack> auslesen(ObjectContainer db) {
+	public LinkedList<DBTrack> auslesen(ObjectContainer db) {
 		
-		ArrayList<DBTrack> arrayListDBTrack = new ArrayList<DBTrack>();
+		LinkedList<DBTrack> linkedListDBTrack = new LinkedList<DBTrack>();
 		
 		try {
 			
@@ -43,7 +43,7 @@ public class DAOTrack {
 			
 			while(result.hasNext()) {
 				track = result.next();
-				arrayListDBTrack.add(track);
+				linkedListDBTrack.add(track);
 			}
 		}
 		catch (DatabaseFileLockedException e) {
@@ -54,7 +54,7 @@ public class DAOTrack {
 			db.close();
 		}
 		
-		return arrayListDBTrack;
+		return linkedListDBTrack;
 	}
 
 }
