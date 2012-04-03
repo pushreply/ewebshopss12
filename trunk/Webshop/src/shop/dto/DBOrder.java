@@ -17,7 +17,7 @@ public class DBOrder {
 		private DBItems item;
 		private int state;
 
-		//An order can have more than one item.
+		//Items Collection
 		LinkedList<DBItems> orderedItem = new LinkedList<DBItems>();
 		
 		public LinkedList<DBItems> getOrderedItem() {
