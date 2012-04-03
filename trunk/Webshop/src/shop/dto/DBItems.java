@@ -12,6 +12,7 @@ import java.util.LinkedList;
 public class DBItems {
 	private int orderAmount;
 	
+	//an order must have one or many items.
 	LinkedList<DBOrder> item = new LinkedList<DBOrder>();
 
 	public DBItems(int orderAmount) {
