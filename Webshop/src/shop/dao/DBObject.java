@@ -12,13 +12,6 @@ import com.db4o.ext.DatabaseFileLockedException;
 
 public class DBObject {
 	
-	public static ObjectContainer getConnection(String file)
-	{
-       
-		return getConnection(file, null);
-		
-	}
-	
 	public static ObjectContainer getConnection(String file, EmbeddedConfiguration config)
 	{
         ObjectContainer db = null;
