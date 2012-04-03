@@ -10,7 +10,7 @@ import shop.dto.DBCustomer;
 
 public class DAOCustomer {
 	
-	public void speichern(DAOCustomer cust, ObjectContainer db)
+	public void speichern(DBCustomer cust, ObjectContainer db)
 	{	
 		try {
 			db.store(cust);
@@ -24,19 +24,19 @@ public class DAOCustomer {
 		}
 	}
 	
-	public LinkedList<DAOCustomer> auslesen(ObjectContainer db) {
+	public LinkedList<DBCustomer> auslesen(ObjectContainer db) {
 		
-		LinkedList<DAOCustomer> linkedListDAOCustomer= new LinkedList<DAOCustomer>();
+		LinkedList<DBCustomer> linkedListDBCustomer= new LinkedList<DBCustomer>();
 		
 		try {
 			
-			DAOCustomer cust = new DAOCustomer();
+			DBCustomer cust = new DBCustomer();
 			
-			ObjectSet<DAOCustomer> result = db.queryByExample(cust);
+			ObjectSet<DBCustomer> result = db.queryByExample(cust);
 			
 			while(result.hasNext()) {
 				cust = result.next();
-				linkedListDAOCustomer.add(cust);
+				linkedListDBCustomer.add(cust);
 			}
 		}
 		catch (DatabaseFileLockedException e) {
@@ -47,6 +47,6 @@ public class DAOCustomer {
 			db.close();
 		}
 		
-		return linkedListDAOCustomer;
+		return linkedListDBCustomer;
 	}
 }

@@ -3,13 +3,14 @@ package shop.dao;
 import java.util.LinkedList;
 
 import shop.dto.DBAddress;
+import shop.dto.DBAlbum;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseFileLockedException;
 
 public class DAOAlbum {
-	public void speichern(DAOAlbum album, ObjectContainer db)
+	public void speichern(DBAlbum album, ObjectContainer db)
 	{	
 		try {
 			db.store(album);
@@ -23,19 +24,19 @@ public class DAOAlbum {
 		}
 	}
 	
-	public LinkedList<DAOAlbum> auslesen(ObjectContainer db) {
+	public LinkedList<DBAlbum> auslesen(ObjectContainer db) {
 		
-		LinkedList<DAOAlbum> linkedListDAOAlbum= new LinkedList<DAOAlbum>();
+		LinkedList<DBAlbum> linkedListDBAlbum= new LinkedList<DBAlbum>();
 		
 		try {
 			
-			DAOAlbum album = new DAOAlbum();
+			DBAlbum album = new DBAlbum();
 			
-			ObjectSet<DAOAlbum> result = db.queryByExample(album);
+			ObjectSet<DBAlbum> result = db.queryByExample(album);
 			
 			while(result.hasNext()) {
 				album = result.next();
-				linkedListDAOAlbum.add(album);
+				linkedListDBAlbum.add(album);
 			}
 		}
 		catch (DatabaseFileLockedException e) {
@@ -46,6 +47,6 @@ public class DAOAlbum {
 			db.close();
 		}
 		
-		return linkedListDAOAlbum;
+		return linkedListDBAlbum;
 	}
 }

@@ -2,12 +2,14 @@ package shop.dao;
 
 import java.util.LinkedList;
 
+import shop.dto.DBKeyword;
+
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseFileLockedException;
 
 public class DAOKeyword {
-	public void speichern(DAOKeyword keyword, ObjectContainer db)
+	public void speichern(DBKeyword keyword, ObjectContainer db)
 	{	
 		try {
 			db.store(keyword);
@@ -21,19 +23,19 @@ public class DAOKeyword {
 		}
 	}
 	
-	public LinkedList<DAOKeyword> auslesen(ObjectContainer db) {
+	public LinkedList<DBKeyword> auslesen(ObjectContainer db) {
 		
-		LinkedList<DAOKeyword> linkedListDAOKeyword= new LinkedList<DAOKeyword>();
+		LinkedList<DBKeyword> linkedListDBKeyword= new LinkedList<DBKeyword>();
 		
 		try {
 			
-			DAOKeyword keyword = new DAOKeyword();
+			DBKeyword keyword = new DBKeyword();
 			
-			ObjectSet<DAOKeyword> result = db.queryByExample(keyword);
+			ObjectSet<DBKeyword> result = db.queryByExample(keyword);
 			
 			while(result.hasNext()) {
 				keyword = result.next();
-				linkedListDAOKeyword.add(keyword);
+				linkedListDBKeyword.add(keyword);
 			}
 		}
 		catch (DatabaseFileLockedException e) {
@@ -44,6 +46,6 @@ public class DAOKeyword {
 			db.close();
 		}
 		
-		return linkedListDAOKeyword;
+		return linkedListDBKeyword;
 	}
 }
