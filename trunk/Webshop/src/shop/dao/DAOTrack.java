@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import shop.dto.DBTrack;
 
-import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseFileLockedException;
@@ -16,11 +15,8 @@ public class DAOTrack {
 	
 //	private static final Log log = LogFactory.getLog(DAOTrack.class);
 	
-	public void speichern(DBTrack track)
-	{
-		/* Wir öffnen eine Datenbank: */
-		ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),"C:/projekt/Code/Webshop/db/WebShop.yap");
-		
+	public void speichern(DBTrack track, ObjectContainer db)
+	{	
 		try {
 			db.store(track);
 		}
@@ -35,9 +31,7 @@ public class DAOTrack {
 		
 	}
 	
-	public ArrayList<DBTrack> auslesen() {
-		
-		ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),"C:/projekt/Code/Webshop/db/WebShop.yap");
+	public ArrayList<DBTrack> auslesen(ObjectContainer db) {
 		
 		ArrayList<DBTrack> arrayListDBTrack = new ArrayList<DBTrack>();
 		
