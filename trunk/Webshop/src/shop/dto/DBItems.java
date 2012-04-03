@@ -3,12 +3,16 @@
  */
 package shop.dto;
 
+import java.util.LinkedList;
+
 /**
  * @author roha0001
  *
  */
 public class DBItems {
 	private int orderAmount;
+	
+	LinkedList<DBOrder> item = new LinkedList<DBOrder>();
 
 	public DBItems(int orderAmount) {
 		super();
@@ -17,6 +21,14 @@ public class DBItems {
 
 	public int getOrderAmount() {
 		return orderAmount;
+	}
+
+	public LinkedList<DBOrder> getItem() {
+		return item;
+	}
+
+	public void setItem(LinkedList<DBOrder> item) {
+		this.item = item;
 	}
 
 	public void setOrderAmount(int orderAmount) {
