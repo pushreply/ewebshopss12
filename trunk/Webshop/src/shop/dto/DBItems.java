@@ -10,6 +10,7 @@ import java.util.LinkedList;
  *
  */
 public class DBItems {
+	private int id_dbitem;
 	private int orderAmount;
 	
 	//an order must have one or many items.
@@ -46,6 +47,14 @@ public class DBItems {
 
 	public void setOrderAmount(int orderAmount) {
 		this.orderAmount = orderAmount;
+	}
+
+	public int getId_dbitem() {
+		return id_dbitem;
+	}
+
+	public void setId_dbitem(int id_dbitem) {
+		this.id_dbitem = id_dbitem;
 	}
 
 	@Override

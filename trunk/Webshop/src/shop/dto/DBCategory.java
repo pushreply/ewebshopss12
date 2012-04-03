@@ -10,6 +10,8 @@ import java.util.LinkedList;
  *
  */
 public class DBCategory {
+	private int id_dbcategory;
+	
 	private String categoryName;
 	
 	LinkedList<DBAlbum> category = new LinkedList<DBAlbum>();
@@ -26,6 +28,15 @@ public class DBCategory {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
+	public int getId_dbcategory() {
+		return id_dbcategory;
+	}
+
+	public void setId_dbcategory(int id_dbcategory) {
+		this.id_dbcategory = id_dbcategory;
+	}
+
 
 	@Override
 	public String toString() {

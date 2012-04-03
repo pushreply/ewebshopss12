@@ -8,6 +8,7 @@ package shop.dto;
  *
  */
 public class DBAddress {
+	private int id_dbadress;
 	private String street;
 	private String country; 
 	private String firstName;
@@ -62,6 +63,14 @@ public class DBAddress {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public int getId_dbadress() {
+		return id_dbadress;
+	}
+
+	public void setId_dbadress(int id_dbadress) {
+		this.id_dbadress = id_dbadress;
 	}
 
 	@Override
