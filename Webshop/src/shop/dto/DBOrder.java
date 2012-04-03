@@ -1,5 +1,6 @@
 package shop.dto;
 import java.util.Date;
+import java.util.LinkedList;
 
 
 /**
@@ -15,7 +16,16 @@ public class DBOrder {
 		private Date datum;
 		private DBItems item;
 		private int state;
+
+		//An order can have more than one item.
+		LinkedList<DBItems> orderedItem = new LinkedList<DBItems>();
 		
+		public LinkedList<DBItems> getOrderedItem() {
+			return orderedItem;
+		}
+		public void setOrderedItem(LinkedList<DBItems> orderedItem) {
+			this.orderedItem = orderedItem;
+		}
 		public Order(DBCustomer cust, Date datum, DBItems item, int state) {
 			super();
 			this.cust = cust;
