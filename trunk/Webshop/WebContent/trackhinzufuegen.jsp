@@ -27,7 +27,7 @@
      <td><input type="file" name='bearbeiten'></td>
    </tr>
  </table>
- <input type=button onClick="location.href='index.jsp'" value='bearbeiten'>
+
  <input type=button onClick="location.href='index.jsp'" value='Track hinzufügen'> 
 </form>
 
