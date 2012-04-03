@@ -14,6 +14,10 @@ public class DBItems {
 	
 	//an order must have one or many items.
 	LinkedList<DBOrder> item = new LinkedList<DBOrder>();
+	
+	//an item has one or many album
+	LinkedList<DBItems> album = new LinkedList<DBItems>();
+	
 
 	public DBItems(int orderAmount) {
 		super();
