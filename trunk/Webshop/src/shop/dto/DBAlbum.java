@@ -27,6 +27,8 @@ public class DBAlbum {
 	LinkedList<DBCategory> category = new LinkedList<DBCategory>();
 	LinkedList<DBTrack> track = new LinkedList<DBTrack>();
 	
+	//default constructor
+	public DBAlbum(){}
 	
 	public DBAlbum(String coverpath, String albumTitel, String artist,
 			int numberOfDisks, double price, int amount, int numberOfTracks,

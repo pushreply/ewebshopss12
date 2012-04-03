@@ -21,6 +21,9 @@ public class DBCustomer {
 		this.address = address;
 	}
 	
+	//default constructor
+	public DBCustomer(){}
+	
 	public DBCustomer(String login, String password, LinkedList<DBAddress> address) {
 		super();
 		this.login = login;

@@ -15,6 +15,9 @@ public class DBCategory {
 	private String categoryName;
 	
 	LinkedList<DBAlbum> category = new LinkedList<DBAlbum>();
+	
+	//default constructor
+	public DBCategory(){}
 
 	public DBCategory(String categoryName) {
 		super();
