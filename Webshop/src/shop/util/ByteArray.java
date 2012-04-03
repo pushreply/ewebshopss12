@@ -1,5 +1,11 @@
 package shop.util;
 
+
+/**
+ * @author sesc0009
+ * Eine Datei in Byte-Array
+ *
+ */
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
