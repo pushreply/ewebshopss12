@@ -15,7 +15,7 @@ public class DAOTrack {
 	
 //	private static final Log log = LogFactory.getLog(DAOTrack.class);
 	
-	public void speichern(DBTrack track, ObjectContainer db)
+	public static void speichern(DBTrack track, ObjectContainer db)
 	{	
 		try {
 			db.store(track);
@@ -31,7 +31,7 @@ public class DAOTrack {
 		
 	}
 	
-	public LinkedList<DBTrack> auslesen(ObjectContainer db) {
+	public static LinkedList<DBTrack> auslesen(ObjectContainer db) {
 		
 		LinkedList<DBTrack> linkedListDBTrack = new LinkedList<DBTrack>();
 		
@@ -56,6 +56,34 @@ public class DAOTrack {
 		
 		return linkedListDBTrack;
 	}
-
-
+	
+	
+	public static DBTrack auslesenEinzeln(ObjectContainer db, int trackid)
+	{
+		DBTrack a = new DBTrack();
+		
+		try {
+			/* Wir erstellen ein Beispielobject mit dem int id_dbtrack */
+			DBTrack track = new DBTrack(trackid);
+			
+			/* Die Methode get() gibt eine OjectSet zurück, das
+			 * genau ein DBTrack enthält, das exakt dem Beispielobjekt
+			 * entspricht. */
+			 
+			 ObjectSet<DBTrack> result = db.queryByExample(track);
+			
+			 /* Das bestimmte Object wird aus dem ObjectSet ausgelesen. */
+			 a = result.next();
+			 
+			
+		} catch (DatabaseFileLockedException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally{
+			db.close();
+		}
+		
+		return a;
+	}
 }
