@@ -26,11 +26,12 @@ public class DBObject {
 		
 		else if(config == null)
 		{
+			// Öffne Datenbank
 			db = Db4oEmbedded.openFile(file);
 		}
 		else
 		{
-		// Öffne eine Datenbank
+		  // Öffne Datenbank
 		  db = Db4oEmbedded.openFile(config, file);
 		}
 		  
