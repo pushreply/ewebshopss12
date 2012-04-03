@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Album anlegen</title>
 </head>
 <body>
   <h3>Abum anlegen</h3>
 
-<form action=" ">
+<form action="Album.jsp ">
   <table border="0" cellpadding="0" cellspacing="4">
     <tr>
       <td align="right">Titel:</td>
