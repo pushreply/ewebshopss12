@@ -20,6 +20,11 @@ public class DBTrack {
 		
 	}
 	
+	public DBTrack(int id_dbtrack)
+	{
+		this.id_dbtrack = id_dbtrack;
+	}
+	
 	public DBTrack(int tracknr, byte[] file, String trackTitle, String trackArtist,
 			Date trackDate, String trackGenre, int trackNumber,
 			int trackDiskNumber) {
