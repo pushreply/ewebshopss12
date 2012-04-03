@@ -1,10 +1,16 @@
 package shop.dao;
 
+import java.util.ArrayList;
+
 import shop.dto.DBTrack;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseFileLockedException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class DAOTrack {
 	
@@ -33,16 +39,16 @@ public class DAOTrack {
 		
 		ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),"C:/projekt/Code/Webshop/db/WebShop.yap");
 		
-		ArrayList<DBTrack> arrayListDATrack = new ArrayList<DBTrack>();
+		ArrayList<DBTrack> arrayListDBTrack = new ArrayList<DBTrack>();
 		
 		try {
 			
-			DBTrack track = new DBTRack(null);
+			DBTrack track = new DBTrack(null);
 			
 			ObjectSet<DBTrack> result = db.queryByExample(track);
 			
 			while(result.hasNext()) {
-				auto = result.next();
+				track = result.next();
 				arrayListDBTrack.add(track);
 			}
 		}
