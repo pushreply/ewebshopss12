@@ -35,7 +35,9 @@ public class ByteArray {
 	    return baos.toByteArray(); 
 	} 
 
-	
+	/*
+	 * ByteArray.byteArrayToFile(bytearray, ausDateiname);
+	 */
 	
 	static public void byteArrayToFile(byte[] byteArray, String outFilePath) throws IOException
 	{
