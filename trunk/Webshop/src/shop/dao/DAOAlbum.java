@@ -23,7 +23,7 @@ public class DAOAlbum {
 		}
 	}
 	
-public LinkedList<DAOAlbum> auslesen(ObjectContainer db) {
+	public LinkedList<DAOAlbum> auslesen(ObjectContainer db) {
 		
 		LinkedList<DAOAlbum> linkedListDAOAlbum= new LinkedList<DAOAlbum>();
 		
