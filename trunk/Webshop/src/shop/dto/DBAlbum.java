@@ -3,6 +3,8 @@
  */
 package shop.dto;
 
+import java.util.LinkedList;
+
 /**
  * @author roha0001
  *
@@ -16,6 +18,12 @@ public class DBAlbum {
 	private int amount;
 	private int numberOfTracks;
 	private String label;
+	
+	LinkedList<DBItems> album = new LinkedList<DBItems>();
+	LinkedList<DBKeyword> keyword = new LinkedList<DBKeyword>();
+	LinkedList<DBCategory> category = new LinkedList<DBCategory>();
+	LinkedList<DBTrack> track = new LinkedList<DBTrack>();
+	
 	
 	public DBAlbum(String coverpath, String albumTitel, String artist,
 			int numberOfDisks, double price, int amount, int numberOfTracks,
@@ -93,6 +101,38 @@ public class DBAlbum {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	public LinkedList<DBItems> getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(LinkedList<DBItems> album) {
+		this.album = album;
+	}
+
+	public LinkedList<DBKeyword> getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(LinkedList<DBKeyword> keyword) {
+		this.keyword = keyword;
+	}
+
+	public LinkedList<DBCategory> getCategory() {
+		return category;
+	}
+
+	public void setCategory(LinkedList<DBCategory> category) {
+		this.category = category;
+	}
+
+	public LinkedList<DBTrack> getTrack() {
+		return track;
+	}
+
+	public void setTrack(LinkedList<DBTrack> track) {
+		this.track = track;
 	}
 
 	@Override

@@ -3,12 +3,16 @@
  */
 package shop.dto;
 
+import java.util.LinkedList;
+
 /**
  * @author roha0001
  *
  */
 public class DBCategory {
 	private String categoryName;
+	
+	LinkedList<DBAlbum> category = new LinkedList<DBAlbum>();
 
 	public DBCategory(String categoryName) {
 		super();
