@@ -3,7 +3,9 @@ package shop.util;
 
 /**
  * @author sesc0009
- * Eine Datei in Byte-Array
+ * Eine Datei in Byte-Array umwandeln
+ * 
+ * Ein Byte-Array ins eine Datei umwandeln
  *
  */
 import java.io.ByteArrayOutputStream;
@@ -14,6 +16,15 @@ import java.io.InputStream;
 
 public class ByteArray {
 	
+/*	
+ * eine Datei in Byte-Array umwandlen
+ * try {
+        FileInputStream file = new FileInputStream("C:/Users/HP-Master/Desktop/FH/"+sDateiname);
+        bytesarray = ByteArray.inputStreamToByteArray(file);
+    } catch (FileNotFoundException e) { 
+        e.printStackTrace(); 
+    }
+ */ 
 	static public byte[] inputStreamToByteArray(InputStream inStream) throws IOException { 
 	    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
 	    byte[] buffer = new byte[8192]; 
