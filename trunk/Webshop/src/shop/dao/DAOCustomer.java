@@ -1,9 +1,8 @@
 package shop.dao;
 
-import java.util.List;
 import com.db4o.ObjectSet;
 import com.db4o.ObjectContainer;
-import dto.DBCustomer;
+import shop.dto.DBCustomer;
 
 public class DAOCustomer {
 	
