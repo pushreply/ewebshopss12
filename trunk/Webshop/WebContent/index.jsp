@@ -9,7 +9,7 @@
 <body>
 Hallo JSP!
 
-<form action="webshop" name="test" method="post">
+<form action="controller" name="test" method="post">
 	<input type="text" value="abschicken">
 </form>
 
