@@ -8,5 +8,10 @@
 </head>
 <body>
 Hallo JSP!
+
+<form action="webshop" name="test" method="post">
+	<input type="text" value="abschicken">
+</form>
+
 </body>
 </html>
