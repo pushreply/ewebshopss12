@@ -15,6 +15,10 @@ public class DBAddress {
 	private String lastName;
 	private String gender;
 	
+	
+	//Default Constructor
+	public DBAddress(){}
+	
 	public DBAddress(String street, String country, String firstName,
 			String lastName, String gender) {
 		super();
