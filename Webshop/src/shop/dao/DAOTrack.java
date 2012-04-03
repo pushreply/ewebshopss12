@@ -43,7 +43,7 @@ public class DAOTrack {
 		
 		try {
 			
-			DBTrack track = new DBTrack(null);
+			DBTrack track = new DBTrack();
 			
 			ObjectSet<DBTrack> result = db.queryByExample(track);
 			
