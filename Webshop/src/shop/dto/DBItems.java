@@ -16,14 +16,14 @@ public class DBItems {
 	LinkedList<DBOrder> item = new LinkedList<DBOrder>();
 	
 	//an item has one or many album
-	LinkedList<DBItems> album = new LinkedList<DBItems>();
+	LinkedList<DBAlbum> album = new LinkedList<DBAlbum>();
 	
 
-	public LinkedList<DBItems> getAlbum() {
+	public LinkedList<DBAlbum> getAlbum() {
 		return album;
 	}
 
-	public void setAlbum(LinkedList<DBItems> album) {
+	public void setAlbum(LinkedList<DBAlbum> album) {
 		this.album = album;
 	}
 
