@@ -5,11 +5,14 @@
 
 package shop.app;
 
+import java.util.List;
+
 import javax.servlet.http.*;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
+
 
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
@@ -26,7 +29,7 @@ public class Controller extends HttpServlet {
 
 		System.out.println("Test");
 		
-		/*ObjectContainer db = null;
+		ObjectContainer db = null;
 	
 		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
 	
@@ -98,11 +101,29 @@ public class Controller extends HttpServlet {
 		
 		db = Db4oEmbedded.openFile(config, file);
 		
-		/*DBKeyword test = new DBKeyword("Michael Schumacher");
+		DBKeyword test = new DBKeyword("Schlagwort");
 		db.store(test);
-		System.out.println("Stored " + test);*/
+	
 		
-		//db.close();
+			List <DBKeyword> result = null;
+			try
+			{
+				result = db.queryByExample(DBKeyword.class);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+			}
+
+			for(int i = 0; i < result.size(); i++)
+			{
+				DBKeyword a = (DBKeyword) result.get(i);
+				System.out.println(a.getKeywordName());
+			}
+		
+		
+		
+		db.close();
 		
 	}	// Ende der service-Methode
 
