@@ -11,6 +11,9 @@ public class DBKeyword {
 	
 	private int id_dbkeyword;
 	private String keywordName;
+	
+	//default constructor
+	public DBKeyword(){}
 
 	public DBKeyword(String keywordName) {
 		super();

@@ -9,8 +9,6 @@ import java.util.LinkedList;
  */
 
 public class DBOrder {
-
-	public class Order {
 		
 		private int id_dborder;
 		private DBCustomer cust;
@@ -27,7 +25,11 @@ public class DBOrder {
 		public void setOrderedItem(LinkedList<DBItems> orderedItem) {
 			this.orderedItem = orderedItem;
 		}
-		public Order(DBCustomer cust, Date datum, DBItems item, int state) {
+		
+		//default constructor
+		public DBOrder(){}
+		
+		public DBOrder(DBCustomer cust, Date datum, DBItems item, int state) {
 			super();
 			this.cust = cust;
 			this.datum = datum;
@@ -72,6 +74,6 @@ public class DBOrder {
 			return "Order [cust=" + cust + ", datum=" + datum + ", item="
 					+ item + "]";
 		}
-	}
+	
 		
 }

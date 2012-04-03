@@ -27,6 +27,9 @@ public class DBItems {
 	public void setAlbum(LinkedList<DBAlbum> album) {
 		this.album = album;
 	}
+	
+	//default constructor
+	public DBItems(){}
 
 	public DBItems(int orderAmount) {
 		super();
