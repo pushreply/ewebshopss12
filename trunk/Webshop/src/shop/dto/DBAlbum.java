@@ -11,8 +11,6 @@ import java.util.LinkedList;
  */
 public class DBAlbum {
 	private int id_dbalbum;
-
-
 	private String coverpath;
 	private String albumTitel;
 	private String artist;
@@ -22,26 +20,19 @@ public class DBAlbum {
 	private int numberOfTracks;
 	private String label;
 	
-	LinkedList<DBItems> album = new LinkedList<DBItems>();
-	LinkedList<DBKeyword> keyword = new LinkedList<DBKeyword>();
-	LinkedList<DBCategory> category = new LinkedList<DBCategory>();
-	LinkedList<DBTrack> track = new LinkedList<DBTrack>();
+	LinkedList<DBKeyword> keywords = new LinkedList<DBKeyword>();
+	LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
+	LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
 	
 	//default constructor
 	public DBAlbum(){}
-	
-	public DBAlbum(String coverpath, String albumTitel, String artist,
-			int numberOfDisks, double price, int amount, int numberOfTracks,
-			String label) {
-		super();
-		this.coverpath = coverpath;
-		this.albumTitel = albumTitel;
-		this.artist = artist;
-		this.numberOfDisks = numberOfDisks;
-		this.price = price;
-		this.amount = amount;
-		this.numberOfTracks = numberOfTracks;
-		this.label = label;
+
+	public int getId_dbalbum() {
+		return id_dbalbum;
+	}
+
+	public void setId_dbalbum(int id_dbalbum) {
+		this.id_dbalbum = id_dbalbum;
 	}
 
 	public String getCoverpath() {
@@ -107,54 +98,42 @@ public class DBAlbum {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	public LinkedList<DBItems> getAlbum() {
-		return album;
+
+	public LinkedList<DBKeyword> getKeywords() {
+		return keywords;
 	}
 
-	public void setAlbum(LinkedList<DBItems> album) {
-		this.album = album;
+	public void setKeywords(LinkedList<DBKeyword> keywords) {
+		this.keywords = keywords;
 	}
 
-	public LinkedList<DBKeyword> getKeyword() {
-		return keyword;
+	public LinkedList<DBCategory> getCategories() {
+		return categories;
 	}
 
-	public void setKeyword(LinkedList<DBKeyword> keyword) {
-		this.keyword = keyword;
+	public void setCategories(LinkedList<DBCategory> categories) {
+		this.categories = categories;
 	}
 
-	public LinkedList<DBCategory> getCategory() {
-		return category;
+	public LinkedList<DBTrack> getTracks() {
+		return tracks;
 	}
 
-	public void setCategory(LinkedList<DBCategory> category) {
-		this.category = category;
+	public void setTracks(LinkedList<DBTrack> tracks) {
+		this.tracks = tracks;
 	}
 
-	public LinkedList<DBTrack> getTrack() {
-		return track;
-	}
-
-	public void setTrack(LinkedList<DBTrack> track) {
-		this.track = track;
-	}
-
-	public int getId_dbalbum() {
-		return id_dbalbum;
-	}
-
-	public void setId_dbalbum(int id_dbalbum) {
-		this.id_dbalbum = id_dbalbum;
-	}
 	@Override
 	public String toString() {
-		return "DBAlbum [coverpath=" + coverpath + ", albumTitel=" + albumTitel
-				+ ", artist=" + artist + ", numberOfDisks=" + numberOfDisks
-				+ ", price=" + price + ", amount=" + amount
-				+ ", numberOfTracks=" + numberOfTracks + ", label=" + label
-				+ "]";
+		return "DBAlbum [id_dbalbum=" + id_dbalbum + ", coverpath=" + coverpath
+				+ ", albumTitel=" + albumTitel + ", artist=" + artist
+				+ ", numberOfDisks=" + numberOfDisks + ", price=" + price
+				+ ", amount=" + amount + ", numberOfTracks=" + numberOfTracks
+				+ ", label=" + label + ", keywords=" + keywords
+				+ ", categories=" + categories + ", tracks=" + tracks + "]";
 	}
+	
+	
 	
 	
 }

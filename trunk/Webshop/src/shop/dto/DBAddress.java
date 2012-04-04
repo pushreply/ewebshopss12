@@ -14,20 +14,27 @@ public class DBAddress {
 	private String firstName;
 	private String lastName;
 	private String gender;
+	private String art; //delivery or billing
 	
 	
 	//Default Constructor
-	public DBAddress(){}
+	public DBAddress(){
+		
+	}
 	
-	public DBAddress(String street, String country, String firstName,
-			String lastName, String gender) {
+	public DBAddress(int id_dbadress, String street, String country,
+			String firstName, String lastName, String gender, String art) {
 		super();
+		this.id_dbadress = id_dbadress;
 		this.street = street;
 		this.country = country;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
+		this.art = art;
 	}
+
+
 
 	public String getStreet() {
 		return street;
@@ -77,11 +84,20 @@ public class DBAddress {
 		this.id_dbadress = id_dbadress;
 	}
 
+	public String getArt() {
+		return art;
+	}
+
+	public void setArt(String art) {
+		this.art = art;
+	}
+
 	@Override
 	public String toString() {
-		return "DBAddress [street=" + street + ", country=" + country
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", gender=" + gender + "]";
+		return "DBAddress [id_dbadress=" + id_dbadress + ", street=" + street
+				+ ", country=" + country + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", gender=" + gender + ", art="
+				+ art + "]";
 	}
 
 	
