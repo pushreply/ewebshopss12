@@ -3,6 +3,8 @@
  */
 package shop.dto;
 
+import java.util.LinkedList;
+
 /**
  * @author roha0001
  *
@@ -11,6 +13,8 @@ public class DBKeyword {
 	
 	private int id_dbkeyword;
 	private String keywordName;
+	LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
+	
 	
 	//default constructor
 	public DBKeyword(){}
@@ -36,11 +40,18 @@ public class DBKeyword {
 		this.id_dbkeyword = id_dbkeyword;
 	}
 
+	public LinkedList<DBAlbum> getAlbums() {
+		return albums;
+	}
+
+	public void setAlbums(LinkedList<DBAlbum> albums) {
+		this.albums = albums;
+	}
+
 	@Override
 	public String toString() {
-		return "DBKeyword [keywordName=" + keywordName + "]";
+		return "DBKeyword [id_dbkeyword=" + id_dbkeyword + ", keywordName="
+				+ keywordName + ", albums=" + albums + "]";
 	}
-	
-	
 
 }

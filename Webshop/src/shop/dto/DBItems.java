@@ -11,45 +11,19 @@ import java.util.LinkedList;
  */
 public class DBItems {
 	private int id_dbitem;
-	private int orderAmount;
-	
-	//an order must have one or many items.
-	LinkedList<DBOrder> item = new LinkedList<DBOrder>();
-	
+	private int orderAmount;	
 	//an item has one or many album
 	LinkedList<DBAlbum> album = new LinkedList<DBAlbum>();
 	
-
-	public LinkedList<DBAlbum> getAlbum() {
-		return album;
+	public DBItems(){
+		
 	}
 
-	public void setAlbum(LinkedList<DBAlbum> album) {
-		this.album = album;
-	}
-	
-	//default constructor
-	public DBItems(){}
-
-	public DBItems(int orderAmount) {
+	public DBItems(int id_dbitem, int orderAmount, LinkedList<DBAlbum> album) {
 		super();
+		this.id_dbitem = id_dbitem;
 		this.orderAmount = orderAmount;
-	}
-
-	public int getOrderAmount() {
-		return orderAmount;
-	}
-
-	public LinkedList<DBOrder> getItem() {
-		return item;
-	}
-
-	public void setItem(LinkedList<DBOrder> item) {
-		this.item = item;
-	}
-
-	public void setOrderAmount(int orderAmount) {
-		this.orderAmount = orderAmount;
+		this.album = album;
 	}
 
 	public int getId_dbitem() {
@@ -60,12 +34,27 @@ public class DBItems {
 		this.id_dbitem = id_dbitem;
 	}
 
+	public int getOrderAmount() {
+		return orderAmount;
+	}
+
+	public void setOrderAmount(int orderAmount) {
+		this.orderAmount = orderAmount;
+	}
+
+	public LinkedList<DBAlbum> getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(LinkedList<DBAlbum> album) {
+		this.album = album;
+	}
+
 	@Override
-	//maybe useful for logging.
 	public String toString() {
-		return "Items [orderAmount=" + orderAmount + "]";
+		return "DBItems [id_dbitem=" + id_dbitem + ", orderAmount="
+				+ orderAmount + ", album=" + album + "]";
 	}
 	
 	
-
 }
