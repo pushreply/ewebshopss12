@@ -7,7 +7,7 @@ import java.util.Date;
  *
  */
 public class DBTrack {
-	private int id_dbtrack;
+	private int trackID;
 	private byte[] file;
 	private String trackTitle;
 	private String trackArtist;
@@ -20,16 +20,16 @@ public class DBTrack {
 		
 	}
 	
-	public DBTrack(int id_dbtrack)
+	public DBTrack(int trackID)
 	{
-		this.id_dbtrack = id_dbtrack;
+		this.trackID = trackID;
 	}
 	
-	public DBTrack(int tracknr, byte[] file, String trackTitle, String trackArtist,
+	public DBTrack(int trackID, byte[] file, String trackTitle, String trackArtist,
 			Date trackDate, String trackGenre, int trackNumber,
 			int trackDiskNumber) {
 		super();
-		this.id_dbtrack = tracknr;
+		this.trackID = trackID;
 		this.file = file;
 		this.trackTitle = trackTitle;
 		this.trackArtist = trackArtist;
@@ -39,12 +39,12 @@ public class DBTrack {
 		this.trackDiskNumber = trackDiskNumber;
 	}
 	
-	public int getTracknr() {
-		return id_dbtrack;
+	public int getTrackID() {
+		return trackID;
 	}
 	
-	public void setTracknr(int tracknr) {
-		this.id_dbtrack = tracknr;
+	public void setTrackID(int trackID) {
+		this.trackID = trackID;
 	}
 	
 	public byte[] getFile() {

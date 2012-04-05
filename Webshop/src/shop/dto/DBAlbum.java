@@ -10,7 +10,7 @@ import java.util.LinkedList;
  *
  */
 public class DBAlbum {
-	private int id_dbalbum;
+	private int albID;
 	private String coverpath;
 	private String albumTitel;
 	private String artist;
@@ -27,12 +27,12 @@ public class DBAlbum {
 	//default constructor
 	public DBAlbum(){}
 
-	public int getId_dbalbum() {
-		return id_dbalbum;
+	public int getAlbID() {
+		return albID;
 	}
 
-	public void setId_dbalbum(int id_dbalbum) {
-		this.id_dbalbum = id_dbalbum;
+	public void setAlbID(int id_dbalbum) {
+		this.albID = id_dbalbum;
 	}
 
 	public String getCoverpath() {
@@ -125,7 +125,7 @@ public class DBAlbum {
 
 	@Override
 	public String toString() {
-		return "DBAlbum [id_dbalbum=" + id_dbalbum + ", coverpath=" + coverpath
+		return "DBAlbum [id_dbalbum=" + albID + ", coverpath=" + coverpath
 				+ ", albumTitel=" + albumTitel + ", artist=" + artist
 				+ ", numberOfDisks=" + numberOfDisks + ", price=" + price
 				+ ", amount=" + amount + ", numberOfTracks=" + numberOfTracks

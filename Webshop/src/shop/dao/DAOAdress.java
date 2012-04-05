@@ -14,7 +14,7 @@ import com.db4o.query.Predicate;
 
 public class DAOAdress {
 	
-	public void speichern(DBAddress address, ObjectContainer db)
+	public void insert(DBAddress address, ObjectContainer db)
 	{	
 		try {
 			db.store(address);
@@ -28,9 +28,9 @@ public class DAOAdress {
 		}
 	}
 	
-	public LinkedList<DBAddress> auslesen(ObjectContainer db) {
+	public LinkedList<DBAddress> retrieveAllAdresses(ObjectContainer db) {
 		
-		LinkedList<DBAddress> linkedListDBAddress= new LinkedList<DBAddress>();
+		LinkedList<DBAddress> addresses= new LinkedList<DBAddress>();
 		
 		try {
 			
@@ -40,7 +40,7 @@ public class DAOAdress {
 			
 			while(result.hasNext()) {
 				address = result.next();
-				linkedListDBAddress.add(address);
+				addresses.add(address);
 			}
 		}
 		catch (DatabaseFileLockedException e) {
@@ -51,10 +51,10 @@ public class DAOAdress {
 			db.close();
 		}
 		
-		return linkedListDBAddress;
+		return addresses;
 	}
 	
-	//update DBAddress data
+	/*//update DBAddress data
 	public LinkedList<DBAddress> update(final DBAddress old_data, DBAddress new_data, ObjectContainer db) {
 		
 		try{
@@ -81,9 +81,11 @@ public class DAOAdress {
 		}
 		return null;
 		
+	}*/
+	
+	public void update(final int adrID , DBAddress new_data, ObjectContainer db) {
+		
 	}
-	
-	
 	
 
 }

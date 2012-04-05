@@ -108,7 +108,7 @@ public class Controller extends HttpServlet {
 		
 		db = Db4oEmbedded.openFile(config, file);
 		
-		DBKeyword test = new DBKeyword("Auto");
+		DBKeyword test = new DBKeyword(0,"Auto",null);
 		db.store(test);
 	
 		

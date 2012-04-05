@@ -7,6 +7,7 @@ import java.util.LinkedList;
  * 
  */
 public class DBCustomer {
+	private int custID;
 	private String username;
 	private String password;
 	// A Customer has one or more addresses
@@ -16,28 +17,29 @@ public class DBCustomer {
 	public DBCustomer() {
 	}
 
-	public DBCustomer(String username, String password,
-			LinkedList<DBAddress> address) {
+	public DBCustomer(int custID, String username, String password,
+			LinkedList<DBAddress> addresses) {
 		super();
+		this.custID = custID;
 		this.username = username;
 		this.password = password;
-		this.addresses = address;
+		this.addresses = addresses;
 	}
 
-	public LinkedList<DBAddress> getAddress() {
-		return addresses;
+	public int getCustID() {
+		return custID;
 	}
 
-	public void setAddress(LinkedList<DBAddress> address) {
-		this.addresses = address;
+	public void setCustID(int custID) {
+		this.custID = custID;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String login) {
-		this.username = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -48,11 +50,19 @@ public class DBCustomer {
 		this.password = password;
 	}
 
-	@Override
-	// maybe useful for logging.
-	public String toString() {
-		return "Customer [login=" + username + ", password=" + password
-				+ ", mailadress=" + addresses + "]";
+	public LinkedList<DBAddress> getAddresses() {
+		return addresses;
 	}
 
+	public void setAddresses(LinkedList<DBAddress> addresses) {
+		this.addresses = addresses;
+	}
+
+	@Override
+	public String toString() {
+		return "DBCustomer [custID=" + custID + ", username=" + username
+				+ ", password=" + password + ", addresses=" + addresses + "]";
+	}
+
+	
 }
