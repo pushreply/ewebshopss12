@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class DBOrder {
 		
-		private int id_dborder;
+		private int orderID;
 		private DBCustomer cust;
 		private Date datum;
 		private int state;
@@ -27,11 +27,11 @@ public class DBOrder {
 			
 		}
 		
-		public DBOrder(int id_dborder, DBCustomer cust, Date datum, int state,
+		public DBOrder(int orderID, DBCustomer cust, Date datum, int state,
 				DBAddress address, LinkedList<DBItems> items,
 				LinkedList<DBAddress> idress, LinkedList<DBCustomer> customers) {
 			super();
-			this.id_dborder = id_dborder;
+			this.orderID = orderID;
 			this.cust = cust;
 			this.datum = datum;
 			this.state = state;
@@ -41,12 +41,12 @@ public class DBOrder {
 			this.customers = customers;
 		}
 
-		public int getId_dborder() {
-			return id_dborder;
+		public int getOrderID() {
+			return orderID;
 		}
 
-		public void setId_dborder(int id_dborder) {
-			this.id_dborder = id_dborder;
+		public void setOrderID(int orderID) {
+			this.orderID = orderID;
 		}
 
 		public DBCustomer getCust() {
@@ -107,7 +107,7 @@ public class DBOrder {
 
 		@Override
 		public String toString() {
-			return "DBOrder [id_dborder=" + id_dborder + ", cust=" + cust
+			return "DBOrder [orderID=" + orderID + ", cust=" + cust
 					+ ", datum=" + datum + ", state=" + state + ", address="
 					+ address + ", Items=" + Items + ", Idress=" + Idress
 					+ ", customers=" + customers + "]";

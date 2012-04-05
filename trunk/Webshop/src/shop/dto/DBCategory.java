@@ -10,27 +10,27 @@ import java.util.LinkedList;
  *
  */
 public class DBCategory {
-	private int id_dbcategory;	
+	private int catID;	
 	private String categoryName;	
 	LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
 	
 	//default constructor
 	public DBCategory(){}
 
-	public DBCategory(int id_dbcategory, String categoryName,
+	public DBCategory(int catID, String categoryName,
 			LinkedList<DBAlbum> albums) {
 		super();
-		this.id_dbcategory = id_dbcategory;
+		this.catID = catID;
 		this.categoryName = categoryName;
 		this.albums = albums;
 	}
 
-	public int getId_dbcategory() {
-		return id_dbcategory;
+	public int getCatID() {
+		return catID;
 	}
 
-	public void setId_dbcategory(int id_dbcategory) {
-		this.id_dbcategory = id_dbcategory;
+	public void setCatID(int id_dbcategory) {
+		this.catID = id_dbcategory;
 	}
 
 	public String getCategoryName() {
@@ -51,7 +51,7 @@ public class DBCategory {
 
 	@Override
 	public String toString() {
-		return "DBCategory [id_dbcategory=" + id_dbcategory + ", categoryName="
+		return "DBCategory [id_dbcategory=" + catID + ", categoryName="
 				+ categoryName + ", albums=" + albums + "]";
 	}
    
