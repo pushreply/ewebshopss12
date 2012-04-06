@@ -8,11 +8,12 @@ import java.util.LinkedList;
 
 import com.db4o.ObjectSet;
 import com.db4o.ObjectContainer;
+import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseFileLockedException;
+import com.db4o.ext.Db4oIOException;
 
 import shop.dto.DBAddress;
 import shop.dto.DBCustomer;
-import shop.dto.DBOrder;
 
 public class DAOCustomer {
 
@@ -128,21 +129,36 @@ public class DAOCustomer {
 
 	}
 
+	
+	
 	/*
 	 * retrieve customer adress
 	 */
-	public DBAddress retrieveCustomerAddress(ObjectContainer db,
-			int cutID, String adressArt) {
+	public DBAddress retrieveCustomerAddress(ObjectContainer db, int cutID,
+			String adressArt) { // adressArt is either delivery or billing
 		DBAddress address = null;
-		DBCustomer customer = retrieveCustomerByID(db, cutID);
-		LinkedList<DBAddress> adresses = customer.getAddresses();
 
-		for (DBAddress add : adresses) {
-			if (add.getArt() == adressArt) {
-				address = new DBAddress(add.getAdrID(), add.getStreet(),
-						add.getCountry(), add.getFirstName(),
-						add.getLastName(), add.getGender(), add.getArt());
+		try {
+			ObjectSet<DBCustomer> result = db.queryByExample(new DBCustomer(cutID,
+					null, null, null));
+			DBCustomer customer = (DBCustomer) result.next();
+			LinkedList<DBAddress> adresses = customer.getAddresses();
+
+			for (DBAddress add : adresses) {
+				if (add.getArt() == adressArt) {
+					address = new DBAddress(add.getAdrID(), add.getStreet(),
+							add.getCountry(), add.getFirstName(),
+							add.getLastName(), add.getGender(), add.getArt());
+				}
 			}
+		} catch (Db4oIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseClosedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			db.close();
 		}
 		return address;
 	}
@@ -166,11 +182,4 @@ public class DAOCustomer {
 
 	}
 
-	/*
-	 * retrieve customer delivery order
-	 */
-	public DBOrder retrieveCustomerOrder(ObjectContainer db, String username) {
-
-		return null;
-	}
 }

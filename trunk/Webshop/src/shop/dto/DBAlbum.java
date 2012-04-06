@@ -27,12 +27,31 @@ public class DBAlbum {
 	//default constructor
 	public DBAlbum(){}
 
+	public DBAlbum(int albID, String coverpath, String albumTitel,
+			String artist, int numberOfDisks, double price, int amount,
+			int numberOfTracks, String label, LinkedList<DBKeyword> keywords,
+			LinkedList<DBCategory> categories, LinkedList<DBTrack> tracks) {
+		super();
+		this.albID = albID;
+		this.coverpath = coverpath;
+		this.albumTitel = albumTitel;
+		this.artist = artist;
+		this.numberOfDisks = numberOfDisks;
+		this.price = price;
+		this.amount = amount;
+		this.numberOfTracks = numberOfTracks;
+		this.label = label;
+		this.keywords = keywords;
+		this.categories = categories;
+		this.tracks = tracks;
+	}
+
 	public int getAlbID() {
 		return albID;
 	}
 
-	public void setAlbID(int id_dbalbum) {
-		this.albID = id_dbalbum;
+	public void setAlbID(int albID) {
+		this.albID = albID;
 	}
 
 	public String getCoverpath() {
@@ -125,15 +144,13 @@ public class DBAlbum {
 
 	@Override
 	public String toString() {
-		return "DBAlbum [id_dbalbum=" + albID + ", coverpath=" + coverpath
+		return "DBAlbum [albID=" + albID + ", coverpath=" + coverpath
 				+ ", albumTitel=" + albumTitel + ", artist=" + artist
 				+ ", numberOfDisks=" + numberOfDisks + ", price=" + price
 				+ ", amount=" + amount + ", numberOfTracks=" + numberOfTracks
 				+ ", label=" + label + ", keywords=" + keywords
 				+ ", categories=" + categories + ", tracks=" + tracks + "]";
 	}
-	
-	
-	
+
 	
 }

@@ -44,19 +44,4 @@ public class DBObject {
 		return db;
 	}
 	
-	public  void DBClose(ObjectContainer db)
-	{
-	  try
-	  {
-		if(db == null)
-		{
-			throw new NullPointerException(db +" darf nicht null sein ");
-		}
-		db.close();
-	  }
-	  catch(Exception e)
-	  {
-		  
-	  }
-	}
 }

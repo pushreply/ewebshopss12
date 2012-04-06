@@ -29,8 +29,8 @@ public class DBCategory {
 		return catID;
 	}
 
-	public void setCatID(int id_dbcategory) {
-		this.catID = id_dbcategory;
+	public void setCatID(int catID) {
+		this.catID = catID;
 	}
 
 	public String getCategoryName() {

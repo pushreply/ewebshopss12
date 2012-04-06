@@ -6,7 +6,10 @@ import shop.dto.DBTrack;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseFileLockedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 
 //import org.apache.commons.logging.Log;
 //import org.apache.commons.logging.LogFactory;
@@ -15,7 +18,11 @@ public class DAOTrack {
 	
 //	private static final Log log = LogFactory.getLog(DAOTrack.class);
 	
-	public static void speichern(DBTrack track, ObjectContainer db)
+	
+	/*
+	 * insert a new track
+	 */
+	public static void insertTrack(DBTrack track, ObjectContainer db)
 	{	
 		try {
 			db.store(track);
@@ -27,23 +34,55 @@ public class DAOTrack {
 		finally{
 			db.close();
 		}
-		
-		
+				
 	}
 	
-	public static LinkedList<DBTrack> auslesen(ObjectContainer db) {
+	
+	
+	/*
+	 * delete a track
+	 */
+	public static void deleteTrack(int trackID, ObjectContainer db)
+	{	
 		
-		LinkedList<DBTrack> linkedListDBTrack = new LinkedList<DBTrack>();
+		 try {
+			DBTrack track; 
+			
+			 ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID, null, null,null,null,null,0,0));			
+			 track = result.next();
+			 db.delete(track);
+			 
+		} catch (Db4oIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseClosedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseReadOnlyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			db.close();
+		}
+				
+	}
+	
+	
+	/*
+	 * retrieve all tracks
+	 */
+	public static LinkedList<DBTrack> retrieveAllTracks(ObjectContainer db) {
+		
+		LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
 		
 		try {
 			
-			DBTrack track = new DBTrack();
-			
-			ObjectSet<DBTrack> result = db.queryByExample(track);
+			ObjectSet<DBTrack> result = db.queryByExample(DBTrack.class);
+			DBTrack track;
 			
 			while(result.hasNext()) {
 				track = result.next();
-				linkedListDBTrack.add(track);
+				tracks.add(track);
 			}
 		}
 		catch (DatabaseFileLockedException e) {
@@ -54,26 +93,24 @@ public class DAOTrack {
 			db.close();
 		}
 		
-		return linkedListDBTrack;
+		return tracks;
 	}
 	
 	
-	public static DBTrack auslesenEinzeln(ObjectContainer db, int trackid)
+	
+	/*
+	 * Retrieve a specific track
+	 */
+	public static DBTrack retrieveTrackByID(ObjectContainer db, int trackID)
 	{
-		DBTrack a = new DBTrack();
+
+		DBTrack track = null;
 		
 		try {
-			/* Wir erstellen ein Beispielobject mit dem int id_dbtrack */
-			DBTrack track = new DBTrack(trackid);
+					 
+			 ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID, null, null,null,null,null,0,0));
 			
-			/* Die Methode get() gibt eine OjectSet zurück, das
-			 * genau ein DBTrack enthält, das exakt dem Beispielobjekt
-			 * entspricht. */
-			 
-			 ObjectSet<DBTrack> result = db.queryByExample(track);
-			
-			 /* Das bestimmte Object wird aus dem ObjectSet ausgelesen. */
-			 a = result.next();
+			 track = result.next();
 			 
 			
 		} catch (DatabaseFileLockedException e) {
@@ -84,6 +121,6 @@ public class DAOTrack {
 			db.close();
 		}
 		
-		return a;
+		return track;
 	}
 }

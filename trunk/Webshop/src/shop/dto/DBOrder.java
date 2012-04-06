@@ -11,33 +11,29 @@ import java.util.LinkedList;
 public class DBOrder {
 		
 		private int orderID;
-		private DBCustomer cust;
 		private Date datum;
 		private int state;
-		private DBAddress address;
 
 		//an oder has one or many Items
-		LinkedList<DBItems> Items = new LinkedList<DBItems>();
+		LinkedList<DBItems> items = new LinkedList<DBItems>();
 		//Adress Collection
-		LinkedList<DBAddress> Idress = new LinkedList<DBAddress>();
+		LinkedList<DBAddress> addresses = new LinkedList<DBAddress>();
 		//Customer Collection
 		LinkedList<DBCustomer> customers = new LinkedList<DBCustomer>();
 		
 		public DBOrder(){
 			
 		}
-		
-		public DBOrder(int orderID, DBCustomer cust, Date datum, int state,
-				DBAddress address, LinkedList<DBItems> items,
-				LinkedList<DBAddress> idress, LinkedList<DBCustomer> customers) {
+
+		public DBOrder(int orderID, Date datum, int state,
+				LinkedList<DBItems> items, LinkedList<DBAddress> addresses,
+				LinkedList<DBCustomer> customers) {
 			super();
 			this.orderID = orderID;
-			this.cust = cust;
 			this.datum = datum;
 			this.state = state;
-			this.address = address;
-			Items = items;
-			Idress = idress;
+			this.items = items;
+			this.addresses = addresses;
 			this.customers = customers;
 		}
 
@@ -47,14 +43,6 @@ public class DBOrder {
 
 		public void setOrderID(int orderID) {
 			this.orderID = orderID;
-		}
-
-		public DBCustomer getCust() {
-			return cust;
-		}
-
-		public void setCust(DBCustomer cust) {
-			this.cust = cust;
 		}
 
 		public Date getDatum() {
@@ -73,28 +61,20 @@ public class DBOrder {
 			this.state = state;
 		}
 
-		public DBAddress getAddress() {
-			return address;
-		}
-
-		public void setAddress(DBAddress address) {
-			this.address = address;
-		}
-
 		public LinkedList<DBItems> getItems() {
-			return Items;
+			return items;
 		}
 
 		public void setItems(LinkedList<DBItems> items) {
-			Items = items;
+			this.items = items;
 		}
 
-		public LinkedList<DBAddress> getIdress() {
-			return Idress;
+		public LinkedList<DBAddress> getAddresses() {
+			return addresses;
 		}
 
-		public void setIdress(LinkedList<DBAddress> idress) {
-			Idress = idress;
+		public void setAddresses(LinkedList<DBAddress> addresses) {
+			this.addresses = addresses;
 		}
 
 		public LinkedList<DBCustomer> getCustomers() {
@@ -107,14 +87,11 @@ public class DBOrder {
 
 		@Override
 		public String toString() {
-			return "DBOrder [orderID=" + orderID + ", cust=" + cust
-					+ ", datum=" + datum + ", state=" + state + ", address="
-					+ address + ", Items=" + Items + ", Idress=" + Idress
-					+ ", customers=" + customers + "]";
+			return "DBOrder [orderID=" + orderID + ", datum=" + datum
+					+ ", state=" + state + ", items=" + items + ", addresses="
+					+ addresses + ", customers=" + customers + "]";
 		}
 		
-		
-		
-		
+	    
 		
 }

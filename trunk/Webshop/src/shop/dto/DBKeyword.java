@@ -13,18 +13,15 @@ public class DBKeyword {
 	
 	private int keyID;
 	private String keywordName;
-	LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
-	
 	
 	//default constructor
 	public DBKeyword(){}
 
 
-	public DBKeyword(int keyID, String keywordName, LinkedList<DBAlbum> albums) {
+	public DBKeyword(int keyID, String keywordName) {
 		super();
 		this.keyID = keyID;
 		this.keywordName = keywordName;
-		this.albums = albums;
 	}
 
 
@@ -47,21 +44,9 @@ public class DBKeyword {
 		this.keywordName = keywordName;
 	}
 
-
-	public LinkedList<DBAlbum> getAlbums() {
-		return albums;
-	}
-
-
-	public void setAlbums(LinkedList<DBAlbum> albums) {
-		this.albums = albums;
-	}
-
-
 	@Override
 	public String toString() {
-		return "DBKeyword [keyID=" + keyID + ", keywordName=" + keywordName
-				+ ", albums=" + albums + "]";
+		return "DBKeyword [keyID=" + keyID + ", keywordName=" + keywordName+ "]";
 	}
 
 	

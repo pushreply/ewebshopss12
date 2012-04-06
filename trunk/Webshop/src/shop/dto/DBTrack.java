@@ -1,5 +1,6 @@
 package shop.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -20,14 +21,9 @@ public class DBTrack {
 		
 	}
 	
-	public DBTrack(int trackID)
-	{
-		this.trackID = trackID;
-	}
-	
-	public DBTrack(int trackID, byte[] file, String trackTitle, String trackArtist,
-			Date trackDate, String trackGenre, int trackNumber,
-			int trackDiskNumber) {
+	public DBTrack(int trackID, byte[] file, String trackTitle,
+			String trackArtist, Date trackDate, String trackGenre,
+			int trackNumber, int trackDiskNumber) {
 		super();
 		this.trackID = trackID;
 		this.file = file;
@@ -38,57 +34,79 @@ public class DBTrack {
 		this.trackNumber = trackNumber;
 		this.trackDiskNumber = trackDiskNumber;
 	}
-	
+
 	public int getTrackID() {
 		return trackID;
 	}
-	
+
 	public void setTrackID(int trackID) {
 		this.trackID = trackID;
 	}
-	
+
 	public byte[] getFile() {
 		return file;
 	}
+
 	public void setFile(byte[] file) {
 		this.file = file;
 	}
+
 	public String getTrackTitle() {
 		return trackTitle;
 	}
+
 	public void setTrackTitle(String trackTitle) {
 		this.trackTitle = trackTitle;
 	}
+
 	public String getTrackArtist() {
 		return trackArtist;
 	}
+
 	public void setTrackArtist(String trackArtist) {
 		this.trackArtist = trackArtist;
 	}
+
 	public Date getTrackDate() {
 		return trackDate;
 	}
+
 	public void setTrackDate(Date trackDate) {
 		this.trackDate = trackDate;
 	}
+
 	public String getTrackGenre() {
 		return trackGenre;
 	}
+
 	public void setTrackGenre(String trackGenre) {
 		this.trackGenre = trackGenre;
 	}
+
 	public int getTrackNumber() {
 		return trackNumber;
 	}
+
 	public void setTrackNumber(int trackNumber) {
 		this.trackNumber = trackNumber;
 	}
+
 	public int getTrackDiskNumber() {
 		return trackDiskNumber;
 	}
+
 	public void setTrackDiskNumber(int trackDiskNumber) {
 		this.trackDiskNumber = trackDiskNumber;
 	}
 
+	@Override
+	public String toString() {
+		return "DBTrack [trackID=" + trackID + ", file="
+				+ Arrays.toString(file) + ", trackTitle=" + trackTitle
+				+ ", trackArtist=" + trackArtist + ", trackDate=" + trackDate
+				+ ", trackGenre=" + trackGenre + ", trackNumber=" + trackNumber
+				+ ", trackDiskNumber=" + trackDiskNumber + "]";
+	}
 	
+    
 }
