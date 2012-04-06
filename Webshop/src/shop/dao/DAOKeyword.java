@@ -1,15 +1,21 @@
 package shop.dao;
 
-import java.util.LinkedList;
-
 import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseFileLockedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 
+
+
+/*
+ * insert a new keyword
+ */
 public class DAOKeyword {
-	public void speichern(DBKeyword keyword, ObjectContainer db)
+	public void insertKeyword(DBKeyword keyword, ObjectContainer db)
 	{	
 		try {
 			db.store(keyword);
@@ -23,29 +29,58 @@ public class DAOKeyword {
 		}
 	}
 	
-	public LinkedList<DBKeyword> auslesen(ObjectContainer db) {
-		
-		LinkedList<DBKeyword> linkedListDBKeyword= new LinkedList<DBKeyword>();
+	
+	/*
+	 * delete a specific keyword
+	 */
+	public void deleteKeyword(int keyID, ObjectContainer db){
 		
 		try {
+			DBKeyword keyword; 
 			
-			DBKeyword keyword = new DBKeyword();
-			
-			ObjectSet<DBKeyword> result = db.queryByExample(keyword);
-			
-			while(result.hasNext()) {
-				keyword = result.next();
-				linkedListDBKeyword.add(keyword);
-			}
-		}
-		catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
+			 ObjectSet<DBKeyword> result = db.queryByExample(new DBKeyword(keyID, null));			
+			 keyword = result.next();
+			 db.delete(keyword);
+			 
+		} catch (Db4oIOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally {
+		} catch (DatabaseClosedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseReadOnlyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
 			db.close();
 		}
 		
-		return linkedListDBKeyword;
+	}
+	
+	
+	/*
+	 * edit a specific keyword
+	 */
+	public void editKeyword(int keyID, String newKeywordName, ObjectContainer db){
+		
+		DBKeyword keyword; 
+		
+		try {
+			ObjectSet<DBKeyword> result = db.queryByExample(new DBKeyword(keyID, null));			
+			keyword = result.next();
+			keyword.setKeywordName(newKeywordName);
+			db.store(keyword);
+		} catch (Db4oIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseClosedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseReadOnlyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			db.close();
+		}
 	}
 }

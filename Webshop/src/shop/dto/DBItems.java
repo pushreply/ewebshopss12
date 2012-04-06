@@ -52,7 +52,7 @@ public class DBItems {
 
 	@Override
 	public String toString() {
-		return "DBItems [id_dbitem=" + itemID + ", orderAmount="
+		return "DBItems [itemID=" + itemID + ", orderAmount="
 				+ orderAmount + ", album=" + album + "]";
 	}
 	

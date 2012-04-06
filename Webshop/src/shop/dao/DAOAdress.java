@@ -1,91 +1,79 @@
 package shop.dao;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import shop.dto.DBAddress;
-import shop.dto.DBTrack;
+import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseFileLockedException;
-import com.db4o.ext.DatabaseReadOnlyException;
-import com.db4o.query.Predicate;
+import com.db4o.ext.Db4oIOException;
 
 public class DAOAdress {
-	
-	public void insert(DBAddress address, ObjectContainer db)
-	{	
+
+	public void insert(DBAddress address, ObjectContainer db) {
 		try {
 			db.store(address);
-		}
-		catch(DatabaseFileLockedException e)
-		{
+		} catch (DatabaseFileLockedException e) {
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			db.close();
 		}
 	}
-	
+
 	public LinkedList<DBAddress> retrieveAllAdresses(ObjectContainer db) {
-		
-		LinkedList<DBAddress> addresses= new LinkedList<DBAddress>();
-		
+
+		LinkedList<DBAddress> addresses = new LinkedList<DBAddress>();
+
 		try {
-			
+
 			DBAddress address = new DBAddress();
-			
+
 			ObjectSet<DBAddress> result = db.queryByExample(address);
-			
-			while(result.hasNext()) {
+
+			while (result.hasNext()) {
 				address = result.next();
 				addresses.add(address);
 			}
-		}
-		catch (DatabaseFileLockedException e) {
+		} catch (DatabaseFileLockedException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			db.close();
 		}
-		
+
 		return addresses;
 	}
-	
-	/*//update DBAddress data
-	public LinkedList<DBAddress> update(final DBAddress old_data, DBAddress new_data, ObjectContainer db) {
-		
-		try{
-			ObjectSet<DBAddress> result = db.query(new Predicate<DBAddress>(){
-				public boolean match(DBAddress adr){
-					return adr.getStreet().equals(old_data.getStreet())||
-							adr.getFirstName().equals(old_data.getFirstName())||
-							adr.getLastName().equals(old_data.getLastName())||
-							adr.getGender().equals(old_data.getGender())||
-							adr.getCountry().equals(old_data.getCountry());
-				}
-			});
-			new_data = old_data;
-			new_data.setStreet(new_data.getStreet());
-			//update new data
-			db.close();
-		}
-		catch (DatabaseReadOnlyException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		finally{
-			db.close();
-		}
-		return null;
-		
-	}*/
-	
-	public void update(final int adrID , DBAddress new_data, ObjectContainer db) {
-		
-	}
-	
 
+	public void update(final int adrID, DBAddress newAdress, ObjectContainer db) {
+
+		DBAddress found = new DBAddress();
+
+		try {
+
+			DBCustomer address = new DBCustomer(adrID, null, null, null);
+			ObjectSet<DBAddress> set = db.queryByExample(address);
+			found = (DBAddress) set.next();
+			found.setStreet(newAdress.getStreet());
+			found.setCountry(newAdress.getCountry());
+			found.setFirstName(newAdress.getFirstName());
+			found.setGender(newAdress.getGender());
+			found.setArt(newAdress.getArt());
+
+			db.store(found);
+
+		} catch (Db4oIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseClosedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+	}
+
+	
 }
