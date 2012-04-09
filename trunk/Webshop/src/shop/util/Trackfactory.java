@@ -1,9 +1,12 @@
-package tagger;
+package shop.util;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import de.vdheide.mp3.FrameDamagedException;
 import de.vdheide.mp3.MP3File;
@@ -76,6 +79,7 @@ public class Trackfactory {
 
 		// convert file to mp3file for vdheide.mp3 tag library
 		MP3File mp3File = (MP3File) file;
+		SimpleDateFormat sdf =new SimpleDateFormat("YYYY");
 		try {
 			track.setTrackArtist(mp3File.getArtist().getTextContent());
 			track.setTrackDiskNumber(new Integer(mp3File.getPartOfSet()
@@ -86,7 +90,13 @@ public class Trackfactory {
 			track.setTrackTitle(mp3File.getTitle().getTextContent());
 
 			// date format
-			// track.setTrackDate(mp3File.getDate().getTextContent());
+			try {
+				Date date = sdf.parse(mp3File.getDate().getTextContent());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			track.setTrackDate();
 			// ID for database
 			// track.setTracknr(tracknr);
 
