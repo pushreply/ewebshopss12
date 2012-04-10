@@ -12,7 +12,7 @@ public class DBTrack {
 	private byte[] file;
 	private String trackTitle;
 	private String trackArtist;
-	private Date trackDate;
+	private int trackDate;
 	private String trackGenre;
 	private int trackNumber;
 	private int trackDiskNumber;
@@ -22,7 +22,7 @@ public class DBTrack {
 	}
 	
 	public DBTrack(int trackID, byte[] file, String trackTitle,
-			String trackArtist, Date trackDate, String trackGenre,
+			String trackArtist, int trackDate, String trackGenre,
 			int trackNumber, int trackDiskNumber) {
 		super();
 		this.trackID = trackID;
@@ -67,11 +67,11 @@ public class DBTrack {
 		this.trackArtist = trackArtist;
 	}
 
-	public Date getTrackDate() {
+	public int getTrackDate() {
 		return trackDate;
 	}
 
-	public void setTrackDate(Date trackDate) {
+	public void setTrackDate(int trackDate) {
 		this.trackDate = trackDate;
 	}
 

@@ -69,7 +69,7 @@ public class Trackfactory {
 	public static DBTrack createTrack(File file) {
 		DBTrack track = new DBTrack();
 
-		// transform mp3 in bytearray and add set it in track
+		// transform mp3 in bytearray and set it in track
 		try {
 			track.setFile(getBytesFromFile(file));
 		} catch (IOException e) {
@@ -79,32 +79,25 @@ public class Trackfactory {
 
 		// convert file to mp3file for vdheide.mp3 tag library
 		MP3File mp3File = (MP3File) file;
-		SimpleDateFormat sdf =new SimpleDateFormat("YYYY");
+		
+		//read mp3 tags and set corresponding attributes in the track
 		try {
 			track.setTrackArtist(mp3File.getArtist().getTextContent());
 			track.setTrackDiskNumber(new Integer(mp3File.getPartOfSet()
-					.getTextContent().split("/")[0]).intValue()); //.getTrack().getTextContent() gibt Track in der Art '5/14' aus!...daher split
+					.getTextContent().split("/")[0]).intValue()); // .getTrack().getTextContent() gibt Track in der Art '5/14' aus!...daher split
 			track.setTrackGenre(mp3File.getGenre().getTextContent());
 			track.setTrackNumber(new Integer(mp3File.getTrack()
 					.getTextContent().split("/")[0]).intValue());
 			track.setTrackTitle(mp3File.getTitle().getTextContent());
-
-			// date format
-			try {
-				Date date = sdf.parse(mp3File.getDate().getTextContent());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//			track.setTrackDate();
+			track.setTrackDate(new Integer(mp3File.getYear().getTextContent()));
+			
 			// ID for database
 			// track.setTracknr(tracknr);
 
 		} catch (FrameDamagedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return track;
 	}
 }

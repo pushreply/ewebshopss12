@@ -15,43 +15,36 @@ import com.db4o.ext.Db4oIOException;
 //import org.apache.commons.logging.LogFactory;
 
 public class DAOTrack {
-	
-//	private static final Log log = LogFactory.getLog(DAOTrack.class);
-	
-	
+
+	// private static final Log log = LogFactory.getLog(DAOTrack.class);
+
 	/*
 	 * insert a new track
 	 */
-	public static void insertTrack(DBTrack track, ObjectContainer db)
-	{	
+	public static void insertTrack(DBTrack track, ObjectContainer db) {
 		try {
 			db.store(track);
-		}
-		catch(DatabaseFileLockedException e)
-		{
+		} catch (DatabaseFileLockedException e) {
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			db.close();
 		}
-				
+
 	}
-	
-	
-	
+
 	/*
 	 * delete a track
 	 */
-	public static void deleteTrack(int trackID, ObjectContainer db)
-	{	
-		
-		 try {
-			DBTrack track; 
-			
-			 ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID, null, null,null,null,null,0,0));			
-			 track = result.next();
-			 db.delete(track);
-			 
+	public static void deleteTrack(int trackID, ObjectContainer db) {
+
+		try {
+			DBTrack track;
+
+			ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID,
+					null, null, null, 0, null, 0, 0));
+			track = result.next();
+			db.delete(track);
+
 		} catch (Db4oIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,66 +54,59 @@ public class DAOTrack {
 		} catch (DatabaseReadOnlyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			db.close();
 		}
-				
+
 	}
-	
-	
+
 	/*
 	 * retrieve all tracks
 	 */
 	public static LinkedList<DBTrack> retrieveAllTracks(ObjectContainer db) {
-		
+
 		LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
-		
+
 		try {
-			
+
 			ObjectSet<DBTrack> result = db.queryByExample(DBTrack.class);
 			DBTrack track;
-			
-			while(result.hasNext()) {
+
+			while (result.hasNext()) {
 				track = result.next();
 				tracks.add(track);
 			}
-		}
-		catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		finally {
-			db.close();
-		}
-		
-		return tracks;
-	}
-	
-	
-	
-	/*
-	 * Retrieve a specific track
-	 */
-	public static DBTrack retrieveTrackByID(ObjectContainer db, int trackID)
-	{
-
-		DBTrack track = null;
-		
-		try {
-					 
-			 ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID, null, null,null,null,null,0,0));
-			
-			 track = result.next();
-			 
-			
 		} catch (DatabaseFileLockedException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			db.close();
 		}
-		
+
+		return tracks;
+	}
+
+	/*
+	 * Retrieve a specific track
+	 */
+	public static DBTrack retrieveTrackByID(ObjectContainer db, int trackID) {
+
+		DBTrack track = null;
+
+		try {
+
+			ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID,
+					null, null, null, 0, null, 0, 0));
+
+			track = result.next();
+
+		} catch (DatabaseFileLockedException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+
 		return track;
 	}
 }
