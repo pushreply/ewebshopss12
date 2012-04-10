@@ -44,4 +44,10 @@ public class DBObject {
 		return db;
 	}
 	
+	
+	public static ObjectContainer getConnection(String file)
+	{
+		return getConnection(file, null);
+	}
+	
 }
