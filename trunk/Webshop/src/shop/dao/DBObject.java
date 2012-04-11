@@ -12,7 +12,7 @@ import com.db4o.ext.DatabaseFileLockedException;
 
 public class DBObject {
 	
-	public static ObjectContainer getConnection(String file, EmbeddedConfiguration config)
+	public  ObjectContainer getConnection(String file, EmbeddedConfiguration config)
 	{
         ObjectContainer db = null;
 		
@@ -45,7 +45,7 @@ public class DBObject {
 	}
 	
 	
-	public static ObjectContainer getConnection(String file)
+	public ObjectContainer getConnection(String file)
 	{
 		return getConnection(file, null);
 	}
