@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import de.vdheide.mp3.FrameDamagedException;
-import de.vdheide.mp3.MP3File;
 
 import shop.dto.DBTrack;
+import de.vdheide.mp3.FrameDamagedException;
+import de.vdheide.mp3.ID3v2DecompressionException;
+import de.vdheide.mp3.ID3v2IllegalVersionException;
+import de.vdheide.mp3.ID3v2WrongCRCException;
+import de.vdheide.mp3.MP3File;
+import de.vdheide.mp3.NoMP3FrameException;
 
 /**
  * Create
@@ -66,7 +66,7 @@ public class Trackfactory {
 	 * @return the DBTrack file with fulfilled attributes from the ID3Tag of the
 	 *         given file
 	 */
-	public static DBTrack createTrack(File file) {
+	public static DBTrack createTrack(File file, int id) {
 		DBTrack track = new DBTrack();
 
 		// transform mp3 in bytearray and set it in track
@@ -78,7 +78,25 @@ public class Trackfactory {
 		}
 
 		// convert file to mp3file for vdheide.mp3 tag library
-		MP3File mp3File = (MP3File) file;
+		MP3File mp3File = null;
+		try {
+			mp3File = new MP3File(file.getPath());
+		} catch (ID3v2WrongCRCException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ID3v2DecompressionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ID3v2IllegalVersionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (NoMP3FrameException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		//read mp3 tags and set corresponding attributes in the track
 		try {
@@ -90,13 +108,11 @@ public class Trackfactory {
 					.getTextContent().split("/")[0]).intValue());
 			track.setTrackTitle(mp3File.getTitle().getTextContent());
 			track.setTrackDate(new Integer(mp3File.getYear().getTextContent()));
-			
-			// ID for database
-			// track.setTracknr(tracknr);
-
 		} catch (FrameDamagedException e) {
 			e.printStackTrace();
 		}
+		
+		track.setTrackID(id);
 
 		return track;
 	}

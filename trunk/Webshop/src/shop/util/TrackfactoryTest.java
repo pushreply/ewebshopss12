@@ -3,28 +3,23 @@
  */
 package shop.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
+import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import shop.dto.DBTrack;
 
-import de.vdheide.mp3.ID3v2DecompressionException;
-import de.vdheide.mp3.ID3v2IllegalVersionException;
-import de.vdheide.mp3.ID3v2WrongCRCException;
-import de.vdheide.mp3.MP3File;
-import de.vdheide.mp3.NoMP3FrameException;
-
 /**
  * @author Andreas
  * 
  */
 public class TrackfactoryTest {
-	MP3File file = null;
-
+	File file = null;
+	static final int ID = 0;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -37,28 +32,17 @@ public class TrackfactoryTest {
 	 */
 	@Test
 	public void testCreateTrack() {
-		try {
-
-			file = new MP3File("WebContent/images/wwm.mp3");
-		} catch (ID3v2WrongCRCException e) {
-			e.printStackTrace();
-		} catch (ID3v2DecompressionException e) {
-			e.printStackTrace();
-		} catch (ID3v2IllegalVersionException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NoMP3FrameException e) {
-			e.printStackTrace();
-		}
 		
-		DBTrack underTest = Trackfactory.createTrack(file);
+		file = new File("WebContent/images/wwm.mp3");
+		
+		DBTrack underTest = Trackfactory.createTrack(file,ID);
 		assertEquals(underTest.getTrackArtist(), "myArtistName");
 		assertEquals(underTest.getTrackDiskNumber(), 3);
 		assertEquals(underTest.getTrackGenre(), "Rock/Pop");
 		assertEquals(underTest.getTrackNumber(), 1);
 		assertEquals(underTest.getTrackTitle(), "myTrackTitle");
 		assertEquals(underTest.getTrackDate(), 2000);
+		assertEquals(underTest.getTrackID(), ID);
 	}
 
 }
