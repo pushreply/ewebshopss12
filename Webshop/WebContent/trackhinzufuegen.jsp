@@ -20,15 +20,21 @@
   
   <h3>Tracks Hinzufügen</h3>
  </div>
- <form>
+ <form action="uploadmusicfile"  		
+ 		method="post"
+ 		enctype="multipart/form-data">
  <table>
    <tr>
      <td align="right">Datei:</td>
-     <td><input type="file" name='bearbeiten'></td>
+     <td><input type="file" name="filename" id="fileid"></td>
    </tr>
  </table>
 
- <input type=button onClick="location.href='index.jsp'" value='Track hinzufügen'> 
+ <input type=submit 
+ 		onClick="location.href='index.jsp'" 
+ 		value='Upload File'
+
+ 		> 
 </form>
 
 </body>
