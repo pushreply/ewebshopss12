@@ -99,13 +99,13 @@ public class Controller extends HttpServlet {
 		//Klasse Track
 		config.common().objectClass(DBTrack.class).cascadeOnUpdate(true);
 		config.common().objectClass(DBTrack.class).cascadeOnDelete(true);
-		config.common().objectClass(DBOrder.class).objectField("file").indexed(true);
-		config.common().objectClass(DBOrder.class).objectField("trackTitle").indexed(true);
-		config.common().objectClass(DBOrder.class).objectField("trackArtist").indexed(true);
-		config.common().objectClass(DBOrder.class).objectField("trackDate").indexed(true);
-		config.common().objectClass(DBOrder.class).objectField("trackGenre").indexed(true);
-		config.common().objectClass(DBOrder.class).objectField("trackNumber").indexed(true);
-		config.common().objectClass(DBOrder.class).objectField("trackDiskNumber").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("file").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("trackTitle").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("trackArtist").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("trackDate").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("trackGenre").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("trackNumber").indexed(true);
+		config.common().objectClass(DBTrack.class).objectField("trackDiskNumber").indexed(true);
 		
 		//DBObject baut eine verbindung zur DB auf
 		db = new DBObject().getConnection(file, config);
