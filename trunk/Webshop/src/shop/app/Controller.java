@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -17,6 +18,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
 
 
+import shop.actions.UploadMusicFile;
 import shop.dao.DAOTrack;
 import shop.dao.DBObject;
 import shop.dto.DBAddress;
@@ -27,7 +29,7 @@ import shop.dto.DBItems;
 import shop.dto.DBKeyword;
 import shop.dto.DBOrder;
 import shop.dto.DBTrack;
-import shop.util.UploadMusicFile;
+import shop.util.Sequence;
 
 public class Controller extends HttpServlet {
 	
@@ -163,29 +165,15 @@ public class Controller extends HttpServlet {
 		config.common().objectClass(DBTrack.class).objectField("trackGenre").indexed(true);
 		config.common().objectClass(DBTrack.class).objectField("trackNumber").indexed(true);
 		config.common().objectClass(DBTrack.class).objectField("trackDiskNumber").indexed(true);
+		 
+		//Klasse Sequence
+		config.common().objectClass(Sequence.class).objectField("nextNumber").indexed(true);
+		config.common().objectClass(Sequence.class).objectField("seqname").indexed(true);
+		
 		
 		//DBObject baut eine verbindung zur DB auf
 		db = new DBObject().getConnection(file, config);
 		
-		DBKeyword test = new DBKeyword(0,"Auto");
-		db.store(test);
-	
-		
-			List <DBKeyword> result = null;
-			try
-			{
-				result = db.queryByExample(DBKeyword.class);
-			}
-			catch(Exception e)
-			{
-				System.out.println(e);
-			}
-
-			for(int i = 0; i < result.size(); i++)
-			{
-				DBKeyword a = (DBKeyword) result.get(i);
-				System.out.println(a.getKeywordName());
-			}
 		
 		
 		
