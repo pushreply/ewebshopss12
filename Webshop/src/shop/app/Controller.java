@@ -14,6 +14,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
 
 
+import shop.dao.DBObject;
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
 import shop.dto.DBCategory;
@@ -106,7 +107,8 @@ public class Controller extends HttpServlet {
 		config.common().objectClass(DBOrder.class).objectField("trackNumber").indexed(true);
 		config.common().objectClass(DBOrder.class).objectField("trackDiskNumber").indexed(true);
 		
-		db = Db4oEmbedded.openFile(config, file);
+		//DBObject baut eine verbindung zur DB auf
+		db = new DBObject().getConnection(file, config);
 		
 		DBKeyword test = new DBKeyword(0,"Auto");
 		db.store(test);

@@ -15,7 +15,7 @@ public class TestDBOBject {
 	@Test
 	public void testGetConnection1() {
 		ObjectContainer db;
-		String FILE = "database.db";
+		String FILE = "C:/projektDB/beispiel.db";
 		try {
 			db = new DBObject().getConnection(FILE);
 			assertNotNull(db);
@@ -33,7 +33,7 @@ public class TestDBOBject {
 	@Test
 	public void testGetCollection2() {
 		ObjectContainer db;
-		String FILE = "database.db";
+		String FILE = "C:/projektDB/nix.db";
 
 		try {
 			db = new DBObject().getConnection(FILE);
@@ -45,21 +45,4 @@ public class TestDBOBject {
 
 	}
 
-	/*
-	 * Datenbank ist leer
-	 */
-	@Test
-	public void testGetCollection3() {
-		ObjectContainer db;
-		String FILE = "database.db";
-
-		try {
-			db = new DBObject().getConnection(FILE);
-			assertNotNull(db);
-		} catch (Exception e) {
-			fail("Ein Fehler ist beim Testen, da ein unerwartete Exception "
-					+ "aufgetreten ist" + e.getMessage());
-		}
-
-	}
 }
