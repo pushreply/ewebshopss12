@@ -1,6 +1,7 @@
 package shop.app;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,12 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 import shop.dao.DAOTrack;
 import shop.dto.DBTrack;
 
 /**
  * Servlet implementation class loadTrack
+ * 
  * @author Andreas
  */
 @WebServlet("/loadTrack")
@@ -41,8 +44,8 @@ public class LoadTrack extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-//		for test purposes
-//		int trackID = new Integer(request.getParameter("trackID"));
+		// for test purposes
+		// int trackID = new Integer(request.getParameter("trackID"));
 		int trackID = 1;
 		ObjectContainer db = null;
 		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
@@ -66,27 +69,38 @@ public class LoadTrack extends HttpServlet {
 		config.common().objectClass(DBTrack.class)
 				.objectField("trackDiskNumber").indexed(true);
 		db = Db4oEmbedded.openFile(config, file);
-		
+
 		DBTrack track = DAOTrack.retrieveTrackByID(db, trackID);
-		byte[] mp3 = track.getFile();
+		byte[] mp3File = track.getFile();
 
 		ServletOutputStream stream = null;
+		BufferedInputStream buf = null;
 		try {
 			stream = response.getOutputStream();
 			// set response headers
 			response.setContentType("audio/mpeg");
 			response.addHeader("Content-Disposition", "attachment; filename="
-					+ trackID + ".mp3");
-			response.setContentLength((int) mp3.length);
-//			stream.write(mp3);
-			stream.flush();
+					+ track.getTrackTitle() + " - " + track.getTrackArtist()
+					+ ".mp3");
+			response.setContentLength((int) mp3File.length);
+
+			ByteArrayInputStream input = new ByteArrayInputStream(mp3File);
+			buf = new BufferedInputStream(input);
+			int readBytes = 0;
+			
+			// read from the file; write to the ServletOutputStream
+			while ((readBytes = buf.read()) != -1)
+				stream.write(readBytes);
+				stream.flush();
 		} catch (IOException ioe) {
 			throw new ServletException(ioe.getMessage());
 		} finally {
 			if (stream != null)
 				stream.close();
+			if (buf != null)
+				buf.close();
 		}
-		
+
 	}
 
 	/**
