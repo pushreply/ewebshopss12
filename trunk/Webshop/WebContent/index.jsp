@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hallo JSP!
+Webshop Startseite
 
-<form action="controller" name="test" method="post">
-	<input type="text" value="abschicken">
+<form action="controller" name="controlleraction" method="post">
+	<input type="button" name="button1" value="Album hochladen">
 </form>
 
 </body>
