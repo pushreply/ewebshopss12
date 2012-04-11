@@ -5,8 +5,11 @@
 
 package shop.app;
 
+import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import com.db4o.Db4oEmbedded;
@@ -14,6 +17,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
 
 
+import shop.dao.DAOTrack;
 import shop.dao.DBObject;
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
@@ -23,9 +27,28 @@ import shop.dto.DBItems;
 import shop.dto.DBKeyword;
 import shop.dto.DBOrder;
 import shop.dto.DBTrack;
+import shop.util.UploadMusicFile;
 
 public class Controller extends HttpServlet {
+	
+	//content-type
+	private static final String CONTENT_TYPE = "text/html; charset=windows-1252";
+	
+	ObjectContainer db = null;
+	
+	EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
 
+	String file = "WebshopDB.dbf";
+	
+	//http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html
+	private static final long serialVersionUID = 1L; 
+	
+	//init()
+	public void init() throws ServletException {
+		super.init();
+	}
+	
+	//service()
 	public void service(HttpServletRequest request, HttpServletResponse response){			// service-Methode Anfang
 
 		System.out.println("Test");
@@ -37,11 +60,45 @@ public class Controller extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
-		ObjectContainer db = null;
-	
-		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-	
-		String file = "WebshopDB.dbf";
+		
+		response.setContentType(CONTENT_TYPE);
+		
+		//variable for post/get method 
+		String param = request.getParameter("action");
+		
+		
+		try {
+			//if 'param' is empty/null, show 'index.jsp', only temporary..
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			
+			//show what controller does in eclipse console
+			System.out.println("Controller: " + param); 
+			
+			//create session
+			//HttpSession session = request.getSession(true);
+			
+			//testing file upload
+			if(request.getParameter("filename") != null){
+				//DBObject baut eine verbindung zur DB auf
+				db = new DBObject().getConnection(file, config);
+				
+				DBTrack filename = new DBTrack();
+				DAOTrack.insertTrack(filename, db);
+				request.setAttribute("filename", filename);
+				
+				
+			}
+			
+			
+			
+		} catch (ServletException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+
 		
 	
 		//Klasse Address
