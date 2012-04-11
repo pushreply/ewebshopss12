@@ -98,7 +98,7 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 						//write the uploaded file to the system
 						//fileItem.write(uploadedFile);
 						
-						//send to ByteArray
+						//send to ByteArray (?)
 						ByteArray.inputStreamToByteArray(uploadedFile);
 						uploadedFile.close();
 					}
