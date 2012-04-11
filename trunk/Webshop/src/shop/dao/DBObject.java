@@ -1,8 +1,7 @@
 package shop.dao;
 
 /**
- * @author jemu0006
- *
+ * @author mukunzi
  */
 
 import com.db4o.Db4oEmbedded;

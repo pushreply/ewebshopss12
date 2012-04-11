@@ -1,5 +1,9 @@
 package shop.dao.jtest;
 
+/**
+ * @author mukunzi
+ */
+
 import static org.junit.Assert.*;
 import com.db4o.ObjectContainer;
 
