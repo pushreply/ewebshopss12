@@ -4,12 +4,10 @@
 package shop.util;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 
-import java.beans.DesignMode;
 import java.io.*;
 import java.util.*;
 
 import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.*;
-import org.apache.commons.fileupload.disk.*;
 import org.apache.commons.fileupload.servlet.*;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.io.IOException;
 /**
  * @author roha0001
@@ -31,6 +24,11 @@ import java.io.IOException;
  */
 public class UploadMusicFile extends HttpServlet implements Servlet{
 	
+	/**
+	 * default UID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public UploadMusicFile(){
 		super();
 	}
