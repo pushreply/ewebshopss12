@@ -1,7 +1,7 @@
 package shop.dao;
 
-/*
- *@autor jemu0006 
+/**
+ * @author mukunzi
  */
 
 import java.util.LinkedList;
