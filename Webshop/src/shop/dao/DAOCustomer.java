@@ -56,7 +56,7 @@ public class DAOCustomer {
 	 * Register the user , only when this does not allready exist in the
 	 * Database
 	 */
-	public void UserRegister(DBCustomer customer, ObjectContainer db) {
+	public void registerUser(DBCustomer customer, ObjectContainer db) {
 
 		try {
 

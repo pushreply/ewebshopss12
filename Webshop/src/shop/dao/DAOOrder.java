@@ -46,6 +46,8 @@ public class DAOOrder {
 			order = result.next();
 
 			db.delete(order);
+			db.commit();
+			
 		} catch (DatabaseFileLockedException e) {
 			// TODO: handle exception
 			e.printStackTrace();

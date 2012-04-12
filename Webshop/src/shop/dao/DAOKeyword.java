@@ -19,6 +19,7 @@ import com.db4o.ext.Db4oIOException;
  * insert a new keyword
  */
 public class DAOKeyword {
+	
 	public void insertKeyword(DBKeyword keyword, ObjectContainer db)
 	{	
 		try {
@@ -45,6 +46,7 @@ public class DAOKeyword {
 			 ObjectSet<DBKeyword> result = db.queryByExample(new DBKeyword(keyID, null));			
 			 keyword = result.next();
 			 db.delete(keyword);
+			 db.commit();
 			 
 		} catch (Db4oIOException e) {
 			// TODO Auto-generated catch block
@@ -74,6 +76,7 @@ public class DAOKeyword {
 			keyword = result.next();
 			keyword.setKeywordName(newKeywordName);
 			db.store(keyword);
+			
 		} catch (Db4oIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

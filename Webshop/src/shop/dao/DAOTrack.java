@@ -48,6 +48,7 @@ public class DAOTrack {
 					null, null, null, 0, null, 0, 0));
 			track = result.next();
 			db.delete(track);
+			db.commit();
 
 		} catch (Db4oIOException e) {
 			// TODO Auto-generated catch block
