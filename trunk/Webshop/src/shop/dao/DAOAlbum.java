@@ -16,8 +16,11 @@ import com.db4o.ext.DatabaseFileLockedException;
 
 public class DAOAlbum {
 
-	/*
+	
+	/**
 	 * insert a new album in the Database
+	 * @param album
+	 * @param db
 	 */
 	public void inserAlbum(DBAlbum album, ObjectContainer db) {
 		try {
@@ -31,8 +34,11 @@ public class DAOAlbum {
 	
 	
 
-	/*
+	/**
 	 * Retrieve a specific album from database
+	 * @param db
+	 * @param albID
+	 * @return
 	 */
 	public DBAlbum retrieveAllAlbumByID(ObjectContainer db, int albID) {
 
@@ -59,8 +65,10 @@ public class DAOAlbum {
 	
 	
 
-	/*
+	/**
 	 * Retrieve all albums from database
+	 * @param db
+	 * @return
 	 */
 	public LinkedList<DBAlbum> retrieveAllAlbums(ObjectContainer db) {
 
@@ -88,8 +96,12 @@ public class DAOAlbum {
     
 	
 	
-	/*
+	
+	/**
 	 * Retrieve all album's categories
+	 * @param db
+	 * @param albID
+	 * @return
 	 */
 	public LinkedList<DBCategory> retrieveAlbumsCategories(ObjectContainer db, int albID) {
 		
@@ -116,8 +128,12 @@ public class DAOAlbum {
     
 	
 	
-	/*
+	
+	/**
 	 * Retrieve all album's keywords
+	 * @param db
+	 * @param albID
+	 * @return
 	 */
 	public LinkedList<DBKeyword> retrieveAlbumsKeywords(ObjectContainer db ,int albID) {
 
@@ -144,8 +160,11 @@ public class DAOAlbum {
     
 	
 	
-	/*
+	/**
 	 * Retrieve all album's tracks
+	 * @param db
+	 * @param albID
+	 * @return
 	 */
 	public LinkedList<DBTrack> retrieveAlbumsTracks(ObjectContainer db ,int albID) {
 
@@ -168,6 +187,54 @@ public class DAOAlbum {
 		}
 
 		return tracks;
+
+	}
+	
+	/**
+	 * 
+	 * @param db
+	 * @param albID
+	 * @param coverpath
+	 * @param albumTitel
+	 * @param artist
+	 * @param numberOfDisks
+	 * @param price
+	 * @param amount
+	 * @param numberOfTracks
+	 * @param label
+	 */
+	public void editAlbum(ObjectContainer db, int albID,String coverpath,String albumTitel,
+			String artist, int numberOfDisks, double price, int amount, int numberOfTracks,
+			String label) {
+
+		try {
+
+			DBAlbum album = new DBAlbum(albID, null, null, null, 0, 0.0, 0, 0,
+					null, null, null, null);
+
+			ObjectSet<DBAlbum> result = db.queryByExample(album);
+
+			album = result.next();
+			db.commit();
+			db.commit();
+			
+			album.setCoverpath(coverpath);
+			album.setAlbumTitel(albumTitel);
+			album.setArtist(artist);
+			album.setNumberOfDisks(numberOfDisks);
+			album.setPrice(price);
+			album.setAmount(amount);
+			album.getNumberOfTracks();
+            
+			db.commit();
+
+		} catch (DatabaseFileLockedException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+
 
 	}
 

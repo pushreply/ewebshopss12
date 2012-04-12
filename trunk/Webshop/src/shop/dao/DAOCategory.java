@@ -48,6 +48,7 @@ public class DAOCategory {
 			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null,null));			
 			 category = result.next();
 			 db.delete(category);
+			 db.commit();
 			 
 		} catch (Db4oIOException e) {
 			// TODO Auto-generated catch block

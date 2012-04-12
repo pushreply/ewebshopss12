@@ -98,7 +98,7 @@ public class DAOItem {
 	/*
 	 * 
 	 */
-	public LinkedList<DBAlbum> itemsAlbums (ObjectContainer db, int itemID){
+	public LinkedList<DBAlbum> retrieveItemsAlbums (ObjectContainer db, int itemID){
 		
 		DBItems item = new DBItems();
 		LinkedList<DBAlbum> albums = null;
