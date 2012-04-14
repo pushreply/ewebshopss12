@@ -19,6 +19,15 @@
   </servlet-mapping>
   
     <servlet>
+    <servlet-name>UploadMusicFile</servlet-name>
+    <servlet-class>shop.actions.UploadMusicFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>uploadmusicfile</servlet-name>
+    <url-pattern>/uploadmusicfile</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
     <servlet-name>LoadTrack</servlet-name>
     <servlet-class>shop.app.LoadTrack</servlet-class>
   </servlet>
