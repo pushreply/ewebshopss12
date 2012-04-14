@@ -9,6 +9,7 @@ import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,16 +35,34 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	//temp path for testing purpose on local system
+	/*
+	 * Warning: 
+	 * data is written to "/" level of local system, 
+	 * I'm still trying to "correct" the path..
+	 */
+	private static final String DEST_PATH = "/"; 
+	private File destinationDir;
+	
 	public UploadMusicFile(){
 		super();
 	}
 	
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-//			throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		super.doGet(req, resp);
-//	}
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+//		String realPath = getServletContext().getRealPath(DEST_PATH);
+//		destinationDir = new File(realPath);
+//		if(!destinationDir.isDirectory()) {
+//			throw new ServletException(DEST_PATH+" is not a directory");
+//		}
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doGet(req, resp);
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -78,8 +97,6 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 		
 		List uploadedItems = null;
 		FileItem fileItem = null;
-		//temp path for testing purpose on local system
-		String filePath = "WebContent/musicfile/";
 		
 		try {
 			//iterate over all uploaded files
@@ -93,7 +110,7 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 					System.out.println("entering if isFormField");
 					if(fileItem.getSize() > 0){
 						System.out.println("entering if getsize");
-					//InputStream uploadedFile = null;
+						//InputStream uploadedFile = null;
 						File uploadedFile = null;
 						String myFullFileName = fileItem.getName(), myFileName = "", slashType = (myFullFileName.lastIndexOf("\\")>0) ? "\\" : "/" ;  //windows or UNIX Path
 						
@@ -102,16 +119,15 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 						//igonore the path and get filename
 						myFileName = myFullFileName.substring(startIndex + 1, myFullFileName.length());
 						System.out.println("FileName calculated");
+						
 						//create new File object
-						uploadedFile = new File(filePath, myFileName);
+						uploadedFile = new File(DEST_PATH, myFileName);
 						
 						//write the uploaded file to the system
 						fileItem.write(uploadedFile);
 						System.out.println("File is written to disk.");
-
 					}
 				}
-
 			}
 			
 		} catch (FileUploadException fue) {
