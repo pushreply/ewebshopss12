@@ -40,9 +40,10 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 	 * Warning: 
 	 * data is written to "/" level of local system, 
 	 * I'm still trying to "correct" the path..
+	 * "./" --> file is copied to eclipse folder
+	 * "/" --> file is copied to system-root folder, i.e.: 'C:/'
 	 */
-	private static final String DEST_PATH = "/"; 
-	private File destinationDir;
+	private static final String DEST_PATH = "./"; 
 	
 	public UploadMusicFile(){
 		super();
@@ -50,18 +51,6 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-//		String realPath = getServletContext().getRealPath(DEST_PATH);
-//		destinationDir = new File(realPath);
-//		if(!destinationDir.isDirectory()) {
-//			throw new ServletException(DEST_PATH+" is not a directory");
-//		}
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
 	}
 	
 	@Override
