@@ -3,8 +3,8 @@ package shop.util;
 import java.io.File;
 
 /**
- * wird benötigt beim Löschen der MP3-Dateien und Cover nachden sie in der
-   db gespeicher wurden.
+ * wird benötigt beim Löschen der MP3-Dateien und Albumcover, nachden sie in der
+   db gespeichert wurden.
  * @author mukunzi
  *
  */
