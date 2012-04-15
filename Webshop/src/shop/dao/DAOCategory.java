@@ -45,7 +45,7 @@ public class DAOCategory {
 		try {
 			DBCategory category; 
 			
-			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null,null));			
+			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null));			
 			 category = result.next();
 			 db.delete(category);
 			 db.commit();
@@ -75,7 +75,7 @@ public class DAOCategory {
 		try {
 			DBCategory category; 
 			
-			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null,null));			
+			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null));			
 			 category = result.next();
 			 category.setCategoryName(categoryName);
 			 db.store(category);
@@ -95,31 +95,6 @@ public class DAOCategory {
 		
 	}
 	
-	
-	
-	/*
-	 * retrieve all category's album
-	 */
-	public LinkedList<DBAlbum> RetrieveAllCategorysAlbums(ObjectContainer db, int catID){
-		
-		LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
-
-		try {
-
-			ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null, null));
-            
-			albums = result.next().getAlbums();
-
-		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			db.close();
-		}
-
-		return albums;
-		
-	}
 	
 	
 	/*

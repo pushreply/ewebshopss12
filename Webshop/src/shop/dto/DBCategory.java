@@ -17,12 +17,10 @@ public class DBCategory {
 	//default constructor
 	public DBCategory(){}
 
-	public DBCategory(int catID, String categoryName,
-			LinkedList<DBAlbum> albums) {
+	public DBCategory(int catID, String categoryName) {
 		super();
 		this.catID = catID;
 		this.categoryName = categoryName;
-		this.albums = albums;
 	}
 
 	public int getCatID() {
@@ -41,18 +39,11 @@ public class DBCategory {
 		this.categoryName = categoryName;
 	}
 
-	public LinkedList<DBAlbum> getAlbums() {
-		return albums;
-	}
-
-	public void setAlbums(LinkedList<DBAlbum> albums) {
-		this.albums = albums;
-	}
 
 	@Override
 	public String toString() {
 		return "DBCategory [id_dbcategory=" + catID + ", categoryName="
-				+ categoryName + ", albums=" + albums + "]";
+				+ categoryName + "]";
 	}
    
 }
