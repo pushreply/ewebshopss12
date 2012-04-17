@@ -20,21 +20,19 @@
   
   <h3>Tracks Hinzufügen</h3>
  </div>
- <form action="uploadmusicfile"  		
+ 
+ 	<form action="controller"  		
  		method="post"
  		enctype="multipart/form-data">
- <table>
-   <tr>
-     <td align="right">Datei:</td>
-     <td><input type="file" name="file" id="file"></td>
-   </tr>
- </table>
+ 	<table>
+   		<tr>
+     		<td align="right">Datei:</td>
+    		<td><input type="file" name="file" id="file"></td>
+   		</tr>
+	 </table>
 
- <input type=submit 
- 		value='Upload File'
-
- 		> 
-</form>
+	 <input type=submit name="uploadFileSubmitButton" value='Upload File'> 
+	</form>
 
 </body>
 </html>
