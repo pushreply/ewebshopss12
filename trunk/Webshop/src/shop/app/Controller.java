@@ -5,16 +5,22 @@
 
 package shop.app;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import shop.actions.MultipartMap;
 import shop.dao.DBObject;
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
@@ -29,6 +35,8 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
 
+@WebServlet(urlPatterns = { "/upload" })
+@MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L) // 10MB.
 public class Controller extends HttpServlet {
 
 	private static final long serialVersionUID = -3188047853265442959L;
@@ -146,7 +154,8 @@ public class Controller extends HttpServlet {
 
 		
 		//Controller leitet die Anfragen entsprechend weiter
-		if(request.getParameter("trackHochladenButton")!=null){
+		if((request.getParameter("trackHochladenButton")!=null)){
+			System.out.println("trackhochladenButton");
 			RequestDispatcher disp = request.getRequestDispatcher("/trackhinzufuegen.jsp");
 				try {
 					disp.forward(request, response);
@@ -158,11 +167,14 @@ public class Controller extends HttpServlet {
 					e.printStackTrace();
 				}
 		}
+		
 				
-		else if(request.getParameter("uploadFileSubmitButton")!=null){
-			RequestDispatcher disp = request.getRequestDispatcher("uploadmusicfile");
+		else if(ServletFileUpload.isMultipartContent(request)){
+			System.out.println("ich bin in upload");
+		
 			try {
-				disp.forward(request, response);
+				MultipartMap map = new MultipartMap(request, this);
+
 			} catch (ServletException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -170,7 +182,16 @@ public class Controller extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
+		        try {
+					request.getRequestDispatcher("/weiter.jsp").forward(request, response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
 		}
 			
 		
