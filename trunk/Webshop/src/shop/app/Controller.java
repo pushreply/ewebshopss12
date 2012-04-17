@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.MultipartMap;
+import shop.actions.UploadMusicFile;
 import shop.dao.DBObject;
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
@@ -172,26 +173,27 @@ public class Controller extends HttpServlet {
 		else if(ServletFileUpload.isMultipartContent(request)){
 			System.out.println("ich bin in upload");
 		
-			try {
-				MultipartMap map = new MultipartMap(request, this);
-
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		        try {
-					request.getRequestDispatcher("/weiter.jsp").forward(request, response);
-				} catch (ServletException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-				e.printStackTrace();
-				}
+			UploadMusicFile up = new UploadMusicFile(this, request, response);
+//			try {
+//				MultipartMap map = new MultipartMap(request, this);
+//
+//			} catch (ServletException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		        try {
+//					request.getRequestDispatcher("/weiter.jsp").forward(request, response);
+//				} catch (ServletException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				}
 		}
 			
 		
