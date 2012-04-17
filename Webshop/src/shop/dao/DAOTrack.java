@@ -6,6 +6,7 @@ package shop.dao;
  */
 
 import java.util.LinkedList;
+import java.util.UUID;
 
 import shop.dto.DBTrack;
 import shop.util.Sequence;
@@ -28,12 +29,7 @@ public class DAOTrack {
 	 * insert a new track
 	 */
 	public static void insertTrack(DBTrack track, ObjectContainer db) {
-//		Sequence found = new Sequence(0, null);
-//		found.setName("TrackSeq");
-//		ObjectSet<Sequence> result = db.queryByExample(found);
-//		Sequence trackSeq = result.get(0);//
-		track.setTrackID(2);
-//		db.store(trackSeq);
+		track.setTrackID(UUID.randomUUID());
 
 		try {
 			db.store(track);
@@ -48,7 +44,7 @@ public class DAOTrack {
 	/*
 	 * delete a track
 	 */
-	public static void deleteTrack(int trackID, ObjectContainer db) {
+	public static void deleteTrack(UUID trackID, ObjectContainer db) {
 
 		try {
 			DBTrack track;
@@ -103,7 +99,7 @@ public class DAOTrack {
 	/*
 	 * Retrieve a specific track
 	 */
-	public static DBTrack retrieveTrackByID(ObjectContainer db, int trackID) {
+	public static DBTrack retrieveTrackByID(ObjectContainer db, UUID trackID) {
 
 		DBTrack track = null;
 
