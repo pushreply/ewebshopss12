@@ -12,20 +12,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import shop.actions.MultipartMap;
+import shop.app.Controller;
 
 @WebServlet(urlPatterns = { "/upload" })
 @MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L) // 10MB.
-public class UploadMusicFile extends HttpServlet {
+public class UploadMusicFile {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        request.getRequestDispatcher("/weiter.jsp").forward(request, response);
-    }
+	protected HttpServletRequest request;
+	protected HttpServletResponse response;
+	protected HttpServlet servlet;
+	
+    public UploadMusicFile(HttpServlet servlet, HttpServletRequest request,
+			HttpServletResponse response) {
+    	this.servlet = servlet;
+    	this.request = request;
+    	this.response = response;
+    	
+    	try {
+			process(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	}
+
+    protected void process(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {
         MultipartMap map = new MultipartMap(request, this);
