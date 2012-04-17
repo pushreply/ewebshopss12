@@ -2,6 +2,9 @@
 
 <%@ include file="header.jsp" %>
 
+<title>Webshop Startseite</title>
+</head>
+<body>
 <p><b>Webshop Startseite</b><p>
 
 
