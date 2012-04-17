@@ -240,17 +240,6 @@ public class Controller extends HttpServlet {
 		// sequence.nextVal());
 		// db.store(test2);
 
-		System.out.println("---------------");
-		System.out.println("AAAAAAAAAAAAAAAAAA");
-		
-		
-		LinkedList<DBTrack> asdasd = DAOTrack.retrieveAllTracks(db);
-		for (DBTrack dbTrack : asdasd) {
-			System.out.println(dbTrack.getTrackTitle());
-		}
-		
-		System.out.println("---------------");
-		
 		List<DBTrack> result2 = null;
 		try {
 			result2 = db.query(DBTrack.class);
