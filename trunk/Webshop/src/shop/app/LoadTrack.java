@@ -3,6 +3,8 @@ package shop.app;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +46,7 @@ public class LoadTrack extends HttpServlet {
 
 		// test purposes ONLY - uncomment the line below and delete the
 		// following
-		int trackID = new Integer(request.getParameter("trackID"));
+		UUID trackID = UUID.fromString(request.getParameter("trackID"));
 
 		// Database connection and DBTrack receiving
 		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();

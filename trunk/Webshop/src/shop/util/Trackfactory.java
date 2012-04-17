@@ -97,17 +97,62 @@ public class Trackfactory {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		//read mp3 tags and set corresponding attributes in the track
+
+		// read mp3 tags and set corresponding attributes in the track
 		try {
-			track.setTrackArtist(mp3File.getArtist().getTextContent());
-			track.setTrackDiskNumber(new Integer(mp3File.getPartOfSet()
-					.getTextContent().split("/")[0]).intValue()); // .getTrack().getTextContent() gibt Track in der Art '5/14' aus!...daher split
-			track.setTrackGenre(mp3File.getGenre().getTextContent());
-			track.setTrackNumber(new Integer(mp3File.getTrack()
-					.getTextContent().split("/")[0]).intValue());
-			track.setTrackTitle(mp3File.getTitle().getTextContent());
-			track.setTrackDate(new Integer(mp3File.getYear().getTextContent()));
+
+			// ARTIST
+			String trackArtistString = mp3File.getArtist().getTextContent();
+			if (trackArtistString == null || trackArtistString.isEmpty()) {
+				track.setTrackArtist("unknownArtist");
+			} else {
+				track.setTrackArtist(trackArtistString);
+			}
+
+			// DISKNUMBER
+			String trackDiskNumberString = mp3File.getPartOfSet()
+					.getTextContent();
+			if (trackDiskNumberString == null || trackDiskNumberString.isEmpty()) {
+				track.setTrackDiskNumber(1);
+			} else {
+				track.setTrackDiskNumber(new Integer(trackDiskNumberString
+						.split("/")[0]).intValue());
+				// .getTrack().getTextContent() gibt Track in der Art '5/14'
+				// aus!...daher split
+			}
+
+			// GENRE
+			String trackGenreString = mp3File.getGenre().getTextContent();
+			if (trackGenreString == null || trackGenreString.isEmpty()) {
+				track.setTrackGenre("unknownGenre");
+			} else {
+				track.setTrackGenre(trackGenreString);
+			}
+
+			// TRACKNUMBER
+			String trackNumberString = mp3File.getTrack().getTextContent();
+			if (trackNumberString == null || trackNumberString.isEmpty()) {
+				track.setTrackNumber(0);
+			} else {
+				track.setTrackNumber(new Integer(
+						trackNumberString.split("/")[0]).intValue());
+			}
+
+			// TITLE
+			String trackTitleString = mp3File.getTitle().getTextContent();
+			if (trackTitleString == null || trackTitleString.isEmpty()) {
+				track.setTrackTitle("unknownTitle");
+			} else {
+				track.setTrackTitle(trackTitleString);
+			}
+
+			// DATE
+			String trackDateString = mp3File.getYear().getTextContent();
+			if (trackDateString == null || trackDateString.isEmpty()) {
+				track.setTrackDate(0);
+			} else {
+				track.setTrackDate(new Integer(trackDateString));
+			}
 		} catch (FrameDamagedException e) {
 			e.printStackTrace();
 		}
