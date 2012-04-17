@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import shop.actions.MultipartMap;
 
 @WebServlet(urlPatterns = { "/upload" })
-@MultipartConfig(location = "C:\\projekt\\Code\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\work\\Catalina\\localhost\\Webshop\\upload", maxFileSize = 10485760L) // 10MB.
+@MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L) // 10MB.
 public class UploadMusicFile extends HttpServlet {
 
     @Override
