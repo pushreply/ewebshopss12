@@ -7,7 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>$title</title>
+
 </head>
 <body>
 
