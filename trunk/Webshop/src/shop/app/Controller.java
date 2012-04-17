@@ -5,8 +5,10 @@
 
 package shop.app;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -142,6 +144,23 @@ public class Controller extends HttpServlet {
 		//DBObject baut eine verbindung zur DB auf
 		db = new DBObject().getConnection(file, config);
 
+		
+		//Controller leitet die Anfragen entsprechend weiter
+		if(request.getParameter("trackHochladenButton")!=null){
+			RequestDispatcher disp = request.getRequestDispatcher("/trackhinzufuegen.jsp");
+			try {
+				disp.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
 		DBKeyword test = new DBKeyword(0, "Auto");
 		db.store(test);
 
