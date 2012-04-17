@@ -20,6 +20,10 @@
   <servlet>
     <servlet-name>UploadMusicFile</servlet-name>
     <servlet-class>shop.actions.UploadMusicFile</servlet-class>
+    <init-param>
+    	<param-name>default</param-name>
+    	<param-value>*.mp3</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadMusicFile</servlet-name>
