@@ -1,6 +1,3 @@
-/**
- * 
- */
 package shop.actions;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 
@@ -20,6 +17,7 @@ import org.apache.commons.fileupload.*;
 import org.apache.commons.fileupload.servlet.*;
 
 import shop.util.FileUploadListener;
+import sun.rmi.server.Dispatcher;
 
 import java.io.File;
 import java.io.InputStream;
@@ -43,7 +41,6 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 	 * "./" --> file is copied to eclipse folder
 	 * "/" --> file is copied to system-root folder, i.e.: 'C:/'
 	 */
-	private static final String DEST_PATH = "./"; 
 	
 	public UploadMusicFile(){
 		super();
@@ -53,9 +50,19 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 		super.init(config);
 	}
 	
-	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+			process(req, resp);
+	}
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		process(req, resp);
+	}
+	
+	protected void process(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
 		// TODO Auto-generated method stub
 		super.doPost(req, resp);
 		
@@ -109,8 +116,15 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 						myFileName = myFullFileName.substring(startIndex + 1, myFullFileName.length());
 						System.out.println("FileName calculated");
 						
-						//create new File object
-						uploadedFile = new File(DEST_PATH, myFileName);
+						String virtaulPath = "upload//";
+						String realPath = getServletContext().getRealPath(virtaulPath);
+						boolean exists = (new File(realPath+""+myFileName)).exists();
+						if(exists)
+						{
+							new File(realPath+""+myFileName).delete();
+						}
+						uploadedFile = new File(realPath, myFileName);
+						
 						
 						//write the uploaded file to the system
 						fileItem.write(uploadedFile);
@@ -124,8 +138,16 @@ public class UploadMusicFile extends HttpServlet implements Servlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-//		rd.forward(req, resp);
+		if(fileItem == null)
+		{
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/trackhinzufuegen.jsp"); 
+		    requestDispatcher.forward(req, resp);
+		}
+		else
+		{
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp"); 
+		    requestDispatcher.forward(req, resp);
+		}
 	}
 
 }
