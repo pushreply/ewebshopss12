@@ -86,15 +86,15 @@ public class MultipartMap extends HashMap<String, Object> {
      * of the servlet. When the encoding is not specified in the given request, then it will default
      * to <tt>UTF-8</tt>.
      * @param multipartRequest The multipart request to construct the multipart map for.
-     * @param servlet The servlet which is responsible for the given request.
+     * @param uploadMusicFile The servlet which is responsible for the given request.
      * @throws ServletException If something fails at Servlet level.
      * @throws IOException If something fails at I/O level.
      */
-    public MultipartMap(HttpServletRequest multipartRequest, Servlet servlet)
+    public MultipartMap(HttpServletRequest multipartRequest, UploadMusicFile uploadMusicFile)
         throws ServletException, IOException
     {
         this(multipartRequest, new MultipartConfigElement(
-            servlet.getClass().getAnnotation(MultipartConfig.class)).getLocation(), true);
+            uploadMusicFile.getClass().getAnnotation(MultipartConfig.class)).getLocation(), true);
     }
 
     /**
