@@ -44,8 +44,7 @@ public class LoadTrack extends HttpServlet {
 
 		// test purposes ONLY - uncomment the line below and delete the
 		// following
-		// int trackID = new Integer(request.getParameter("trackID"));
-		int trackID = 1;
+		int trackID = new Integer(request.getParameter("trackID"));
 
 		// Database connection and DBTrack receiving
 		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
