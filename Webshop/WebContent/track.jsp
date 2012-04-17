@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>geht</p>
 	<table width="589" border="1">
 		<c:forEach items="${AlbumTracks}" var="track">
 			<tr>
@@ -16,9 +15,13 @@
 				<td>${track.trackTitle}</td>
 				<td>${track.trackArtist}</td>
 				<td>${track.trackDate}</td>
-				<td><label for="${track.trackID}">Play</label> <input
-					type="submit" name="loadTrack" value="${track.trackID}"
-					id="${track.trackID}"></td>
+				<td><label for="${track.trackID}">Play</label>
+
+					<form action="loadtrack" method="get">
+						<input type="submit" name="trackID" value="${track.trackID}"
+							id="${track.trackID}">
+					</form>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
