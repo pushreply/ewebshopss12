@@ -18,7 +18,6 @@ import shop.dto.DBTrack;
  */
 public class TrackfactoryTest {
 	File file = null;
-	static final int ID = 0;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -35,14 +34,13 @@ public class TrackfactoryTest {
 		
 		file = new File("WebContent/images/wwm.mp3");
 		
-		DBTrack underTest = Trackfactory.createTrack(file,ID);
+		DBTrack underTest = Trackfactory.createTrack(file);
 		assertEquals(underTest.getTrackArtist(), "myArtistName");
 		assertEquals(underTest.getTrackDiskNumber(), 3);
 		assertEquals(underTest.getTrackGenre(), "Rock/Pop");
 		assertEquals(underTest.getTrackNumber(), 1);
 		assertEquals(underTest.getTrackTitle(), "myTrackTitle");
 		assertEquals(underTest.getTrackDate(), 2000);
-		assertEquals(underTest.getTrackID(), ID);
 	}
 
 }

@@ -66,7 +66,7 @@ public class Trackfactory {
 	 * @return the DBTrack file with fulfilled attributes from the ID3Tag of the
 	 *         given file
 	 */
-	public static DBTrack createTrack(File file, int id) {
+	public static DBTrack createTrack(File file) {
 		DBTrack track = new DBTrack();
 
 		// transform mp3 in bytearray and set it in track
@@ -111,8 +111,6 @@ public class Trackfactory {
 		} catch (FrameDamagedException e) {
 			e.printStackTrace();
 		}
-		
-		track.setTrackID(id);
 
 		return track;
 	}

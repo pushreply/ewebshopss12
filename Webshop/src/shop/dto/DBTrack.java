@@ -1,10 +1,10 @@
 package shop.dto;
 
 import java.util.Arrays;
-import java.util.Date;
 
 /**
  * @author roha0001
+ * @author Andreas
  *
  */
 public class DBTrack {

@@ -3,8 +3,6 @@
  */
 package shop.dto;
 
-import java.util.LinkedList;
-
 /**
  * @author roha0001
  *
