@@ -7,6 +7,7 @@ package shop.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -57,6 +58,76 @@ public class Controller extends HttpServlet {
 
 		String file = "WebshopDB.dbf";
 
+		initConfig(config);
+
+		//DBObject baut eine verbindung zur DB auf
+		db = new DBObject().getConnection(file, config);
+
+		
+		//Controller leitet die Anfragen entsprechend weiter
+		if((request.getParameter("trackHochladenButton")!=null)){
+			System.out.println("trackhochladenButton");
+			RequestDispatcher disp = request.getRequestDispatcher("/trackhinzufuegen.jsp");
+				try {
+					disp.forward(request, response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		else if ((request.getParameter("tracksAnzeigenButton") != null)) {
+			
+			request.setAttribute("AlbumTracks", DAOTrack.retrieveAllTracks(db));
+			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
+			try {
+				disp.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+				
+		else if(ServletFileUpload.isMultipartContent(request)){
+			System.out.println("ich bin in upload");
+		
+			UploadMusicFile up = new UploadMusicFile(this, request, response);
+//			try {
+//				MultipartMap map = new MultipartMap(request, this);
+//
+//			} catch (ServletException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		        try {
+//					request.getRequestDispatcher("/weiter.jsp").forward(request, response);
+//				} catch (ServletException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				}
+		}
+				
+//		testing(db);
+		
+		db.close();
+		
+	} // Ende der service-Methode
+
+	private void initConfig(EmbeddedConfiguration config) {
 		// Klasse Address
 		config.common().objectClass(DBAddress.class).cascadeOnUpdate(true);
 		config.common().objectClass(DBAddress.class).cascadeOnDelete(true);
@@ -150,91 +221,7 @@ public class Controller extends HttpServlet {
 				.indexed(true);
 		config.common().objectClass(DBTrack.class)
 				.objectField("trackDiskNumber").indexed(true);
-
-		//DBObject baut eine verbindung zur DB auf
-		db = new DBObject().getConnection(file, config);
-
-		
-		//Controller leitet die Anfragen entsprechend weiter
-		if((request.getParameter("trackHochladenButton")!=null)){
-			System.out.println("trackhochladenButton");
-			RequestDispatcher disp = request.getRequestDispatcher("/trackhinzufuegen.jsp");
-				try {
-					disp.forward(request, response);
-				} catch (ServletException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		}
-		
-		else if ((request.getParameter("tracksAnzeigenButton") != null)) {
-			
-			request.setAttribute("AlbumTracks", DAOTrack.retrieveAllTracks(db));
-			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
-			try {
-				disp.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-				
-		else if(ServletFileUpload.isMultipartContent(request)){
-			System.out.println("ich bin in upload");
-		
-			UploadMusicFile up = new UploadMusicFile(this, request, response);
-//			try {
-//				MultipartMap map = new MultipartMap(request, this);
-//
-//			} catch (ServletException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		        try {
-//					request.getRequestDispatcher("/weiter.jsp").forward(request, response);
-//				} catch (ServletException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				}
-		}
-			
-		
-		
-		
-		DBKeyword test = new DBKeyword(0, "Auto");
-		db.store(test);
-
-		List<DBKeyword> result = null;
-		try {
-			result = db.queryByExample(DBKeyword.class);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-		for (int i = 0; i < result.size(); i++) {
-			DBKeyword a = (DBKeyword) result.get(i);
-			System.out.println(a.getKeywordName());
-		}
-		
-		testing(db);
-		
-		db.close();
-		
-	} // Ende der service-Methode
+	}
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -254,7 +241,16 @@ public class Controller extends HttpServlet {
 		// db.store(test2);
 
 		System.out.println("---------------");
-
+		System.out.println("AAAAAAAAAAAAAAAAAA");
+		
+		
+		LinkedList<DBTrack> asdasd = DAOTrack.retrieveAllTracks(db);
+		for (DBTrack dbTrack : asdasd) {
+			System.out.println(dbTrack.getTrackTitle());
+		}
+		
+		System.out.println("---------------");
+		
 		List<DBTrack> result2 = null;
 		try {
 			result2 = db.query(DBTrack.class);
@@ -266,7 +262,5 @@ public class Controller extends HttpServlet {
 			System.out.println(dbTrack.getTrackArtist());
 			System.out.println(dbTrack.getFile());
 		}
-
-		db.close();
 	}
 } // Ende Klasse Controller
