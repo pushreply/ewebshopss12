@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<p>geht</p>
 	<table width="589" border="1">
 		<c:forEach items="${AlbumTracks}" var="track">
 			<tr class="track">
