@@ -71,34 +71,34 @@ public class TestDaten {
 			 
 	//Track
 			 File file1 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track1 = Trackfactory.createTrack(file1,1);
+			 DBTrack track1 = Trackfactory.createTrack(file1);
 			 
 			 File file2 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track2 = Trackfactory.createTrack(file2,2);
+			 DBTrack track2 = Trackfactory.createTrack(file2);
 			 
 			 File file3 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track3 = Trackfactory.createTrack(file3,3);
+			 DBTrack track3 = Trackfactory.createTrack(file3);
 			 
 			 File file4 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track4 = Trackfactory.createTrack(file4,4);
+			 DBTrack track4 = Trackfactory.createTrack(file4);
 			 
 			 File file5 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track5 = Trackfactory.createTrack(file5,5);
+			 DBTrack track5 = Trackfactory.createTrack(file5);
 			 
 			 File file6 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track6 = Trackfactory.createTrack(file6,6);
+			 DBTrack track6 = Trackfactory.createTrack(file6);
 			 
 			 File file7 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track7 = Trackfactory.createTrack(file7,7);
+			 DBTrack track7 = Trackfactory.createTrack(file7);
 			 
 			 File file8 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track8 = Trackfactory.createTrack(file8,8);
+			 DBTrack track8 = Trackfactory.createTrack(file8);
 			 
 			 File file9 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track9 = Trackfactory.createTrack(file9,9);
+			 DBTrack track9 = Trackfactory.createTrack(file9);
 			 
 			 File file10 = new File("WebContent/images/wwm.mp3");
-			 DBTrack track10 = Trackfactory.createTrack(file10,10);
+			 DBTrack track10 = Trackfactory.createTrack(file10);
 			 
 	 //categories
 			 DBCategory category1 = new DBCategory(1,"Rock");
