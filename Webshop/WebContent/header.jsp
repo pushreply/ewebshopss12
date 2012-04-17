@@ -15,7 +15,7 @@
 
 <tr>
 <td><a href="index.jsp">Home</td>
-<td><a href="controller?controlleraction=trackHochladenButton">Upload</td>
+<td><a href="controller?trackHochladenButton">Upload</td>
 </tr>
 <br>
 
