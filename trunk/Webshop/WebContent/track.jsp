@@ -11,7 +11,7 @@
 	<p>geht</p>
 	<table width="589" border="1">
 		<c:forEach items="${AlbumTracks}" var="track">
-			<tr class="track">
+			<tr>
 				<td>${track.trackNumber}</td>
 				<td>${track.trackTitle}</td>
 				<td>${track.trackArtist}</td>
