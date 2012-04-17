@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.MultipartMap;
 import shop.actions.UploadMusicFile;
+import shop.dao.DAOTrack;
 import shop.dao.DBObject;
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
@@ -167,6 +168,21 @@ public class Controller extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		}
+		
+		else if ((request.getParameter("tracksAnzeigenButton") != null)) {
+			
+			request.setAttribute("AlbumTracks", DAOTrack.retrieveAllTracks(db));
+			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
+			try {
+				disp.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 				
