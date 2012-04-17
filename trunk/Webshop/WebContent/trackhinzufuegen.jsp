@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="de">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="multipart/form-data" charset=ISO-8859-1">
 <title>Track hinzufügen</title>
 </head>
 <body>
@@ -26,12 +26,11 @@
  <table>
    <tr>
      <td align="right">Datei:</td>
-     <td><input type="file" name="filename" id="fileid"></td>
+     <td><input type="file" name="file" id="file"></td>
    </tr>
  </table>
 
  <input type=submit 
- 		onClick="location.href='index.jsp'" 
  		value='Upload File'
 
  		> 
