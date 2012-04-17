@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ist alles ok
+<p><b>${track.trackTitle}</b> von <b>${track.trackArtist}</b> wurde erfolgreich hinzugefügt!</p>
 </body>
 </html>

@@ -9,19 +9,23 @@
 </head>
 <body>
 	<table width="589" border="1">
+		<tr>
+		<th>Track Number</th>
+		<th>Title</th>
+		<th>Artist</th>
+		<th>Year</th>
+		<th>Play</th>
+		</tr>
 		<c:forEach items="${AlbumTracks}" var="track">
 			<tr>
 				<td>${track.trackNumber}</td>
 				<td>${track.trackTitle}</td>
 				<td>${track.trackArtist}</td>
 				<td>${track.trackDate}</td>
-				<td><label for="${track.trackID}">Play</label>
-
-					<form action="loadtrack" method="get">
-						<input type="submit" name="trackID" value="${track.trackID}"
-							id="${track.trackID}">
-					</form>
-				</td>
+				<td><form action="loadtrack" method="get">
+						<input type="hidden"  name="trackID" value="${track.trackID}">
+						<input type="submit"  value="Play">
+					</form></td>
 			</tr>
 		</c:forEach>
 	</table>

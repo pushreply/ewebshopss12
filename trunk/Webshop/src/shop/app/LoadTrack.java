@@ -44,8 +44,6 @@ public class LoadTrack extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		// test purposes ONLY - uncomment the line below and delete the
-		// following
 		UUID trackID = UUID.fromString(request.getParameter("trackID"));
 
 		// Database connection and DBTrack receiving
