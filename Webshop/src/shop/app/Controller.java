@@ -148,6 +148,19 @@ public class Controller extends HttpServlet {
 		//Controller leitet die Anfragen entsprechend weiter
 		if(request.getParameter("trackHochladenButton")!=null){
 			RequestDispatcher disp = request.getRequestDispatcher("/trackhinzufuegen.jsp");
+				try {
+					disp.forward(request, response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+				
+		else if(request.getParameter("uploadFileSubmitButton")!=null){
+			RequestDispatcher disp = request.getRequestDispatcher("uploadmusicfile");
 			try {
 				disp.forward(request, response);
 			} catch (ServletException e) {
@@ -159,6 +172,8 @@ public class Controller extends HttpServlet {
 			}
 			
 		}
+			
+		
 		
 		
 		DBKeyword test = new DBKeyword(0, "Auto");
@@ -193,12 +208,12 @@ public class Controller extends HttpServlet {
 	 */
 	private void testing(ObjectContainer db) {
 
-//		Sequence sequence = new Sequence(0, "trackid");
-//		DBTrack test2 = Trackfactory.createTrack(new File(
-//				"C:\\projekt\\DB\\Webshop\\WebContent\\images\\wwm.mp3"),
-//				sequence.nextVal());
-//		db.store(test2);
-		
+		// Sequence sequence = new Sequence(0, "trackid");
+		// DBTrack test2 = Trackfactory.createTrack(new File(
+		// "C:\\projekt\\DB\\Webshop\\WebContent\\images\\wwm.mp3"),
+		// sequence.nextVal());
+		// db.store(test2);
+
 		System.out.println("---------------");
 
 		List<DBTrack> result2 = null;
