@@ -4,7 +4,7 @@
 <body>
 
 <h3>Album</h3>
-<!-- <img src=".<c:out value='${.....}'/>s.jpg" width=120 height=130 alt="bild">  -->
+
 
  <form action="controller"  		
  		method="post"
