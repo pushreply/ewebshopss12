@@ -98,7 +98,7 @@ public class Controller extends HttpServlet {
 		else if(ServletFileUpload.isMultipartContent(request)){
 			System.out.println("ich bin in upload");
 		
-			UploadMusicFile up = new UploadMusicFile(this, request, response);
+			UploadMusicFile up = new UploadMusicFile(this, request, response, db);
 //			try {
 //				MultipartMap map = new MultipartMap(request, this);
 //

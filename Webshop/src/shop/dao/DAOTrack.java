@@ -28,12 +28,12 @@ public class DAOTrack {
 	 * insert a new track
 	 */
 	public static void insertTrack(DBTrack track, ObjectContainer db) {
-		Sequence found = new Sequence(0, null);
-		found.setName("TrackSeq");
-		ObjectSet<Sequence> result = db.queryByExample(found);
-		Sequence trackSeq = result.get(0);
-		track.setTrackID(trackSeq.nextVal());
-		db.store(trackSeq);
+//		Sequence found = new Sequence(0, null);
+//		found.setName("TrackSeq");
+//		ObjectSet<Sequence> result = db.queryByExample(found);
+//		Sequence trackSeq = result.get(0);//
+		track.setTrackID(2);
+//		db.store(trackSeq);
 
 		try {
 			db.store(track);
