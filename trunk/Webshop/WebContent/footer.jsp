@@ -1,5 +1,5 @@
 
---------------------
-<p>this is the footer</p>
+------footer.jsp---------
+<br>footer info
 </body>
 </html>
