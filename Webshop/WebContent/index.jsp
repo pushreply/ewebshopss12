@@ -20,15 +20,7 @@
 	<input type="submit" name="trackHochladenButton" value="Track hochladen"> <br>
 		
 </form>
-<table border="1">
 
-<tr>
-<td><a href="index.jsp">Home</td>
-<td><a href="controller?controlleraction=trackHochladenButton">Upload</td>
-</tr>
-
-
-</table>
 
 
 <%@ include file="footer.jsp" %>
