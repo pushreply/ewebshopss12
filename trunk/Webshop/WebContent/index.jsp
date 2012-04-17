@@ -18,7 +18,6 @@
 	<input type="submit" name="albumHochladenButton" value="Album hochladen"> <br>	
 	<input type="submit" name="suchenButton" value="Suchen"> <br>
 	<input type="submit" name="trackHochladenButton" value="Track hochladen"> <br>
-		
 </form>
 
 
