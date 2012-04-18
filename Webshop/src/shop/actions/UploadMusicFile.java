@@ -17,6 +17,7 @@ import com.db4o.ObjectContainer;
 import shop.actions.MultipartMap;
 import shop.app.Controller;
 import shop.dao.DAOTrack;
+import shop.dto.DBTrack;
 import shop.util.Trackfactory;
 
 @WebServlet(urlPatterns = { "/upload" })
@@ -51,8 +52,9 @@ public class UploadMusicFile {
         throws ServletException, IOException
     {
         MultipartMap map = new MultipartMap(request, this);
-        DAOTrack.insertTrack(Trackfactory.createTrack(map.getFile("file")),db);
-
+        DBTrack dbTrack = Trackfactory.createTrack(map.getFile("file"));
+        DAOTrack.insertTrack(dbTrack, db);
+        request.setAttribute("track", dbTrack);
         request.getRequestDispatcher("/weiter.jsp").forward(request, response);
     }
 
