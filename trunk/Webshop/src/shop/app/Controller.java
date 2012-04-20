@@ -23,7 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.MultipartMap;
 import shop.actions.UploadMusicFile;
-import shop.dao.DAOTrack;
+
 import shop.dao.DBObject;
 import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
@@ -34,9 +34,15 @@ import shop.dto.DBKeyword;
 import shop.dto.DBOrder;
 import shop.dto.DBTrack;
 
+import shop.dao.DAOKeyword;
+import shop.dao.DAOTrack;
+
+
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.cs.Db4oClientServer;
+import com.db4o.cs.config.ClientConfiguration;
 
 @WebServlet(urlPatterns = { "/upload" })
 @MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L) // 10MB.
@@ -50,19 +56,28 @@ public class Controller extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) { // service-Methode
 																					// Anfang
 
-		System.out.println("Test");
+		//System.out.println("Test");
 
-		ObjectContainer db = null;
+		ClientConfiguration config = Db4oClientServer.newClientConfiguration(); //Eine neue Client-Configuration wird angelegt
+		
+		ObjectContainer db = null;	//Ein leerer Objekt-Container wird angelegt
 
-		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-
-		String file = "WebshopDB.dbf";
+		//String file = "WebshopDB.dbf";
 
 		initConfig(config);
 
-		//DBObject baut eine verbindung zur DB auf
-		db = new DBObject().getConnection(file, config);
+		//DBObject baut eine Verbindung zur DB auf
+		db = new DBObject().getConnection(config);
 
+		System.out.println("Verbindung wurde aufgebaut");
+		
+		
+		
+		//Nur zum Testen
+		DBKeyword test = new DBKeyword(3, "TestKeyword");
+		DAOKeyword.insertKeyword(test, db);
+		System.out.println("TestKeyword wurde eingefügt");
+		
 		
 		//Controller leitet die Anfragen entsprechend weiter
 		if((request.getParameter("trackHochladenButton")!=null)){
@@ -127,7 +142,7 @@ public class Controller extends HttpServlet {
 		
 	} // Ende der service-Methode
 
-	private void initConfig(EmbeddedConfiguration config) {
+	private void initConfig(ClientConfiguration config) {
 		// Klasse Address
 		config.common().objectClass(DBAddress.class).cascadeOnUpdate(true);
 		config.common().objectClass(DBAddress.class).cascadeOnDelete(true);
