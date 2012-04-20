@@ -72,13 +72,6 @@ public class Controller extends HttpServlet {
 		System.out.println("Verbindung wurde aufgebaut");
 		
 		
-		
-		//Nur zum Testen
-		DBKeyword test = new DBKeyword(3, "TestKeyword");
-		DAOKeyword.insertKeyword(test, db);
-		System.out.println("TestKeyword wurde eingefügt");
-		
-		
 		//Controller leitet die Anfragen entsprechend weiter
 		if((request.getParameter("trackHochladenButton")!=null)){
 			System.out.println("trackhochladenButton");
