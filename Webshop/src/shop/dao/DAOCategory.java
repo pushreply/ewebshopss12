@@ -6,7 +6,6 @@ package shop.dao;
 
 import java.util.LinkedList;
 
-import shop.dto.DBAlbum;
 import shop.dto.DBCategory;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -15,7 +14,12 @@ import com.db4o.ext.DatabaseFileLockedException;
 import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class DAOCategory {
+	
+	private static final Log log = LogFactory.getLog(DAOTrack.class);
 	
 	
 	/*
@@ -23,15 +27,27 @@ public class DAOCategory {
 	 */
 	public void insertCategory(DBCategory category, ObjectContainer db)
 	{	
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER insertCategory");
+		}
+		
 		try {
 			db.store(category);
 		}
 		catch(DatabaseFileLockedException e)
 		{
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("insertCategory - DB-Fehler", e);
+			}
 		}
 		finally{
 			db.close();
+			
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE insertCategory");
+			}
+			
 		}
 	}
 	
@@ -42,6 +58,11 @@ public class DAOCategory {
 	 */
 	public void deleteCategory(int catID, ObjectContainer db)
 	{	
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER deleteCategory");
+		}
+		
 		try {
 			DBCategory category; 
 			
@@ -51,16 +72,24 @@ public class DAOCategory {
 			 db.commit();
 			 
 		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("deleteCategory - DB-Fehler", e);
+			}
 		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("deleteCategory - DB-Fehler", e);
+			}
 		} catch (DatabaseReadOnlyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("deleteCategory - DB-Fehler", e);
+			}
 		}finally{
 			db.close();
+			
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE deleteCategory");
+			}
+			
 		}
 		
 	}
@@ -72,6 +101,10 @@ public class DAOCategory {
 	 */
 	public void updateCategory(int catID, ObjectContainer db, String categoryName)
 	{
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER updateCategory"+catID);
+		}
+		
 		try {
 			DBCategory category; 
 			
@@ -81,16 +114,24 @@ public class DAOCategory {
 			 db.store(category);
 			 
 		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("updateCategory - DB-Fehler", e);
+			}
 		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("updateCategory - DB-Fehler", e);
+			}
 		} catch (DatabaseReadOnlyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("updateCategory - DB-Fehler", e);
+			}
 		}finally{
 			db.close();
+			
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE updateCategory");
+			}
+			
 		}
 		
 	}
@@ -101,6 +142,10 @@ public class DAOCategory {
 	 * retrieve all categories
 	 */
 	public LinkedList<DBCategory> retrieveAllCategories(ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAllCategories");
+		}
 		
 		LinkedList<DBCategory> categories= new LinkedList<DBCategory>();
 		
@@ -116,11 +161,16 @@ public class DAOCategory {
 			}
 		}
 		catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAllCategories - DB-Fehler", e);
+			}
 		}
 		finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAllCategories" +categories.size());
 		}
 		
 		return categories;
