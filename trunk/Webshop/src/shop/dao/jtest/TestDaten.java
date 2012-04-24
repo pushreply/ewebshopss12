@@ -14,12 +14,19 @@ import shop.util.Trackfactory;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 
+
+/**
+ * 
+ * @author mukunzi
+ *
+ */
+
 public class TestDaten {
 	
 	public static void main(String[] arg){
 		
-		// Öffne eine Datenbank
-		  ObjectContainer db = Db4oEmbedded.openFile("C:\\projektDB\\beispiel.db");
+	// Öffne eine Datenbank
+		  ObjectContainer db = Db4oEmbedded.openFile("db/WebshopDB.dbf");
 		  try { 
 			  
 	 // DBAddres-Objekte
