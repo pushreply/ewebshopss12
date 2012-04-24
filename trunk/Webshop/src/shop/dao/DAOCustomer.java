@@ -15,15 +15,33 @@ import com.db4o.ext.Db4oIOException;
 import shop.dto.DBAddress;
 import shop.dto.DBCustomer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
 public class DAOCustomer {
+	
+	private static final Log log = LogFactory.getLog(DAOTrack.class);
 
 	public void insert(DBCustomer customer, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER insert");
+		}
+		
 		try {
 			db.store(customer);
 		} catch (DatabaseFileLockedException e) {
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("insert - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE insert");
+			}
 		}
 	}
 
@@ -31,6 +49,11 @@ public class DAOCustomer {
 	 * Verify weather the Username allready exists in the Database
 	 */
 	public boolean userFound(String username, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER userFound");
+		}
+		
 		boolean found = false;
 		try {
 
@@ -44,11 +67,19 @@ public class DAOCustomer {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("userFound - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
 		}
-
+        
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE userFound"+found);
+		}
+		
 		return found;
 	}
 
@@ -57,6 +88,10 @@ public class DAOCustomer {
 	 * Database
 	 */
 	public void registerUser(DBCustomer customer, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER registerUser");
+		}
 
 		try {
 
@@ -69,9 +104,18 @@ public class DAOCustomer {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("registerUser - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
+			
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE registerUser");
+			}
+			
 		}
 
 	}
@@ -80,6 +124,10 @@ public class DAOCustomer {
 	 * retrieve all Customers
 	 */
 	public LinkedList<DBCustomer> selectAllCustomer(ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER selectAllCustomer");
+		}
 
 		LinkedList<DBCustomer> customers = new LinkedList<DBCustomer>();
 
@@ -94,10 +142,17 @@ public class DAOCustomer {
 				customers.add(customer);
 			}
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("selectAllCustomer - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE selectAllCustomer"+customers.size());
 		}
 
 		return customers;
@@ -109,6 +164,10 @@ public class DAOCustomer {
 	 */
 	public DBCustomer retrieveCustomerByID(ObjectContainer db,
 			int cutID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveCustomerByID"+cutID);
+		}
 
 		DBCustomer result = new DBCustomer();
 
@@ -119,10 +178,17 @@ public class DAOCustomer {
 			result = (DBCustomer) set.next();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("retrieveCustomerByID - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveCustomerByID");
 		}
 
 		return result;
@@ -136,6 +202,11 @@ public class DAOCustomer {
 	 */
 	public DBAddress retrieveCustomerAddress(ObjectContainer db, int cutID,
 			String adressArt) { // adressArt is either delivery or billing
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveCustomerAddress");
+		}
+			
 		DBAddress address = null;
 
 		try {
@@ -152,14 +223,25 @@ public class DAOCustomer {
 				}
 			}
 		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("retrieveCustomerAddress - DB-Fehler", e);
+			}
+			
 		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("retrieveCustomerAddress - DB-Fehler", e);
+			}
+			
 		}finally{
 			db.close();
 		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveCustomerAddress");
+		}
+		
 		return address;
 	}
 
@@ -169,7 +251,18 @@ public class DAOCustomer {
 
 	public DBAddress retrieveCustomerBillingAddress(ObjectContainer db,
 			int cutID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveCustomerBillingAddress");
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveCustomerBillingAddress");
+		}
+		
 		return retrieveCustomerAddress(db, cutID, "billing");
+		
+		
 
 	}
 
@@ -178,6 +271,15 @@ public class DAOCustomer {
 	 */
 	public DBAddress retrieveCustomerDeliveryAddress(ObjectContainer db,
 			int cutID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveCustomerDeliveryAddress");
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveCustomerDeliveryAddress");
+		}
+		
 		return retrieveCustomerAddress(db, cutID, "delivery");
 
 	}

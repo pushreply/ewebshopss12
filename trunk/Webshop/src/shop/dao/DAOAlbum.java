@@ -14,8 +14,12 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseFileLockedException;
 
-public class DAOAlbum {
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+public class DAOAlbum {
+   
+	 private static final Log log = LogFactory.getLog(DAOTrack.class);
 	
 	/**
 	 * insert a new album in the Database
@@ -23,12 +27,26 @@ public class DAOAlbum {
 	 * @param db
 	 */
 	public void inserAlbum(DBAlbum album, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER inserAlbum");
+		}
+		
 		try {
 			db.store(album);
 		} catch (DatabaseFileLockedException e) {
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("inserAlbum - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
+			
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE inserAlbum");
+			}
+
 		}
 	}
 	
@@ -41,6 +59,10 @@ public class DAOAlbum {
 	 * @return
 	 */
 	public DBAlbum retrieveAllAlbumByID(ObjectContainer db, int albID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAllAlbumByID"+albID);
+		}
 
 		DBAlbum album = null;
 
@@ -54,10 +76,15 @@ public class DAOAlbum {
 			album = result.next();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAllAlbumByID - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAllAlbumByID");
 		}
 
 		return album;
@@ -71,8 +98,12 @@ public class DAOAlbum {
 	 * @return
 	 */
 	public LinkedList<DBAlbum> retrieveAllAlbums(ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAllAlbums");
+		}
 
-		LinkedList<DBAlbum> linkedListDBAlbum = new LinkedList<DBAlbum>();
+		LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
 
 		try {
 
@@ -82,16 +113,21 @@ public class DAOAlbum {
 
 			while (result.hasNext()) {
 				album = result.next();
-				linkedListDBAlbum.add(album);
+				albums.add(album);
 			}
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAllAlbums - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
 		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAllAlbums"+albums.size());
+		}
 
-		return linkedListDBAlbum;
+		return albums;
 	}
     
 	
@@ -105,22 +141,31 @@ public class DAOAlbum {
 	 */
 	public LinkedList<DBCategory> retrieveAlbumsCategories(ObjectContainer db, int albID) {
 		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAlbumsCategories"+albID);
+		}
+		
 		LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
 
 		try {
 			
 			DBAlbum al = new DBAlbum(albID, null, null, null, 0, 0.0, 0, 0,
-					null, null, null, null);
+					     null, null, null, null);
 
 			ObjectSet<DBAlbum> result = db.queryByExample(al);
             
 			categories = result.next().getCategories();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAlbumsCategories - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAlbumsCategories"+categories.size());
 		}
 
 		return categories;
@@ -136,6 +181,10 @@ public class DAOAlbum {
 	 * @return
 	 */
 	public LinkedList<DBKeyword> retrieveAlbumsKeywords(ObjectContainer db ,int albID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAlbumsKeywords");
+		}
 
 		LinkedList<DBKeyword> keywords = new LinkedList<DBKeyword>();
 
@@ -149,12 +198,16 @@ public class DAOAlbum {
 			keywords = result.next().getKeywords();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAlbumsKeywords - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
 		}
-
+        
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAlbumsKeywords"+keywords.size());
+		}
 		return keywords;
 	}
     
@@ -167,6 +220,10 @@ public class DAOAlbum {
 	 * @return
 	 */
 	public LinkedList<DBTrack> retrieveAlbumsTracks(ObjectContainer db ,int albID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAlbumsTracks"+albID);
+		}
 
 		LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
 
@@ -180,10 +237,15 @@ public class DAOAlbum {
 			tracks = result.next().getTracks();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAlbumsTracks - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAlbumsTracks:"+tracks.size());
 		}
 
 		return tracks;
@@ -206,6 +268,10 @@ public class DAOAlbum {
 	public void editAlbum(ObjectContainer db, int albID,String coverpath,String albumTitel,
 			String artist, int numberOfDisks, double price, int amount, int numberOfTracks,
 			String label) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER editAlbum"+albID);
+		}
 
 		try {
 
@@ -229,10 +295,15 @@ public class DAOAlbum {
 			db.commit();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("editAlbum - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
+			
+			if(log.isDebugEnabled()){
+				log.debug("LEAVE editAlbum:");
+			}
 		}
 
 
