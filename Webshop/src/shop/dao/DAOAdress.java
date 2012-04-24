@@ -6,6 +6,7 @@ package shop.dao;
 
 import java.util.LinkedList;
 
+
 import shop.dto.DBAddress;
 import shop.dto.DBCustomer;
 
@@ -15,7 +16,12 @@ import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseFileLockedException;
 import com.db4o.ext.Db4oIOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class DAOAdress {
+	
+	private static final Log log = LogFactory.getLog(DAOTrack.class);
     
 	
 	/**
@@ -23,11 +29,19 @@ public class DAOAdress {
 	 * @param address
 	 * @param db
 	 */
-	public void insert(DBAddress address, ObjectContainer db) {
+	public void insertAddress(DBAddress address, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER insertAddress");
+		}
+		
 		try {
 			db.store(address);
 		} catch (DatabaseFileLockedException e) {
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("insertAddress - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
 		}
@@ -40,6 +54,10 @@ public class DAOAdress {
 	 * @return
 	 */
 	public LinkedList<DBAddress> retrieveAllAdresses(ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAllAdresses");
+		}
 
 		LinkedList<DBAddress> addresses = new LinkedList<DBAddress>();
 
@@ -54,10 +72,17 @@ public class DAOAdress {
 				addresses.add(address);
 			}
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAllAdresses - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAllAdresses: Anzahl der Addresse"+addresses.size());
 		}
 
 		return addresses;
@@ -70,7 +95,11 @@ public class DAOAdress {
 	 * @param newAdress
 	 * @param db
 	 */
-	public void update(final int adrID, DBAddress newAdress, ObjectContainer db) {
+	public void updateAddress(final int adrID, DBAddress newAdress, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER updateAddress"+adrID);
+		}
 
 		DBAddress found = new DBAddress();
 
@@ -88,11 +117,15 @@ public class DAOAdress {
 			db.store(found);
 
 		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("updateAddress - DB-Fehler", e);
+			}
 		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			if (log.isErrorEnabled()) {
+				log.error("updateAddress - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
 		}
@@ -105,6 +138,10 @@ public class DAOAdress {
 	 * @param db
 	 */
 	public void delete(final int adrID,ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER delete"+adrID);
+		}
 
 		DBAddress found = new DBAddress();
 
@@ -118,11 +155,15 @@ public class DAOAdress {
             db.commit();
             
 		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("delete - DB-Fehler", e);
+			}
+			
 		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("delete - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
 		}

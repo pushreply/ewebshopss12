@@ -18,23 +18,31 @@ import com.db4o.ext.DatabaseFileLockedException;
 import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
 
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class DAOTrack {
 
-	// private static final Log log = LogFactory.getLog(DAOTrack.class);
+    private static final Log log = LogFactory.getLog(DAOTrack.class);
 
 	/*
 	 * insert a new track
 	 */
 	public static void insertTrack(DBTrack track, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER insertTrack");
+		}
+		
 		track.setTrackID(UUID.randomUUID());
 
 		try {
 			db.store(track);
 		} catch (DatabaseFileLockedException e) {
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("insertTrack - DB-Fehler", e);
+			}
+			
 		} finally {
 			db.close();
 		}
@@ -45,6 +53,10 @@ public class DAOTrack {
 	 * delete a track
 	 */
 	public static void deleteTrack(UUID trackID, ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER deleteTrack"+ trackID);
+		}
 
 		try {
 			DBTrack track;
@@ -56,24 +68,32 @@ public class DAOTrack {
 			db.commit();
 
 		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("deleteTrack - DB-Fehler", e);
+			}
 		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("deleteTrack - DB-Fehler", e);
+			}
 		} catch (DatabaseReadOnlyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("deleteTrack - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
 		}
 
 	}
+	
 
 	/*
 	 * retrieve all tracks
 	 */
 	public static LinkedList<DBTrack> retrieveAllTracks(ObjectContainer db) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveAllTracks");
+		}
 
 		LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
 
@@ -87,19 +107,29 @@ public class DAOTrack {
 				tracks.add(track);
 			}
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveAllTracks - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveAllTracks: Anzahl aller Tracks"+tracks.size());
 		}
 
 		return tracks;
 	}
+	
 
 	/*
 	 * Retrieve a specific track
 	 */
 	public static DBTrack retrieveTrackByID(ObjectContainer db, UUID trackID) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER retrieveTrackByID"+trackID);
+		}
 
 		DBTrack track = null;
 
@@ -111,10 +141,15 @@ public class DAOTrack {
 			track = result.next();
 
 		} catch (DatabaseFileLockedException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error("retrieveTrackByID - DB-Fehler", e);
+			}
 		} finally {
 			db.close();
+		}
+		
+		if(log.isDebugEnabled()){
+			log.debug("LEAVE retrieveTrackByID");
 		}
 
 		return track;
