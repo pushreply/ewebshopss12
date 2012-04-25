@@ -25,7 +25,7 @@ public class DAOCategory {
 	/*
 	 * insert a new category
 	 */
-	public void insertCategory(DBCategory category, ObjectContainer db)
+	public static void insertCategory(DBCategory category, ObjectContainer db)
 	{	
 		
 		if (log.isInfoEnabled()) {
@@ -56,7 +56,7 @@ public class DAOCategory {
 	/*
 	 * insert a new category
 	 */
-	public void deleteCategory(int catID, ObjectContainer db)
+	public static void deleteCategory(int catID, ObjectContainer db)
 	{	
 		
 		if (log.isInfoEnabled()) {
@@ -99,7 +99,7 @@ public class DAOCategory {
 	/*
 	 * update an existing category
 	 */
-	public void updateCategory(int catID, ObjectContainer db, String categoryName)
+	public static void updateCategory(int catID, ObjectContainer db, String categoryName)
 	{
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER updateCategory"+catID);
@@ -141,7 +141,7 @@ public class DAOCategory {
 	/*
 	 * retrieve all categories
 	 */
-	public LinkedList<DBCategory> retrieveAllCategories(ObjectContainer db) {
+	public static LinkedList<DBCategory> retrieveAllCategories(ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAllCategories");

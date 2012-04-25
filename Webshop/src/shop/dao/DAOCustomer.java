@@ -23,7 +23,7 @@ public class DAOCustomer {
 	
 	private static final Log log = LogFactory.getLog(DAOTrack.class);
 
-	public void insert(DBCustomer customer, ObjectContainer db) {
+	public static void insert(DBCustomer customer, ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER insert");
@@ -48,7 +48,7 @@ public class DAOCustomer {
 	/*
 	 * Verify weather the Username allready exists in the Database
 	 */
-	public boolean userFound(String username, ObjectContainer db) {
+	public static boolean userFound(String username, ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER userFound");
@@ -87,7 +87,7 @@ public class DAOCustomer {
 	 * Register the user , only when this does not allready exist in the
 	 * Database
 	 */
-	public void registerUser(DBCustomer customer, ObjectContainer db) {
+	public static void registerUser(DBCustomer customer, ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER registerUser");
@@ -123,7 +123,7 @@ public class DAOCustomer {
 	/*
 	 * retrieve all Customers
 	 */
-	public LinkedList<DBCustomer> selectAllCustomer(ObjectContainer db) {
+	public static LinkedList<DBCustomer> selectAllCustomer(ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER selectAllCustomer");
@@ -162,7 +162,7 @@ public class DAOCustomer {
 	 * retrieved a Custon by username, Caution: username must be unique in the
 	 * database!
 	 */
-	public DBCustomer retrieveCustomerByID(ObjectContainer db,
+	public static DBCustomer retrieveCustomerByID(ObjectContainer db,
 			int cutID) {
 		
 		if (log.isInfoEnabled()) {
@@ -200,7 +200,7 @@ public class DAOCustomer {
 	/*
 	 * retrieve customer adress
 	 */
-	public DBAddress retrieveCustomerAddress(ObjectContainer db, int cutID,
+	public static DBAddress retrieveCustomerAddress(ObjectContainer db, int cutID,
 			String adressArt) { // adressArt is either delivery or billing
 		
 		if (log.isInfoEnabled()) {
@@ -249,7 +249,7 @@ public class DAOCustomer {
 	 * retrieve customer belling adress
 	 */
 
-	public DBAddress retrieveCustomerBillingAddress(ObjectContainer db,
+	public static DBAddress retrieveCustomerBillingAddress(ObjectContainer db,
 			int cutID) {
 		
 		if (log.isInfoEnabled()) {
@@ -269,7 +269,7 @@ public class DAOCustomer {
 	/*
 	 * retrieve customer delivery adress
 	 */
-	public DBAddress retrieveCustomerDeliveryAddress(ObjectContainer db,
+	public static DBAddress retrieveCustomerDeliveryAddress(ObjectContainer db,
 			int cutID) {
 		
 		if (log.isInfoEnabled()) {

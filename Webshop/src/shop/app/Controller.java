@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -91,6 +92,24 @@ public class Controller extends HttpServlet {
 			
 			request.setAttribute("AlbumTracks", DAOTrack.retrieveAllTracks(db));
 			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
+			try {
+				disp.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+        else if ((request.getParameter("trackEditieren") != null)) {
+        	
+        	UUID trackID = UUID.fromString(request.getParameter("uuid"));
+			
+			request.setAttribute("track", DAOTrack.retrieveTrackByID(db,trackID));
+			RequestDispatcher disp = request.getRequestDispatcher("/TrackEditieren.jsp");
 			try {
 				disp.forward(request, response);
 			} catch (ServletException e) {

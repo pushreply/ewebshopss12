@@ -20,7 +20,7 @@ import com.db4o.ext.Db4oIOException;
  */
 public class DAOKeyword {
 	
-	public void insertKeyword(DBKeyword keyword, ObjectContainer db)
+	public static void insertKeyword(DBKeyword keyword, ObjectContainer db)
 	{	
 		try {
 			db.store(keyword);
@@ -38,7 +38,7 @@ public class DAOKeyword {
 	/*
 	 * delete a specific keyword
 	 */
-	public void deleteKeyword(int keyID, ObjectContainer db){
+	public static void deleteKeyword(int keyID, ObjectContainer db){
 		
 		try {
 			DBKeyword keyword; 
@@ -67,7 +67,7 @@ public class DAOKeyword {
 	/*
 	 * edit a specific keyword
 	 */
-	public void editKeyword(int keyID, String newKeywordName, ObjectContainer db){
+	public static void editKeyword(int keyID, String newKeywordName, ObjectContainer db){
 		
 		DBKeyword keyword; 
 		

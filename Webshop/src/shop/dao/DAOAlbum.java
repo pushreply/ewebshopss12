@@ -26,7 +26,7 @@ public class DAOAlbum {
 	 * @param album
 	 * @param db
 	 */
-	public void inserAlbum(DBAlbum album, ObjectContainer db) {
+	public static void inserAlbum(DBAlbum album, ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER inserAlbum");
@@ -58,7 +58,7 @@ public class DAOAlbum {
 	 * @param albID
 	 * @return
 	 */
-	public DBAlbum retrieveAllAlbumByID(ObjectContainer db, int albID) {
+	public static DBAlbum retrieveAllAlbumByID(ObjectContainer db, int albID) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAllAlbumByID"+albID);
@@ -97,7 +97,7 @@ public class DAOAlbum {
 	 * @param db
 	 * @return
 	 */
-	public LinkedList<DBAlbum> retrieveAllAlbums(ObjectContainer db) {
+	public static LinkedList<DBAlbum> retrieveAllAlbums(ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAllAlbums");
@@ -139,7 +139,7 @@ public class DAOAlbum {
 	 * @param albID
 	 * @return
 	 */
-	public LinkedList<DBCategory> retrieveAlbumsCategories(ObjectContainer db, int albID) {
+	public static LinkedList<DBCategory> retrieveAlbumsCategories(ObjectContainer db, int albID) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAlbumsCategories"+albID);
@@ -180,7 +180,7 @@ public class DAOAlbum {
 	 * @param albID
 	 * @return
 	 */
-	public LinkedList<DBKeyword> retrieveAlbumsKeywords(ObjectContainer db ,int albID) {
+	public static LinkedList<DBKeyword> retrieveAlbumsKeywords(ObjectContainer db ,int albID) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAlbumsKeywords");
@@ -219,7 +219,7 @@ public class DAOAlbum {
 	 * @param albID
 	 * @return
 	 */
-	public LinkedList<DBTrack> retrieveAlbumsTracks(ObjectContainer db ,int albID) {
+	public static LinkedList<DBTrack> retrieveAlbumsTracks(ObjectContainer db ,int albID) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAlbumsTracks"+albID);
@@ -265,7 +265,7 @@ public class DAOAlbum {
 	 * @param numberOfTracks
 	 * @param label
 	 */
-	public void editAlbum(ObjectContainer db, int albID,byte[] coverpath,String albumTitel,
+	public static void editAlbum(ObjectContainer db, int albID,byte[] coverpath,String albumTitel,
 			String artist, int numberOfDisks, double price, int amount, int numberOfTracks,
 			String label) {
 		

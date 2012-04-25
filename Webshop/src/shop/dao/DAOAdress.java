@@ -53,7 +53,7 @@ public class DAOAdress {
 	 * @param db
 	 * @return
 	 */
-	public LinkedList<DBAddress> retrieveAllAdresses(ObjectContainer db) {
+	public static LinkedList<DBAddress> retrieveAllAdresses(ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER retrieveAllAdresses");
@@ -95,7 +95,7 @@ public class DAOAdress {
 	 * @param newAdress
 	 * @param db
 	 */
-	public void updateAddress(final int adrID, DBAddress newAdress, ObjectContainer db) {
+	public static void updateAddress(final int adrID, DBAddress newAdress, ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER updateAddress"+adrID);
@@ -137,7 +137,7 @@ public class DAOAdress {
 	 * @param adrID
 	 * @param db
 	 */
-	public void delete(final int adrID,ObjectContainer db) {
+	public static void delete(final int adrID,ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER delete"+adrID);
