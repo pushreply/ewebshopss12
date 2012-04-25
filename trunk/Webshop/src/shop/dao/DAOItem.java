@@ -22,7 +22,7 @@ public class DAOItem {
 	/*
 	 * 
 	 */
-	public void insertItem(DBItems item, ObjectContainer db)
+	public static void insertItem(DBItems item, ObjectContainer db)
 	{	
 		try {
 			db.store(item);
@@ -40,7 +40,7 @@ public class DAOItem {
 	/*
 	 * 
 	 */
-	public LinkedList<DBItems> retrieveAllItems(ObjectContainer db) {
+	public static LinkedList<DBItems> retrieveAllItems(ObjectContainer db) {
 		
 		LinkedList<DBItems> items= new LinkedList<DBItems>();
 		
@@ -70,7 +70,7 @@ public class DAOItem {
 	/*
 	 * 
 	 */
-	public void incrementAmount (ObjectContainer db, int itemID){
+	public static void incrementAmount (ObjectContainer db, int itemID){
 		
 		DBItems item = new DBItems();
 		try {
@@ -98,7 +98,7 @@ public class DAOItem {
 	/*
 	 * 
 	 */
-	public LinkedList<DBAlbum> retrieveItemsAlbums (ObjectContainer db, int itemID){
+	public static LinkedList<DBAlbum> retrieveItemsAlbums (ObjectContainer db, int itemID){
 		
 		DBItems item = new DBItems();
 		LinkedList<DBAlbum> albums = null;

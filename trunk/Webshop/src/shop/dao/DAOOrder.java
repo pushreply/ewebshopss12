@@ -23,7 +23,7 @@ public class DAOOrder {
 	/*
 	 * insert a new order in the Database
 	 */
-	public void insertOrder(DBOrder order, ObjectContainer db) {
+	public static void insertOrder(DBOrder order, ObjectContainer db) {
 		try {
 			db.store(order);
 		} catch (DatabaseFileLockedException e) {
@@ -37,7 +37,7 @@ public class DAOOrder {
     /*
      * delete an order by orderID
      */
-	public void deleteOrder(int orderID, ObjectContainer db) {
+	public static void deleteOrder(int orderID, ObjectContainer db) {
 		DBOrder order;
 		try {
 
@@ -62,7 +62,7 @@ public class DAOOrder {
 	/*
 	 * retrieve all orders
 	 */
-	public LinkedList<DBOrder> retieveAllOders(ObjectContainer db) {
+	public static LinkedList<DBOrder> retieveAllOders(ObjectContainer db) {
 
 		LinkedList<DBOrder> orders = new LinkedList<DBOrder>();
 		DBOrder order = new DBOrder();
@@ -89,7 +89,7 @@ public class DAOOrder {
 	/*
 	 * Retrieve adress (biling or delivery) of an order
 	 */
-	public DBAddress retieveOrderAdress(ObjectContainer db, int orderID,
+	public static DBAddress retieveOrderAdress(ObjectContainer db, int orderID,
 			String adressArt) { // adressArt is either billing or delivery
 		DBOrder result;
 		DBAddress address = new DBAddress();
@@ -125,7 +125,7 @@ public class DAOOrder {
 	/*
 	 * Retrieve delivery adress of an order
 	 */
-	public DBAddress retieveOrderDeliveryAdress(ObjectContainer db, int orderID) {
+	public static DBAddress retieveOrderDeliveryAdress(ObjectContainer db, int orderID) {
 
 		return retieveOrderAdress(db, orderID, "delivery");
 	}
@@ -135,7 +135,7 @@ public class DAOOrder {
 	/*
 	 * Retrieve billing adress of an order
 	 */
-	public DBAddress retieveOrderBillingAdress(ObjectContainer db, int orderID) {
+	public static DBAddress retieveOrderBillingAdress(ObjectContainer db, int orderID) {
 		return retieveOrderAdress(db, orderID, "belling");
 	}
 	
@@ -144,7 +144,7 @@ public class DAOOrder {
 	/*
 	 * Retrieve all Customer of an Order
 	 */
-	public LinkedList<DBCustomer> retieveOrderCustomers(ObjectContainer db,
+	public static LinkedList<DBCustomer> retieveOrderCustomers(ObjectContainer db,
 			int orderID) {
 
 		DBOrder result;
@@ -173,7 +173,7 @@ public class DAOOrder {
 	/*
 	 * retrieve all items of an order
 	 */
-	public LinkedList<DBItems> retieveOrderItems(ObjectContainer db, int orderID) {
+	public static LinkedList<DBItems> retieveOrderItems(ObjectContainer db, int orderID) {
 
 		DBOrder result;
 		LinkedList<DBItems> items = null;
@@ -201,7 +201,7 @@ public class DAOOrder {
 	/*
 	 * retrieve all customer's orders
 	 */
-	public LinkedList<DBOrder> retrieveCustomerOrder(ObjectContainer db, int custID) {
+	public static LinkedList<DBOrder> retrieveCustomerOrder(ObjectContainer db, int custID) {
 		
         LinkedList<DBOrder> orders = new LinkedList<DBOrder>();
         
