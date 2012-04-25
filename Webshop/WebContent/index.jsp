@@ -19,6 +19,7 @@
 	<input type="submit" name="suchenButton" value="Suchen"> <br>
 	<input type="submit" name="trackHochladenButton" value="Track hochladen"> <br>
 	<input type="submit" name="tracksAnzeigenButton" value="Tracks anzeigen"> <br>
+	<input type="submit" name="trackEditieren" value="Track editieren"> <br>
 	
 </form>
 
