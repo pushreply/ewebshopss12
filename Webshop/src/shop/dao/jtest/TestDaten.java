@@ -145,8 +145,8 @@ public class TestDaten {
 			 tracks1.add(track4);
 			 tracks1.add(track5);
 			 
-			 DBAlbum album1 = new DBAlbum(1,"WebContent/images/cover1.jpg","","",1,25,20,5,"",keywords1,categories1,tracks1);
-			 db.store(album1);
+			 //DBAlbum album1 = new DBAlbum(1,"WebContent/images/cover1.jpg","","",1,25,20,5,"",keywords1,categories1,tracks1);
+			 //db.store(album1);
 			 
 			 
 			//Album2
@@ -165,8 +165,8 @@ public class TestDaten {
 			 tracks1.add(track9);
 			 tracks1.add(track10);
 			 
-			 DBAlbum album2 = new DBAlbum(2,"WebContent/images/cover2.jpg","","",1,30,50,5,"",keywords2,categories2,tracks2);
-			 db.store(album2);
+			 //DBAlbum album2 = new DBAlbum(2,"WebContent/images/cover2.jpg","","",1,30,50,5,"",keywords2,categories2,tracks2);
+			 //db.store(album2);
 			 
 			 
 		     

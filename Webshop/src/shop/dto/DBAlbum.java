@@ -6,12 +6,12 @@ package shop.dto;
 import java.util.LinkedList;
 
 /**
- * @author roha0001
+ * @author roha0001,Mukunzi
  *
  */
 public class DBAlbum {
 	private int albID;
-	private String coverpath;
+	private byte[] coverpath;
 	private String albumTitel;
 	private String artist;
 	private int numberOfDisks;
@@ -27,7 +27,7 @@ public class DBAlbum {
 	//default constructor
 	public DBAlbum(){}
 
-	public DBAlbum(int albID, String coverpath, String albumTitel,
+	public DBAlbum(int albID, byte[] coverpath, String albumTitel,
 			String artist, int numberOfDisks, double price, int amount,
 			int numberOfTracks, String label, LinkedList<DBKeyword> keywords,
 			LinkedList<DBCategory> categories, LinkedList<DBTrack> tracks) {
@@ -54,11 +54,11 @@ public class DBAlbum {
 		this.albID = albID;
 	}
 
-	public String getCoverpath() {
+	public byte[] getCoverpath() {
 		return coverpath;
 	}
 
-	public void setCoverpath(String coverpath) {
+	public void setCoverpath(byte[] coverpath) {
 		this.coverpath = coverpath;
 	}
 
