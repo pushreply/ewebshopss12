@@ -48,7 +48,7 @@ public class DAOCustomer {
 	/*
 	 * Verify weather the Username allready exists in the Database
 	 */
-	public static boolean userFound(String username, ObjectContainer db) {
+	public static boolean userFound(String username, String password, ObjectContainer db) {
 		
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER userFound");
@@ -60,7 +60,7 @@ public class DAOCustomer {
 			ObjectSet<DBCustomer> customers = db
 					.queryByExample(DBCustomer.class);
 			for (DBCustomer customer : customers) {
-				if (username.equals(customer.getUsername())) {
+				if (username.equals(customer.getUsername())&& username.equals(customer.getPassword())) {
 					found = true;
 					break;
 				}
@@ -95,7 +95,7 @@ public class DAOCustomer {
 
 		try {
 
-			if (userFound(customer.getUsername(), db) == false) {
+			if (userFound(customer.getUsername(), customer.getPassword(), db) == false) {
 				db.store(customer);
 
 			} else {
