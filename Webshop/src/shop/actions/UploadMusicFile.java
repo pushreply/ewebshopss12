@@ -103,7 +103,7 @@ public class UploadMusicFile {
         dbalbum.setAmount(Integer.parseInt(map.getParameter("albumanzahl")));
         System.out.println(map.getFile("coverpage").getName());
         
-        dbalbum.setCoverpath(ByteArray.getBytesFrombild(map.getFile("coverpage")));
+        dbalbum.setCoverpath(ByteArray.getBytesFromFile(map.getFile("coverpage")));
         DAOAlbum.inserAlbum(dbalbum,db);
         request.setAttribute("album", dbalbum);
         request.getRequestDispatcher("/weiter.jsp").forward(request, response);
