@@ -26,6 +26,7 @@
 						<input type="hidden"  name="trackID" value="${track.trackID}">
 						<input type="submit"  value="Play">
 					</form></td>
+					<td>${track.trackID}</td>
 			</tr>
 		</c:forEach>
 	</table>
