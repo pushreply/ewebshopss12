@@ -5,7 +5,7 @@
 <body>
   <h3>Abum anlegen</h3>
 
-<form action="Album.jsp ">
+<form action="controller" method="post" enctype="multipart/form-data">
   <table border="0" cellpadding="0" cellspacing="4">
     <tr>
       <td align="right">Titel:</td>
@@ -16,12 +16,12 @@
       <td><input type="text" name="artist" type="text" size="30" maxlength="40"></td>
     </tr>
     <tr>
-      <td align="right">Date:</td>
-      <td><input type="text" name="date" type="text" size="30" maxlength="40"></td>
+      <td align="right">Price:</td>
+      <td><input type="text" name="price" type="text" size="30" maxlength="40"></td>
     </tr>
     <tr>
-      <td align="right">Genre:</td>
-      <td><input type="text" name="genre" type="text" size="30" maxlength="40"></td>
+      <td align="right">Label:</td>
+      <td><input type="text" name="label" type="text" size="30" maxlength="40"></td>
     </tr>
     <tr>
       <td align="right">Trackanzahl:</td>
@@ -29,7 +29,12 @@
     </tr>
     <tr>
       <td align="right">Diskanzahl:</td>
-      <td><input type="text" "diskanzahl" type="text" size="30" maxlength="40"></td>
+      <td><input type="text" name="diskanzahl" type="text" size="30" maxlength="40"></td>
+    </tr>
+    <tr>
+	<tr>
+      <td align="right">Album Anzahl</td>
+      <td><input type="text" name="albumanzahl" type="text" size="30" maxlength="40"></td>
     </tr>
     <tr>
       <td align="right">Cover-Page:</td>
