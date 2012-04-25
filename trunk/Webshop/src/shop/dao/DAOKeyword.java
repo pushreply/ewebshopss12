@@ -1,8 +1,10 @@
 package shop.dao;
 
 /**
- * @author mukunzi
+ * @author Benjamin, mukunzi
  */
+
+import java.util.List;
 
 import shop.dto.DBKeyword;
 
@@ -12,6 +14,7 @@ import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseFileLockedException;
 import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
+
 
 
 
@@ -89,5 +92,23 @@ public class DAOKeyword {
 		}finally{
 			db.close();
 		}
+	}
+	
+	/*
+	gibt eine Liste aller Keywords zurück
+	 */
+	public static ObjectSet<DBKeyword> retrieveAllKeywords(ObjectContainer db)
+	{
+		ObjectSet<DBKeyword> result = null;
+		try
+		{
+			result = db.queryByExample(DBKeyword.class);
+			return result;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		return result;
 	}
 }
