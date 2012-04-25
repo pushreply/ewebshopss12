@@ -41,6 +41,7 @@ import shop.dao.DAOTrack;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.cs.Db4oClientServer;
 import com.db4o.cs.config.ClientConfiguration;
@@ -57,20 +58,20 @@ public class Controller extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) { // service-Methode
 																					// Anfang
 
-		//System.out.println("Test");
 
-		ClientConfiguration config = Db4oClientServer.newClientConfiguration(); //Eine neue Client-Configuration wird angelegt
-		
-		ObjectContainer db = null;	//Ein leerer Objekt-Container wird angelegt
-
-		//String file = "WebshopDB.dbf";
-
-		initConfig(config);
-
-		//DBObject baut eine Verbindung zur DB auf
-		db = new DBObject().getConnection(config);
-
+		// DBObject baut eine Verbindung zur DB auf
+		ObjectContainer db = null;
+		db = new DBObject().getConnection();
 		System.out.println("Verbindung wurde aufgebaut");
+
+		// nur zum Testen der Verbindung
+		ObjectSet<DBKeyword> keywords = DAOKeyword.retrieveAllKeywords(db);
+		for (int i = 0; i < keywords.size(); i++) {
+			DBKeyword key = (DBKeyword) keywords.get(i);
+			String out = key.getKeywordName();
+			System.out.println(out);
+		}
+	
 		
 		
 		//Controller leitet die Anfragen entsprechend weiter
