@@ -112,32 +112,10 @@ public class Controller extends HttpServlet {
 			System.out.println("ich bin in upload");
 		
 			UploadMusicFile up = new UploadMusicFile(this, request, response, db);
-//			try {
-//				MultipartMap map = new MultipartMap(request, this);
-//
-//			} catch (ServletException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		        try {
-//					request.getRequestDispatcher("/weiter.jsp").forward(request, response);
-//				} catch (ServletException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				}
+
+		
+			db.close();
 		}
-				
-//		testing(db);
-		
-		db.close();
-		
 	} // Ende der service-Methode
 
 	private void initConfig(ClientConfiguration config) {
