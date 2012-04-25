@@ -102,7 +102,12 @@ public class Controller extends HttpServlet {
 			}
 		}
 		
-				
+		
+		/**
+		 * @author Schneider
+		 * @author Sergej
+		 */
+		
 		else if(ServletFileUpload.isMultipartContent(request)){
 			System.out.println("ich bin in upload");
 		
