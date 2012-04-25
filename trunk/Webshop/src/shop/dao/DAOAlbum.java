@@ -265,7 +265,7 @@ public class DAOAlbum {
 	 * @param numberOfTracks
 	 * @param label
 	 */
-	public void editAlbum(ObjectContainer db, int albID,String coverpath,String albumTitel,
+	public void editAlbum(ObjectContainer db, int albID,byte[] coverpath,String albumTitel,
 			String artist, int numberOfDisks, double price, int amount, int numberOfTracks,
 			String label) {
 		
