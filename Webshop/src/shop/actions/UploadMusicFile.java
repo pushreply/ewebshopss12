@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.db4o.ObjectContainer;
 
 import shop.actions.MultipartMap;
-import shop.app.Controller;
+import shop.dao.DAOAlbum;
 import shop.dao.DAOTrack;
+import shop.dto.DBAlbum;
 import shop.dto.DBTrack;
+import shop.util.ByteArray;
 import shop.util.Trackfactory;
 
 @WebServlet(urlPatterns = { "/upload" })
@@ -36,25 +38,74 @@ public class UploadMusicFile {
     	this.response = response;
     	this.db = db;
     	
-    	try {
-			process(request, response, db);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    	
+    	System.out.println("parameter ausgabe: "+request.getParameter("senden"));
+    	if(request.getParameter("senden") != null && "senden".equals(request.getParameter("senden")))
+    	{
+    			try {
+    				albumprocess(request, response, db);
+    		} catch (ServletException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
 		}
+    	else
+    	{
+    		System.out.println("parameter mp3: "+request.getParameter("uploadFileSubmitButton"));
+    		try {
+					process(request, response, db);
+    			} catch (ServletException e) {
+    					// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    		}
+    	}
 
 	}
 
+    
     protected void process(HttpServletRequest request, HttpServletResponse response, ObjectContainer db)
         throws ServletException, IOException
     {
+    	System.out.println("ich bin in prozess");
         MultipartMap map = new MultipartMap(request, this);
         DBTrack dbTrack = Trackfactory.createTrack(map.getFile("file"));
         DAOTrack.insertTrack(dbTrack, db);
         request.setAttribute("track", dbTrack);
+        request.getRequestDispatcher("/weiter.jsp").forward(request, response);
+    }
+    
+    
+    protected void albumprocess(HttpServletRequest request, HttpServletResponse response, ObjectContainer db)
+        throws ServletException, IOException
+    {
+    	System.out.println("ich bin albumprocess");
+        MultipartMap map = new MultipartMap(request, this);
+        DBAlbum dbalbum = new DBAlbum();
+        System.out.println(map.getParameter("titel"));
+        dbalbum.setAlbumTitel(map.getParameter("titel"));
+        System.out.println(map.getParameter("artist"));
+        dbalbum.setArtist(map.getParameter("artist"));
+        System.out.println(map.getParameter("price"));
+        dbalbum.setPrice(Double.parseDouble(map.getParameter("price")));
+        System.out.println(map.getParameter("label"));
+        dbalbum.setLabel(map.getParameter("label"));
+        System.out.println(map.getParameter("trackanzahl"));
+        dbalbum.setNumberOfTracks(Integer.parseInt(map.getParameter("trackanzahl")));
+        System.out.println(map.getParameter("diskanzahl"));
+        dbalbum.setNumberOfDisks(Integer.parseInt(map.getParameter("diskanzahl")));
+        System.out.println(map.getParameter("albumanzahl"));
+        dbalbum.setAmount(Integer.parseInt(map.getParameter("albumanzahl")));
+        System.out.println(map.getFile("coverpage").getName());
+        
+        dbalbum.setCoverpath(ByteArray.getBytesFrombild(map.getFile("coverpage")));
+        DAOAlbum.inserAlbum(dbalbum,db);
+        request.setAttribute("album", dbalbum);
         request.getRequestDispatcher("/weiter.jsp").forward(request, response);
     }
 
