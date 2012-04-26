@@ -125,6 +125,25 @@ public class Controller extends HttpServlet {
 		}
 		
 		
+		
+		///////////////////////track editieren////////////////////////////////////////////////
+		if((request.getParameter("TrackEditierenButton")!=null)){
+			System.out.println("TrackEditierenButton");
+			
+			//request.getParameter(arg0)
+			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				try {
+					disp.forward(request, response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		
 		/**
 		 * @author Schneider
 		 * @author Sergej

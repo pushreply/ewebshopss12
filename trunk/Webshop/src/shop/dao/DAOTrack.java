@@ -47,6 +47,54 @@ public class DAOTrack {
 		}
 
 	}
+	
+	
+	
+	
+public static void editTrack(ObjectContainer db, UUID trackID , String trackTitel, String trackArtist, 
+		                     int trackDate, String trackGenre, int trackNumber, int trackDiskNumber) {
+		
+		if (log.isInfoEnabled()) {
+			log.debug("ENTER editTrack"+ trackID);
+		}
+
+		try {
+			DBTrack track;
+
+			ObjectSet<DBTrack> result = db.queryByExample(new DBTrack(trackID,
+					null, null, null, 0, null, 0, 0));
+			track = result.next();
+			
+			track.setTrackTitle(trackTitel);
+			track.setTrackArtist(trackArtist);
+			track.setTrackDate(trackDate);
+			track.setTrackGenre(trackGenre);
+			track.setTrackNumber(trackNumber);
+			track.setTrackDiskNumber(trackDiskNumber);
+			
+			db.store(track);
+
+		} catch (Db4oIOException e) {
+			if (log.isErrorEnabled()) {
+				log.error("editTrack - DB-Fehler", e);
+			}
+		} catch (DatabaseClosedException e) {
+			if (log.isErrorEnabled()) {
+				log.error("editTrack - DB-Fehler", e);
+			}
+		} catch (DatabaseReadOnlyException e) {
+			if (log.isErrorEnabled()) {
+				log.error("editTrack - DB-Fehler", e);
+			}
+		} finally {
+			db.close();
+		}
+
+	}
+	
+	
+	
+	
 
 	/*
 	 * delete a track
