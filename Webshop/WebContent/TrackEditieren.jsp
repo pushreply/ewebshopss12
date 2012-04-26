@@ -7,7 +7,8 @@
 	<h3>Track editieren: <c:out value="${track.trackTitle}"  default="N/A" /></h3>
 
 
-	<form action="Album.jsp ">
+	<form action="controller" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="titel" size="30" maxlength="30" value="<c:out value="${track.trackID}"/>"/>
   <table border="0" cellpadding="0" cellspacing="4">
     <tr>
       <td align="right">Titel:</td>
@@ -35,7 +36,7 @@
     </tr>
     <tr>
       <td align="right"></td>
-      <td><input type="submit" name="senden" value="senden" size="30" maxlength="40"></td>
+      <td><input type="submit" name="TrackEditierenButton" value="senden" ></td>
     </tr>
   </table>
 </form>
