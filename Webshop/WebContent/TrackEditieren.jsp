@@ -8,7 +8,7 @@
 
 
 	<form action="controller" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="titel" size="30" maxlength="30" value="<c:out value="${track.trackID}"/>"/>
+	<input type="hidden" name="uuid" size="30" maxlength="30" value="<c:out value="${track.trackID}"/>"/>
   <table border="0" cellpadding="0" cellspacing="4">
     <tr>
       <td align="right">Titel:</td>
@@ -36,7 +36,7 @@
     </tr>
     <tr>
       <td align="right"></td>
-      <td><input type="submit" name="TrackEditierenButton" value="senden" ></td>
+      <td><input type="submit" name="TrackEditierenButton" value="TrackEditierenButton" ></td>
     </tr>
   </table>
 </form>
