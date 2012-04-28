@@ -1,6 +1,7 @@
 /**
  * @author Benjamin
  * @author Andreas
+ * @author mukunzi
  */
 
 package shop.app;
@@ -104,7 +105,7 @@ public class Controller extends HttpServlet {
 			}
 		}
 		
-		
+		//Track editieren
         else if ((request.getParameter("trackEditieren") != null)) {
         	
         	//UUID trackID = UUID.fromString(request.getParameter("uuid"));
@@ -126,12 +127,21 @@ public class Controller extends HttpServlet {
 		
 		
 		
-		///////////////////////track editieren////////////////////////////////////////////////
+		//Das editierte Track speichern
 		if((request.getParameter("TrackEditierenButton")!=null)){
 			System.out.println("TrackEditierenButton");
+			System.out.println("----"+request.getParameter("TrackEditierenButton")+"-----");
 			
-			//request.getParameter(arg0)
-			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+			UUID uuid = UUID.fromString(request.getParameter("uuid"));
+			String titel = request.getParameter("titel");
+			String artist = request.getParameter("artist");
+			int date = Integer.parseInt((request.getParameter("date")));
+			String genre = request.getParameter("genre");
+			int trackanzahl = Integer.parseInt(request.getParameter("trackanzahl"));
+			int diskanzahl = Integer.parseInt(request.getParameter("diskanzahl"));
+			
+			DAOTrack.editTrack(db,uuid,titel,artist,date,genre,trackanzahl,diskanzahl);
+			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
 				try {
 					disp.forward(request, response);
 				} catch (ServletException e) {
