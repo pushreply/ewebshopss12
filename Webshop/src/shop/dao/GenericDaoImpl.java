@@ -61,7 +61,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		return (T) result.get(0);
 	}
 	
-	public List<T> readAll(ObjectContainer db) {
+	public List<T> readAll() {
 		LinkedList<T> items = new LinkedList<T>();
 
 		ObjectSet<T> result = null;
@@ -74,37 +74,6 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		}
 		while (result.hasNext()) {
 			items.add(result.next());
-		}
-
-		return items;
-	}
-	public List<T> readAll() {
-		LinkedList<T> items = new LinkedList<T>();
-
-		ObjectSet<T> result = null;
-		try {
-			result = db.queryByExample(type.newInstance());
-		} catch (Db4oIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DatabaseClosedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		T item;
-
-		while (result.hasNext()) {
-			item = result.next();
-			items.add(item);
 		}
 
 		return items;
