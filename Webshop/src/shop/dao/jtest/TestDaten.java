@@ -108,15 +108,15 @@ public class TestDaten {
 			 DBTrack track10 = Trackfactory.createTrack(file10);
 			 
 	 //categories
-			 DBCategory category1 = new DBCategory(1,"Rock");
-			 DBCategory category2 = new DBCategory(2,"Pop");
-			 DBCategory category3 = new DBCategory(3,"Hip hop");
-			 DBCategory category4 = new DBCategory(4,"Rock 'n' Roll");
-			 DBCategory category5 = new DBCategory(5,"Rap"); 
-			 DBCategory category6 = new DBCategory(6,"Romance");
-			 DBCategory category7 = new DBCategory(7,"Opera");
-			 DBCategory category8 = new DBCategory(8,"Schlager");
-			 DBCategory category9 = new DBCategory(9,"Rap");
+			 DBCategory category1 = new DBCategory("Rock");
+			 DBCategory category2 = new DBCategory("Pop");
+			 DBCategory category3 = new DBCategory("Hip hop");
+			 DBCategory category4 = new DBCategory("Rock 'n' Roll");
+			 DBCategory category5 = new DBCategory("Rap"); 
+			 DBCategory category6 = new DBCategory("Romance");
+			 DBCategory category7 = new DBCategory("Opera");
+			 DBCategory category8 = new DBCategory("Schlager");
+			 DBCategory category9 = new DBCategory("Rap");
 			 
 	  //Keywords
 			 DBKeyword keyword1 = new DBKeyword(1,"Rock");
