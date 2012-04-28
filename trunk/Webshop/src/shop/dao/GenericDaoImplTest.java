@@ -20,10 +20,9 @@ public class GenericDaoImplTest {
 	@Test
 	public void create() {
 		ObjectContainer db = new DBObject().getConnection();
-		GenericDaoImpl<DBTrack> underTest = new GenericDaoImpl<DBTrack>(
+		IGenericDao<DBTrack> underTest = new GenericDaoImpl<DBTrack>(
 				DBTrack.class, db);
 
-		DBCategory newCat = new DBCategory("testCategoryName");
 		File file = new File("WebContent/images/wwm.mp3");
 	
 		DBTrack underTrack = Trackfactory.createTrack(file);
@@ -35,9 +34,9 @@ public class GenericDaoImplTest {
 	@Test
 	public void read() {
 		ObjectContainer db = new DBObject().getConnection();
-		GenericDaoImpl<DBTrack> underTest = new GenericDaoImpl<DBTrack>(
+		IGenericDao<DBTrack> underTest = new GenericDaoImpl<DBTrack>(
 				DBTrack.class, db);
-		List<DBTrack> asd = underTest.readAll(db);
+		List<DBTrack> asd = underTest.readAll();
 		System.err.println(asd.get(0).getTrackArtist());
 	}
 
