@@ -5,6 +5,12 @@ import java.util.UUID;
 
 import shop.dto.DBUUIDBase;
 
+/**
+ * 
+ * @author Andreas
+ *
+ * @param <T> you can enter any class of the Webshop that is meant to be persisted; just let the class extend {@link DBUUIDBase}
+ */
 public interface IGenericDao <T extends DBUUIDBase> {
 
     /** Persist the newInstance object into database */
@@ -25,4 +31,7 @@ public interface IGenericDao <T extends DBUUIDBase> {
 
     /** Remove an object from persistent storage in the database */
     void delete(T persistentObject);
+    
+    /** Remove an object from persistent storage in the database based on the ID as String */
+    void delete(String uuid);
 }

@@ -72,6 +72,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 			e.printStackTrace();
 		
 		}
+		
 		while (result.hasNext()) {
 			items.add(result.next());
 		}
@@ -87,5 +88,9 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		db.delete(o);
 	}
 
+	public void delete(String uuid) {
+		T o = read(UUID.fromString(uuid)); 
+		delete(o);
+	}
 	// Not showing implementations of getSession() and setSessionFactory()
 }

@@ -1,8 +1,5 @@
 package shop.dao;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,14 +8,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import shop.dto.DBCategory;
-import shop.dto.DBKeyword;
-import shop.dto.DBTrack;
-import shop.util.Trackfactory;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.sun.xml.internal.fastinfoset.algorithm.UUIDEncodingAlgorithm;
 
+/**
+ * 
+ * @author Andreas
+ *
+ */
 public class DAOCategoryTest {
 
 	ObjectContainer db;
@@ -60,9 +57,9 @@ public class DAOCategoryTest {
 
 	@Test
 	public void readAll() {
-		IGenericDao<DBCategory> underTest = new GenericDaoImpl<DBCategory>(
+		IGenericDao<DBCategory> dao = new GenericDaoImpl<DBCategory>(
 				DBCategory.class, db);
-		List<DBCategory> asd = underTest.readAll();
+		List<DBCategory> asd = dao.readAll();
 		for (DBCategory dbCategory : asd) {
 			System.err.println(dbCategory.getCategoryName());
 		}
