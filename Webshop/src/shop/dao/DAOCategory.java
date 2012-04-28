@@ -5,6 +5,7 @@ package shop.dao;
  */
 
 import java.util.LinkedList;
+import java.util.UUID;
 
 import shop.dto.DBCategory;
 import com.db4o.ObjectContainer;
@@ -18,59 +19,41 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class DAOCategory {
-	
+
 	private static final Log log = LogFactory.getLog(DAOTrack.class);
-	
-	
+
 	/*
 	 * insert a new category
 	 */
-	public static void insertCategory(DBCategory category, ObjectContainer db)
-	{	
-		
-		if (log.isInfoEnabled()) {
-			log.debug("ENTER insertCategory");
-		}
-		
+	public static void insertCategory(DBCategory category, ObjectContainer db) {
+		category.setIdentifier(UUID.randomUUID());
+	
 		try {
-			db.store(category);
-		}
-		catch(DatabaseFileLockedException e)
-		{
-			if (log.isErrorEnabled()) {
-				log.error("insertCategory - DB-Fehler", e);
-			}
-		}
-		finally{
+			db.store((DBCategory) category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			db.close();
-			
-			if(log.isDebugEnabled()){
-				log.debug("LEAVE insertCategory");
-			}
-			
 		}
 	}
-	
-	
-	
+
 	/*
 	 * insert a new category
 	 */
-	public static void deleteCategory(int catID, ObjectContainer db)
-	{	
-		
+	public static void deleteCategory(UUID identifier, ObjectContainer db) {
+
 		if (log.isInfoEnabled()) {
 			log.debug("ENTER deleteCategory");
 		}
-		
+
 		try {
-			DBCategory category; 
-			
-			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null));			
-			 category = result.next();
-			 db.delete(category);
-			 db.commit();
-			 
+			DBCategory category = new DBCategory();
+			category.setIdentifier(identifier);
+			ObjectSet<DBCategory> result = db.queryByExample(category);
+			category = result.next();
+			db.delete(category);
+			db.commit();
+
 		} catch (Db4oIOException e) {
 			if (log.isErrorEnabled()) {
 				log.error("deleteCategory - DB-Fehler", e);
@@ -83,36 +66,34 @@ public class DAOCategory {
 			if (log.isErrorEnabled()) {
 				log.error("deleteCategory - DB-Fehler", e);
 			}
-		}finally{
+		} finally {
 			db.close();
-			
-			if(log.isDebugEnabled()){
+
+			if (log.isDebugEnabled()) {
 				log.debug("LEAVE deleteCategory");
 			}
-			
+
 		}
-		
+
 	}
-	
-	
-	
+
 	/*
 	 * update an existing category
 	 */
-	public static void updateCategory(int catID, ObjectContainer db, String categoryName)
-	{
+	public static void updateCategory(UUID catID, ObjectContainer db,
+			String categoryName) {
 		if (log.isInfoEnabled()) {
-			log.debug("ENTER updateCategory"+catID);
+			log.debug("ENTER updateCategory" + catID);
 		}
-		
+
 		try {
-			DBCategory category; 
-			
-			 ObjectSet<DBCategory> result = db.queryByExample(new DBCategory(catID, null));			
-			 category = result.next();
-			 category.setCategoryName(categoryName);
-			 db.store(category);
-			 
+			DBCategory category = new DBCategory();
+			category.setIdentifier(catID);
+			ObjectSet<DBCategory> result = db.queryByExample(category);
+			category = result.next();
+			category.setCategoryName(categoryName);
+			db.store(category);
+
 		} catch (Db4oIOException e) {
 			if (log.isErrorEnabled()) {
 				log.error("updateCategory - DB-Fehler", e);
@@ -125,54 +106,35 @@ public class DAOCategory {
 			if (log.isErrorEnabled()) {
 				log.error("updateCategory - DB-Fehler", e);
 			}
-		}finally{
+		} finally {
 			db.close();
-			
-			if(log.isDebugEnabled()){
+
+			if (log.isDebugEnabled()) {
 				log.debug("LEAVE updateCategory");
 			}
-			
+
 		}
-		
+
 	}
-	
-	
-	
+
 	/*
 	 * retrieve all categories
 	 */
-	public static LinkedList<DBCategory> retrieveAllCategories(ObjectContainer db) {
-		
-		if (log.isInfoEnabled()) {
-			log.debug("ENTER retrieveAllCategories");
-		}
-		
-		LinkedList<DBCategory> categories= new LinkedList<DBCategory>();
-		
+	public static ObjectSet<DBCategory> retrieveAllCategories(
+			ObjectContainer db) {
+		ObjectSet<DBCategory> result=null;
+
 		try {
-			
-			DBCategory category = new DBCategory();
-			
-			ObjectSet<DBCategory> result = db.queryByExample(DBCategory.class);
-			
-			while(result.hasNext()) {
-				category = result.next();
-				categories.add(category);
-			}
-		}
-		catch (DatabaseFileLockedException e) {
-			if (log.isErrorEnabled()) {
-				log.error("retrieveAllCategories - DB-Fehler", e);
-			}
-		}
-		finally {
+			result = db.queryByExample(DBCategory.class);
+			return result;
+		} catch (DatabaseFileLockedException e) {
+			e.printStackTrace();
+		} finally {
 			db.close();
 		}
-		
-		if(log.isDebugEnabled()){
-			log.debug("LEAVE retrieveAllCategories" +categories.size());
-		}
-		
-		return categories;
+
+
+
+		return result;
 	}
 }

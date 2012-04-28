@@ -8,7 +8,7 @@ import java.util.UUID;
  * @author Andreas
  *
  */
-public class DBTrack {
+public class DBTrack extends DBUUIDBase{
 	private UUID trackID;
 	private byte[] file;
 	private String trackTitle;

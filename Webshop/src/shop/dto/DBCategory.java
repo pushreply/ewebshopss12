@@ -9,26 +9,16 @@ import java.util.LinkedList;
  * @author roha0001
  *
  */
-public class DBCategory {
-	private int catID;	
+public class DBCategory extends DBUUIDBase {
 	private String categoryName;	
 	LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
 	
 	//default constructor
 	public DBCategory(){}
 
-	public DBCategory(int catID, String categoryName) {
+	public DBCategory(String categoryName) {
 		super();
-		this.catID = catID;
 		this.categoryName = categoryName;
-	}
-
-	public int getCatID() {
-		return catID;
-	}
-
-	public void setCatID(int catID) {
-		this.catID = catID;
 	}
 
 	public String getCategoryName() {
@@ -39,11 +29,4 @@ public class DBCategory {
 		this.categoryName = categoryName;
 	}
 
-
-	@Override
-	public String toString() {
-		return "DBCategory [id_dbcategory=" + catID + ", categoryName="
-				+ categoryName + "]";
-	}
-   
 }
