@@ -30,8 +30,7 @@ public class CategoryAction extends AbstractAction {
 				DBCategory.class, db);
 
 		// read all categories for initial JSP displaying purposes
-		List<DBCategory> categories = dao.readAll();
-		request.setAttribute("categories", categories);
+		loadCategories(request, dao);
 
 		// add a new category
 		String add = null;
@@ -44,22 +43,24 @@ public class CategoryAction extends AbstractAction {
 			DBCategory category = new DBCategory();
 			category.setCategoryName(request.getParameter("addCategory").trim());
 			dao.create(category);
+			loadCategories(request, dao);
 		}
 
 		// delete a category
-		String deleteId = null;
+		String toDelete = null;
 		try {
-			deleteId = request.getParameter("deleteCategory");
+			toDelete = request.getParameter("deleteCategory");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (!(deleteId == null || deleteId.isEmpty())) {
-			dao.delete(deleteId);
+		if (!(toDelete == null || toDelete.isEmpty())) {
+			dao.delete(toDelete);
+			loadCategories(request, dao);
 		}
 
 		// forwarding to same page again
 		RequestDispatcher disp = request
-				.getRequestDispatcher("/kategorieHinzufuegen.jsp");
+				.getRequestDispatcher("/category.jsp");
 		try {
 			disp.forward(request, response);
 		} catch (ServletException e) {
@@ -69,5 +70,17 @@ public class CategoryAction extends AbstractAction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * read all categories from database and loads them into the request 
+	 * @param request the request to write the loaded files in
+	 * @param dao the DAO to read the categories from DB
+	 */
+	private void loadCategories(HttpServletRequest request,
+			IGenericDao<DBCategory> dao) {
+		List<DBCategory> categories;
+		categories = dao.readAll();
+		request.setAttribute("categories", categories);
 	}
 }

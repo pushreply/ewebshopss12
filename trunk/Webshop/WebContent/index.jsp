@@ -12,13 +12,17 @@
 
 <br>
 <br>
-
-<form action="controller" name="controlleraction" method="post">	<!-- Controller-Servlet wird aufgerufen und entscheidet, wohin geleitet wird -->
-
-	<input type="submit" name="albumHochladenButton" value="Album hochladen"> <br>	
+<!-- <input type="submit" name="albumHochladenButton" value="Album hochladen"> <br>	
 	<input type="submit" name="suchenButton" value="Suchen"> <br>
-	<input type="submit" name="trackHochladenButton" value="Track hochladen"> <br>
-	<input type="submit" name="tracksAnzeigenButton" value="Tracks anzeigen"> <br>
+ -->	
+
+<form action="controller" method="post">	<!-- Controller-Servlet wird aufgerufen und entscheidet, wohin geleitet wird -->
+	<input type="hidden" name ="action" value="track">
+ 	<input type="submit" name="upload" value="Track hochladen"> <br>
+	<input type="submit" name="show" value="Tracks anzeigen"> <br>
+</form>
+
+<form action="controller" name="controlleraction" method="post">
 	<input type="submit" name="trackEditieren" value="Track editieren"> <br>
 	
 </form>

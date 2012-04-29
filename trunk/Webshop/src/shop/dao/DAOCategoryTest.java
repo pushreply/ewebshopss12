@@ -51,7 +51,7 @@ public class DAOCategoryTest {
 	public void create() {
 		DBCategory newCat = new DBCategory("testCategoryName");
 		IGenericDao<DBCategory> underTest = new GenericDaoImpl<DBCategory>(DBCategory.class,db);
-		UUID newId = underTest.create(newCat);
+		String newId = underTest.create(newCat);
 		System.err.println(newId);
 	}
 
@@ -69,7 +69,7 @@ public class DAOCategoryTest {
 	public void read(){
 		GenericDaoImpl<DBCategory> underTest = new GenericDaoImpl<DBCategory>(
 				DBCategory.class, db);
-		DBCategory category = underTest.read(UUID.fromString("baaf25f2-0118-4435-907d-a0bd0559425d"));
+		DBCategory category = underTest.read("9a73c6e2-f7ac-49e4-945b-486916c26e22");
 		System.err.println(category.getCategoryName());
 	}
 }

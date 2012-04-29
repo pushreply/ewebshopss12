@@ -4,14 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import shop.dto.DBTrack;
 import shop.dto.DBUUIDBase;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.DatabaseFileLockedException;
-import com.db4o.ext.Db4oIOException;
 
 /**
  * 
@@ -28,7 +24,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		this.db = db;
 	}
 
-	public UUID create(T o) {
+	public String create(T o) {
 		UUID newID = UUID.randomUUID();
 		o.setIdentifier(newID);
 
@@ -36,16 +32,11 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 			db.store(o);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			db.close();
 		}
-		
-		System.out.println("nach store");
-		return o.getIdentifier();
-
+		return o.getIdentifier().toString();
 	}
 
-	public T read(UUID id) {
+	public T read(String uuid) {
 		T example = null;
 		try {
 			example = type.newInstance();
@@ -56,7 +47,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		example.setIdentifier(id);
+		example.setIdentifier(UUID.fromString(uuid));
 		ObjectSet<T> result = db.queryByExample(example);
 		return (T) result.get(0);
 	}
@@ -67,16 +58,12 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		ObjectSet<T> result = null;
 		try {
 			result = db.queryByExample(type.newInstance());
+			while (result.hasNext()) {
+				items.add(result.next());
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		
 		}
-		
-		while (result.hasNext()) {
-			items.add(result.next());
-		}
-
 		return items;
 	}
 
@@ -89,8 +76,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 	}
 
 	public void delete(String uuid) {
-		T o = read(UUID.fromString(uuid)); 
+		T o = read(uuid); 
 		delete(o);
 	}
-	// Not showing implementations of getSession() and setSessionFactory()
 }

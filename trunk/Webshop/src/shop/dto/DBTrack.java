@@ -1,7 +1,6 @@
 package shop.dto;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 /**
  * @author roha0001
@@ -9,7 +8,6 @@ import java.util.UUID;
  *
  */
 public class DBTrack extends DBUUIDBase{
-	private UUID trackID;
 	private byte[] file;
 	private String trackTitle;
 	private String trackArtist;
@@ -22,11 +20,10 @@ public class DBTrack extends DBUUIDBase{
 		
 	}
 	
-	public DBTrack(UUID trackID, byte[] file, String trackTitle,
+	public DBTrack(byte[] file, String trackTitle,
 			String trackArtist, int trackDate, String trackGenre,
 			int trackNumber, int trackDiskNumber) {
 		super();
-		this.trackID = trackID;
 		this.file = file;
 		this.trackTitle = trackTitle;
 		this.trackArtist = trackArtist;
@@ -34,14 +31,6 @@ public class DBTrack extends DBUUIDBase{
 		this.trackGenre = trackGenre;
 		this.trackNumber = trackNumber;
 		this.trackDiskNumber = trackDiskNumber;
-	}
-
-	public UUID getTrackID() {
-		return trackID;
-	}
-
-	public void setTrackID(UUID trackID) {
-		this.trackID = trackID;
 	}
 
 	public byte[] getFile() {
@@ -102,7 +91,7 @@ public class DBTrack extends DBUUIDBase{
 
 	@Override
 	public String toString() {
-		return "DBTrack [trackID=" + trackID + ", file="
+		return "DBTrack [file="
 				+ Arrays.toString(file) + ", trackTitle=" + trackTitle
 				+ ", trackArtist=" + trackArtist + ", trackDate=" + trackDate
 				+ ", trackGenre=" + trackGenre + ", trackNumber=" + trackNumber

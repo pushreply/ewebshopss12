@@ -1,7 +1,6 @@
 package shop.dao;
 
 import java.util.List;
-import java.util.UUID;
 
 import shop.dto.DBUUIDBase;
 
@@ -13,13 +12,13 @@ import shop.dto.DBUUIDBase;
  */
 public interface IGenericDao <T extends DBUUIDBase> {
 
-    /** Persist the newInstance object into database */
-    UUID create(T newInstance);
+    /** Persist the newInstance object into database and returns the id */
+    String create(T newInstance);
 
     /** Retrieve an object that was previously persisted to the database using
      *   the indicated id as primary key
      */
-    T read(UUID id);
+    T read(String id);
     
     /**
      * Retrieve all objects that were previously persisted to the database
@@ -33,5 +32,5 @@ public interface IGenericDao <T extends DBUUIDBase> {
     void delete(T persistentObject);
     
     /** Remove an object from persistent storage in the database based on the ID as String */
-    void delete(String uuid);
+    void delete(String id);
 }

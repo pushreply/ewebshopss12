@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DAOAlbum {
    
-	 private static final Log log = LogFactory.getLog(DAOTrack.class);
+	 private static final Log log = LogFactory.getLog(DAOAlbum.class);
 	
 	/**
 	 * insert a new album in the Database

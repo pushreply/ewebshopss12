@@ -9,7 +9,6 @@ package shop.app;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -24,9 +23,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.AbstractAction;
 import shop.actions.CategoryAction;
+import shop.actions.KeywordAction;
+import shop.actions.TrackAction;
 import shop.actions.UploadMusicFile;
-import shop.dao.DAOTrack;
 import shop.dao.DBObject;
+import shop.dao.GenericDaoImpl;
+import shop.dao.IGenericDao;
+import shop.dto.DBTrack;
 
 import com.db4o.ObjectContainer;
 
@@ -47,7 +50,9 @@ public class Controller extends HttpServlet {
 
 		// Map initialisieren mit allen benötigten Actions
 		actionMap.put("category", new CategoryAction());
-		// more puts here
+		actionMap.put("track", new TrackAction());
+		actionMap.put("keyword", new KeywordAction());
+		// more "put" go here
 	}
 
 	/**
@@ -57,53 +62,22 @@ public class Controller extends HttpServlet {
 		
 		// DBObject baut eine Verbindung zur DB auf
 		db = new DBObject().getConnection();
-
+		
 		// Aufruf des passenden Controllers
 		AbstractAction action = actionMap.get(request.getParameter("action"));
 		if (action != null)
 			action.processAndClose(request, response, db);
 
 		// Controller leitet die Anfragen entsprechend weiter
-		if ((request.getParameter("trackHochladenButton") != null)) {
-			System.out.println("trackhochladenButton");
-			RequestDispatcher disp = request
-					.getRequestDispatcher("/trackhinzufuegen.jsp");
-			try {
-				disp.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		else if ((request.getParameter("tracksAnzeigenButton") != null)) {
-
-			request.setAttribute("AlbumTracks", DAOTrack.retrieveAllTracks(db));
-			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
-			try {
-				disp.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} 
 		
 		// Track editieren
 		else if ((request.getParameter("trackEditieren") != null)) {
 
 			// UUID trackID = UUID.fromString(request.getParameter("uuid"));
-
-			UUID trackID = UUID
-					.fromString("3b0bf46a-2ff6-4f2e-be52-981a2864a96f");
-
+			IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
+			
 			request.setAttribute("track",
-					DAOTrack.retrieveTrackByID(db, trackID));
+					dao.read("3b0bf46a-2ff6-4f2e-be52-981a2864a96f"));
 			RequestDispatcher disp = request
 					.getRequestDispatcher("/TrackEditieren.jsp");
 			try {
@@ -122,8 +96,10 @@ public class Controller extends HttpServlet {
 			System.out.println("TrackEditierenButton");
 			System.out.println("----"
 					+ request.getParameter("TrackEditierenButton") + "-----");
-
-			UUID uuid = UUID.fromString(request.getParameter("uuid"));
+			
+			IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
+			DBTrack track = dao.read(request.getParameter("uuid"));
+			
 			String titel = request.getParameter("titel");
 			String artist = request.getParameter("artist");
 			int date = Integer.parseInt((request.getParameter("date")));
@@ -132,9 +108,14 @@ public class Controller extends HttpServlet {
 					.getParameter("trackanzahl"));
 			int diskanzahl = Integer.parseInt(request
 					.getParameter("diskanzahl"));
-
-			DAOTrack.editTrack(db, uuid, titel, artist, date, genre,
-					trackanzahl, diskanzahl);
+			track.setTrackTitle(titel);
+			track.setTrackArtist(artist);
+			track.setTrackDate(date);
+			track.setTrackGenre(genre);
+			track.setTrackNumber(trackanzahl);
+			track.setTrackDiskNumber(diskanzahl);
+			
+			dao.update(track);
 			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
 			try {
 				disp.forward(request, response);
@@ -155,11 +136,10 @@ public class Controller extends HttpServlet {
 		else if (ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("ich bin in upload");
 
-			UploadMusicFile up = new UploadMusicFile(this, request, response,
-					db);
+			UploadMusicFile up = new UploadMusicFile(request, response,	db);
 
-			db.close();
 		}
+		db.close();
 	} // Ende der service-Methode
 
 } // Ende Klasse Controller
