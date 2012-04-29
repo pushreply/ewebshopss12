@@ -6,8 +6,7 @@ import java.util.LinkedList;
  * @author roha0001
  * 
  */
-public class DBCustomer {
-	private int custID;
+public class DBCustomer extends DBUUIDBase{
 	private String username;
 	private String password;
 	// A Customer has one or more addresses
@@ -17,21 +16,12 @@ public class DBCustomer {
 	public DBCustomer() {
 	}
 
-	public DBCustomer(int custID, String username, String password,
+	public DBCustomer(String username, String password,
 			LinkedList<DBAddress> addresses) {
 		super();
-		this.custID = custID;
 		this.username = username;
 		this.password = password;
 		this.addresses = addresses;
-	}
-
-	public int getCustID() {
-		return custID;
-	}
-
-	public void setCustID(int custID) {
-		this.custID = custID;
 	}
 
 	public String getUsername() {
@@ -60,7 +50,7 @@ public class DBCustomer {
 
 	@Override
 	public String toString() {
-		return "DBCustomer [custID=" + custID + ", username=" + username
+		return "DBCustomer [username=" + username
 				+ ", password=" + password + ", addresses=" + addresses + "]";
 	}
 

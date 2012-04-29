@@ -11,7 +11,6 @@ import java.util.LinkedList;
  */
 public class DBCategory extends DBUUIDBase {
 	private String categoryName;	
-	LinkedList<DBAlbum> albums = new LinkedList<DBAlbum>();
 	
 	//default constructor
 	public DBCategory(){}

@@ -7,8 +7,7 @@ package shop.dto;
  * @author roha0001
  *
  */
-public class DBAddress {
-	private int adrID;
+public class DBAddress extends DBUUIDBase{
 	private String street;
 	private String country; 
 	private String firstName;
@@ -22,10 +21,9 @@ public class DBAddress {
 		
 	}
 	
-	public DBAddress(int adrID, String street, String country,
+	public DBAddress(String street, String country,
 			String firstName, String lastName, String gender, String art) {
 		super();
-		this.adrID = adrID;
 		this.street = street;
 		this.country = country;
 		this.firstName = firstName;
@@ -76,14 +74,6 @@ public class DBAddress {
 		this.gender = gender;
 	}
 
-	public int getAdrID() {
-		return adrID;
-	}
-
-	public void setAdrID(int id_dbadress) {
-		this.adrID = id_dbadress;
-	}
-
 	public String getArt() {
 		return art;
 	}
@@ -94,7 +84,7 @@ public class DBAddress {
 
 	@Override
 	public String toString() {
-		return "DBAddress [id_dbadress=" + adrID + ", street=" + street
+		return "DBAddress [street=" + street
 				+ ", country=" + country + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", gender=" + gender + ", art="
 				+ art + "]";
