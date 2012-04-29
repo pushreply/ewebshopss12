@@ -9,8 +9,7 @@ import java.util.LinkedList;
  * @author roha0001
  *
  */
-public class DBItems {
-	private int itemID;
+public class DBItems extends DBUUIDBase {
 	private int orderAmount;	
 	//an item has one or many album
 	LinkedList<DBAlbum> album = new LinkedList<DBAlbum>();
@@ -19,19 +18,10 @@ public class DBItems {
 		
 	}
 
-	public DBItems(int itemID, int orderAmount, LinkedList<DBAlbum> album) {
+	public DBItems(int orderAmount, LinkedList<DBAlbum> album) {
 		super();
-		this.itemID = itemID;
 		this.orderAmount = orderAmount;
 		this.album = album;
-	}
-
-	public int getItemID() {
-		return itemID;
-	}
-
-	public void setItemID(int itemID) {
-		this.itemID = itemID;
 	}
 
 	public int getOrderAmount() {
@@ -52,7 +42,7 @@ public class DBItems {
 
 	@Override
 	public String toString() {
-		return "DBItems [itemID=" + itemID + ", orderAmount="
+		return "DBItems [orderAmount="
 				+ orderAmount + ", album=" + album + "]";
 	}
 	

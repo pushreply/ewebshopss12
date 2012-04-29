@@ -8,9 +8,8 @@ import java.util.LinkedList;
  *
  */
 
-public class DBOrder {
+public class DBOrder extends DBUUIDBase {
 		
-		private int orderID;
 		private Date datum;
 		private int state;
 
@@ -25,24 +24,15 @@ public class DBOrder {
 			
 		}
 
-		public DBOrder(int orderID, Date datum, int state,
+		public DBOrder(Date datum, int state,
 				LinkedList<DBItems> items, LinkedList<DBAddress> addresses,
 				LinkedList<DBCustomer> customers) {
 			super();
-			this.orderID = orderID;
 			this.datum = datum;
 			this.state = state;
 			this.items = items;
 			this.addresses = addresses;
 			this.customers = customers;
-		}
-
-		public int getOrderID() {
-			return orderID;
-		}
-
-		public void setOrderID(int orderID) {
-			this.orderID = orderID;
 		}
 
 		public Date getDatum() {
@@ -87,7 +77,7 @@ public class DBOrder {
 
 		@Override
 		public String toString() {
-			return "DBOrder [orderID=" + orderID + ", datum=" + datum
+			return "DBOrder [datum=" + datum
 					+ ", state=" + state + ", items=" + items + ", addresses="
 					+ addresses + ", customers=" + customers + "]";
 		}
