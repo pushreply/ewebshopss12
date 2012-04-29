@@ -9,8 +9,7 @@ import java.util.LinkedList;
  * @author roha0001,Mukunzi
  *
  */
-public class DBAlbum {
-	private int albID;
+public class DBAlbum extends DBUUIDBase{
 	private byte[] coverpath;
 	private String albumTitel;
 	private String artist;
@@ -27,12 +26,11 @@ public class DBAlbum {
 	//default constructor
 	public DBAlbum(){}
 
-	public DBAlbum(int albID, byte[] coverpath, String albumTitel,
+	public DBAlbum(byte[] coverpath, String albumTitel,
 			String artist, int numberOfDisks, double price, int amount,
 			int numberOfTracks, String label, LinkedList<DBKeyword> keywords,
 			LinkedList<DBCategory> categories, LinkedList<DBTrack> tracks) {
 		super();
-		this.albID = albID;
 		this.coverpath = coverpath;
 		this.albumTitel = albumTitel;
 		this.artist = artist;
@@ -44,14 +42,6 @@ public class DBAlbum {
 		this.keywords = keywords;
 		this.categories = categories;
 		this.tracks = tracks;
-	}
-
-	public int getAlbID() {
-		return albID;
-	}
-
-	public void setAlbID(int albID) {
-		this.albID = albID;
 	}
 
 	public byte[] getCoverpath() {
@@ -144,7 +134,7 @@ public class DBAlbum {
 
 	@Override
 	public String toString() {
-		return "DBAlbum [albID=" + albID + ", coverpath=" + coverpath
+		return "DBAlbum [coverpath=" + coverpath
 				+ ", albumTitel=" + albumTitel + ", artist=" + artist
 				+ ", numberOfDisks=" + numberOfDisks + ", price=" + price
 				+ ", amount=" + amount + ", numberOfTracks=" + numberOfTracks

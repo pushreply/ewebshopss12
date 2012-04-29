@@ -1,32 +1,40 @@
-<!-- Autor: Benjamin -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ include file="header.jsp" %>
-
-<title>Webshop Startseite</title>
-</head>
-<body>
-<p><b>Webshop Startseite</b><p>
-
-
+<c:import url="header.jsp">
+	<c:param name="title" value="Webshop Startseite" />
+</c:import>
+<p>
+	<b>Webshop Startseite</b>
+<p>
 <p>Menü</p>
 
 <br>
 <br>
 <!-- <input type="submit" name="albumHochladenButton" value="Album hochladen"> <br>	
 	<input type="submit" name="suchenButton" value="Suchen"> <br>
- -->	
+ -->
 
-<form action="controller" method="post">	<!-- Controller-Servlet wird aufgerufen und entscheidet, wohin geleitet wird -->
-	<input type="hidden" name ="action" value="track">
- 	<input type="submit" name="upload" value="Track hochladen"> <br>
+<form action="controller" method="post">
+	<!-- Controller-Servlet wird aufgerufen und entscheidet, wohin geleitet wird -->
+	<input type="hidden" name="action" value="track"> <input
+		type="submit" name="upload" value="Track hochladen"> <br>
 	<input type="submit" name="show" value="Tracks anzeigen"> <br>
 </form>
 
 <form action="controller" name="controlleraction" method="post">
-	<input type="submit" name="trackEditieren" value="Track editieren"> <br>
-	
+	<input type="submit" name="trackEditieren" value="Track editieren">
+	<br>
+
 </form>
 
+<form action="controller" method="post">
+	<input type="hidden" name="action" value="category"> <input
+		type="submit" value="Kategorien verwalten">
+</form>
 
+<form action="controller" method="post">
+	<input type="hidden" name="action" value="keyword"> <input
+		type="submit" value="Schlüsselworte verwalten">
+</form>
 
-<%@ include file="footer.jsp" %>
+<c:import url="footer.jsp" />

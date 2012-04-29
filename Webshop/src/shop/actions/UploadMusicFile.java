@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import shop.dao.DAOAlbum;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
@@ -71,6 +70,7 @@ public class UploadMusicFile {
         DBTrack dbTrack = Trackfactory.createTrack(map.getFile("file"));
         IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
         dao.create(dbTrack);
+        map.getFile("file").delete();
         request.setAttribute("track", dbTrack);
         request.getRequestDispatcher("/weiter.jsp").forward(request, response);
     }
@@ -99,7 +99,8 @@ public class UploadMusicFile {
         System.out.println(map.getFile("coverpage").getName());
         
         dbalbum.setCoverpath(ByteArray.getBytesFromFile(map.getFile("coverpage")));
-        DAOAlbum.inserAlbum(dbalbum,db);
+        IGenericDao<DBAlbum>daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
+        daoAlbum.create(dbalbum);
         request.setAttribute("album", dbalbum);
         request.getRequestDispatcher("/weiter.jsp").forward(request, response);
     }
