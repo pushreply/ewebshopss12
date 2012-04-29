@@ -1,7 +1,8 @@
-<%@ include file="header.jsp" %>
-<title>Track hinzufügen</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:import url="header.jsp">
+	<c:param name="title" value="Lied hinzufügen" />
+</c:import>
 
 <h3>Album</h3>
 
@@ -31,3 +32,4 @@
 	</form>
 </table>
 
+<c:import url="footer.jsp" />

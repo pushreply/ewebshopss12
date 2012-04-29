@@ -1,5 +1,5 @@
 
-------footer.jsp---------
-<br>footer info
+<hr/>
+<br>anfang von footer
 </body>
 </html>
