@@ -1,26 +1,22 @@
 package shop.actions;
 
-import java.awt.image.DataBufferShort;
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.db4o.ObjectContainer;
-
-import shop.actions.MultipartMap;
 import shop.dao.DAOAlbum;
-import shop.dao.DAOTrack;
+import shop.dao.GenericDaoImpl;
+import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
 import shop.dto.DBTrack;
 import shop.util.ByteArray;
 import shop.util.Trackfactory;
+
+import com.db4o.ObjectContainer;
 
 @WebServlet(urlPatterns = { "/upload" })
 @MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L) // 10MB.
@@ -28,12 +24,10 @@ public class UploadMusicFile {
 
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
-	protected HttpServlet servlet;
 	protected ObjectContainer db;
 	
-    public UploadMusicFile(HttpServlet servlet, HttpServletRequest request,
+    public UploadMusicFile(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db) {
-    	this.servlet = servlet;
     	this.request = request;
     	this.response = response;
     	this.db = db;
@@ -75,7 +69,8 @@ public class UploadMusicFile {
     	System.out.println("ich bin in prozess");
         MultipartMap map = new MultipartMap(request, this);
         DBTrack dbTrack = Trackfactory.createTrack(map.getFile("file"));
-        DAOTrack.insertTrack(dbTrack, db);
+        IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
+        dao.create(dbTrack);
         request.setAttribute("track", dbTrack);
         request.getRequestDispatcher("/weiter.jsp").forward(request, response);
     }

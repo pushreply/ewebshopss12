@@ -3,7 +3,6 @@ package shop.app;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
-import com.db4o.config.EmbeddedConfiguration;
 
-import shop.dao.DAOTrack;
+import shop.dao.DBObject;
+import shop.dao.GenericDaoImpl;
+import shop.dao.IGenericDao;
 import shop.dto.DBTrack;
 
 /**
@@ -44,14 +43,10 @@ public class LoadTrack extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		UUID trackID = UUID.fromString(request.getParameter("trackID"));
-
-		// Database connection and DBTrack receiving
-		EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-		String file = "WebshopDB.dbf";
-		ObjectContainer db = Db4oEmbedded.openFile(config, file);
-		DBTrack track = DAOTrack.retrieveTrackByID(db, trackID);
-		db.close();
+		ObjectContainer db = new DBObject().getConnection();
+		IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(
+				DBTrack.class, db);
+		DBTrack track = dao.read(request.getParameter("trackID"));
 
 		byte[] mp3File = track.getFile();
 		ServletOutputStream stream = null;

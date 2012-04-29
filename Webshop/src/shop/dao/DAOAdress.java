@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DAOAdress {
 	
-	private static final Log log = LogFactory.getLog(DAOTrack.class);
+	private static final Log log = LogFactory.getLog(DAOAdress.class);
     
 	
 	/**

@@ -7,7 +7,7 @@ package shop.dto;
  * @author roha0001
  *
  */
-public class DBKeyword {
+public class DBKeyword extends DBUUIDBase {
 	
 	private int keyID;
 	private String keywordName;

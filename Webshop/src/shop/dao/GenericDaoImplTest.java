@@ -27,7 +27,7 @@ public class GenericDaoImplTest {
 	
 		DBTrack underTrack = Trackfactory.createTrack(file);
 		
-		UUID newId = underTest.create(underTrack);
+		String newId = underTest.create(underTrack);
 		System.err.println(newId);
 	}
 

@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DAOCustomer {
 	
-	private static final Log log = LogFactory.getLog(DAOTrack.class);
+	private static final Log log = LogFactory.getLog(DAOCustomer.class);
 
 	public static void insert(DBCustomer customer, ObjectContainer db) {
 		

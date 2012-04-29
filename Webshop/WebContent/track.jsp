@@ -23,10 +23,10 @@
 				<td>${track.trackArtist}</td>
 				<td>${track.trackDate}</td>
 				<td><form action="loadtrack" method="get">
-						<input type="hidden"  name="trackID" value="${track.trackID}">
+						<input type="hidden"  name="trackID" value="${track.identifier}">
 						<input type="submit"  value="Play">
 					</form></td>
-					<td>${track.trackID}</td>
+					<td>${track.identifier}</td>
 			</tr>
 		</c:forEach>
 	</table>
