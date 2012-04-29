@@ -28,10 +28,10 @@ public class TestDaten {
 
 	public static void main(String[] arg) {
 
-		// Öffne eine Datenbankverbinndung
+		//open database connection
 		ObjectContainer db = new DBObject().getConnection();
 
-		// bereite dao klassen vor
+		// initialize DAOs
 		IGenericDao<DBAddress> doaAddress = new GenericDaoImpl<DBAddress>(
 				DBAddress.class, db);
 		IGenericDao<DBCategory> daoCategory = new GenericDaoImpl<DBCategory>(
@@ -45,7 +45,7 @@ public class TestDaten {
 		IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(
 				DBAlbum.class, db);
 
-		// DBAddres-Objekte
+		// DBAddres-Objekts
 		List<DBAddress> adresses = new LinkedList<DBAddress>();
 		adresses.add(new DBAddress("Schillerplatz 30", "Deutschland", "Jens",
 				" Müller", "M", "delivery"));
@@ -72,7 +72,7 @@ public class TestDaten {
 			doaAddress.create(dbAddress);
 		}
 
-		// DBCustomer-Objekte
+		// DBCustomer-Objekts
 		LinkedList<DBAddress> addresses1 = new LinkedList<DBAddress>();
 		addresses1.add(adresses.get(0));
 		addresses1.add(adresses.get(1));
@@ -105,14 +105,12 @@ public class TestDaten {
 
 		// Track
 		String[] paths = { "WebContent/images/wwm.mp3",
-				"WebContent/images/wwm.mp3", "WebContent/images/wwm.mp3",
-				"WebContent/images/wwm.mp3", "WebContent/images/wwm.mp3",
 				"WebContent/images/wwm.mp3", "WebContent/images/wwm.mp3" };
 		for (String path : paths) {
 			daoTrack.create(Trackfactory.createTrack(new File(path)));
 		}
 
-		// categories
+		// Categories
 		String[] categories = { "Rock", "Pop", "HipHop", "Rock'n'Roll", "Rap",
 				"Romance", "Opera", "Schlager", "Metal" };
 		for (String categorie : categories) {
@@ -126,33 +124,38 @@ public class TestDaten {
 			daoKeyword.create(new DBKeyword(keyword));
 		}
 
-		// Album1
-		List<DBKeyword> keys = daoKeyword.readAll();
-		List<DBCategory> cats = daoCategory.readAll();
-		List<DBTrack> tracks = daoTrack.readAll();
+		// Albums
+		//	load existing keywords, categories and tracks to put in the albums
+		List<DBKeyword> dbKeys = daoKeyword.readAll();
+		List<DBCategory> dbCats = daoCategory.readAll();
+		List<DBTrack> dbTracks = daoTrack.readAll();
 
+		//pick random keywords, categories & tracks and adds them to album
 		for (int i = 0; i < 5; i++) {
 			List<DBKeyword> albumKeywords = new LinkedList<DBKeyword>();
-			for (DBKeyword dbKeyword : keys) {
+			for (DBKeyword dbKeyword : dbKeys) {
 				if (Math.random() < 0.5)
 					albumKeywords.add(dbKeyword);
 			}
 
 			List<DBCategory> albumCategories = new LinkedList<DBCategory>();
-			for (DBCategory dbCategory : cats) {
+			for (DBCategory dbCategory : dbCats) {
 				if (Math.random() < 0.5)
 					albumCategories.add(dbCategory);
 			}
 
 			List<DBTrack> albumTracks = new LinkedList<DBTrack>();
-			for (DBTrack dbTrack : tracks) {
+			//ensures that at least one song is in the album
+			albumTracks.add(dbTracks.get(0));
+			
+			for (DBTrack dbTrack : dbTracks) {
 				if (Math.random() < 0.5)
 					albumTracks.add(dbTrack);
 			}
 
 			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_" + i + "_"+ i,
 					(int) Math.random() * 3, Math.random() * 20, (int) Math
-							.random() * 500, (int) Math.random() * 10, "Label_"
+							.random() * 500, (int) albumTracks.size(), "Label_"
 							+ i + " "+ i+1 + " "+ i+2, albumKeywords, albumCategories, albumTracks));
 		}
 		db.close();

@@ -19,7 +19,7 @@ public interface ServerInfo {
   /**
    * the database file to be used by the server.
    */
-  public String   FILE = "db/WebshopDB.dbf";
+  public String   FILE = "WebshopDB.dbf";
   
   /**
    * the port to be used by the server.
