@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>${param.title}</title>
+<link rel="stylesheet" href="stylesheet/style.css" type="text/css"></link>
 </head>
 <body>
 	Du bist als
@@ -16,14 +17,16 @@
 		<button name="action" type="submit" value="Logout" class="buttonslog">Logout</button>
 	</form>
 
-	<ul>
-		<li><a href="index.jsp">Home</a></li>
-		<li><a href="controller?action=track&upload=true">Lied
-				Hochladen</a></li>
-		<li><a href="controller?action=track&show=true">Alle Lieder
-				Anzeigen</a></li>
-		<li><a href="controller?action=keyword">Schlüsselworte</a></li>
-		<li><a href="controller?action=category">Kategorien</a></li>
+	<!-- include all urls according to URL-Rewriting rules -->
+	<%@ include file="urlVariables.jsp"%>
+	<ul class="topmenue">
+		<li><a href="${home}">Home</a></li>
+		<li><a href="${trackUpload}">Lied Hochladen</a></li>
+		<li><a href="${trackShow}">Alle Lieder Anzeigen</a></li>
+		<li><a href="${keyword}">Schlüsselworte</a></li>
+		<li><a href="${category}">Kategorien</a></li>
 	</ul>
+	<br />
+	<br />
 	//ende mit header
-	<hr/>
+	<hr />
