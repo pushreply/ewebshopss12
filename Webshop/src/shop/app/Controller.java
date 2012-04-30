@@ -23,6 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.AbstractAction;
 import shop.actions.CategoryAction;
+import shop.actions.CustomerAction;
 import shop.actions.KeywordAction;
 import shop.actions.TrackAction;
 import shop.actions.UploadMusicFile;
@@ -52,6 +53,8 @@ public class Controller extends HttpServlet {
 		actionMap.put("category", new CategoryAction());
 		actionMap.put("track", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
+		actionMap.put("customer", new CustomerAction());
+		
 		// more "put" go here
 	}
 
@@ -90,7 +93,8 @@ public class Controller extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		
+			
 		// Das editierte Track speichern
 		if ((request.getParameter("TrackEditierenButton") != null)) {
 			System.out.println("TrackEditierenButton");
