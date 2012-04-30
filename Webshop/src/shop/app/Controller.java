@@ -76,6 +76,12 @@ public class Controller extends HttpServlet {
 		// Controller leitet die Anfragen entsprechend weiter
 		
 		// Track editieren
+		
+		AbstractAction action1 = actionMap.get(request.getParameter("trackEditieren"));
+		if (action1 != null)
+			action1.processAndClose(request, response, db); 
+		
+		/**
 		else if ((request.getParameter("trackEditieren") != null)) {
 
 			// UUID trackID = UUID.fromString(request.getParameter("uuid"));
@@ -133,6 +139,8 @@ public class Controller extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		*/
 
 		/**
 		 * @author Schneider
