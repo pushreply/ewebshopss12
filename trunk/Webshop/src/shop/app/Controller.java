@@ -52,6 +52,8 @@ public class Controller extends HttpServlet {
 		// Map initialisieren mit allen benötigten Actions
 		actionMap.put("category", new CategoryAction());
 		actionMap.put("track", new TrackAction());
+		actionMap.put("trackEditieren", new TrackAction());
+		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
 		actionMap.put("customer", new CustomerAction()); //meine ist noch nicht vollkommen fertig, aber erst sicher committen.
 		
