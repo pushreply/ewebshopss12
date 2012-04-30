@@ -53,7 +53,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("category", new CategoryAction());
 		actionMap.put("track", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
-		actionMap.put("customer", new CustomerAction());
+		actionMap.put("customer", new CustomerAction()); //meine ist noch nicht vollkommen fertig, aber erst sicher committen.
 		
 		// more "put" go here
 	}
