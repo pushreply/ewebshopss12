@@ -19,6 +19,7 @@ public class AlbumAction extends AbstractAction{
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db) {
 		RequestDispatcher disp = null;
+		System.out.println("ich in album action");
 		
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 		
