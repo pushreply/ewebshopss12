@@ -28,6 +28,7 @@
 		<li><a href="${trackShow}">Alle Lieder Anzeigen</a></li>
 		<li><a href="${keyword}">Schlüsselworte</a></li>
 		<li><a href="${category}">Kategorien</a></li>
+		<li><a href="${album}">Alle Album</a></li>
 	</ul>
 	<br />
 	<br />
