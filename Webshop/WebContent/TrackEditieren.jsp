@@ -37,12 +37,12 @@
     
     <tr>
       <td align="right"></td>
-      <td><input type="submit" name="TrackEditierenButton" value="TrackEditierenButton" ></td>
+      <td><input type="hidden" name="action" value="TrackEditierenButton" ></td>
     </tr>
     
     <tr>
       <td align="right"></td>
-      <td><input type="submit" name="TrackEditierenButton" value="TrackEditierenButton" ></td>
+      <td><input type="submit" name="TrackEditierenButton"></td>
     </tr>
   </table>
 </form>
