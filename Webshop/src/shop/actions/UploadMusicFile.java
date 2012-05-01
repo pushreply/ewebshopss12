@@ -1,5 +1,10 @@
 package shop.actions;
 
+
+/**
+ * @author Schneider Sergej
+ */
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -102,7 +107,7 @@ public class UploadMusicFile {
         IGenericDao<DBAlbum>daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
         daoAlbum.create(dbalbum);
         request.setAttribute("album", dbalbum);
-        request.getRequestDispatcher("/weiter.jsp").forward(request, response);
+        request.getRequestDispatcher("/trackhinzufuegen.jsp").forward(request, response);
     }
 
 }
