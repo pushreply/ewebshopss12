@@ -4,8 +4,8 @@
 </c:import>
 
 <form name="login" action="controller?action=Login" method="post" accept-charset="ISO-8859-1">
-                <input name="username" type="text" value="Username"/>
-                <input name="password" type="text" value="Passwort"/>
+                Benutzername: <input name="username" type="text" value=""/><br>
+                Kennwort: <input name="password" type="password" value=""/>
 
                 		<input type="submit" name="action" value="Login"/>
                 		<p>
