@@ -129,8 +129,8 @@ public class DBAlbum extends DBUUIDBase{
 		return tracks;
 	}
 
-	public void setTracks(List<DBTrack> tracks) {
-		this.tracks = tracks;
+	public void setTracks(DBTrack track) {
+		this.tracks.add(track);
 	}
 
 	@Override
