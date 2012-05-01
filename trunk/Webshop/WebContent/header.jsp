@@ -11,12 +11,15 @@
 <link rel="stylesheet" href="stylesheet/style.css" type="text/css"></link>
 </head>
 <body>
+<c:choose>
+<c:when test="${!empty session}">
 	Du bist als
 	<strong><%=session.getAttribute("username")%> </strong> angemeldet.
 	<form name="logout" action="controller" method="get">
 		<button name="action" type="submit" value="Logout" class="buttonslog">Logout</button>
 	</form>
-
+	</c:when>
+</c:choose>
 	<!-- include all urls according to URL-Rewriting rules -->
 	<%@ include file="urlVariables.jsp"%>
 	<ul class="topmenue">
