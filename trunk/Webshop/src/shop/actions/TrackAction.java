@@ -33,7 +33,7 @@ public class TrackAction extends AbstractAction{
 		
 		//Track editieren
 		else if ((request.getParameter("trackEditieren") != null)) {
-			request.setAttribute("track",dao.read("3b0bf46a-2ff6-4f2e-be52-981a2864a96f"));
+			request.setAttribute("track",dao.read(request.getParameter("uuid")));
 			disp = request.getRequestDispatcher("/TrackEditieren.jsp");
 		} 
 		

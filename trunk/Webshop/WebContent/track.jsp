@@ -11,6 +11,7 @@
 		<th>Artist</th>
 		<th>Year</th>
 		<th>Play</th>
+		<th>editieren</th>
 		</tr>
 		<c:forEach items="${AlbumTracks}" var="track">
 			<tr>
@@ -22,7 +23,11 @@
 						<input type="hidden"  name="trackID" value="${track.identifier}">
 						<input type="submit"  value="Play">
 					</form></td>
-					<td>${track.identifier}</td>
+				<td><form action="controller" method="get">
+				        <input type="hidden"  name="action">
+						<input type="hidden"  name="uuid" value="${track.identifier}">
+						<input type="submit"  value="editieren">
+					</form></td>
 			</tr>
 		</c:forEach>
 	</table>
