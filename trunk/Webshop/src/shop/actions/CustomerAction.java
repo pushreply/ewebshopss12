@@ -20,12 +20,14 @@ import com.db4o.ObjectContainer;
  * 
  * @author roha0001
  * 
+ * 
  */
 
 public class CustomerAction extends AbstractAction{
 
 	@Override
-	protected void process(HttpServletRequest request, HttpServletResponse response, ObjectContainer db) {
+	protected void process(HttpServletRequest request, 
+			HttpServletResponse response, ObjectContainer db) {
 		
 		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
 		
@@ -34,16 +36,23 @@ public class CustomerAction extends AbstractAction{
 		String addPassword = null;
 		
 		try {
-			addUsername = request.getParameter("username").trim();
-			addPassword = request.getParameter("password");
+			addUsername = request.getParameter("username").toLowerCase().trim(); //lower cases and delete spaces if any.
+			addPassword = request.getParameter("password").trim();
 			//String encryptedPassword = toMD5(addPassword);
 		} catch (Exception e) {
+			System.err.println("error: wtf!");
 			e.printStackTrace();
 		}
 		
-		//REGISTRATION
+		/*
+		 * REGISTRATION:
+		 * registration -> OK -> index.jsp
+		 * registration -> ERROR: username not available -> registration
+		 */
+		
 		//check whether the username and password is not empty
-		if (!((addUsername == null||addUsername.isEmpty()) && !(addPassword == null || addPassword.isEmpty()))){
+		if (!((addUsername == null||addUsername.isEmpty()) && 
+				!(addPassword == null || addPassword.isEmpty()))){
 			
 			DBCustomer newcustomer = new DBCustomer();
 			newcustomer.setUsername(addUsername);
@@ -60,10 +69,8 @@ public class CustomerAction extends AbstractAction{
 				try {
 					disp.forward(request, response);
 				} catch (ServletException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -81,8 +88,14 @@ public class CustomerAction extends AbstractAction{
 			}
 		}
 		
-		//LOGIN
-		else if(!((addUsername == null||addUsername.isEmpty()) && !(addPassword == null || addPassword.isEmpty()))){
+		/*
+		 * LOGIN:
+		 * Login ok -> index.jsp
+		 * Login error (username/password is wrong/empty) -> loginerror.jsp -> login.jsp
+		 * 
+		 */
+		else if(!((addUsername == null||addUsername.isEmpty()) && 
+				!(addPassword == null || addPassword.isEmpty()))){
 			System.out.println("processing login");
 			DBCustomer LoginUser = new DBCustomer();
 			LoginUser.setUsername(addUsername);
@@ -90,11 +103,13 @@ public class CustomerAction extends AbstractAction{
 			LoginUser.setPassword(addPassword);
 			DBCustomer ExistedUser = dao.read(addUsername);
 			
+			System.out.println("comparing data from DB and user input");
 			if(!(LoginUser.equals(ExistedUser))){ 
-				System.out.println("login compared");
-				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
+				System.out.println("login OK, go to index.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 				HttpSession session = request.getSession(true);
-				//session
+				session.setAttribute("username", addUsername);
+				
 				try {
 					disp.forward(request, response);
 				} catch (ServletException e) {
@@ -104,6 +119,7 @@ public class CustomerAction extends AbstractAction{
 				}
 			}
 			else {
+				System.out.println("login failed: user/password is wrong");
 				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
 				try {
 					disp.forward(request, response);
