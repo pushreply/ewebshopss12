@@ -55,8 +55,8 @@ public class Controller extends HttpServlet {
 		actionMap.put("trackEditieren", new TrackAction());
 		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
-		actionMap.put("login", new CustomerAction()); //meine ist noch nicht vollkommen fertig, aber erst sicher committen.
-		actionMap.put("register", new CustomerAction());
+		actionMap.put("login", new CustomerAction()); //noch nicht fertig, aber erst sicher committen.
+		actionMap.put("register", new CustomerAction());//noch nicht fertig, aber erst sicher committen.
 		// more "put" go here
 	}
 
