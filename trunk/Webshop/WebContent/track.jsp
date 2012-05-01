@@ -23,8 +23,8 @@
 						<input type="hidden"  name="trackID" value="${track.identifier}">
 						<input type="submit"  value="Play">
 					</form></td>
-				<td><form action="controller" method="get">
-				        <input type="hidden"  name="action">
+				<td><form action="Controller" method="post">
+				        <input type="hidden"  name="action" value="editieren">
 						<input type="hidden"  name="uuid" value="${track.identifier}">
 						<input type="submit"  value="editieren">
 					</form></td>
