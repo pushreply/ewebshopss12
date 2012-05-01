@@ -20,12 +20,12 @@
 				<td>${track.trackArtist}</td>
 				<td>${track.trackDate}</td>
 				<td><form action="loadtrack" method="get">
-						<input type="hidden"  name="trackID" value="${track.identifier}">
+						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="Play">
 					</form></td>
-				<td><form action="Controller" method="post">
+				<td><form action="controller" method="post">
 				        <input type="hidden"  name="action" value="editieren">
-						<input type="hidden"  name="uuid" value="${track.identifier}">
+						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="editieren">
 					</form></td>
 			</tr>

@@ -8,7 +8,7 @@
 
 
 	<form action="controller" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="uuid" size="30" maxlength="30" value="<c:out value="${track.trackID}"/>"/>
+	<input type="hidden" name="uuid" size="30" maxlength="30" value="<c:out value="${track.identifier}"/>"/>
   <table border="0" cellpadding="0" cellspacing="4">
     <tr>
       <td align="right">Titel:</td>

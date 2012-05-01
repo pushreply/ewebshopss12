@@ -46,7 +46,7 @@ public class LoadTrack extends HttpServlet {
 		ObjectContainer db = new DBObject().getConnection();
 		IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(
 				DBTrack.class, db);
-		DBTrack track = dao.read(request.getParameter("trackID"));
+		DBTrack track = dao.read(request.getParameter("identifier"));
 
 		byte[] mp3File = track.getFile();
 		ServletOutputStream stream = null;
