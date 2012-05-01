@@ -22,7 +22,8 @@
 </form>
 
 <form action="controller" name="controlleraction" method="post">
-	<input type="submit" name="trackEditieren" value="Track editieren">
+    <input type="hidden" name="action" value="trackEditieren">
+	<input type="submit" value="Track editieren">
 	<br>
 
 </form>

@@ -34,6 +34,12 @@
       <td align="right">Diskanzahl:</td>
       <td><input type="text" name="diskanzahl" size="30" maxlength="40" value="<c:out value="${track.trackDiskNumber}"  default="N/A" />" /></td>
     </tr>
+    
+    <tr>
+      <td align="right"></td>
+      <td><input type="submit" name="TrackEditierenButton" value="TrackEditierenButton" ></td>
+    </tr>
+    
     <tr>
       <td align="right"></td>
       <td><input type="submit" name="TrackEditierenButton" value="TrackEditierenButton" ></td>
