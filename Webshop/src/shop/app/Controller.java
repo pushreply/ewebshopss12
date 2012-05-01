@@ -74,67 +74,6 @@ public class Controller extends HttpServlet {
 			action.processAndClose(request, response, db);
 		
 		/**
-		else if ((request.getParameter("trackEditieren") != null)) {
-
-			// UUID trackID = UUID.fromString(request.getParameter("uuid"));
-			IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
-			
-			request.setAttribute("track",
-					dao.read("3b0bf46a-2ff6-4f2e-be52-981a2864a96f"));
-			RequestDispatcher disp = request
-					.getRequestDispatcher("/TrackEditieren.jsp");
-			try {
-				disp.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		
-		// Das editierte Track speichern
-		if ((request.getParameter("TrackEditierenButton") != null)) {
-			System.out.println("TrackEditierenButton");
-			System.out.println("----"
-					+ request.getParameter("TrackEditierenButton") + "-----");
-			
-			IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
-			DBTrack track = dao.read(request.getParameter("uuid"));
-			
-			String titel = request.getParameter("titel");
-			String artist = request.getParameter("artist");
-			int date = Integer.parseInt((request.getParameter("date")));
-			String genre = request.getParameter("genre");
-			int trackanzahl = Integer.parseInt(request
-					.getParameter("trackanzahl"));
-			int diskanzahl = Integer.parseInt(request
-					.getParameter("diskanzahl"));
-			track.setTrackTitle(titel);
-			track.setTrackArtist(artist);
-			track.setTrackDate(date);
-			track.setTrackGenre(genre);
-			track.setTrackNumber(trackanzahl);
-			track.setTrackDiskNumber(diskanzahl);
-			
-			dao.update(track);
-			RequestDispatcher disp = request.getRequestDispatcher("/track.jsp");
-			try {
-				disp.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		*/
-
-		/**
 		 * @author Schneider
 		 * @author Sergej
 		 */

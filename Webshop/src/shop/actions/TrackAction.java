@@ -57,7 +57,7 @@ public class TrackAction extends AbstractAction{
 			track.setTrackDiskNumber(diskanzahl);
 			
 			dao.update(track);
-			disp = request.getRequestDispatcher("/track.jsp");
+			disp = request.getRequestDispatcher("controller?action=track&show=true");
 		} 
 
 
