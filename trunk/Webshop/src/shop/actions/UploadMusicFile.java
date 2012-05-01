@@ -74,10 +74,15 @@ public class UploadMusicFile {
         MultipartMap map = new MultipartMap(request, this);
         DBTrack dbTrack = Trackfactory.createTrack(map.getFile("file"));
         IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
+        IGenericDao<DBAlbum> daoa = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
+        DBAlbum dbalbum = daoa.read(map.getParameter("identifier"));
         dao.create(dbTrack);
+        dbalbum.setTracks(dbTrack);
+        daoa.update(dbalbum);
         map.getFile("file").delete();
-        request.setAttribute("track", dbTrack);
-        request.getRequestDispatcher("/weiter.jsp").forward(request, response);
+        request.setAttribute("album", dbalbum);
+        request.setAttribute("track", dbalbum.getTracks());
+        request.getRequestDispatcher("/trackhinzufuegen.jsp").forward(request, response);
     }
     
     
@@ -87,21 +92,14 @@ public class UploadMusicFile {
     	System.out.println("ich bin albumprocess");
         MultipartMap map = new MultipartMap(request, this);
         DBAlbum dbalbum = new DBAlbum();
-        System.out.println(map.getParameter("titel"));
         dbalbum.setAlbumTitel(map.getParameter("titel"));
-        System.out.println(map.getParameter("artist"));
         dbalbum.setArtist(map.getParameter("artist"));
-        System.out.println(map.getParameter("price"));
         dbalbum.setPrice(Double.parseDouble(map.getParameter("price")));
-        System.out.println(map.getParameter("label"));
         dbalbum.setLabel(map.getParameter("label"));
-        System.out.println(map.getParameter("trackanzahl"));
         dbalbum.setNumberOfTracks(Integer.parseInt(map.getParameter("trackanzahl")));
-        System.out.println(map.getParameter("diskanzahl"));
         dbalbum.setNumberOfDisks(Integer.parseInt(map.getParameter("diskanzahl")));
-        System.out.println(map.getParameter("albumanzahl"));
         dbalbum.setAmount(Integer.parseInt(map.getParameter("albumanzahl")));
-        System.out.println(map.getFile("coverpage").getName());
+
         
         dbalbum.setCoverpath(ByteArray.getBytesFromFile(map.getFile("coverpage")));
         IGenericDao<DBAlbum>daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
