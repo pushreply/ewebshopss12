@@ -21,6 +21,11 @@
 	<input type="submit" name="show" value="Tracks anzeigen"> <br>
 </form>
 
+<form action="controller" method="post">
+	<input type="hidden" name="action" value="album"><input 
+	type="submit" name="showalbum" value="Album anzeigen"> <br>
+</form>
+
 <form action="controller" name="controlleraction" method="post">
     <input type="hidden" name="action" value="trackEditieren">
 	<input type="submit" value="Track editieren">
