@@ -1,7 +1,6 @@
 package shop.actions;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,18 +30,9 @@ public class CustomerAction extends AbstractAction{
 		
 		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
 		
-		// add user
-		String addUsername = null;
-		String addPassword = null;
-		
-		try {
-			addUsername = request.getParameter("username").toLowerCase().trim(); //lower cases and delete spaces if any.
-			addPassword = request.getParameter("password").trim();
-			//String encryptedPassword = toMD5(addPassword);
-		} catch (Exception e) {
-			System.err.println("error: wtf!");
-			e.printStackTrace();
-		}
+		String addUsername = request.getParameter("username").toLowerCase().trim(); //lower cases and delete spaces if any.
+		String addPassword = request.getParameter("password").trim();
+		//String encryptedPassword = toMD5(addPassword);
 		
 		/*
 		 * REGISTRATION:
@@ -59,12 +49,12 @@ public class CustomerAction extends AbstractAction{
 			newcustomer.setPassword(addPassword); //plain text! It should be saved and compared in MD5/encrypted.
 			DBCustomer oldcustomer =  dao.read(addUsername);
 			
-			//save the username, if it is available (selected username does not exist in DB)
+			//save the username
 			if(!(oldcustomer.equals(newcustomer))){
 				dao.create(newcustomer);
 			}
 			else{
-				//if username is not available, forward page to error registration page "registererror.jsp"
+				//if username is not available
 				RequestDispatcher disp = request.getRequestDispatcher("/registererror.jsp");
 				try {
 					disp.forward(request, response);
