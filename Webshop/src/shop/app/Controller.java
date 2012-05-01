@@ -55,8 +55,8 @@ public class Controller extends HttpServlet {
 		actionMap.put("trackEditieren", new TrackAction());
 		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
-		actionMap.put("customer", new CustomerAction()); //meine ist noch nicht vollkommen fertig, aber erst sicher committen.
-		
+		actionMap.put("login", new CustomerAction()); //meine ist noch nicht vollkommen fertig, aber erst sicher committen.
+		actionMap.put("register", new CustomerAction());
 		// more "put" go here
 	}
 
@@ -72,14 +72,14 @@ public class Controller extends HttpServlet {
 		AbstractAction action = actionMap.get(request.getParameter("action"));
 		if (action != null)
 			action.processAndClose(request, response, db);
-
-		// Controller leitet die Anfragen entsprechend weiter
 		
 		// Track editieren
 		
 		AbstractAction action1 = actionMap.get(request.getParameter("trackEditieren"));
 		if (action1 != null)
 			action1.processAndClose(request, response, db); 
+		
+		
 		
 		/**
 		else if ((request.getParameter("trackEditieren") != null)) {
@@ -101,8 +101,8 @@ public class Controller extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
 		
-			
 		// Das editierte Track speichern
 		if ((request.getParameter("TrackEditierenButton") != null)) {
 			System.out.println("TrackEditierenButton");
