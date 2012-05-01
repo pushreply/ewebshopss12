@@ -7,15 +7,21 @@
 <p>
 
 <form action="controller" method="post">
-<ul class="">
+<ul>
 Bitte wählen Sie einen anderen Benutzernamen: 
-<li><input id="username" name="username" type="text"/></li>
+<li><input name="username" type="text"/>
+<input name="action" type="hidden" value="register"/>
+</li>
 und einen Kenntwort: 
-<li><input id="password" name="password1" type="password"/></li>
+<li><input name="password1" type="password" value=""/>
+<input name="action" type="hidden" value="register" />
+</li>
 Bitte den Kenntwort noch mal bestätigen:
-<li><input id="password" name="password2" type="password"/></li>
+<li><input name="password2" type="password"/></li>
 </ul>
-<input type="submit" name="action" value="registrieren"> <input type="reset"  value="Reset">
+
+<input type="submit" name="action" value="Registrieren" > 
+	<input type="reset" value="Reset">
 </form>
 
 
