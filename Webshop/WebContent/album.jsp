@@ -42,7 +42,6 @@
   <input type=button onClick="location.href='index.jsp'" value='bearbeiten'>
   <input type=button onClick="location.href='trackhinzufuegen.jsp'" value='Track hinzufügen'>
   <div id="contecnt">
-  	<%@ include file="track.jsp" %>
   </div>
 </body>
 </html>
