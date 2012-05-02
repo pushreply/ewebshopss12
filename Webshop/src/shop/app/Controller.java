@@ -23,8 +23,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.AbstractAction;
 import shop.actions.CategoryAction;
-import shop.actions.CustomerAction;
 import shop.actions.KeywordAction;
+import shop.actions.LoginAction;
+import shop.actions.RegisterAction;
 import shop.actions.TrackAction;
 import shop.actions.UploadMusicFile;
 import shop.dao.DBObject;
@@ -55,8 +56,9 @@ public class Controller extends HttpServlet {
 		actionMap.put("editieren", new TrackAction());
 		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
-		actionMap.put("login", new CustomerAction()); //noch nicht fertig, aber erst sicher committen.
-		actionMap.put("register", new CustomerAction());//noch nicht fertig, aber erst sicher committen.
+		actionMap.put("login", new LoginAction()); 
+		actionMap.put("register", new RegisterAction());
+
 		// more "put" go here
 	}
 
