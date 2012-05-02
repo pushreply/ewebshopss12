@@ -12,11 +12,11 @@ Wählen Sie eine Benutzername:
 <input name="action" type="hidden" value="register"/>
 </li>
 und einen Kenntwort: 
-<li><input name="password1" type="password" value=""/>
+<li><input name="pw1" type="password" value=""/>
 <input name="action" type="hidden" value="register" />
 </li>
 Bitte den Kenntwort noch mal bestätigen:
-<li><input name="password2" type="password"/></li>
+<li><input name="pw2" type="password"/></li>
 </ul>
 
 <input type="submit" name="action" value="Registrieren" > 
