@@ -36,7 +36,6 @@ public class RegisterAction extends AbstractAction{
 		 * registration -> OK -> index.jsp
 		 * registration -> ERROR: username not available -> registration
 		 */
-		String address = null;
 		String newUsername = request.getParameter("username").toLowerCase().trim(); 
 		String newPassword1 = request.getParameter("pw1").trim();
 		String newPassword2 = request.getParameter("pw2").trim();
@@ -66,23 +65,32 @@ public class RegisterAction extends AbstractAction{
 //			}
 //			else{
 //				//if username is not available, forward to error page
-//				address = "/registererror.jsp";
+//				RequestDispatcher disp = request.getRequestDispatcher("/registererror.jsp");
+//				try {
+//					disp.forward(request, response);
+//				} catch (ServletException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 //			}
 			
 			//username is registered successfully, forward page to index.jsp
-			address = "/index.jsp";
+			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+			try {
+				disp.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
-		RequestDispatcher disp = request.getRequestDispatcher(address);
-		try {
-			disp.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 	}
 

@@ -29,8 +29,6 @@ public class LoginAction extends AbstractAction {
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db) {
 
-		String address = null;
-
 		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(
 				DBCustomer.class, db);
 
@@ -42,45 +40,50 @@ public class LoginAction extends AbstractAction {
 		String loginUsername = request.getParameter("username");
 		String loginPassword = request.getParameter("password");
 		
-		System.out.println("Login parameters are set.");
+		System.out.println("Login parameters are set: " + loginUsername + ":" + loginPassword);
 		
 		if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword.isEmpty()))) 
 		{
 			System.out.println("processing login");
 			DBCustomer user = new DBCustomer();
 			user.setUsername(loginUsername);
-			String uuid = null;
-			request.setAttribute(uuid, request.getParameter("username"));
-
+			
 			user.setPassword(loginPassword);
-			DBCustomer ExistingUserData = dao.read(uuid);
+			DBCustomer ExistingUserData = dao.read(loginUsername);
 
 			System.out.println("comparing data from DB and user input");
 			if (!(user.equals(ExistingUserData))) {
 				System.out.println("login OK, return to index.jsp");
-				RequestDispatcher disp = request
-						.getRequestDispatcher("/index.jsp");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", loginUsername);
-				address = ".";
 
+				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				try {
+					disp.forward(request, response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
 				System.out.println("login failed: user/password is wrong");
-				address = "/login.jsp";
+				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
+				try {
+					disp.forward(request, response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		}
 		
-		RequestDispatcher disp = request.getRequestDispatcher(address);
-		try {
-			disp.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 	}
 }
