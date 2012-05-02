@@ -56,7 +56,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("editieren", new TrackAction());
 		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
-		actionMap.put("login", new LoginAction()); 
+		actionMap.put("Login", new LoginAction()); 
 		actionMap.put("register", new RegisterAction());
 
 		// more "put" go here
