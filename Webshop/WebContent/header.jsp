@@ -12,6 +12,9 @@
 </head>
 <body>
 <c:choose>
+<c:when test="${empty session}">
+Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
+</c:when>
 <c:when test="${!empty session}">
 	Du bist als
 	<strong><%=session.getAttribute("username")%> </strong> angemeldet.
