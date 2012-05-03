@@ -29,8 +29,6 @@ public class DBObject {
 		initConfig(config);
 		ObjectContainer client = Db4oClientServer.openClient(config, "localhost", 4488, "db4o", "db4o");
 	
-        System.out.println("getConnection() wurde ausgeführt ausgeführt");
-        
 		return client;
 	}
 	

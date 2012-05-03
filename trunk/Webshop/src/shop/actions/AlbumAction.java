@@ -17,12 +17,13 @@ public class AlbumAction extends AbstractAction{
 
 	@Override
 	protected void process(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db) {
+			HttpServletResponse response, ObjectContainer db) throws ServletException {
 		RequestDispatcher disp = null;
 		System.out.println("ich in album action");
 		
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 		
+		try{
 		if ((request.getParameter("upload") != null)) {
 			disp = request
 					.getRequestDispatcher("/trackhinzufuegen.jsp");
@@ -41,7 +42,7 @@ public class AlbumAction extends AbstractAction{
 		else if ((request.getParameter("AlbumEditierenButton") != null)) {
 			dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 			DBAlbum album = dao.read(request.getParameter("uuid"));
-			
+		}
 //			String titel = request.getParameter("titel");
 //			String artist = request.getParameter("artist");
 //			int date = Integer.parseInt((request.getParameter("date")));
@@ -61,15 +62,14 @@ public class AlbumAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/album.jsp");
 		} 
 
+		catch (Exception e) {
+			errorHandler.toUser("Beim Bearbeiten ihrer Anfrage ist ein technischer Fehler aufgetreten", e);
+		}
 
 		try {
 			disp.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
 		}
 		
 	}

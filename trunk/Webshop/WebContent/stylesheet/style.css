@@ -1,32 +1,36 @@
 @CHARSET "ISO-8859-1";
 
 /*ist einfach nur irgendwas um zu testen ob die CSS datei richtig eingebunden wird*/
-
 body {
-	background-color:#EFEFFF;
+	background-color: #EFEFFF;
 }
 
-a{
-	font-weight:bold;
+a {
+	font-weight: bold;
 	color: #0000DD;
 	text-decoration: none;
 }
 
-h1, h2, h3, h4{
+h1,h2,h3,h4 {
 	font-family: Garamond;
 	color: #0000AA;
 }
 
-.topmenue{
-    margin: 0 auto;
-    padding: 0;
+.topmenue {
+	margin: 0 auto;
+	padding: 0;
 }
 
-.topmenue li{
-    text-align: left;
-    float: left;
-    list-style: none;
-    padding: 3px 10px 3px 10px;
-    margin: 5px;
-    border: 1px solid #CCC;
+.topmenue li {
+	text-align: left;
+	float: left;
+	list-style: none;
+	padding: 3px 10px 3px 10px;
+	margin: 5px;
+	border: 1px solid #CCC;
+}
+
+#errorheading {
+	font-weight: bold;
+	color: #AA0000;
 }

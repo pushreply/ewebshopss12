@@ -13,6 +13,8 @@ import shop.dao.IGenericDao;
 import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.Db4oIOException;
 
 /**
  * This Action handles all needs of keywords
@@ -24,7 +26,7 @@ public class KeywordAction extends AbstractAction {
 
 	@Override
 	public void process(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db) {
+			HttpServletResponse response, ObjectContainer db) throws ServletException {
 
 		IGenericDao<DBKeyword> dao = new GenericDaoImpl<DBKeyword>(
 				DBKeyword.class, db);
@@ -37,7 +39,7 @@ public class KeywordAction extends AbstractAction {
 		try {
 			add = request.getParameter("addKeyword");
 		} catch (Exception e) {
-			e.printStackTrace();
+			errorHandler.toUser("Das Schlüsselwort konnte aus unbekannten Gründen nicht hinzugefügt werden", e);
 		}
 		if (!(add == null || add.isEmpty())) {
 			DBKeyword keyword = new DBKeyword();
@@ -50,12 +52,12 @@ public class KeywordAction extends AbstractAction {
 		String toDelete = null;
 		try {
 			toDelete = request.getParameter("deleteKeyword");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		if (!(toDelete == null || toDelete.isEmpty())) {
 			dao.delete(toDelete);
 			loadKeywords(request, dao);
+		}
+		} catch (Exception e) {
+			errorHandler.toUser("Beim Löschen des Schlüsselwort ist en Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 		}
 
 		// forwarding to same page again
@@ -63,12 +65,8 @@ public class KeywordAction extends AbstractAction {
 				.getRequestDispatcher("/keyword.jsp");
 		try {
 			disp.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
 		}
 	}
 
@@ -76,11 +74,16 @@ public class KeywordAction extends AbstractAction {
 	 * read all categories from database and loads them into the request 
 	 * @param request the request to write the loaded files in
 	 * @param dao the DAO to read the categories from DB
+	 * @throws ServletException 
 	 */
 	private void loadKeywords(HttpServletRequest request,
-			IGenericDao<DBKeyword> dao) {
-		List<DBKeyword> keyword;
-		keyword = dao.readAll();
+			IGenericDao<DBKeyword> dao) throws ServletException {
+		List<DBKeyword> keyword = null;
+		try {
+			keyword = dao.readAll();
+		} catch (Exception e) {
+			errorHandler.toUser("Beim Lesen des Schlüsselwort ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+		}
 		request.setAttribute("keywords", keyword);
 	}
 }

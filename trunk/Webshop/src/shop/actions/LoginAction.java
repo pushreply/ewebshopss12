@@ -27,7 +27,8 @@ public class LoginAction extends AbstractAction {
 
 	@Override
 	protected void process(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db) {
+			HttpServletResponse response, ObjectContainer db)
+			throws ServletException {
 
 		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(
 				DBCustomer.class, db);
@@ -39,51 +40,45 @@ public class LoginAction extends AbstractAction {
 
 		String loginUsername = request.getParameter("username");
 		String loginPassword = request.getParameter("password");
-		
-		System.out.println("Login parameters are set: " + loginUsername + ":" + loginPassword);
-		
-		if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword.isEmpty()))) 
-		{
+
+		System.out.println("Login parameters are set: " + loginUsername + ":"
+				+ loginPassword);
+
+		if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword
+				.isEmpty()))) {
 			System.out.println("processing login");
 			DBCustomer user = new DBCustomer();
 			user.setUsername(loginUsername);
-			
-			user.setPassword(loginPassword);
-			DBCustomer ExistingUserData = dao.read(loginUsername);
 
+			user.setPassword(loginPassword);
+			DBCustomer ExistingUserData = null;
+			try {
+				ExistingUserData = dao.read(loginUsername);
+			} catch (Exception e) {
+				errorHandler
+						.toUser("Beim Anmelden ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
+								e);
+			}
+
+			RequestDispatcher disp;
 			System.out.println("comparing data from DB and user input");
 			if (!(user.equals(ExistingUserData))) {
 				System.out.println("login OK, return to index.jsp");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", loginUsername);
 
-				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-				try {
-					disp.forward(request, response);
-				} catch (ServletException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				disp = request.getRequestDispatcher("/index.jsp");
 			} else {
 				System.out.println("login failed: user/password is wrong");
-				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
-				try {
-					disp.forward(request, response);
-				} catch (ServletException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				disp = request.getRequestDispatcher("/login.jsp");
+			}
+			try {
+				disp.forward(request, response);
+			} catch (Exception e) {
+				errorHandler.toUser(
+						"Etwas mit der Weiterleitung ist schief gelaufen.", e);
 			}
 		}
-		
 
-		
 	}
 }

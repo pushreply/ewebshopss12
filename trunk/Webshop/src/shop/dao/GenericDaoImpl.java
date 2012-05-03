@@ -8,11 +8,14 @@ import shop.dto.DBUUIDBase;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.Db4oIOException;
 
 /**
  * 
  * @author Andreas
- * @param <T> The DAO Classtype you want this Instance to work for
+ * @param <T>
+ *            The DAO Classtype you want this Instance to work for
  */
 public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 	private Class<T> type;
@@ -28,41 +31,27 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		UUID newID = UUID.randomUUID();
 		o.setIdentifier(newID);
 
-		try {
-			db.store(o);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		db.store(o);
 		return o.getIdentifier().toString();
 	}
 
-	public T read(String uuid) {
+	public T read(String uuid) throws InstantiationException, IllegalAccessException {
 		T example = null;
-		try {
-			example = type.newInstance();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		example = type.newInstance();
+
 		example.setIdentifier(UUID.fromString(uuid));
 		ObjectSet<T> result = db.queryByExample(example);
 		return (T) result.get(0);
 	}
-	
-	public List<T> readAll() {
+
+	public List<T> readAll() throws Db4oIOException, DatabaseClosedException,
+			InstantiationException, IllegalAccessException {
 		LinkedList<T> items = new LinkedList<T>();
 
 		ObjectSet<T> result = null;
-		try {
-			result = db.queryByExample(type.newInstance());
-			while (result.hasNext()) {
-				items.add(result.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		result = db.queryByExample(type.newInstance());
+		while (result.hasNext()) {
+			items.add(result.next());
 		}
 		return items;
 	}
@@ -75,8 +64,8 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		db.delete(o);
 	}
 
-	public void delete(String uuid) {
-		T o = read(uuid); 
+	public void delete(String uuid) throws InstantiationException, IllegalAccessException {
+		T o = read(uuid);
 		delete(o);
 	}
 }

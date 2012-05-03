@@ -32,6 +32,7 @@ import shop.dao.DBObject;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBTrack;
+import shop.util.ErrorHandler;
 
 import com.db4o.ObjectContainer;
 
@@ -49,14 +50,13 @@ public class Controller extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 
-
 		// Map initialisieren mit allen benötigten Actions
 		actionMap.put("category", new CategoryAction());
 		actionMap.put("track", new TrackAction());
 		actionMap.put("editieren", new TrackAction());
 		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
-		actionMap.put("Login", new LoginAction()); 
+		actionMap.put("Login", new LoginAction());
 		actionMap.put("register", new RegisterAction());
 
 		// more "put" go here
@@ -65,16 +65,22 @@ public class Controller extends HttpServlet {
 	/**
 	 * 
 	 */
-	public void service(HttpServletRequest request, HttpServletResponse response) {
-		
+	public void service(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		ErrorHandler errorHandler = new ErrorHandler();
+
 		// DBObject baut eine Verbindung zur DB auf
-		db = new DBObject().getConnection();
-		
+		try {
+			db = new DBObject().getConnection();
+		} catch (Exception e) {
+			errorHandler.toUser("Datenbankserver ist nicht erreichbar", e);
+		}
+
 		// Aufruf des passenden Controllers
 		AbstractAction action = actionMap.get(request.getParameter("action"));
 		if (action != null)
 			action.processAndClose(request, response, db);
-		
+
 		/**
 		 * @author Schneider
 		 * @author Sergej
@@ -82,11 +88,10 @@ public class Controller extends HttpServlet {
 
 		else if (ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("ich bin in upload");
-
-			UploadMusicFile up = new UploadMusicFile(request, response,	db);
-
-		}
-		db.close();
+			UploadMusicFile up = new UploadMusicFile(request, response, db);
+		} 
+		if (db != null)
+			db.close();
 	} // Ende der service-Methode
 
 } // Ende Klasse Controller
