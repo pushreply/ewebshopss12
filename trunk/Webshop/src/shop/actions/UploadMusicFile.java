@@ -127,7 +127,7 @@ public class UploadMusicFile {
 					.getParameter("diskanzahl")));
 			dbalbum.setAmount(Integer.parseInt(map.getParameter("albumanzahl")));
 
-			dbalbum.setCoverpath(ByteArray.getBytesFromFile(map
+			dbalbum.setCover(ByteArray.getBytesFromFile(map
 					.getFile("coverpage")));
 			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(
 					DBAlbum.class, db);

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
+import shop.util.ByteArray;
 
 import com.db4o.ObjectContainer;
 
@@ -36,6 +37,8 @@ public class AlbumAction extends AbstractAction{
 		//Album anzeigen --> Finger Weg!
 		else if ((request.getParameter("identifier") != null)) {
 			request.setAttribute("album",dao.read(request.getParameter("identifier")));
+			byte[] cover = dao.read(request.getParameter("identifier")).getCover();
+			ByteArray.byteArrayToFile(cover,"images/cover.jpg");
 			disp = request.getRequestDispatcher("/albumanzeigen.jsp");
 		} 
 		
