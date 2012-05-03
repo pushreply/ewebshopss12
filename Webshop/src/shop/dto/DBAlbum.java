@@ -11,7 +11,7 @@ import java.util.List;
  *
  */
 public class DBAlbum extends DBUUIDBase{
-	private byte[] coverpath;
+	private byte[] cover;
 	private String albumTitel;
 	private String artist;
 	private int numberOfDisks;
@@ -27,12 +27,12 @@ public class DBAlbum extends DBUUIDBase{
 	//default constructor
 	public DBAlbum(){}
 
-	public DBAlbum(byte[] coverpath, String albumTitel,
+	public DBAlbum(byte[] cover, String albumTitel,
 			String artist, int numberOfDisks, double price, int amount,
 			int numberOfTracks, String label, List<DBKeyword> keywords,
 			List<DBCategory> categories, List<DBTrack> tracks) {
 		super();
-		this.coverpath = coverpath;
+		this.cover = cover;
 		this.albumTitel = albumTitel;
 		this.artist = artist;
 		this.numberOfDisks = numberOfDisks;
@@ -45,12 +45,12 @@ public class DBAlbum extends DBUUIDBase{
 		this.tracks = tracks;
 	}
 
-	public byte[] getCoverpath() {
-		return coverpath;
+	public byte[] getCover() {
+		return cover;
 	}
 
-	public void setCoverpath(byte[] coverpath) {
-		this.coverpath = coverpath;
+	public void setCover(byte[] coverpath) {
+		this.cover = coverpath;
 	}
 
 	public String getAlbumTitel() {
@@ -135,7 +135,7 @@ public class DBAlbum extends DBUUIDBase{
 
 	@Override
 	public String toString() {
-		return "DBAlbum [coverpath=" + coverpath
+		return "DBAlbum [coverpath=" + cover
 				+ ", albumTitel=" + albumTitel + ", artist=" + artist
 				+ ", numberOfDisks=" + numberOfDisks + ", price=" + price
 				+ ", amount=" + amount + ", numberOfTracks=" + numberOfTracks

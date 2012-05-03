@@ -6,7 +6,7 @@
 
 <h3>Das Album ${album.albumTitel}<h3>
 
- <img src="images/bild.jpg" width=120 height=130 alt="bild">
+ <img src="images/cover.jpg" width=120 height=130 alt="bild">
  
  <table >
 		<tr>
