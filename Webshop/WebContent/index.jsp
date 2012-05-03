@@ -16,14 +16,14 @@
 
 <form action="controller" method="post">
 	<!-- Controller-Servlet wird aufgerufen und entscheidet, wohin geleitet wird -->
-	<input type="hidden" name="action" value="track"> <input
-		type="submit" name="upload" value="Track hochladen"> <br>
+	<input type="hidden" name="action" value="track"> 
+	<input type="submit" name="upload" value="Track hochladen"> <br>
 	<input type="submit" name="show" value="Tracks anzeigen"> <br>
 </form>
 
 <form action="controller" method="post">
-	<input type="hidden" name="action" value="album"><input 
-	type="submit" name="showalbum" value="Album anzeigen"> <br>
+	<input type="hidden" name="action" value="album">
+	<input type="submit" name="showalbum" value="Album anzeigen"> <br>
 </form>
 
 <form action="controller" name="controlleraction" method="post">
