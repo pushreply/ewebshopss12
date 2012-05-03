@@ -30,3 +30,7 @@
 	<c:url var="register" value="controller">
 		<c:param name="action" value="register" />
 	</c:url>
+	
+	<c:url var="alben" value="controller">
+		<c:param name="action" value="alben" />
+	</c:url>

@@ -1,7 +1,5 @@
 package shop.actions;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,20 +26,23 @@ public class AlbumAction extends AbstractAction{
 			disp = request
 					.getRequestDispatcher("/trackhinzufuegen.jsp");
 		}
-		else if ((request.getParameter("showalbum") != null)) {
-			request.setAttribute("Albums", dao.readAll());
-			disp = request.getRequestDispatcher("/album.jsp");
+		
+		//Alle Alben anzegen --> Bitte Finger weg!
+		if ((request.getParameter("alben") != null)) {
+			request.setAttribute("Alben", dao.readAll());
+			disp = request.getRequestDispatcher("/allealbenanzeigen.jsp");
 		} 
 		
-		//Track editieren
+		//Album anzeigen --> Finger Weg!
 		else if ((request.getParameter("identifier") != null)) {
 			request.setAttribute("album",dao.read(request.getParameter("identifier")));
-			disp = request.getRequestDispatcher("/albumEditieren.jsp");
+			disp = request.getRequestDispatcher("/albumanzeigen.jsp");
 		} 
 		
-		else if ((request.getParameter("AlbumEditierenButton") != null)) {
+		//Album editieren
+		else if ((request.getParameter("identifier") != null)) {
 			dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
-			DBAlbum album = dao.read(request.getParameter("uuid"));
+			DBAlbum album = dao.read(request.getParameter("identifier"));
 		}
 //			String titel = request.getParameter("titel");
 //			String artist = request.getParameter("artist");

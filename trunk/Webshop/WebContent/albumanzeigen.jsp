@@ -1,40 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Album</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:import url="header.jsp">
+	<c:param name="title" value="Album anzeigen" />
+</c:import>
+
+<h3>Das Album ${album.albumTitel}<h3>
+
  <img src="images/bild.jpg" width=120 height=130 alt="bild">
  
- <table width="589" border="1">
+ <table >
 		<tr>
-		<th>Title</th>
-		<th>Artist</th>
-		<th>Disk Anzahl</th>
-		<th>Preis</th>
-		<th>Anzahl</th>
-		<th>Anzahl der Tracks</th>
-		<th>Label</th>
-		<th>Cover</th>
+		   <td>Title:</td><th>${album.albumTitel}</td>
 		</tr>
-			<tr>
-				<td>${album.albumTitel}</td>
-				<td>${album.artist}</td>
-				<td>${album.numberOfDisks}</td>
-				<td>${album.price}</td>
-				<td>${album.amount}</td>
-				<td>${album.numberOfTracks}</td>
-				<td>${album.label}</td>
-				<td><img src="${album.coverpath}" width=120 height=130 alt="bild">
+		<tr>
+		   <td>Artist:</td><td>${album.artist}</td>
+		</tr>
+		<tr>
+		   <td>Disk Anzahl:</td><td>${album.numberOfDisks}</td>
+		</tr>
+		<tr>
+		   <td>Preis:</td><td>${album.price}</td>
+		</tr>
+		<tr>
+		   <td>Anzahl:</td><td>${album.amount}</td>
+		</tr>
+		<tr>
+		   <td>Anzahl der Tracks:</td><td>${album.numberOfTracks}</td>
+		</tr>
+		<tr>
+		   <td>Label:</td><td>${album.label}</td>
+		</tr>
+		
+		<tr>
 				<td><form action="controller" method="post">
-				        <input type="hidden"  name="action" value="editieren">
+				        <input type="hidden"  name="action" value="albumEditieren">
 						<input type="hidden"  name="identifier" value="${album.identifier}">
 						<input type="submit"  value="editieren">
 					</form></td>
-			</tr>
+		</tr>
 	</table>
-</body>
-</html>
+<c:import url="footer.jsp" />

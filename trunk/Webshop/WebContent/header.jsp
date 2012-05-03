@@ -36,7 +36,7 @@ Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 		<li><a href="${trackShow}">Alle Lieder Anzeigen</a></li>
 		<li><a href="${keyword}">Schlüsselworte</a></li>
 		<li><a href="${category}">Kategorien</a></li>
-		<li><a href="${album}">Alle Album</a></li>
+		<li><a href="${alben}">Alle Albumen</a></li>
 	</ul>
 	<br />
 	<br /> //ende mit header
