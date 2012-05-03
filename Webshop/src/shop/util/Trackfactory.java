@@ -28,38 +28,23 @@ public class Trackfactory {
 	 *            the mp3 you want to create the {@link #DBTrack} for.
 	 * @return the DBTrack file with fulfilled attributes from the ID3Tag of the
 	 *         given file
+	 * @throws IOException 
+	 * @throws NoMP3FrameException 
+	 * @throws ID3v2IllegalVersionException 
+	 * @throws ID3v2DecompressionException 
+	 * @throws ID3v2WrongCRCException 
 	 */
-	public static DBTrack createTrack(File file) {
+	public static DBTrack createTrack(File file) throws IOException, ID3v2WrongCRCException, ID3v2DecompressionException, ID3v2IllegalVersionException, NoMP3FrameException  {
 		DBTrack track = new DBTrack();
 
 		// transform mp3 in bytearray and set it in track
-		try {
 			track.setFile(ByteArray.getBytesFromFile(file));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 
 		// convert file to mp3file for vdheide.mp3 tag library
 		MP3File mp3File = null;
-		try {
 			mp3File = new MP3File(file.getPath());
-		} catch (ID3v2WrongCRCException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ID3v2DecompressionException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ID3v2IllegalVersionException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (NoMP3FrameException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 
 		// read mp3 tags and set corresponding attributes in the track
 		try {

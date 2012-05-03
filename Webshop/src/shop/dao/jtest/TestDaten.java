@@ -1,6 +1,7 @@
 package shop.dao.jtest;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +17,13 @@ import shop.dto.DBTrack;
 import shop.util.Trackfactory;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.Db4oIOException;
+
+import de.vdheide.mp3.ID3v2DecompressionException;
+import de.vdheide.mp3.ID3v2IllegalVersionException;
+import de.vdheide.mp3.ID3v2WrongCRCException;
+import de.vdheide.mp3.NoMP3FrameException;
 
 /**
  * 
@@ -26,7 +34,7 @@ import com.db4o.ObjectContainer;
 
 public class TestDaten {
 
-	public static void main(String[] arg) {
+	public static void main(String[] arg) throws ID3v2WrongCRCException, ID3v2DecompressionException, ID3v2IllegalVersionException, IOException, NoMP3FrameException, Db4oIOException, DatabaseClosedException, InstantiationException, IllegalAccessException {
 
 		//open database connection
 		ObjectContainer db = new DBObject().getConnection();

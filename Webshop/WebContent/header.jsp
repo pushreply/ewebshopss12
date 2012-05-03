@@ -2,27 +2,32 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"> <!-- ending tag in footer.jsp -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<%@ page errorPage="/errorPage.jsp"%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>${param.title}</title>
 <link rel="stylesheet" href="stylesheet/style.css" type="text/css"></link>
+
 </head>
-<body>
-<c:choose>
-<c:when test="${empty session}">
+<body> <!-- ending tag in footer.jsp -->
+	<c:choose>
+		<c:when test="${empty session}">
 Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
-</c:when>
-<c:when test="${!empty session}">
+		</c:when>
+		<c:when test="${!empty session}">
 	Du bist als
 	<strong><%=session.getAttribute("username")%> </strong> angemeldet.
 	<form name="logout" action="controller" method="get">
-		<button name="action" type="submit" value="Logout" class="buttonslog">Logout</button>
-	</form>
-	</c:when>
-</c:choose>
+				<button name="action" type="submit" value="Logout"
+					class="buttonslog">Logout</button>
+			</form>
+		</c:when>
+	</c:choose>
 	<!-- include all urls according to URL-Rewriting rules -->
 	<%@ include file="urlVariables.jsp"%>
 	<ul class="topmenue">
@@ -34,6 +39,5 @@ Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 		<li><a href="${album}">Alle Album</a></li>
 	</ul>
 	<br />
-	<br />
-	//ende mit header
+	<br /> //ende mit header
 	<hr />

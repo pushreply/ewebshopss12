@@ -17,6 +17,7 @@ import shop.dao.DBObject;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBTrack;
+import shop.util.ErrorHandler;
 
 /**
  * Servlet implementation class loadTrack. Handles the playback of tracks by
@@ -41,17 +42,29 @@ public class LoadTrack extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException {
 
 		ObjectContainer db = new DBObject().getConnection();
-		IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(
-				DBTrack.class, db);
-		DBTrack track = dao.read(request.getParameter("identifier"));
-
+		IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class,
+				db);
+		DBTrack track = null;
+		try {
+			track = dao.read(request.getParameter("identifier"));
+		} catch (InstantiationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if (track != null) {
+			
 		byte[] mp3File = track.getFile();
 		ServletOutputStream stream = null;
 		BufferedInputStream buf = null;
 
+		ErrorHandler errorHandler = new ErrorHandler();
 		try {
 			stream = response.getOutputStream();
 			// set response headers
@@ -68,12 +81,19 @@ public class LoadTrack extends HttpServlet {
 				stream.write(readBytes);
 			}
 		} catch (IOException ioe) {
-			throw new ServletException(ioe.getMessage());
+			errorHandler.toUser(
+					"Etwas mit der Weiterleitung ist schief gelaufen.", ioe);
 		} finally {
-			if (stream != null)
-				stream.close();
-			if (buf != null)
-				buf.close();
+			try {
+				if (stream != null)
+					stream.close();
+				if (buf != null)
+					buf.close();
+			} catch (IOException e) {
+				errorHandler
+						.toUser("Ein technischer Fehler ist aufgetreten", e);
+			}
+			}
 		}
 	}
 
