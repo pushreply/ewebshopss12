@@ -3,14 +3,13 @@ package shop.dao.jtest;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.Test;
 
 import shop.dao.DBObject;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
-import shop.dto.DBCategory;
+import shop.dto.DBAlbum;
 import shop.dto.DBTrack;
 import shop.util.Trackfactory;
 
@@ -23,6 +22,11 @@ import de.vdheide.mp3.ID3v2IllegalVersionException;
 import de.vdheide.mp3.ID3v2WrongCRCException;
 import de.vdheide.mp3.NoMP3FrameException;
 
+/**
+ * keine richtigen JUnt tests. vielmehr eine spielwiese um datenbankabfragen schnell und unkompliziert auszugeben
+ * @author Andreas
+ *
+ */
 public class GenericDaoImplTest {
 
 	/**
@@ -54,6 +58,24 @@ public class GenericDaoImplTest {
 				DBTrack.class, db);
 		List<DBTrack> asd = underTest.readAll();
 		System.err.println(asd.get(0).getTrackArtist());
+	}
+	
+	@Test
+	public void readAlbum() throws Db4oIOException, DatabaseClosedException, InstantiationException, IllegalAccessException{
+		ObjectContainer db = new DBObject().getConnection();
+		IGenericDao<DBAlbum> underTest = new GenericDaoImpl<DBAlbum>(
+				DBAlbum.class, db);
+		List<DBAlbum> alben = underTest.readAll();
+		for (DBAlbum dbAlbum : alben) {
+			System.err.println("---ALBUM---");
+			System.err.println(dbAlbum.getAlbumTitel());
+			System.err.println(dbAlbum.getArtist());
+			System.err.println(dbAlbum.getNumberOfTracks());
+			System.err.println(dbAlbum.getKeywords().get(0).getKeywordName());
+			System.err.println(dbAlbum.getCategories().get(0).getCategoryName());
+			System.err.println(dbAlbum.getTracks().get(0).getTrackTitle());
+		}
+		System.err.println("---END OF READ ALBUM---");
 	}
 
 }
