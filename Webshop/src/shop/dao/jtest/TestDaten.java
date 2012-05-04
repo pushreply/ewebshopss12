@@ -1,7 +1,6 @@
 package shop.dao.jtest;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,13 +16,6 @@ import shop.dto.DBTrack;
 import shop.util.Trackfactory;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.Db4oIOException;
-
-import de.vdheide.mp3.ID3v2DecompressionException;
-import de.vdheide.mp3.ID3v2IllegalVersionException;
-import de.vdheide.mp3.ID3v2WrongCRCException;
-import de.vdheide.mp3.NoMP3FrameException;
 
 /**
  * 
@@ -34,9 +26,9 @@ import de.vdheide.mp3.NoMP3FrameException;
 
 public class TestDaten {
 
-	public static void main(String[] arg) throws ID3v2WrongCRCException, ID3v2DecompressionException, ID3v2IllegalVersionException, IOException, NoMP3FrameException, Db4oIOException, DatabaseClosedException, InstantiationException, IllegalAccessException {
+	public static void main(String[] arg) {
 
-		//open database connection
+		// open database connection
 		ObjectContainer db = new DBObject().getConnection();
 
 		// initialize DAOs
@@ -112,10 +104,16 @@ public class TestDaten {
 		daoCustomer.create(customer5);
 
 		// Track
-		String[] paths = { "WebContent/images/wwm.mp3",
-				"WebContent/images/wwm.mp3", "WebContent/images/wwm.mp3" };
-		for (String path : paths) {
-			daoTrack.create(Trackfactory.createTrack(new File(path)));
+		String path = "";
+		for (int i = 1; i <= 10; i++) {
+			// set path for next iteration
+			path = "WebContent/images/Alb1_Disc" + (i <= 5 ? "1" : "2")
+					+ "_Track" + i + ".mp3";
+			try {
+				daoTrack.create(Trackfactory.createTrack(new File(path)));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// Categories
@@ -127,46 +125,57 @@ public class TestDaten {
 
 		// Keywords
 		String[] keywords = { "Geniale Scheibe", "Radio-Mitschnitt",
-				"Ohrenkrebsgefahr", "Ohrwurm", "Evergreen", "One Hit Wonder" };
+				"Ohrenkrebsgefahr", "Ohrwurm", "Evergreen", "One Hit Wonder",
+				"Klasse", "Sommer 2012", "Unsere Empfehlung" };
 		for (String keyword : keywords) {
 			daoKeyword.create(new DBKeyword(keyword));
 		}
 
 		// Albums
-		//	load existing keywords, categories and tracks to put in the albums
-		List<DBKeyword> dbKeys = daoKeyword.readAll();
-		List<DBCategory> dbCats = daoCategory.readAll();
-		List<DBTrack> dbTracks = daoTrack.readAll();
+		// load existing keywords, categories and tracks to put in the albums
+		List<DBKeyword> allKeywords = null;
+		List<DBCategory> allCategories = null;
+		List<DBTrack> allTracks = null;
+		try {
+			allKeywords = daoKeyword.readAll();
+			allCategories = daoCategory.readAll();
+			allTracks = daoTrack.readAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		//pick random keywords, categories & tracks and adds them to album
+		// pick random keywords, categories & tracks and adds them to album
 		for (int i = 0; i < 5; i++) {
-			List<DBKeyword> albumKeywords = new LinkedList<DBKeyword>();
-			for (DBKeyword dbKeyword : dbKeys) {
-				if (Math.random() < 0.5)
-					albumKeywords.add(dbKeyword);
-			}
+			List<DBKeyword> albumKeywords = addRandom(allKeywords);
+			List<DBCategory> albumCategories = addRandom(allCategories);
+			List<DBTrack> albumTracks = addRandom(allTracks);
 
-			List<DBCategory> albumCategories = new LinkedList<DBCategory>();
-			for (DBCategory dbCategory : dbCats) {
-				if (Math.random() < 0.5)
-					albumCategories.add(dbCategory);
-			}
-
-			List<DBTrack> albumTracks = new LinkedList<DBTrack>();
-			//ensures that at least one song is in the album
-			albumTracks.add(dbTracks.get(0));
-			
-			for (DBTrack dbTrack : dbTracks) {
-				if (Math.random() < 0.5)
-					albumTracks.add(dbTrack);
-			}
-
-			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_" + i + "_"+ i,
-					(int) Math.random() * 3, Math.random() * 20, (int) Math
-							.random() * 500, (int) albumTracks.size(), "Label_"
-							+ i + " "+ i+1 + " "+ i+2, albumKeywords, albumCategories, albumTracks));
+			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
+					+ i + "_" + i, (int) Math.random() * 3, Math.random() * 20,
+					(int) Math.random() * 500, (int) albumTracks.size(),
+					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
+					albumCategories, albumTracks));
 		}
 		db.close();
 		System.out.println("Testdaten wurden geschrieben");
+	}
+
+	/**
+	 * @author Andreas
+	 * @param allItems
+	 * @return
+	 */
+	private static <T> List<T> addRandom(List<T> allItems) {
+		List<T> tempItemsCopy = allItems;
+		List<T> albumItem = new LinkedList<T>();
+		// ensures that at least one item is in the album
+		albumItem.add(tempItemsCopy.get(0));
+		tempItemsCopy.remove(0);
+		// pick random item
+		for (T item : tempItemsCopy) {
+			if (Math.random() < 0.5)
+				albumItem.add(item);
+		}
+		return albumItem;
 	}
 }
