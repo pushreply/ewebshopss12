@@ -23,19 +23,25 @@ public class AlbumAction extends AbstractAction{
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 		
 		try{
-		if ((request.getParameter("upload") != null)) {
+		if (request.getParameter("upload") != null) {
 			disp = request
 					.getRequestDispatcher("/trackhinzufuegen.jsp");
 		}
 		
 		//Alle Alben anzegen --> Bitte Finger weg!
-		if ((request.getParameter("alben") != null)) {
-			request.setAttribute("Alben", dao.readAll());
+		if (request.getParameter("alb") != null) {
+			System.out.println("ich nur in album");
+				request.setAttribute("Alben", dao.readAll());
+			
 			disp = request.getRequestDispatcher("/allealbenanzeigen.jsp");
-		} 
+		}
+		else{
+			System.out.println("die action kann nicht ausgeführt werden");
+			System.out.println(request.getParameter("alben").length());
+		}
 		
 		//Album anzeigen --> Finger Weg!
-		else if ((request.getParameter("identifier") != null)) {
+		if ((request.getParameter("identifier") != null)) {
 			request.setAttribute("album",dao.read(request.getParameter("identifier")));
 			byte[] cover = dao.read(request.getParameter("identifier")).getCover();
 			ByteArray.byteArrayToFile(cover,"images/cover.jpg");
