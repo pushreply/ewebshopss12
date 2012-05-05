@@ -33,4 +33,5 @@
 	
 	<c:url var="alben" value="controller">
 		<c:param name="action" value="alben" />
+		<c:param name="alb" value=""/>
 	</c:url>

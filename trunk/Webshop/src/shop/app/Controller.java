@@ -61,7 +61,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("register", new RegisterAction());
 		actionMap.put("alben", new AlbumAction());
 		actionMap.put("albumAnzeigen", new AlbumAction());
-		actionMap.put("albumEditieren", new AlbumAction());
+		actionMap.put("albumBearbeiten", new AlbumAction());
 
 		// more "put" go here
 	}

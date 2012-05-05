@@ -21,11 +21,16 @@
 						<input type="submit"  value="album anzeigen">
 					</form>
 				</td>
+				<td>
+				   <form action="controller" method="post">
+				        <input type="hidden"  name="action" value="albumBearbeiten">
+						<input type="hidden"  name="identifier" value="${album.identifier}">
+						<input type="submit"  value="editieren">
+					</form>
+				</td>
 		  </tr>
 	</table>
 
-  <input type=button onClick="location.href='index.jsp'" value='bearbeiten'>
-  <input type=button onClick="location.href='trackhinzufuegen.jsp'" value='Track hinzufügen'>
   <div id="contecnt">
   </div>
   </c:forEach> 
