@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import shop.dao.DAOCustomer;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBCustomer;
@@ -32,6 +33,7 @@ public class LoginAction extends AbstractAction {
 
 		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(
 				DBCustomer.class, db);
+		DAOCustomer customer = new DAOCustomer();
 
 		/*
 		 * LOGIN: Login ok -> index.jsp Login error (username/password is
@@ -40,29 +42,24 @@ public class LoginAction extends AbstractAction {
 
 		String loginUsername = request.getParameter("username");
 		String loginPassword = request.getParameter("password");
-
+		boolean match = false;
+		
 		System.out.println("Login parameters are set: " + loginUsername + ":"
 				+ loginPassword);
 
 		if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword
 				.isEmpty()))) {
 			System.out.println("processing login");
-			DBCustomer user = new DBCustomer();
-			user.setUsername(loginUsername);
-
-			user.setPassword(loginPassword);
-			DBCustomer ExistingUserData = null;
+			
 			try {
-				ExistingUserData = dao.read(loginUsername);
+				match = customer.matchUser(loginUsername, loginPassword, db);
 			} catch (Exception e) {
-				errorHandler
-						.toUser("Beim Anmelden ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
-								e);
+				errorHandler.toUser("Beim Anmelden ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			}
 
 			RequestDispatcher disp;
 			System.out.println("comparing data from DB and user input");
-			if (!(user.equals(ExistingUserData))) {
+			if (match) {
 				System.out.println("login OK, return to index.jsp");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", loginUsername);
