@@ -16,7 +16,7 @@
         </tr>
         <tr>						
 				<td>
-				   <form action="controller" method="post">
+				   <form action="controller" method="get">
 				        <input type="hidden"  name="action" value="albumAnzeigen">
 						<input type="hidden"  name="identifier" value="${album.identifier}">
 						<input type="submit"  value="album anzeigen">

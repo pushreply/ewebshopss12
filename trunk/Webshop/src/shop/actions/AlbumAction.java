@@ -16,6 +16,11 @@ import com.db4o.ObjectContainer;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.Db4oIOException;
 
+/**
+ * @author Mukunzi
+ *
+ */
+
 public class AlbumAction extends AbstractAction{
 
 	@Override
@@ -35,11 +40,8 @@ public class AlbumAction extends AbstractAction{
 		
 		//Alle Alben anzegen --> Bitte Finger weg!
 		if (request.getParameter("alle") != null) {
-			System.out.println("ich nur in album");
 				try {
 					request.setAttribute("Alben", dao.readAll());
-					System.out.println((dao.readAll()).size());
-					System.out.println((dao.readAll()).get(1));
 				} catch (Exception e) {
 					errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 				} 
@@ -50,42 +52,70 @@ public class AlbumAction extends AbstractAction{
 		else if ((request.getParameter("identifier") != null)) {
 			try {
 				request.setAttribute("album",dao.read(request.getParameter("identifier")));
-				byte[] cover = dao.read(request.getParameter("identifier")).getCover();
-				ByteArray.byteArrayToFile(cover,"images/cover.jpg");
+				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
+				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			} 
 			disp = request.getRequestDispatcher("/albumanzeigen.jsp");
+		}
+		
+		//Album in Felder -->Finger weg
+		else if ((request.getParameter("uuid1") != null)) {
+			System.out.println("daten in Felder");
+			try {
+				request.setAttribute("album",dao.read(request.getParameter("uuid1")));
+				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
+				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);	
+			} 
+			disp = request.getRequestDispatcher("/albumBearbeiten.jsp");
 		} 
 		
-		//Album editieren
-		else if ((request.getParameter("identifier") != null)) {
+		//Album bearbeiten -->Finger weg
+		else if ((request.getParameter("ident1") != null)) {
 			try {
 				dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
-				DBAlbum album = dao.read(request.getParameter("identifier"));
-
-//			String titel = request.getParameter("titel");
-//			String artist = request.getParameter("artist");
-//			int date = Integer.parseInt((request.getParameter("date")));
-//			String genre = request.getParameter("genre");
-//			int trackanzahl = Integer.parseInt(request
-//					.getParameter("trackanzahl"));
-//			int diskanzahl = Integer.parseInt(request
-//					.getParameter("diskanzahl"));
-//			track.setTrackTitle(titel);
-//			track.setTrackArtist(artist);
-//			track.setTrackDate(date);
-//			track.setTrackGenre(genre);
-//			track.setTrackNumber(trackanzahl);
-//			track.setTrackDiskNumber(diskanzahl);
-//			
-//			dao.update(track);
+				DBAlbum album = dao.read(request.getParameter("ident1"));
+				
+			String titel = request.getParameter("titel");
+			String artist = request.getParameter("artist");
+			int diskAnzahl = Integer.parseInt((request.getParameter("diskAnzahl")));
+			Double preis = Double.parseDouble((request.getParameter("preis")));
+			int anzahl = Integer.parseInt(request.getParameter("anzahl"));
+			int trackAnzahl = Integer.parseInt(request.getParameter("trackAnzahl"));
+			String label = request.getParameter("label");
+			album.setAlbumTitel(titel);
+			album.setArtist(artist);
+			album.setNumberOfDisks(diskAnzahl);
+			album.setPrice(preis);
+			album.setAmount(anzahl);
+			album.setNumberOfTracks(trackAnzahl);
+			album.setLabel(label);
+			
+			dao.update(album);
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			}
-			disp = request.getRequestDispatcher("/album.jsp");
-		 }	
-
+			disp = request.getRequestDispatcher("/controller?action=alben&alle=alleAlben");
+		 }
+		
+		//Albumtracks anzeigen -->Finger weg
+		else if ((request.getParameter("uuid2") != null)) {
+			try {
+				request.setAttribute("albumTracks",dao.read(request.getParameter("uuid2")));
+				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
+				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
+				DBAlbum al = dao.read(request.getParameter("uuid2"));
+				System.out.println(al);
+			} catch (Exception e) {
+				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+			} 
+			disp = request.getRequestDispatcher("/albumTracks.jsp");
+		} 
 		try {
 			disp.forward(request, response);
 		} catch (Exception e) {
