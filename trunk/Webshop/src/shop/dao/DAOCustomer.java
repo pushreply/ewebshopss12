@@ -10,13 +10,18 @@ import com.db4o.query.Query;
 
 import shop.dto.DBCustomer;
 
+/*
+ * @author: roha0001
+ */
+
 public class DAOCustomer extends DBCustomer{
 	
 	DBCustomer result = null;
 	
-	public DAOCustomer() {
-		// TODO Auto-generated constructor stub
-	}
+	/*
+	 * default constructor
+	 */
+	public DAOCustomer() { }
 	
 	/* 
 	 * match username and password, for login process, return boolean value
