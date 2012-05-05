@@ -42,4 +42,12 @@ public class DAOCustomer extends DBCustomer{
 		if(result.isEmpty()){return true;}
 		return false;
 	}
+	
+	public DBCustomer findUser(String username, ObjectContainer db){
+		Query query = db.query();
+		query.constrain(DBCustomer.class);
+		query.descend("username").constrain(username);
+		ObjectSet<DBCustomer> result = query.execute();
+		return result.next();
+	}
 }
