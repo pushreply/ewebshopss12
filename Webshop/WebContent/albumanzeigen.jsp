@@ -6,7 +6,7 @@
 
 <h3>Das Album ${album.albumTitel}<h3>
 
- <img src="images/cover.jpg" width=120 height=130 alt="bild">
+ <img src="images/bild.jpg" width=120 height=130 alt="bild">
  
  <table >
 		<tr>
@@ -32,10 +32,15 @@
 		</tr>
 		
 		<tr>
-				<td><form action="controller" method="post">
-				        <input type="hidden"  name="action" value="albumEditieren">
-						<input type="hidden"  name="identifier" value="${album.identifier}">
-						<input type="submit"  value="editieren">
+				<td><form action="controller" method="get">
+				        <input type="hidden"  name="action" value="albumInFelder">
+						<input type="hidden"  name="uuid1" value="${album.identifier}">
+						<input type="submit"  value="Bearbeiten">
+					</form></td>
+			   <td><form action="controller" method="post">
+				        <input type="hidden"  name="action" value="albumTracks">
+						<input type="hidden"  name="uuid2" value="${album.identifier}">
+						<input type="submit"  value="Tracks anzeigen">
 					</form></td>
 		</tr>
 	</table>
