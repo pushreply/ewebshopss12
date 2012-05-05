@@ -19,7 +19,7 @@ public class DAOCustomer extends DBCustomer{
 	}
 	
 	/* 
-	 * match username and password, for login process, return boolean
+	 * match username and password, for login process, return boolean value
 	 */
 	public boolean matchUser(final String username, final String password, ObjectContainer db){
 		List<DBCustomer> customerlist = db.query(new Predicate<DBCustomer>() {
@@ -32,7 +32,7 @@ public class DAOCustomer extends DBCustomer{
 	}
 	
 	/*
-	 * match username, for registration process, return boolean
+	 * match username, check whether the username is taken (for registration process), return boolean value
 	 */
 	public boolean matchUser(String username, ObjectContainer db){
 		Query query = db.query();
@@ -43,6 +43,10 @@ public class DAOCustomer extends DBCustomer{
 		return false;
 	}
 	
+	
+	/*
+	 * find user by username
+	 */
 	public DBCustomer findUser(String username, ObjectContainer db){
 		Query query = db.query();
 		query.constrain(DBCustomer.class);
