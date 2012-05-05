@@ -39,5 +39,5 @@ Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 		<li><a href="${alben}">Alle Albumen</a></li>
 	</ul>
 	<br />
-	<br /> //ende mit header
+	<br /> 
 	<hr />
