@@ -45,7 +45,7 @@ public class LoginAction extends AbstractAction {
 		
 		System.out.println("Login parameters are set: " + loginUsername + ":"
 				+ loginPassword);
-		if(request.getParameter("Login")!=null){
+//		if(request.getParameter("Login")!=null){
 			if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword
 					.isEmpty()))) {
 				System.out.println("processing login");
@@ -74,7 +74,7 @@ public class LoginAction extends AbstractAction {
 							"Etwas mit der Weiterleitung ist schief gelaufen.", e);
 				}
 			}
-		}
+//		}
 		if(request.getParameter("Logout")!=null)
 		{
 			try {
