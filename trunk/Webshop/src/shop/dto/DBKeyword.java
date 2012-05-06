@@ -5,6 +5,7 @@ package shop.dto;
 
 /**
  * @author roha0001
+ * @author mukunzi
  *
  */
 public class DBKeyword extends DBUUIDBase {

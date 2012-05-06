@@ -1,7 +1,5 @@
 package shop.actions;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
-import shop.util.ByteArray;
 
 import com.db4o.ObjectContainer;
 
@@ -27,7 +24,6 @@ public class AlbumAction extends AbstractAction{
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db) throws ServletException {
 		RequestDispatcher disp = null;
-		System.out.println("ich in album action");
 		
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 		
@@ -38,7 +34,7 @@ public class AlbumAction extends AbstractAction{
 			
 		}
 		
-		//Alle Alben anzegen --> Bitte Finger weg!
+		//Alle Alben anzegen
 		if (request.getParameter("alle") != null) {
 				try {
 					request.setAttribute("Alben", dao.readAll());
@@ -48,25 +44,23 @@ public class AlbumAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/allealbenanzeigen.jsp");
 		}
 		
-		//Album anzeigen --> Finger Weg!
+		//Album anzeigen
 		else if ((request.getParameter("identifier") != null)) {
 			try {
 				request.setAttribute("album",dao.read(request.getParameter("identifier")));
-				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
-				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
+				
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			} 
 			disp = request.getRequestDispatcher("/albumanzeigen.jsp");
 		}
 		
-		//Album in Felder -->Finger weg
+		//Album in Felder
 		else if ((request.getParameter("uuid1") != null)) {
 			System.out.println("daten in Felder");
 			try {
 				request.setAttribute("album",dao.read(request.getParameter("uuid1")));
-				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
-				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
+				
 				
 			} catch (Exception e) {
 				System.out.println(e);
@@ -75,7 +69,7 @@ public class AlbumAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/albumBearbeiten.jsp");
 		} 
 		
-		//Album bearbeiten -->Finger weg
+		//Album bearbeiten
 		else if ((request.getParameter("ident1") != null)) {
 			try {
 				dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
@@ -103,15 +97,11 @@ public class AlbumAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/controller?action=alben&alle=alleAlben");
 		 }
 		
-		//Albumtracks anzeigen -->Finger weg
+		//Albumtracks anzeigen
 		else if ((request.getParameter("uuid2") != null)) {
 			try {
 				request.setAttribute("albumTracks",dao.read(request.getParameter("uuid2")));
-				System.out.println("das ist AlbumTracks");
-				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
-				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
-				//DBAlbum al = dao.read(request.getParameter("uuid2"));
-				//System.out.println(al);
+				
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			} 
