@@ -54,6 +54,7 @@ public class imageDisplayProcess extends HttpServlet {
 			.toUser("Ein technischer Fehler ist aufgetreten", e);
 		}
 		response.setContentType("image/jpeg");
+		response.setContentLength(imageData.length);
 		response.getOutputStream().write(imageData);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
