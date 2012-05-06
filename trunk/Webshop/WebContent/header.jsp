@@ -15,19 +15,21 @@
 
 </head>
 <body> <!-- ending tag in footer.jsp -->
+
 	<c:choose>
-		<c:when test="${empty session}">
+		<c:when test="${empty username}">
 Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 		</c:when>
-		<c:when test="${!empty session}">
+		<c:when test="${!empty username}">
 	Du bist als
-	<strong><%=session.getAttribute("username")%> </strong> angemeldet.
+	<strong>${username}</strong> angemeldet.
 	<form name="logout" action="controller" method="get">
 				<button name="action" type="submit" value="Logout"
 					class="buttonslog">Logout</button>
 			</form>
 		</c:when>
 	</c:choose>
+
 	<!-- include all urls according to URL-Rewriting rules -->
 	<%@ include file="urlVariables.jsp"%>
 	<ul class="topmenue">
