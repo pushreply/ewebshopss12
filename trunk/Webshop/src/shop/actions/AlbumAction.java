@@ -13,8 +13,8 @@ import shop.dto.DBAlbum;
 import shop.util.ByteArray;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.Db4oIOException;
+
+
 
 /**
  * @author Mukunzi

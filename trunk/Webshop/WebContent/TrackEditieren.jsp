@@ -7,7 +7,7 @@
 	<h3>Track editieren: <c:out value="${track.trackTitle}"  default="N/A" /></h3>
 
 
-	<form action="controller" method="post" enctype="multipart/form-data">
+	<form action="controller" method="get" enctype="multipart/form-data">
 	<input type="hidden" name="uuid" size="30" maxlength="30" value="<c:out value="${track.identifier}"/>"/>
   <table border="0" cellpadding="0" cellspacing="4">
     <tr>
@@ -42,7 +42,7 @@
     
     <tr>
       <td align="right"></td>
-      <td><input type="submit" name="TrackEditierenButton"></td>
+      <td><input type="submit" name="TrackEditierenButton" value = speichern></td>
     </tr>
   </table>
 </form>

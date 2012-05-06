@@ -15,6 +15,12 @@ import com.db4o.ObjectContainer;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.Db4oIOException;
 
+/**
+ * 
+ * @author mukunzi
+ *
+ */
+
 public class TrackAction extends AbstractAction{
 
 	@Override
@@ -28,6 +34,7 @@ public class TrackAction extends AbstractAction{
 			disp = request
 					.getRequestDispatcher("/trackhinzufuegen.jsp");
 		}
+		//Alle Tracks anzeigen
 		else if ((request.getParameter("show") != null)) {
 			try {
 				request.setAttribute("AlbumTracks", dao.readAll());
@@ -37,7 +44,7 @@ public class TrackAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/track.jsp");
 		} 
 		
-		//Track editieren
+		//Track- Attributen in Felder
 		else if ((request.getParameter("identifier") != null)) {
 			try {
 				request.setAttribute("track",dao.read(request.getParameter("identifier")));
@@ -47,6 +54,7 @@ public class TrackAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/TrackEditieren.jsp");
 		} 
 		
+		//Track editieren
 		else if ((request.getParameter("TrackEditierenButton") != null)) {
 			dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
 			DBTrack track=null;
@@ -73,7 +81,6 @@ public class TrackAction extends AbstractAction{
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
 								e);
 			}
-
 		} 
 
 		try {
