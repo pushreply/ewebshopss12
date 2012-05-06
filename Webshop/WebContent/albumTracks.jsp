@@ -27,7 +27,7 @@
 					</form>
 				</td>
 				<td>
-				   <form action="controller" method="post">
+				   <form action="controller" method="get">
 				        <input type="hidden"  name="action" value="editieren">
 						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="editieren">
