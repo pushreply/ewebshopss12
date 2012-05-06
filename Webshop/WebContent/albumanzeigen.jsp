@@ -4,13 +4,15 @@
 	<c:param name="title" value="Album anzeigen" />
 </c:import>
 
-<h3>Das Album ${album.albumTitel}<h3>
+<h3>Das Album ${album.albumTitel}</h3>
 
- <img src="images/bild.jpg" width=120 height=130 alt="bild">
+ <!--  <img src="images/bild.jpg" width=120 height=130 alt="bild"> -->
+
+ <img src="imageDisplayProcess.do?identifier=<c:out value="${album.identifier}" />" width="120" height="130" alt="Albumcover"/>
  
  <table >
 		<tr>
-		   <td>Title:</td><th>${album.albumTitel}</td>
+		   <td>Title:</td><td>${album.albumTitel}</td>
 		</tr>
 		<tr>
 		   <td>Artist:</td><td>${album.artist}</td>

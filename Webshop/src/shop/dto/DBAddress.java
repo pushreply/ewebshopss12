@@ -4,7 +4,7 @@
 package shop.dto;
 
 /**
- * @author roha0001
+ * @author roha0001,Mukunzi
  *
  */
 public class DBAddress extends DBUUIDBase{

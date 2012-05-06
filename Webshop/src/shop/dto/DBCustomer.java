@@ -3,7 +3,7 @@ package shop.dto;
 import java.util.LinkedList;
 
 /**
- * @author roha0001
+ * @author roha0001,Mukunzi
  * 
  */
 public class DBCustomer extends DBUUIDBase{
