@@ -13,22 +13,26 @@
 		<th>Play</th>
 		<th>editieren</th>
 		</tr>
-		<c:forEach items="${albumTracks}" var="track">
-		    <c:if test="${track.trackDiskNumber}" var ='0'>
+		<c:forEach items="${albumTracks.tracks}" var="track">
+		    <c:if test="${track.trackDiskNumber ==1}">
 			<tr>
 				<td>${track.trackNumber}</td>
 				<td>${track.trackTitle}</td>
 				<td>${track.trackArtist}</td>
 				<td>${track.trackDate}</td>
-				<td><form action="loadtrack" method="get">
+				<td>
+				   <form action="loadtrack" method="get">
 						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="Play">
-					</form></td>
-				<td><form action="controller" method="post">
+					</form>
+				</td>
+				<td>
+				   <form action="controller" method="post">
 				        <input type="hidden"  name="action" value="editieren">
 						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="editieren">
-					</form></td>
+					</form>
+				</td>
 			</tr>
 			</c:if>
 		</c:forEach>
@@ -44,22 +48,26 @@
 		<th>Play</th>
 		<th>editieren</th>
 		</tr>
-		<c:forEach items="${AlbumTracks}" var="track">
-		    <c:if test="${track.trackDiskNumber}" var ='1'>
+		<c:forEach items="${albumTracks.tracks}" var="track">
+		    <c:if test="${track.trackDiskNumber == 2}" >
 			<tr>
 				<td>${track.trackNumber}</td>
 				<td>${track.trackTitle}</td>
 				<td>${track.trackArtist}</td>
 				<td>${track.trackDate}</td>
-				<td><form action="loadtrack" method="get">
+				<td>
+				    <form action="loadtrack" method="get">
 						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="Play">
-					</form></td>
-				<td><form action="controller" method="post">
+					</form>
+				</td>
+				<td>
+				   <form action="controller" method="post">
 				        <input type="hidden"  name="action" value="editieren">
 						<input type="hidden"  name="identifier" value="${track.identifier}">
 						<input type="submit"  value="editieren">
-					</form></td>
+					</form>
+				</td>
 			</tr>
 			</c:if>
 		</c:forEach>
