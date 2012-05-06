@@ -107,10 +107,11 @@ public class AlbumAction extends AbstractAction{
 		else if ((request.getParameter("uuid2") != null)) {
 			try {
 				request.setAttribute("albumTracks",dao.read(request.getParameter("uuid2")));
+				System.out.println("das ist AlbumTracks");
 				//byte[] cover = dao.read(request.getParameter("identifier")).getCover();
 				//ByteArray.byteArrayToFile(cover,"images/cover.jpg");
-				DBAlbum al = dao.read(request.getParameter("uuid2"));
-				System.out.println(al);
+				//DBAlbum al = dao.read(request.getParameter("uuid2"));
+				//System.out.println(al);
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			} 
