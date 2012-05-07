@@ -29,9 +29,10 @@ Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 		<c:when test="${!empty username}">
 	Du bist als
 	<strong>${username}</strong> angemeldet.
-	<form name="logout" action="controller" method="get">
+	<form action="controller" method="get">
 				<button name="action" type="submit" value="Logout"
 					class="buttonslog">Logout</button>
+					<input type="hidden" name="Logout" value="true" />
 			</form>
 		</c:when>
 	</c:choose>
