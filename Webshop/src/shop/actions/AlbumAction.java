@@ -45,11 +45,8 @@ public class AlbumAction extends AbstractAction{
 			{
 				errorHandler.toUser("Beim Laden der Kategorie und Keyword ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			}
-			System.out.println(keywordies.size());
-			System.out.println(categories.size());
 			request.setAttribute("keywordies", keywordies);
 			request.setAttribute("categories",categories);
-			request.setAttribute("catsize", categories.size());
 			disp = request
 					.getRequestDispatcher("/Albumanlegen.jsp");
 			
