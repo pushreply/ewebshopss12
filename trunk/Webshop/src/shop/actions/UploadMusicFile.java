@@ -5,6 +5,9 @@ package shop.actions;
  */
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
+import shop.dto.DBCategory;
+import shop.dto.DBKeyword;
 import shop.dto.DBTrack;
 import shop.util.ByteArray;
 import shop.util.ErrorHandler;
@@ -116,8 +121,41 @@ public class UploadMusicFile {
 
 		try {
 			MultipartMap map = new MultipartMap(request, this);
+			
 			DBAlbum dbalbum = new DBAlbum();
+			
+			List<DBCategory> categories = new LinkedList<DBCategory>();
+			
+			String[] category = map.getParameterValues("category");
+			
+			System.out.println(category.length);
+			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class,db);
+			for(int i = 0; i <= category.length-1; i++)
+			{
+				categories.add(daoc.read(category[i]));	
+			}
+			
+			dbalbum.setCategories(categories);
+			
+			
+			System.out.println("Check: " + Arrays.toString(category));
+			List<DBKeyword> keywordies = new LinkedList<DBKeyword>();
+			String[] keyword = map.getParameterValues("keyword");
+			
+			
+			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(DBKeyword.class,db);
+			
+			for(int i = 0; i <= keyword.length-1; i++)
+			{
+				keywordies.add(daok.read(keyword[i]));	
+			}
+			
+			dbalbum.setKeywords(keywordies);
+			
+			
+			System.out.println("Check: " + Arrays.toString(keyword));
 			dbalbum.setAlbumTitel(map.getParameter("titel"));
+			System.out.println(map.getParameter("titel"));
 			dbalbum.setArtist(map.getParameter("artist"));
 			dbalbum.setPrice(Double.parseDouble(map.getParameter("price")));
 			dbalbum.setLabel(map.getParameter("label"));
