@@ -3,7 +3,7 @@
 	<c:param name="title" value="Es tut uns leid!" />
 </c:import>
 <p>
-<h3>Leider ist die ausgewählte Benutzername: <strong><c:out value="${customer.username}" /></strong> von anderen Kunden belegt.</h3>
+<h3>Leider ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.</h3>
 <p>
 
 <form action="controller" method="post">
@@ -13,11 +13,11 @@ Bitte wählen Sie einen anderen Benutzernamen:
 <input name="action" type="hidden" value="register"/>
 </li>
 und einen Kenntwort: 
-<li><input name="password1" type="password" value=""/>
+<li><input name="pw1" type="password" value=""/>
 <input name="action" type="hidden" value="register" />
 </li>
 Bitte den Kenntwort noch mal bestätigen:
-<li><input name="password2" type="password"/></li>
+<li><input name="pw2" type="password"/></li>
 </ul>
 
 <input type="submit" name="action" value="Registrieren" > 
