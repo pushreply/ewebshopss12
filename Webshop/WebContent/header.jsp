@@ -38,13 +38,15 @@ Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 
 	<!-- include all urls according to URL-Rewriting rules -->
 	<%@ include file="urlVariables.jsp"%>
-	<ul class="topmenue">
+	<ul class="topmenue" align="center">
 		<li><a href="${home}">Home</a></li>
-		<li><a href="${trackUpload}">Lied Hochladen</a></li>
-		<li><a href="${trackShow}">Alle Lieder Anzeigen</a></li>
+		
+		<li><a href="${alben}">Alle Alben</a></li>
+		<li><a href="${trackShow}">Alle Tracks</a></li>
+		<li><a href="${trackUpload}">Track hochladen</a></li>
 		<li><a href="${keyword}">Schlüsselworte</a></li>
 		<li><a href="${category}">Kategorien</a></li>
-		<li><a href="${alben}">Alle Albumen</a></li>
+		
 	</ul>
 	<br />
 	<br /> 
