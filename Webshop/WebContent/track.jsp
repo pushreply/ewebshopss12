@@ -4,7 +4,7 @@
 	<c:param name="title" value="Lied Abspielen" />
 </c:import>
 
-	<table width="589" border="1">
+	<table>
 		<tr>
 		<th>Track Number</th>
 		<th>Title</th>

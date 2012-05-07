@@ -12,7 +12,7 @@
 </form>
 
 <h2>Alle Kategorien</h2>
-<table width="589" border="1">
+<table>
 	<c:forEach items="${categories}" var="category">
 		<tr>
 			<td>${category.categoryName}</td>

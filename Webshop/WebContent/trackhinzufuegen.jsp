@@ -3,62 +3,47 @@
 <c:import url="header.jsp">
 	<c:param name="title" value="Lied hinzufügen" />
 </c:import>
+<h1>${album.albumTitel} von ${album.artist}</h1>
+<h2>Neue Tracks hinzufügen</h2>
 
-<h3>Album</h3>
+<form action="controller" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="identifier" value="${album.identifier}">
+	<input type="file" name="file" id="file"> <input type=submit
+		name="uploadFileSubmitButton" value='Upload File'>
+</form>
 
-<p><b>${album.albumTitel}</b> von <b>${album.artist}</b></p>
-
-<table width="589" border="1">
-		<tr>
+<h2>Tracks Übersicht</h2>
+ <c:if test="${empty album.cover}">
+       <img src="images/bild.jpg" width=120 height=130 alt="bild" alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
+ </c:if>
+ <c:if test="${ not empty album.cover}">
+       <img src="imageDisplayProcess?identifier=<c:out value="${album.identifier}"/>"  width=120 height=130 alt="${album.albumTitel} - ${album.artist}" title="${album.albumTitel} - ${album.artist}"/>
+ </c:if>
+<table>
+	<tr>
 		<th>Track Number</th>
 		<th>Title</th>
 		<th>Artist</th>
 		<th>Year</th>
 		<th>Play</th>
 		<th>editieren</th>
+	</tr>
+	<c:forEach items="${track}" var="track">
+		<tr>
+			<td>${track.trackNumber}</td>
+			<td>${track.trackTitle}</td>
+			<td>${track.trackArtist}</td>
+			<td>${track.trackDate}</td>
+			<td><form action="loadtrack" method="get">
+					<input type="hidden" name="identifier" value="${track.identifier}">
+					<input type="submit" value="Play">
+				</form></td>
+			<td><form action="controller" method="post">
+					<input type="hidden" name="action" value="editieren"> <input
+						type="hidden" name="identifier" value="${track.identifier}">
+					<input type="submit" value="editieren">
+				</form></td>
 		</tr>
-		<c:forEach items="${track}" var="track">
-			<tr>
-				<td>${track.trackNumber}</td>
-				<td>${track.trackTitle}</td>
-				<td>${track.trackArtist}</td>
-				<td>${track.trackDate}</td>
-				<td><form action="loadtrack" method="get">
-						<input type="hidden"  name="identifier" value="${track.identifier}">
-						<input type="submit"  value="Play">
-					</form></td>
-				<td><form action="controller" method="post">
-				        <input type="hidden"  name="action" value="editieren">
-						<input type="hidden"  name="identifier" value="${track.identifier}">
-						<input type="submit"  value="editieren">
-					</form></td>
-			</tr>
-		</c:forEach>
-	</table>
-
- <form action="controller"  		
- 		method="post"
- 		enctype="multipart/form-data">
- 		<table border=1>
-  <tr><td>Titel:</td><td><c:out value="" /></td></tr>
-  <tr><td>Artist:</td><td><c:out value="" /></td></tr>
-  <tr><td>Year:</td><td><c:out value="" /></td></tr>
-  <tr><td>Genre</td><td><c:out value="" /></td></tr>
-  <tr><td>Track Number:</td><td><c:out value="" /></td></tr>
- <!--  <tr><td>Album Cover:</td><td><c:out value="" /></td></tr>-->
- 
-  <h3>Tracks Hinzufügen</h3>
-
-	<input type="hidden"  name="identifier" value="${album.identifier}"> 	
- 	</table>
-   		<tr>
-     		<td align="right">Datei:</td>
-    		<td><input type="file" name="file" id="file"></td>
-   		</tr>
-	 </table>
-
-	 <input type=submit name="uploadFileSubmitButton" value='Upload File'> 
-	</form>
+	</c:forEach>
 </table>
-
 <c:import url="footer.jsp" />

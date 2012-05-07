@@ -23,7 +23,7 @@
   <h3>Abum anlegen</h3>
 
 <form action="controller" method="post" enctype="multipart/form-data">
-  <table border="0" cellpadding="0" cellspacing="4">
+  <table>
     <tr>
       <td align="right">Titel:</td>
       <td><input type="text" name="titel" type="text" size="30" maxlength="30"></td>
