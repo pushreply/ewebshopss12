@@ -33,7 +33,7 @@ public class DAOCustomer extends DBCustomer{
 				return candidate.getUsername().equals(username) && candidate.getPassword().equals(password);
 			}
 		});
-		if (customerlist.isEmpty()){return true;}
+		if (!customerlist.isEmpty()){return true;}
 		else{return false;}
 	}
 	
@@ -47,8 +47,8 @@ public class DAOCustomer extends DBCustomer{
 		query.constrain(DBCustomer.class);
 		query.descend("username").constrain(username);
 		ObjectSet<DBCustomer> result = query.execute();
-		if(result.isEmpty()){return true;}
-		else{return false;}
+		if(result.isEmpty()){return false;}
+		else{return true;}
 	}
 	
 	
