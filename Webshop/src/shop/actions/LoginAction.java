@@ -27,23 +27,21 @@ import com.db4o.ObjectContainer;
 public class LoginAction extends AbstractAction {
 
 	@Override
-	protected void process(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db)
-			throws ServletException {
+	protected void process(HttpServletRequest request, HttpServletResponse response, ObjectContainer db) throws ServletException {
 
 		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
 		DAOCustomer customer = new DAOCustomer();
 
 		/*
-		 * LOGIN: Login ok -> index.jsp Login error (username/password is
-		 * wrong/empty) -> loginerror.jsp -> login.jsp
+		 * LOGIN: Login ok -> index.jsp 
+		 * Login error (username/password is wrong/empty) -> loginerror.jsp -> login.jsp
 		 */
 
 		String loginUsername = request.getParameter("username");
 		String loginPassword = request.getParameter("password");
 		boolean match = false;
-		RequestDispatcher disp = null;
-		HttpSession session = request.getSession(true);
+//		RequestDispatcher disp = null;
+		
 		System.out.println("Login parameters are set: " + loginUsername + ":"+ loginPassword);
 		
 		if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword.isEmpty()))) {
@@ -58,25 +56,10 @@ public class LoginAction extends AbstractAction {
 			System.out.println("Comparing data from DB and user input");
 			if (match) {
 				System.out.println("login OK, return to index.jsp");
+				HttpSession session = request.getSession(true);
 				session.setAttribute("username", loginUsername);
-				disp = request.getRequestDispatcher("/index.jsp");
-				try {
-					disp.forward(request, response);
-				} catch (Exception e) {
-					errorHandler.toUser(
-							"Etwas mit der Weiterleitung ist schief gelaufen.", e);
-				}
-				if (request.getParameter("Logout") != null) {
-					try {
-						session.invalidate();
-						System.out.println("Logging out");
-					} catch (Exception e) {
-						errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen.", e);
-					}
-				}
-			}else {
-				System.out.println("login failed: user/password is wrong, redo login.");
-				disp = request.getRequestDispatcher("/login.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+
 				try {
 					disp.forward(request, response);
 				} catch (Exception e) {
@@ -84,15 +67,16 @@ public class LoginAction extends AbstractAction {
 							"Etwas mit der Weiterleitung ist schief gelaufen.", e);
 				}
 			}
-			
-//			if (request.getParameter("Logout") != null) {
-//				try {
-//					session.invalidate();
-//					System.out.println("Logging out");
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
-//			}
+			else {
+				System.out.println("login failed: user/password is wrong, redo login.");
+				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
+				try {
+					disp.forward(request, response);
+				} catch (Exception e) {
+					errorHandler.toUser(
+							"Etwas mit der Weiterleitung ist schief gelaufen.", e);
+				}
+			}
 		}
 	}
 }
