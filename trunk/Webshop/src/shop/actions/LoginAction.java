@@ -35,8 +35,8 @@ public class LoginAction extends AbstractAction {
 		DAOCustomer customer = new DAOCustomer();
 
 		/*
-		 * LOGIN: Login ok -> index.jsp Login error (username/password is
-		 * wrong/empty) -> loginerror.jsp -> login.jsp
+		 * LOGIN: Login ok -> index.jsp 
+		 * Login error (username/password is wrong/empty) -> loginerror.jsp -> login.jsp
 		 */
 
 		String loginUsername = request.getParameter("username");
@@ -51,7 +51,7 @@ public class LoginAction extends AbstractAction {
 				System.out.println("processing login");
 				
 				try {
-					match = customer.matchUser(loginUsername, loginPassword, db);
+					match = customer.isMatchUser(loginUsername, loginPassword, db);
 				} catch (Exception e) {
 					errorHandler.toUser("Beim Anmelden ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 				}
@@ -62,6 +62,14 @@ public class LoginAction extends AbstractAction {
 					System.out.println("login OK, return to index.jsp");
 					HttpSession session = request.getSession(true);
 					session.setAttribute("username", loginUsername);
+					if(request.getParameter("Logout")!=null)
+					{
+						try {
+							session.invalidate();
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
 					disp = request.getRequestDispatcher("/index.jsp");
 				} else {
 					System.out.println("login failed: user/password is wrong");
