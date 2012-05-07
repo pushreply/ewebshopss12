@@ -1,8 +1,8 @@
 <!-- contains all urls, include this file if you need any -->
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<c:url var="home" value="index.jsp">
-		<c:param name="action" value="keyword" />
+	<c:url var="home" value="controller">
+		<c:param name="action" value="home" />
 	</c:url>
 	
 	<c:url var="trackUpload" value="controller">
