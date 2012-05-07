@@ -32,6 +32,6 @@
 	</c:url>
 	
 	<c:url var="alben" value="controller">
-		<c:param name="action" value="alben" />
+		<c:param name="action" value="album" />
 		<c:param name="alle" value="alleAlben"/>
 	</c:url>
