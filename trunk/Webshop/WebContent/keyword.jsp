@@ -12,7 +12,7 @@
 </form>
 
 <h2>Alle Schlüsselworte</h2>
-<table width="589" border="1">
+<table>
 	<c:forEach items="${keywords}" var="keyword">
 		<tr>
 			<td>${keyword.keywordName}</td>

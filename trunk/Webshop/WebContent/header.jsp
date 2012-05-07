@@ -24,37 +24,42 @@
 <body>
 	<!-- ending tag in footer.jsp -->
 	<div id=wrapper>
-	<div id="top">
-		<!-- include all urls according to URL-Rewriting rules -->
-		<%@ include file="urlVariables.jsp"%>
-		<ul id="topmenue">
-			<li><a href="${home}">Home</a></li>
-			<li><a href="${trackUpload}">Lied Hochladen</a></li>
-			<li><a href="${trackShow}">Alle Lieder Anzeigen</a></li>
-			<li><a href="${keyword}">Schlüsselworte</a></li>
-			<li><a href="${category}">Kategorien</a></li>
-			<li><a href="${alben}">Alle Alben</a></li>
-		</ul>
-		<div id="login">
-			<c:choose>
-				<c:when test="${empty username}">
+		<div id="top">
+			<!-- include all urls according to URL-Rewriting rules -->
+			<%@ include file="urlVariables.jsp"%>
+			<ul id="topmenue">
+				<li><a href="${home}">Home</a></li>
+				<li><a href="${alben}">Alle Alben</a></li>
+				<li><a href="${trackShow}">Alle Tracks</a></li>
+				<c:choose>
+					<c:when test="${isAdmin=='true'}">
+						<li><a href="${trackUpload}">Track hochladen</a></li>
+						<li><a href="${keyword}">Schlüsselworte</a></li>
+						<li><a href="${category}">Kategorien</a></li>
+					</c:when>
+				</c:choose>
+			</ul>
+			<div id="login">
+				<c:choose>
+					<c:when test="${empty username}">
 			Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
-				</c:when>
-				<c:when test="${not empty username}">
+					</c:when>
+					<c:when test="${not empty username}">
 			Sie sind als <strong>${username}</strong> angemeldet.
 			<form name="logout" action="controller" method="get">
-						<button name="action" type="submit" value="Logout"
-							class="buttonslog">Logout</button>
-					</form>
-				</c:when>
-			</c:choose>
-		</div>
+							<button name="action" type="submit" value="Logout"
+								class="buttonslog">Logout</button>
+						</form>
+					</c:when>
+				</c:choose>
+			</div>
 
-		<div id="search">
-			<!-- just for displaying purposes, not linked with bean so far -->
-			<input type="text" /><input type="button" value="Suchen" />
-		</div><!-- search -->
-	</div><!-- top -->
-	<br />
-	<br />
-	<div id="main">
+			<div id="search">
+				<!-- just for displaying purposes, not linked with bean so far -->
+				<input type="text" /><input type="button" value="Suchen" />
+			</div>
+			<!-- search -->
+		</div>
+		<!-- top -->
+		<br /> <br />
+		<div id="main">

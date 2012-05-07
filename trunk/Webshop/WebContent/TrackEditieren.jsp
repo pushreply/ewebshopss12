@@ -9,7 +9,7 @@
 
 	<form action="controller" method="get" enctype="multipart/form-data">
 	<input type="hidden" name="uuid" size="30" maxlength="30" value="<c:out value="${track.identifier}"/>"/>
-  <table border="0" cellpadding="0" cellspacing="4">
+  <table>
     <tr>
       <td align="right">Titel:</td>
       <td><input type="text" name="titel" size="30" maxlength="30" value="<c:out value="${track.trackTitle}"  default="N/A" />"/></td>
