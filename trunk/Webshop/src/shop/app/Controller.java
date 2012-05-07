@@ -24,6 +24,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import shop.actions.AbstractAction;
 import shop.actions.AlbumAction;
 import shop.actions.CategoryAction;
+import shop.actions.HomeAction;
 import shop.actions.KeywordAction;
 import shop.actions.LoginAction;
 import shop.actions.LogoutAction;
@@ -53,6 +54,7 @@ public class Controller extends HttpServlet {
 		super.init(config);
 
 		// Map initialisieren mit allen benötigten Actions
+		actionMap.put("home", new HomeAction());
 		actionMap.put("category", new CategoryAction());
 		actionMap.put("track", new TrackAction());
 		actionMap.put("editieren", new TrackAction());
