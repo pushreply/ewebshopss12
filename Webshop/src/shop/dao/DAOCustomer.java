@@ -60,6 +60,11 @@ public class DAOCustomer extends DBCustomer{
 		query.constrain(DBCustomer.class);
 		query.descend("username").constrain(username);
 		ObjectSet<DBCustomer> result = query.execute();
-		return result.next();
+		if(result.hasNext()){
+			return result.next();
+		}
+		else{
+			return null;
+		}
 	}
 }
