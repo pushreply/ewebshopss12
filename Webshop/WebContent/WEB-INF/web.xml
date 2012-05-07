@@ -36,17 +36,7 @@
   <servlet-mapping>
     <servlet-name>LoadTrack</servlet-name>
     <url-pattern>/loadtrack</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>ErrorHandler</servlet-name>
-    <servlet-class>shop.util.ErrorHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ErrorHandler</servlet-name>
-    <url-pattern>/errorhandler</url-pattern>
-  </servlet-mapping>
-  
-  
+  </servlet-mapping>  
   
   <servlet>
     <servlet-name>imageDisplayProcess</servlet-name>
@@ -56,8 +46,6 @@
     <servlet-name>imageDisplayProcess</servlet-name>
     <url-pattern>/imageDisplayProcess</url-pattern>
   </servlet-mapping>
-  
-  
   
   <error-page>
     <error-code>404</error-code>

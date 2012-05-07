@@ -2,41 +2,91 @@
 
 /*ist einfach nur irgendwas um zu testen ob die CSS datei richtig eingebunden wird*/
 body {
-	background-color: #9b9b9b;
+	background-color: #CCCCFF;
+	text-align : center ;
+}
+#wrapper {
+	text-align : left ;
+	max-width: 1000px;
+	min-width: 400px;
+	background-color: #FFFFFF;
+	margin-left : auto ;
+	margin-right : auto ;
+	min-height: 500px;
+	padding: 2em;
 }
 
 a {
 	font-weight: bold;
-	color: #000000;
+	color: #5500dd;
 	text-decoration: none;
+}
+
+ul {
+	padding: 0px;
+	margin: 0px;
 }
 
 h1,h2,h3,h4 {
 	font-family: Garamond;
-	color: #000000;
+	color: #2222FF;
 }
 
-.topmenue {
-	margin: 0 auto;
-	padding: 0;
+#topmenue {
+	margin-left: -5px;
 }
 
-.topmenue li {
-	text-align: middle;
+#login {
+	margin-top: 1em;
+	clear:both;
+	float:right;
+}
+
+#search {
+	margin-top: 1em;
+	float:left;
+}
+
+#topmenue li {
 	float: left;
 	list-style: none;
 	padding: 3px 10px 3px 10px;
-	margin: 5px;
+	margin: 0px 5px;
 	border: 1px solid #CCC;
-	color: #000000;
 }
 
+#footer {
+	margin-top: 3em;
+	clear:both;
+	color: #AAAAAA;
+	text-align: center;
+}
+
+#copyright{
+	margin-top: 1em;
+}
+
+#logo {
+	margin-top: 1em;
+}
+
+#names {
+	float: left;
+}
+
+#names li {
+	float: left;
+	list-style: none;
+	margin: 5px;
+}
+
+#main {
+	margin-top: 3em;
+	clear:both;
+	position: relative;
+	float:none;
+}
 #errorheading {
 	font-weight: bold;
 	color: #AA0000;
-}
-
-input{
-	color: #000000;
-	background-color: #f3f3f3;
 }

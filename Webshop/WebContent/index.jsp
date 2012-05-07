@@ -3,9 +3,7 @@
 <c:import url="header.jsp">
 	<c:param name="title" value="Webshop Startseite" />
 </c:import>
-<p>
-	<b>Webshop Startseite</b>
-<p>
+<h1>Webshop Startseite</h1>
 <p>Menü</p>
 
 <br>
@@ -16,7 +14,7 @@
 
 <form action="controller" method="post">
 	<!-- Controller-Servlet wird aufgerufen und entscheidet, wohin geleitet wird -->
-	<input type="hidden" name="action" value="track"> 
+	<input type="hidden" name="logout" value="track"> 
 	<input type="submit" name="upload" value="Track hochladen"> <br>
 	<input type="submit" name="show" value="Tracks anzeigen"> <br>
 </form>
