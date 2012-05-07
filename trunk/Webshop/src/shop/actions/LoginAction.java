@@ -58,7 +58,7 @@ public class LoginAction extends AbstractAction {
 				System.out.println("login OK, return to index.jsp");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", loginUsername);
-				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("controller?action=home");
 
 				try {
 					disp.forward(request, response);
@@ -69,7 +69,7 @@ public class LoginAction extends AbstractAction {
 			}
 			else {
 				System.out.println("login failed: user/password is wrong, redo login.");
-				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("controller?action=login");
 				try {
 					disp.forward(request, response);
 				} catch (Exception e) {
