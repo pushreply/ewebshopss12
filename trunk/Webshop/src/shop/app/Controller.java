@@ -60,7 +60,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("Login", new LoginAction());
 		actionMap.put("Logout", new LoginAction());
 		actionMap.put("register", new RegisterAction());
-		actionMap.put("alben", new AlbumAction());
+		actionMap.put("album", new AlbumAction());
 		actionMap.put("albumAnzeigen", new AlbumAction());
 		actionMap.put("albumInFelder", new AlbumAction());
 		actionMap.put("albumBearbeiten", new AlbumAction());
@@ -84,6 +84,7 @@ public class Controller extends HttpServlet {
 		}
 
 		// Aufruf des passenden Controllers
+		System.out.println(request.getParameter("action"));
 		AbstractAction action = actionMap.get(request.getParameter("action"));
 		if (action != null)
 			action.processAndClose(request, response, db);
