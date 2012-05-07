@@ -61,6 +61,7 @@
     </c:forEach>
     </tr>
     <tr>
+    	<td align="right">Schlagw&oumlrte:</td>
         <c:forEach items="${keywordies}" var="keyword">
     	<td><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.identifier}"
     	${fn:contains(parts.keyword, '{keyword.identifier}') ? 'keywordied' : ''}>
