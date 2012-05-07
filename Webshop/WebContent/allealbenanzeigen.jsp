@@ -5,10 +5,15 @@
 </c:import>
 
  
-<h2>Alle Aben</h2>
+<h2>Alle Alben</h2>
  
  <c:forEach items="${Alben}" var="album">
- <img src="images/bild.jpg" width=120 height=130 alt="bild">
+ <c:if test="${empty album.cover}">
+       <img src="images/bild.jpg" width=120 height=130 alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
+ </c:if>
+ <c:if test="${ not empty album.cover}">
+       <img src="imageDisplayProcess?identifier=<c:out value="${album.identifier}"/>"  width=120 height=130 alt="${album.albumTitel} - ${album.artist}" title="${album.albumTitel} - ${album.artist}"/>
+ </c:if>
 
  <table>
 		<tr>

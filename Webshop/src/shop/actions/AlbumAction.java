@@ -112,7 +112,7 @@ public class AlbumAction extends AbstractAction{
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			}
-			disp = request.getRequestDispatcher("/controller?action=alben&alle=alleAlben");
+			disp = request.getRequestDispatcher("/controller?action=album&alle=alleAlben");
 		 }
 		
 		//Albumtracks anzeigen

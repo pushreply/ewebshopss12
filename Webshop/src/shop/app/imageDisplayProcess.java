@@ -24,6 +24,7 @@ import shop.util.ErrorHandler;
  */
 @WebServlet("/imageDisplayProcess")
 public class imageDisplayProcess extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -37,7 +38,7 @@ public class imageDisplayProcess extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ObjectContainer db = new DBObject().getConnection();
 		byte[] imageData= null;
@@ -45,20 +46,26 @@ public class imageDisplayProcess extends HttpServlet {
 		ErrorHandler errorHandler = new ErrorHandler();
 		try {
 			IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
+			
 			imageData = dao.read(request.getParameter("identifier")).getCover();
-		} catch (InstantiationException e) {
-			errorHandler.toUser(
-					"Etwas mit der Weiterleitung ist schief gelaufen.", e);
-		} catch (IllegalAccessException e) {
-			errorHandler
-			.toUser("Ein technischer Fehler ist aufgetreten", e);
+			
+
+		} catch (Exception e) {
 		}
-		response.setContentType("image/jpeg");
+		
+		if(imageData == null){
+			request.setAttribute("noimage", "sdfd");
+		}
+
+        
+	    response.setContentType("image/jpeg");
 		response.setContentLength(imageData.length);
 		response.getOutputStream().write(imageData);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
 		
 	}
+	
+	
 
 }

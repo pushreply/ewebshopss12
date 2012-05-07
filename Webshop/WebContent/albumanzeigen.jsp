@@ -7,8 +7,14 @@
 <h3>Das Album ${album.albumTitel}</h3>
 
  <!--  <img src="images/bild.jpg" width=120 height=130 alt="bild"> -->
-
- <img src="imageDisplayProcess.do?identifier=<c:out value="${album.identifier}" />" width="120" height="130" alt="Albumcover"/>
+ 
+ <c:if test="${empty album.cover}">
+       <img src="images/bild.jpg" width=120 height=130 alt="bild" alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
+ </c:if>
+ <c:if test="${ not empty album.cover}">
+       <img src="imageDisplayProcess?identifier=<c:out value="${album.identifier}"/>"  width=120 height=130 alt="${album.albumTitel} - ${album.artist}" title="${album.albumTitel} - ${album.artist}"/>
+ </c:if>
+ 
  
  <table >
 		<tr>
