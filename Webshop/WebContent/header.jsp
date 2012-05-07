@@ -44,7 +44,7 @@ Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 		<li><a href="${alben}">Alle Alben</a></li>
 		<li><a href="${trackShow}">Alle Tracks</a></li>
 		<c:choose>
-			<c:when test="${username=='Admin'}">
+			<c:when test="${isAdmin=='true'}">
 					<li><a href="${trackUpload}">Track hochladen</a></li>
 					<li><a href="${keyword}">Schlüsselworte</a></li>
 					<li><a href="${category}">Kategorien</a></li>
