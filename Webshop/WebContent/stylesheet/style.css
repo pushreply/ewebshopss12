@@ -2,18 +2,18 @@
 
 /*ist einfach nur irgendwas um zu testen ob die CSS datei richtig eingebunden wird*/
 body {
-	background-color: #EFEFFF;
+	background-color: #9b9b9b;
 }
 
 a {
 	font-weight: bold;
-	color: #0000DD;
+	color: #000000;
 	text-decoration: none;
 }
 
 h1,h2,h3,h4 {
 	font-family: Garamond;
-	color: #0000AA;
+	color: #000000;
 }
 
 .topmenue {
@@ -22,15 +22,21 @@ h1,h2,h3,h4 {
 }
 
 .topmenue li {
-	text-align: left;
+	text-align: middle;
 	float: left;
 	list-style: none;
 	padding: 3px 10px 3px 10px;
 	margin: 5px;
 	border: 1px solid #CCC;
+	color: #000000;
 }
 
 #errorheading {
 	font-weight: bold;
 	color: #AA0000;
+}
+
+input{
+	color: #000000;
+	background-color: #f3f3f3;
 }
