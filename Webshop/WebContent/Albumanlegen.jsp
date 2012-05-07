@@ -53,6 +53,7 @@
       <td><input type="text" name="albumanzahl" type="text" size="30" maxlength="40"></td>
     </tr>
     <tr>
+    	 <td align="right">Kategorie:</td>
         <c:forEach items="${categories}" var="category">
     	<td><input type="checkbox" id="{category.categoryName}" name="category" value="${category.identifier}"
     	${fn:contains(parts.category, '{category.identifier}') ? 'categoried' : ''}>
