@@ -29,11 +29,12 @@ public abstract class AbstractAction {
 	 *            the response of the servlet
 	 * @param db
 	 *            the open Database connection; it will be closed in this method
-	 * @throws IOException 
-	 * @throws ServletException 
+	 * @throws IOException
+	 * @throws ServletException
 	 */
 	protected abstract void process(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db) throws ServletException, IOException;
+			HttpServletResponse response, ObjectContainer db)
+			throws ServletException, IOException;
 
 	/**
 	 * calls the <code>process</code> method and finally closes the Database
@@ -44,15 +45,22 @@ public abstract class AbstractAction {
 	 * @param request
 	 * @param response
 	 * @param db
-	 * @throws IOException 
-	 * @throws ServletException 
+	 * @throws IOException
+	 * @throws ServletException
 	 */
 	public void processAndClose(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db) throws ServletException, IOException {
+			HttpServletResponse response, ObjectContainer db)
+			throws ServletException, IOException {
 		try {
+			if (request.getSession() != null
+					&& request.getSession().getAttribute("username") != null
+					&& request.getSession().getAttribute("username")
+							.equals("Admin"))
+				request.setAttribute("isAdmin", true);
 			process(request, response, db);
 		} catch (Exception e) {
-			errorHandler.toUser("Der Vorgang konnte nicht durchgeführt werden", e);
+			errorHandler.toUser("Der Vorgang konnte nicht durchgeführt werden",
+					e);
 		} finally {
 			if (db != null)
 				db.close();
