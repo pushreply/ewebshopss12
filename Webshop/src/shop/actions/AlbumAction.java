@@ -1,5 +1,7 @@
 package shop.actions;
 
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
+import shop.dto.DBCategory;
+import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
 
@@ -29,8 +33,25 @@ public class AlbumAction extends AbstractAction{
 		
 		
 		if (request.getParameter("upload") != null) {
+			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class, db);
+			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(DBKeyword.class, db);
+			List<DBCategory> categories = null;
+			List<DBKeyword> keywordies = null;
+			try {
+				categories = daoc.readAll();
+				keywordies = daok.readAll();
+				
+			} catch (Exception e)
+			{
+				errorHandler.toUser("Beim Laden der Kategorie und Keyword ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+			}
+			System.out.println(keywordies.size());
+			System.out.println(categories.size());
+			request.setAttribute("keywordies", keywordies);
+			request.setAttribute("categories",categories);
+			request.setAttribute("catsize", categories.size());
 			disp = request
-					.getRequestDispatcher("/trackhinzufuegen.jsp");
+					.getRequestDispatcher("/Albumanlegen.jsp");
 			
 		}
 		
