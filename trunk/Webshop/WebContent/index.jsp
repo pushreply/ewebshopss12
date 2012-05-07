@@ -23,6 +23,7 @@
 
 <form action="controller" method="post">
 	<input type="hidden" name="action" value="album">
+	<input type="submit" name="upload" value="Album hochladen"> <br>
 	<input type="submit" name="showalbum" value="Album anzeigen"> <br>
 </form>
 
