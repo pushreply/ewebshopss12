@@ -8,6 +8,12 @@
 
 <%@ page errorPage="/errorPage.jsp"%>
 
+<%
+response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+response.setHeader("Pragma","no-cache"); //HTTP 1.0
+response.setDateHeader ("Expires", 0); //prevent caching at the proxy server
+%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>${param.title}</title>
