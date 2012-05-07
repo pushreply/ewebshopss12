@@ -58,7 +58,7 @@ public class DAOCustomer extends DBCustomer{
 	public DBCustomer findUser(String username, ObjectContainer db){
 		Query query = db.query();
 		query.constrain(DBCustomer.class);
-		query.descend("username").constrain(username);
+		query.descend("username").constrain(username); //query.descend("table_column").constrain(param);
 		ObjectSet<DBCustomer> result = query.execute();
 		if(result.hasNext()){
 			return result.next();
