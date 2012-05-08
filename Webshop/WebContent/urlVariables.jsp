@@ -39,3 +39,8 @@
 	<c:param name="action" value="album" />
 	<c:param name="alle" value="alleAlben" />
 </c:url>
+
+<c:url var="uploadAlbum" value="controller">
+	<c:param name="action" value="album" />
+	<c:param name="upload" value="true" />
+</c:url>
