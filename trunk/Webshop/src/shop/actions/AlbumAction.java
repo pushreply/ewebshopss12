@@ -144,16 +144,6 @@ public class AlbumAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/controller?action=album&alle=alleAlben");
 		 }
 		
-		//Albumtracks anzeigen
-		else if ((request.getParameter("uuid2") != null)) {
-			try {
-				request.setAttribute("albumTracks",dao.read(request.getParameter("uuid2")));
-				System.out.print(dao.read(request.getParameter("uuid2")).getNumberOfDisks());
-			} catch (Exception e) {
-				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
-			} 
-			disp = request.getRequestDispatcher("/albumTracks.jsp");
-		} 
 		try {
 			disp.forward(request, response);
 		} catch (Exception e) {
