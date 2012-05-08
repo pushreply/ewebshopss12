@@ -87,7 +87,6 @@ public class Controller extends HttpServlet {
 		}
 
 		// Aufruf des passenden Controllers
-		System.out.println(request.getParameter("action"));
 		AbstractAction action = actionMap.get(request.getParameter("action"));
 		if (action != null)
 			action.processAndClose(request, response, db);
@@ -98,7 +97,6 @@ public class Controller extends HttpServlet {
 		 */
 
 		else if (ServletFileUpload.isMultipartContent(request)) {
-			System.out.println("ich bin in upload");
 			UploadMusicFile up = new UploadMusicFile(request, response, db);
 		} 
 		if (db != null)

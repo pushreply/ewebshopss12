@@ -16,12 +16,11 @@
 	<c:forEach items="${categories}" var="category">
 		<tr>
 			<td>${category.categoryName}</td>
-			<td><form action="controller" method="get">
-					<input type="hidden" name="deleteCategory"
-						value="${category.identifier}"> <input type="hidden"
-						name="action" value="category"> <input type="submit"
-						value="Delete">
-				</form></td>
+			<td><a
+				href="controller?action=category&deleteCategory=<c:out value="${category.identifier}"/>">
+					<img src="images/delete.png" alt="${category.categoryName} löschen"
+					title="${category.categoryName} löschen">
+			</a></td>
 		</tr>
 	</c:forEach>
 </table>
