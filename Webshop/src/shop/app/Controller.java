@@ -27,7 +27,6 @@ import shop.actions.CategoryAction;
 import shop.actions.HomeAction;
 import shop.actions.KeywordAction;
 import shop.actions.LoginAction;
-import shop.actions.LoginErrorAction;
 import shop.actions.LogoutAction;
 import shop.actions.RegisterAction;
 import shop.actions.TrackAction;
@@ -62,7 +61,6 @@ public class Controller extends HttpServlet {
 		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
 		actionMap.put("login", new LoginAction());
-		actionMap.put("loginerror", new LoginErrorAction());
 		actionMap.put("logout", new LogoutAction());
 		actionMap.put("register", new RegisterAction());
 		actionMap.put("album", new AlbumAction());
