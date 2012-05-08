@@ -40,6 +40,7 @@ public class AlbumAction extends AbstractAction{
 			try {
 				
 				dbalbum = dao.read(request.getParameter("delete"));
+				System.out.println(dbalbum.getTracks().size());
 				for(int i = 0; i < dbalbum.getTracks().size(); i++)
 				{
 					daot.delete(dbalbum.getTracks().get(i));
