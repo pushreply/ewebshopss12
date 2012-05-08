@@ -31,6 +31,24 @@ public class AlbumAction extends AbstractAction{
 		
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 		
+		if(request.getParameter("delete") != null)
+		{
+			try {
+				
+				dao.delete(request.getParameter("delete"));
+				
+			}catch (Exception e)
+			{
+				errorHandler.toUser("Beim Löschen des Album ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+			}
+			try {
+				request.setAttribute("Alben", dao.readAll());
+			} catch (Exception e) {
+				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+			} 
+		disp = request.getRequestDispatcher("/allealbenanzeigen.jsp");
+		}
+		
 		
 		if (request.getParameter("upload") != null) {
 			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class, db);
