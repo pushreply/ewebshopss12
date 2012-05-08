@@ -1,14 +1,14 @@
 package shop.dao;
 
 import java.util.List;
-import java.util.UUID;
+
+import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.Db4oException;
 import com.db4o.query.Predicate;
 import com.db4o.query.Query;
-
-import shop.dto.DBCustomer;
 
 /*
  * @author: roha0001
@@ -29,12 +29,17 @@ public class DAOCustomer extends DBCustomer{
 	 */
 	public boolean isMatchUser(final String username, final String password, ObjectContainer db){
 		List<DBCustomer> customerlist = db.query(new Predicate<DBCustomer>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6286611367952498800L;
+
 			public boolean match(DBCustomer candidate) {
 				return candidate.getUsername().equals(username) && candidate.getPassword().equals(password);
 			}
 		});
 		if (!customerlist.isEmpty()){return true;}
-		else{return false;}
+		else{throw new Db4oException("kein Match");}
 	}
 	
 	

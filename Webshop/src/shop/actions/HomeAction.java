@@ -17,7 +17,10 @@ public class HomeAction extends AbstractAction {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-		disp.forward(request, response);
+		try {
+			disp.forward(request, response);
+		} catch (Exception e) {
+			errorHandler.toUser("Beim Anmelden ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+		}
 	}
-
 }

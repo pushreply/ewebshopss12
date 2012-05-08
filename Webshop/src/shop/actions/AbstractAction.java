@@ -58,6 +58,8 @@ public abstract class AbstractAction {
 							.equals("Admin"))
 				request.setAttribute("isAdmin", true);
 			process(request, response, db);
+		} catch (ServletException e) {
+			throw e;
 		} catch (Exception e) {
 			errorHandler.toUser("Der Vorgang konnte nicht durchgeführt werden",
 					e);
