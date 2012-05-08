@@ -5,7 +5,7 @@
 	<c:param name="title" value="Album anzeigen" />
 </c:import>
 
-<h3>Das Album ${album.albumTitel}</h3>
+<h1>${album.albumTitel}</h1>
 
 <!--  <img src="images/bild.jpg" width=120 height=130 alt="bild"> -->
 
@@ -50,21 +50,42 @@
 		<td>Label:</td>
 		<td>${album.label}</td>
 	</tr>
+	<tr>
+		<td>Kategorien:</td>
+		<td><c:forEach items="${album.categories}" var="category">
+				<c:out value="${category.categoryName}" />, 
+		</c:forEach></td>
+	</tr>
+	<tr>
+		<td>Schlüsselworte:</td>
+		<td><c:forEach items="${album.keywords}" var="keyword">
+				<c:out value="${keyword.keywordName}"/>, 
+		</c:forEach></td>
+	</tr>
+
+	<c:if test="${isAdmin=='true'}">
+		<tr>
+			<td><form action="controller" method="get">
+					<input type="hidden" name="action" value="albumInFelder"> <input
+						type="hidden" name="uuid1" value="${album.identifier}"> <input
+						type="submit" value="Bearbeiten">
+				</form></td>
+			<td><form action="controller" method="post">
+					<input type="hidden" name="action" value="album"> <input
+						type="hidden" name="delete" value="${album.identifier}"> <input
+						type="submit" value="Album l&ouml;schen">
+				</form></td>
+		</tr>
+	</c:if>
 </table>
 <c:if test="${isAdmin=='true'}">
-	<form action="controller" method="get">
-		<input type="hidden" name="action" value="albumInFelder"> <input
-			type="hidden" name="uuid1" value="${album.identifier}"> <input
-			type="submit" value="Bearbeiten">
-	</form>
-
-	<form action="controller" method="post">
-		<input type="hidden" name="action" value="album"> <input
-			type="hidden" name="delete" value="${album.identifier}"> <input
-			type="submit" value="Album l&ouml;schen">
+	<h2>Neue Tracks hinzufügen</h2>
+	<form action="controller" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="identifier" value="${album.identifier}">
+		<input type="file" name="file" id="file"> <input type=submit
+			name="uploadFileSubmitButton" value='Upload File'>
 	</form>
 </c:if>
-
 <!--Tracks eines Albums -->
 <c:forEach var="currentDiskNumber" begin="1"
 	end="${album.numberOfDisks}">
