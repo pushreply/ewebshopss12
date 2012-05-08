@@ -59,7 +59,7 @@ public class StartServer implements ServerInfo, MessageRecipient {
     		
     		// Klasse Album
     		config.common().objectClass(DBAlbum.class).cascadeOnUpdate(true);
-    		config.common().objectClass(DBAlbum.class).cascadeOnDelete(true);
+    		config.common().objectClass(DBAlbum.class).cascadeOnDelete(false);
     		
     		// Klasse Category
     		config.common().objectClass(DBCategory.class).cascadeOnUpdate(true);
@@ -71,12 +71,12 @@ public class StartServer implements ServerInfo, MessageRecipient {
     		
     		// Klasse Items
     		config.common().objectClass(DBItems.class).cascadeOnUpdate(true);
-    		config.common().objectClass(DBItems.class).cascadeOnDelete(true);
+    		config.common().objectClass(DBItems.class).cascadeOnDelete(false);
     		
 
     		// Klasse Keyword
     		config.common().objectClass(DBKeyword.class).cascadeOnUpdate(true);
-    		config.common().objectClass(DBKeyword.class).cascadeOnDelete(true);
+    		config.common().objectClass(DBKeyword.class).cascadeOnDelete(false);
     		
     		// Klasse Order
     		config.common().objectClass(DBOrder.class).cascadeOnUpdate(true);
