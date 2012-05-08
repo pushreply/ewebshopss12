@@ -53,20 +53,20 @@
       <td><input type="text" name="albumanzahl" type="text" size="30" maxlength="40"></td>
     </tr>
     <tr>
-    	 <td align="right">Kategorie:</td>
-        <c:forEach items="${categories}" var="category">
-    	<td><input type="checkbox" id="{category.categoryName}" name="category" value="${category.identifier}"
+    	 <td align="right">Kategorie: </td>
+        <td><c:forEach items="${categories}" var="category">
+    	<li><input type="checkbox" id="{category.categoryName}" name="category" value="${category.identifier}"
     	${fn:contains(parts.category, '{category.identifier}') ? 'categoried' : ''}>
-    	<c:out value = "${category.categoryName}"/></td>
+    	<c:out value = "${category.categoryName}"/></li>
     </c:forEach>
     </tr>
     <tr>
-    	<td align="right">Schlagw&oumlrte:</td>
-        <c:forEach items="${keywordies}" var="keyword">
-    	<td><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.identifier}"
+    	<td align="right">Schlagw&oumlrte: </td>
+        <td><ul><c:forEach items="${keywordies}" var="keyword">
+    	<li><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.identifier}"
     	${fn:contains(parts.keyword, '{keyword.identifier}') ? 'keywordied' : ''}>
-    	<c:out value = "${keyword.keywordName}"/></td>
-    </c:forEach>
+    	<c:out value = "${keyword.keywordName}"/></li>
+    </c:forEach></ul></td>
     </tr>
     <tr>
       <td align="right">Cover-Page:</td>
