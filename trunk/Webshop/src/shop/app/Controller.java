@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -32,9 +31,6 @@ import shop.actions.RegisterAction;
 import shop.actions.TrackAction;
 import shop.actions.UploadMusicFile;
 import shop.dao.DBObject;
-import shop.dao.GenericDaoImpl;
-import shop.dao.IGenericDao;
-import shop.dto.DBTrack;
 import shop.util.ErrorHandler;
 
 import com.db4o.ObjectContainer;

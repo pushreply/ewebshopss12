@@ -29,13 +29,12 @@
 			<%@ include file="urlVariables.jsp"%>
 			<ul id="topmenue">
 				<li><a href="${home}">Home</a></li>
-				<li><a href="${alben}">Alle Alben</a></li>
-				<li><a href="${trackShow}">Alle Tracks</a></li>
+				<li><a href="${alben}">Alben Ansehen</a></li>
 				<c:choose>
 					<c:when test="${isAdmin=='true'}">
-						<li><a href="${trackUpload}">Track hochladen</a></li>
 						<li><a href="${keyword}">Schlüsselworte</a></li>
 						<li><a href="${category}">Kategorien</a></li>
+						<li><a href="${uploadAlbum}">Neues Album erstellen</a></li>
 					</c:when>
 				</c:choose>
 			</ul>

@@ -116,11 +116,12 @@ public class AlbumAction extends AbstractAction{
 			disp = request.getRequestDispatcher("/albumBearbeiten.jsp");
 		} 
 		
-		//Album bearbeiten
+		//Album updaten
 		else if ((request.getParameter("ident1") != null)) {
 			try {
 				dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
-				DBAlbum album = dao.read(request.getParameter("ident1"));
+				String identifier = request.getParameter("ident1");
+				DBAlbum album = dao.read(identifier);
 				
 			String titel = request.getParameter("titel");
 			String artist = request.getParameter("artist");
@@ -136,12 +137,12 @@ public class AlbumAction extends AbstractAction{
 			album.setAmount(anzahl);
 			album.setNumberOfTracks(trackAnzahl);
 			album.setLabel(label);
-			
 			dao.update(album);
+			request.setAttribute("album",dao.read(identifier));
+			disp = request.getRequestDispatcher("/albumanzeigen.jsp");
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
 			}
-			disp = request.getRequestDispatcher("/controller?action=album&alle=alleAlben");
 		 }
 		
 		try {
@@ -153,4 +154,5 @@ public class AlbumAction extends AbstractAction{
 	}
 
 }
+
 

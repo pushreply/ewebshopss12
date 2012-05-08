@@ -50,36 +50,24 @@
 		<td>Label:</td>
 		<td>${album.label}</td>
 	</tr>
-
-	<tr>
-		<td><c:choose>
-				<c:when test="${isAdmin=='true'}">
-					<form action="controller" method="get">
-						<input type="hidden" name="action" value="albumInFelder">
-						<input type="hidden" name="uuid1" value="${album.identifier}">
-						<input type="submit" value="Bearbeiten">
-					</form>
-				</c:when>
-			</c:choose></td>
-		<td><form action="controller" method="post">
-				<input type="hidden" name="action" value="albumTracks"> <input
-					type="hidden" name="uuid2" value="${album.identifier}"> <input
-					type="submit" value="Tracks anzeigen">
-			</form></td>
-		<td><c:choose>
-				<c:when test="${isAdmin=='true'}">
-					<form action="controller" method="post">
-						<input type="hidden" name="action" value="album"> <input
-							type="hidden" name="delete" value="${album.identifier}">
-						<input type="submit" value="Album l&ouml;schen">
-					</form>
-				</c:when>
-			</c:choose></td>
-	</tr>
 </table>
+<c:if test="${isAdmin=='true'}">
+	<form action="controller" method="get">
+		<input type="hidden" name="action" value="albumInFelder"> <input
+			type="hidden" name="uuid1" value="${album.identifier}"> <input
+			type="submit" value="Bearbeiten">
+	</form>
+
+	<form action="controller" method="post">
+		<input type="hidden" name="action" value="album"> <input
+			type="hidden" name="delete" value="${album.identifier}"> <input
+			type="submit" value="Album l&ouml;schen">
+	</form>
+</c:if>
 
 <!--Tracks eines Albums -->
-<c:forEach var="currentDiskNumber" begin="1" end="${album.numberOfDisks}">
+<c:forEach var="currentDiskNumber" begin="1"
+	end="${album.numberOfDisks}">
 	<h2>
 		<c:out value="${currentDiskNumber}" />
 		.Disk

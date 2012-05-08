@@ -20,7 +20,7 @@
   //-->
   </script>
 <body>
-  <h3>Abum anlegen</h3>
+  <h3>Album anlegen</h3>
 
 <form action="controller" method="post" enctype="multipart/form-data">
   <table>
