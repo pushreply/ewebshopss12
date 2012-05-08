@@ -17,7 +17,7 @@ import shop.dto.DBCustomer;
 import com.db4o.ObjectContainer;
 
 /**
- * This Action handles all needs of categories
+ * This Action handles LOGIN Function
  * 
  * @author roha0001
  * 
@@ -27,56 +27,37 @@ import com.db4o.ObjectContainer;
 public class LoginAction extends AbstractAction {
 
 	@Override
-	protected void process(HttpServletRequest request, HttpServletResponse response, ObjectContainer db) throws ServletException {
+	protected void process(HttpServletRequest request,
+			HttpServletResponse response, ObjectContainer db)
+			throws ServletException {
 
-		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
 		DAOCustomer customer = new DAOCustomer();
 
 		/*
-		 * LOGIN: Login ok -> index.jsp 
-		 * Login error (username/password is wrong/empty) -> loginerror.jsp -> login.jsp
+		 * LOGIN: Login ok -> index.jsp Login error (username/password is
+		 * wrong/empty) -> loginerror.jsp -> login.jsp
 		 */
 
 		String loginUsername = request.getParameter("username");
 		String loginPassword = request.getParameter("password");
 		boolean match = false;
-//		RequestDispatcher disp = null;
-		
-		System.out.println("Login parameters are set: " + loginUsername + ":"+ loginPassword);
-		
-		if (!((loginUsername == null || loginUsername.isEmpty()) && !(loginPassword == null || loginPassword.isEmpty()))) {
-			
-			System.out.println("Username and password is not empty, processing login");
-			try {
-				match = customer.isMatchUser(loginUsername, loginPassword, db);
-			} catch (Exception e) {
-				errorHandler.toUser("Beim Anmelden ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
-			}
+		// RequestDispatcher disp = null;
+
+		System.out.println("Login parameters are set: " + loginUsername + ":"
+				+ loginPassword);
+		try {
+			match = customer.isMatchUser(loginUsername, loginPassword, db);
 
 			System.out.println("Comparing data from DB and user input");
-			if (match) {
-				System.out.println("login OK, return to index.jsp");
-				HttpSession session = request.getSession(true);
-				session.setAttribute("username", loginUsername);
-				RequestDispatcher disp = request.getRequestDispatcher("controller?action=home");
+			System.out.println("login OK, return to index.jsp");
+			HttpSession session = request.getSession(true);
+			session.setAttribute("username", loginUsername);
+			RequestDispatcher disp = request
+					.getRequestDispatcher("controller?action=home");
 
-				try {
-					disp.forward(request, response);
-				} catch (Exception e) {
-					errorHandler.toUser(
-							"Etwas mit der Weiterleitung ist schief gelaufen.", e);
-				}
-			}
-			else {
-				System.out.println("login failed: user/password is wrong, redo login.");
-				RequestDispatcher disp = request.getRequestDispatcher("controller?action=login");
-				try {
-					disp.forward(request, response);
-				} catch (Exception e) {
-					errorHandler.toUser(
-							"Etwas mit der Weiterleitung ist schief gelaufen.", e);
-				}
-			}
+			disp.forward(request, response);
+		} catch (Exception e) {
+			errorHandler.toUser("Benutzername oder Passwort ist falsch.", e);
 		}
 	}
 }

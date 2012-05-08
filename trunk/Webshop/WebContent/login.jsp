@@ -6,11 +6,11 @@
 <form name="login" action="controller" method="post" accept-charset="ISO-8859-1">
 	<ul>
 		<li>Benutzername: <input name="username" type="text" />
-    						<input name="action" type="hidden" value="Login" />
+    						<input name="action" type="hidden" value="login" />
     						<!-- <input name="username" type="hidden" value="identifier" /> -->
     						</li>
 		<li>Kennwort: <input name="password" type="password" />
-						<input name="action" type="hidden" value="Login"/></li>
+						<input name="action" type="hidden" value="login"/></li>
 	</ul>
 	<input type="submit" name="action" value="Login"/>
 	<p>

@@ -30,7 +30,7 @@ public class LogoutAction  extends AbstractAction{
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 
-		if (request.getParameter("Logout") != null) {
+		if (request.getParameter("logout") != null) {
 			RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
 			try {
 				
