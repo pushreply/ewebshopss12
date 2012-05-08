@@ -51,6 +51,7 @@ public class imageDisplayProcess extends HttpServlet {
 			
 
 		} catch (Exception e) {
+			errorHandler.toUser("Beim Laden des Covers ist ein Fehler aufgetreten, bitte widerholen Sie es", e);
 		}
 		
 		if(imageData == null){
