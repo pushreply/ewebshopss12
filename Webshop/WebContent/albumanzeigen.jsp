@@ -79,9 +79,9 @@
 </table>
 
 <!--Tracks eines Albums -->
-<c:forEach var="i" begin="1" end="${album.numberOfDisks}">
+<c:forEach var="currentDiskNumber" begin="1" end="${album.numberOfDisks}">
 	<h2>
-		<c:out value="${i}" />
+		<c:out value="${currentDiskNumber}" />
 		.Disk
 	</h2>
 	<table>
@@ -98,27 +98,30 @@
 			</c:choose>
 		</tr>
 		<c:forEach items="${album.tracks}" var="track">
-			<tr>
-				<td>${track.trackNumber}</td>
-				<td>${track.trackTitle}</td>
-				<td>${track.trackArtist}</td>
-				<td>${track.trackDate}</td>
-				<td>
-					<form action="loadtrack" method="get">
-						<input type="hidden" name="identifier" value="${track.identifier}">
-						<input type="submit" value="Play">
-					</form>
-				</td>
-				<td><c:choose>
-						<c:when test="${isAdmin=='true'}">
-							<form action="controller" method="get">
-								<input type="hidden" name="action" value="editieren"> <input
-									type="hidden" name="identifier" value="${track.identifier}">
-								<input type="submit" value="editieren">
-							</form>
-						</c:when>
-					</c:choose></td>
-			</tr>
+			<c:if test="${track.trackDiskNumber eq currentDiskNumber}">
+				<tr>
+					<td>${track.trackNumber}</td>
+					<td>${track.trackTitle}</td>
+					<td>${track.trackArtist}</td>
+					<td>${track.trackDate}</td>
+					<td>
+						<form action="loadtrack" method="get">
+							<input type="hidden" name="identifier"
+								value="${track.identifier}"> <input type="submit"
+								value="Play">
+						</form>
+					</td>
+					<td><c:choose>
+							<c:when test="${isAdmin=='true'}">
+								<form action="controller" method="get">
+									<input type="hidden" name="action" value="editieren"> <input
+										type="hidden" name="identifier" value="${track.identifier}">
+									<input type="submit" value="editieren">
+								</form>
+							</c:when>
+						</c:choose></td>
+				</tr>
+			</c:if>
 		</c:forEach>
 	</table>
 </c:forEach>
