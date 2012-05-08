@@ -27,10 +27,6 @@
 	<c:param name="action" value="login" />
 </c:url>
 
-<c:url var="loginerror" value="controller">
-	<c:param name="action" value="loginerror" />
-</c:url>
-
 <c:url var="logout" value="controller">
 	<c:param name="action" value="logout" />
 </c:url>
