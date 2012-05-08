@@ -46,9 +46,9 @@ public class RegisterAction extends AbstractAction {
 		/*
 		 * check whether the proposed username and password is empty..
 		 */
-		if (!((newUsername == null || newUsername.isEmpty())
+		if (!(newUsername == null || newUsername.isEmpty())
 				&& !(newPassword1 == null || newPassword1.isEmpty()) && 
-				!(newPassword2 == null || newPassword2.isEmpty()))) {
+				!(newPassword2 == null || newPassword2.isEmpty())) {
 			/*
 			 * ..and whether the passwords are identical.
 			 */
