@@ -12,6 +12,7 @@ import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
 import shop.dto.DBCategory;
 import shop.dto.DBKeyword;
+import shop.dto.DBTrack;
 
 import com.db4o.ObjectContainer;
 
@@ -19,6 +20,7 @@ import com.db4o.ObjectContainer;
 
 /**
  * @author Mukunzi
+ * @author Sergej Schneider
  *
  */
 
@@ -33,7 +35,15 @@ public class AlbumAction extends AbstractAction{
 		
 		if(request.getParameter("delete") != null)
 		{
+			DBAlbum dbalbum = null;
+			IGenericDao<DBTrack> daot = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
 			try {
+				
+				dbalbum = dao.read(request.getParameter("delete"));
+				for(int i = 0; i < dbalbum.getTracks().size(); i++)
+				{
+					daot.delete(dbalbum.getTracks().get(i));
+				}
 				
 				dao.delete(request.getParameter("delete"));
 				
