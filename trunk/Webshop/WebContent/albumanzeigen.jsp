@@ -50,6 +50,11 @@
 						<input type="hidden"  name="uuid2" value="${album.identifier}">
 						<input type="submit"  value="Tracks anzeigen">
 					</form></td>
+				<td><form action="controller" method="post">
+				        <input type="hidden"  name="action" value="album">
+				        <input type="hidden"  name="delete" value="${album.identifier}">
+						<input type="submit"  value="Album l&ouml;schen">
+					</form></td>
 		</tr>
 	</table>
 <c:import url="footer.jsp" />
