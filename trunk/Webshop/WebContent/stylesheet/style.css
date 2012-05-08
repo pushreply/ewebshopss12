@@ -45,6 +45,11 @@ ul {
 	margin: 0px;
 }
 
+li {
+	list-style: none;
+	margin: 5px;
+}
+
 h1,h2,h3,h4 {
 	font-family: Garamond;
 	color: #2222FF;
