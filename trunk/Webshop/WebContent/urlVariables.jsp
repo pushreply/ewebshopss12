@@ -29,6 +29,7 @@
 
 <c:url var="logout" value="controller">
 	<c:param name="action" value="logout" />
+	<c:param name="logout" value="logout"/>
 </c:url>
 
 <c:url var="register" value="controller">
