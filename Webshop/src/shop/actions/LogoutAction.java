@@ -17,7 +17,7 @@ import shop.dto.DBCustomer;
 import com.db4o.ObjectContainer;
 
 /**
- * This Action handles all needs of categories
+ * This Action handles LOGOUT
  * 
  * @author roha0001
  * 
