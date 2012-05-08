@@ -151,8 +151,8 @@ public class TestDaten {
 			List<DBTrack> albumTracks = addRandom(allTracks);
 
 			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
-					+ i + "_" + i, (int) Math.random() * 3, Math.random() * 20,
-					(int) Math.random() * 500, (int) albumTracks.size(),
+					+ i + "_" + i, (int) (Math.random() * 2+1), (int) (Math.random() * 20)+1,
+					(int) (Math.random() * 500)+1, (int) albumTracks.size(),
 					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
 					albumCategories, albumTracks));
 		}
