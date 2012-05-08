@@ -49,6 +49,7 @@
 			<form name="logout" action="controller" method="get">
 							<button name="action" type="submit" value="Logout"
 								class="buttonslog">Logout</button>
+								<input type="hidden" name="Logout" value="Logout" />
 						</form>
 					</c:when>
 				</c:choose>
