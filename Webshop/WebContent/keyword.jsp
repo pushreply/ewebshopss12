@@ -16,12 +16,11 @@
 	<c:forEach items="${keywords}" var="keyword">
 		<tr>
 			<td>${keyword.keywordName}</td>
-			<td><form action="controller" method="get">
-					<input type="hidden" name="deleteKeyword"
-						value="${keyword.identifier}"> <input type="hidden"
-						name="action" value="keyword"> <input type="submit"
-						value="Delete">
-				</form></td>
+			<td>
+				<a href="controller?action=keyword&deleteKeyword=<c:out value="${keyword.identifier}"/>">
+					<img src="images/delete.png" alt="${keyword.keywordName} löschen" title="${keyword.keywordName} löschen">
+				</a>
+			</td>
 		</tr>
 	</c:forEach>
 </table>
