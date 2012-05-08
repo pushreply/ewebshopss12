@@ -90,7 +90,8 @@ public class UploadMusicFile {
 				db);
 		DBAlbum dbalbum = null;
 		try {
-			if (map.getParameter("identifier") != null && !map.getParameter("identifier").isEmpty()) {
+			if (map.getParameter("identifier") != null
+					&& !map.getParameter("identifier").isEmpty()) {
 				dbalbum = daoa.read(map.getParameter("identifier"));
 				dao.create(dbTrack);
 				dbalbum.setTracks(dbTrack);
@@ -106,8 +107,9 @@ public class UploadMusicFile {
 
 		}
 		try {
-			request.getRequestDispatcher("/trackhinzufuegen.jsp").forward(
-					request, response);
+			request.setAttribute("isAdmin", true);
+			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
+					response);
 		} catch (IOException e) {
 			errorHandler.toUser(
 					"Es tut uns leid, wir haben ein internes Problem", e);
@@ -121,33 +123,32 @@ public class UploadMusicFile {
 
 		try {
 			MultipartMap map = new MultipartMap(request, this);
-			
+
 			DBAlbum dbalbum = new DBAlbum();
-			
+
 			List<DBCategory> categories = new LinkedList<DBCategory>();
 			String[] category = map.getParameterValues("category");
-			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class,db);
-			for(int i = 0; i <= category.length-1; i++)
-			{
-				categories.add(daoc.read(category[i]));	
+			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(
+					DBCategory.class, db);
+			for (int i = 0; i <= category.length - 1; i++) {
+				categories.add(daoc.read(category[i]));
 			}
-			
+
 			// Category in DBAlbum reinsetzen
 			dbalbum.setCategories(categories);
-			
+
 			List<DBKeyword> keywordies = new LinkedList<DBKeyword>();
 			String[] keyword = map.getParameterValues("keyword");
-			
-			
-			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(DBKeyword.class,db);
-			
-			for(int i = 0; i <= keyword.length-1; i++)
-			{
-				keywordies.add(daok.read(keyword[i]));	
+
+			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
+					DBKeyword.class, db);
+
+			for (int i = 0; i <= keyword.length - 1; i++) {
+				keywordies.add(daok.read(keyword[i]));
 			}
-			
+
 			dbalbum.setKeywords(keywordies);
-			
+
 			dbalbum.setAlbumTitel(map.getParameter("titel"));
 			dbalbum.setArtist(map.getParameter("artist"));
 			dbalbum.setPrice(Double.parseDouble(map.getParameter("price")));
@@ -162,10 +163,11 @@ public class UploadMusicFile {
 					.getFile("coverpage")));
 			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(
 					DBAlbum.class, db);
-			daoAlbum.create(dbalbum);
-			request.setAttribute("album", dbalbum);
-			request.getRequestDispatcher("/trackhinzufuegen.jsp").forward(
-					request, response);
+			String identifier = daoAlbum.create(dbalbum);
+			request.setAttribute("isAdmin", true);
+			request.setAttribute("album", daoAlbum.read(identifier));
+			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
+					response);
 		} catch (Exception e) {
 			errorHandler.toUser("Bitte geben Sie eine MP3 Datei an", e);
 		}
