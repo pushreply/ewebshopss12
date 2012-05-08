@@ -45,11 +45,7 @@
 					</c:when>
 					<c:when test="${not empty username}">
 			Sie sind als <strong>${username}</strong> angemeldet.
-			<form name="logout" action="controller" method="get">
-							<button name="action" type="submit" value="logout"
-								class="buttonslog">Logout</button>
-								<input type="hidden" name="logout" value="logout" />
-						</form>
+						<a href="${logout}">Logout</a>
 					</c:when>
 				</c:choose>
 			</div>
