@@ -38,7 +38,7 @@
 
 <c:url var="alben" value="controller">
 	<c:param name="action" value="album" />
-	<c:param name="alle" value="alleAlben" />
+	<c:param name="show" value="all" />
 </c:url>
 
 <c:url var="uploadAlbum" value="controller">

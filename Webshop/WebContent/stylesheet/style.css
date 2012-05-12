@@ -30,6 +30,7 @@ body {
 	padding: 0.5em;
 }
 
+
 .album-item img{
 	border: 5px solid #EEE;
 }
@@ -122,4 +123,9 @@ h1,h2,h3,h4 {
 #errorheading {
 	font-weight: bold;
 	color: #AA0000;
+}
+
+.table-label{
+	vertical-align: top;
+	text-align: right;
 }

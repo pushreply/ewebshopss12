@@ -53,17 +53,11 @@ public class Controller extends HttpServlet {
 		actionMap.put("home", new HomeAction());
 		actionMap.put("category", new CategoryAction());
 		actionMap.put("track", new TrackAction());
-		actionMap.put("editieren", new TrackAction());
-		actionMap.put("TrackEditierenButton", new TrackAction());
 		actionMap.put("keyword", new KeywordAction());
 		actionMap.put("login", new LoginAction());
 		actionMap.put("logout", new LogoutAction());
 		actionMap.put("register", new RegisterAction());
 		actionMap.put("album", new AlbumAction());
-		actionMap.put("albumAnzeigen", new AlbumAction());
-		actionMap.put("albumInFelder", new AlbumAction());
-		actionMap.put("albumBearbeiten", new AlbumAction());
-		actionMap.put("albumTracks", new AlbumAction());
 		
 		// more "put" go here
 	}
