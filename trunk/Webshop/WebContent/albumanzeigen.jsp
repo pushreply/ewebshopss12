@@ -66,8 +66,8 @@
 	<c:if test="${isAdmin=='true'}">
 		<tr>
 			<td><form action="controller" method="get">
-					<input type="hidden" name="action" value="albumInFelder"> <input
-						type="hidden" name="uuid1" value="${album.identifier}"> <input
+					<input type="hidden" name="action" value="album"> <input
+						type="hidden" name="changeAlbumInfo" value="${album.identifier}"> <input
 						type="submit" value="Bearbeiten">
 				</form></td>
 			<td><form action="controller" method="post">
@@ -82,8 +82,8 @@
 	<h2>Neue Tracks hinzufügen</h2>
 	<form action="controller" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="identifier" value="${album.identifier}">
-		<input type="file" name="file" id="file"> <input type=submit
-			name="uploadFileSubmitButton" value='Upload File'>
+		<input type="file" name="file" id="file">
+		<input type=submit value='Upload File'>
 	</form>
 </c:if>
 <!--Tracks eines Albums -->
@@ -117,18 +117,19 @@
 						<form action="loadtrack" method="get">
 							<input type="hidden" name="identifier"
 								value="${track.identifier}"> <input type="submit"
-								value="Play">
+								value="Abspielen">
 						</form>
 					</td>
-					<td><c:choose>
-							<c:when test="${isAdmin=='true'}">
+					<c:if test="${isAdmin=='true'}">
+							<td>
 								<form action="controller" method="get">
-									<input type="hidden" name="action" value="editieren"> <input
-										type="hidden" name="identifier" value="${track.identifier}">
-									<input type="submit" value="editieren">
+									<input type="hidden" name="action" value="track">
+									<input type="hidden" name="changeTrackData" value="${track.identifier}">
+									<input type="hidden" name="albumIdentifier" value="${album.identifier}">
+									<input type="submit" value="Editieren">
 								</form>
-							</c:when>
-						</c:choose></td>
+							</td>
+						</c:if>
 				</tr>
 			</c:if>
 		</c:forEach>

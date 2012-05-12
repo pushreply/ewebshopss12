@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ include file="header.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:import url="header.jsp">
+	<c:param name="title" value="Album anlegen" />
+</c:import>
 <head>
 <title>Album anlegen</title>
 </head>
@@ -25,35 +28,35 @@
 <form action="controller" method="post" enctype="multipart/form-data">
   <table>
     <tr>
-      <td align="right">Titel:</td>
-      <td><input type="text" name="titel" type="text" size="30" maxlength="30"></td>
+      <td class="table-label">Titel:</td>
+      <td><input type="text" name="titel" type="text"></td>
     </tr>
     <tr>
-      <td align="right">Artist:</td>
-      <td><input type="text" name="artist" type="text" size="30" maxlength="40"></td>
+      <td  class="table-label">Artist:</td>
+      <td><input type="text" name="artist" type="text"></td>
     </tr>
     <tr>
-      <td align="right">Price:</td>
-      <td><input type="text" name="price" type="text" size="30" maxlength="40"></td>
+      <td class="table-label">Price:</td>
+      <td><input type="text" name="price" type="text"></td>
     </tr>
     <tr>
-      <td align="right">Label:</td>
-      <td><input type="text" name="label" type="text" size="30" maxlength="40"></td>
+      <td  class="table-label">Label:</td>
+      <td><input type="text" name="label" type="text"></td>
     </tr>
     <tr>
-      <td align="right">Trackanzahl:</td>
-      <td><input type="text" name="trackanzahl" type="text" size="30" maxlength="40"></td>
+      <td  class="table-label">Trackanzahl:</td>
+      <td><input type="text" name="trackanzahl" type="text"></td>
     </tr>
     <tr>
-      <td align="right">Diskanzahl:</td>
-      <td><input type="text" name="diskanzahl" type="text" size="30" maxlength="40"></td>
+      <td  class="table-label">Diskanzahl:</td>
+      <td><input type="text" name="diskanzahl" type="text"></td>
     </tr>
 	<tr>
-      <td align="right">Album Anzahl</td>
-      <td><input type="text" name="albumanzahl" type="text" size="30" maxlength="40"></td>
+      <td  class="table-label">Album Anzahl</td>
+      <td><input type="text" name="albumanzahl" type="text"></td>
     </tr>
     <tr>
-    	 <td align="right">Kategorie: </td>
+    	 <td  class="table-label">Kategorie: </td>
         <td><c:forEach items="${categories}" var="category">
     	<li><input type="checkbox" id="{category.categoryName}" name="category" value="${category.identifier}"
     	${fn:contains(parts.category, '{category.identifier}') ? 'categoried' : ''}>
@@ -61,23 +64,23 @@
     </c:forEach>
     </tr>
     <tr>
-    	<td align="right">Schlagw&oumlrte: </td>
-        <td><ul><c:forEach items="${keywordies}" var="keyword">
+				<td class="table-label">Schlagw&ouml;rter:</td>
+				<td><ul class="bulletless-list"><c:forEach items="${keywordies}" var="keyword">
     	<li><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.identifier}"
     	${fn:contains(parts.keyword, '{keyword.identifier}') ? 'keywordied' : ''}>
     	<c:out value = "${keyword.keywordName}"/></li>
     </c:forEach></ul></td>
     </tr>
     <tr>
-      <td align="right">Cover-Page:</td>
-      <td><input type="file" name="coverpage" value ="Datei auswählen"type="text" size="30" maxlength="40"></td>
+      <td  class="table-label">Cover:</td>
+      <td><input type="file" name="coverpage" value ="Datei auswählen"type="text"></td>
     </tr>
     <tr>
-      <td align="right"></td>
-      <td><input type="submit" name="senden" value="senden" type="text" size="30" maxlength="40" onClick="showHint()"></td>
+      <td  class="table-label"></td>
+      <td><input type="submit" name="senden" value="senden" onClick="showHint()"></td>
     </tr>
   </table>
 </form>
     
 
-<%@ include file="footer.jsp" %>
+<c:import url="footer.jsp" />

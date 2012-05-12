@@ -9,7 +9,7 @@
 <div id="albumlist">
 	<c:forEach items="${Alben}" var="album">
 		<div class="album-item">
-			<a href="controller?action=albumAnzeigen&identifier=<c:out value="${album.identifier}"/>">
+			<a href="controller?action=album&show=<c:out value="${album.identifier}"/>">
 				<c:if test="${empty album.cover}">
 					<img src="images/bild.jpg" width=120 height=130
 						alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
