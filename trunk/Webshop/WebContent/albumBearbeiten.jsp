@@ -15,7 +15,7 @@
 
 <img src="images/bild.jpg" width=120 height=130 alt="bild">
 
-<form action="controller" method="get" enctype="multipart/form-data">
+<form action="controller" method="get" enctype="multipart/form-data" onSubmit="return validate(this,var_1,msg_1)">
 
 	<ul>
 		<li><div class="label">Titel:</div> <input type="text"
