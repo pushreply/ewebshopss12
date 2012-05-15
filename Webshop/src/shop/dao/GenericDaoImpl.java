@@ -14,6 +14,7 @@ import com.db4o.ext.Db4oIOException;
 /**
  * 
  * @author Andreas
+ * @author Benjamin
  * @param <T>
  *            The DAO Classtype you want this Instance to work for
  */
@@ -32,6 +33,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		o.setIdentifier(newID);
 
 		db.store(o);
+		db.commit();
 		return o.getIdentifier().toString();
 	}
 
@@ -41,6 +43,7 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 
 		example.setIdentifier(UUID.fromString(uuid));
 		ObjectSet<T> result = db.queryByExample(example);
+		db.commit();
 		return (T) result.get(0);
 	}
 
@@ -53,19 +56,23 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		while (result.hasNext()) {
 			items.add(result.next());
 		}
+		db.commit();
 		return items;
 	}
 
 	public void update(T o) {
 		db.store(o);
+		db.commit();
 	}
 
 	public void delete(T o) {
 		db.delete(o);
+		db.commit();
 	}
 
 	public void delete(String uuid) throws InstantiationException, IllegalAccessException {
 		T o = read(uuid);
 		delete(o);
+		db.commit();
 	}
 }
