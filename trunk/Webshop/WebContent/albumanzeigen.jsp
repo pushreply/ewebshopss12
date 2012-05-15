@@ -20,70 +20,34 @@
 		title="${album.albumTitel} - ${album.artist}" />
 </c:if>
 
-
-<table>
-	<tr>
-		<td>Title:</td>
-		<td>${album.albumTitel}</td>
-	</tr>
-	<tr>
-		<td>Artist:</td>
-		<td>${album.artist}</td>
-	</tr>
-	<tr>
-		<td>Disk Anzahl:</td>
-		<td>${album.numberOfDisks}</td>
-	</tr>
-	<tr>
-		<td>Preis:</td>
-		<td>${album.price}</td>
-	</tr>
-	<tr>
-		<td>Anzahl:</td>
-		<td>${album.amount}</td>
-	</tr>
-	<tr>
-		<td>Anzahl der Tracks:</td>
-		<td>${album.numberOfTracks}</td>
-	</tr>
-	<tr>
-		<td>Label:</td>
-		<td>${album.label}</td>
-	</tr>
-	<tr>
-		<td>Kategorien:</td>
-		<td><c:forEach items="${album.categories}" var="category">
-				<c:out value="${category.categoryName}" />, 
-		</c:forEach></td>
-	</tr>
-	<tr>
-		<td>Schlüsselworte:</td>
-		<td><c:forEach items="${album.keywords}" var="keyword">
-				<c:out value="${keyword.keywordName}"/>, 
-		</c:forEach></td>
-	</tr>
-
+<ul>
+	<li class="label">Title: ${album.albumTitel}</li>
+	<li><div class="label">Artist:</div> ${album.artist}
+	<li><div class="label">Disk Anzahl:</div> ${album.numberOfDisks}</li>
+	<li><div class="label">Preis:</div> ${album.price}</li>
+	<li><div class="label">Anzahl:</div> ${album.amount}</li>
+	<li><div class="label">Anzahl der Tracks:</div>${album.numberOfTracks}</li>
+	<li><div class="label">Label:</div> ${album.label}</li>
 	<c:if test="${isAdmin=='true'}">
-		<tr>
-			<td><form action="controller" method="get">
-					<input type="hidden" name="action" value="album"> <input
-						type="hidden" name="changeAlbumInfo" value="${album.identifier}"> <input
-						type="submit" value="Bearbeiten">
-				</form></td>
-			<td><form action="controller" method="post">
-					<input type="hidden" name="action" value="album"> <input
-						type="hidden" name="delete" value="${album.identifier}"> <input
-						type="submit" value="Album l&ouml;schen">
-				</form></td>
-		</tr>
+		<li><form action="controller" method="get">
+				<input type="hidden" name="action" value="album"> <input
+					type="hidden" name="changeAlbumInfo" value="${album.identifier}">
+				<input type="submit" value="Bearbeiten">
+			</form></li>
+		<li><form action="controller" method="post">
+				<input type="hidden" name="action" value="album"> <input
+					type="hidden" name="delete" value="${album.identifier}"> <input
+					type="submit" value="Album l&ouml;schen">
+			</form></li>
 	</c:if>
-</table>
+</ul>
+
 <c:if test="${isAdmin=='true'}">
 	<h2>Neue Tracks hinzufügen</h2>
 	<form action="controller" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="identifier" value="${album.identifier}">
-		<input type="file" name="file" id="file">
-		<input type=submit value='Upload File'>
+		<input type="file" name="file" id="file"> <input type=submit
+			value='Upload File'>
 	</form>
 </c:if>
 <!--Tracks eines Albums -->
@@ -121,15 +85,16 @@
 						</form>
 					</td>
 					<c:if test="${isAdmin=='true'}">
-							<td>
-								<form action="controller" method="get">
-									<input type="hidden" name="action" value="track">
-									<input type="hidden" name="changeTrackData" value="${track.identifier}">
-									<input type="hidden" name="albumIdentifier" value="${album.identifier}">
-									<input type="submit" value="Editieren">
-								</form>
-							</td>
-						</c:if>
+						<td>
+							<form action="controller" method="get">
+								<input type="hidden" name="action" value="track"> <input
+									type="hidden" name="changeTrackData"
+									value="${track.identifier}"> <input type="hidden"
+									name="albumIdentifier" value="${album.identifier}"> <input
+									type="submit" value="Editieren">
+							</form>
+						</td>
+					</c:if>
 				</tr>
 			</c:if>
 		</c:forEach>
