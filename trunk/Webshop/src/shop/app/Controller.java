@@ -28,6 +28,7 @@ import shop.actions.KeywordAction;
 import shop.actions.LoginAction;
 import shop.actions.LogoutAction;
 import shop.actions.RegisterAction;
+import shop.actions.SearchAction;
 import shop.actions.TrackAction;
 import shop.actions.UploadMusicFile;
 import shop.dao.DBObject;
@@ -58,6 +59,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("logout", new LogoutAction());
 		actionMap.put("register", new RegisterAction());
 		actionMap.put("album", new AlbumAction());
+		actionMap.put("albumsearch", new SearchAction());
 		
 		// more "put" go here
 	}
