@@ -38,8 +38,8 @@ public class LoginAction extends AbstractAction {
 		 * wrong/empty) -> loginerror.jsp -> login.jsp
 		 */
 
-		String loginUsername = request.getParameter("username");
-		String loginPassword = request.getParameter("password");
+		String loginUsername = request.getParameter("username").trim();
+		String loginPassword = request.getParameter("password").trim();
 		boolean match = false;
 		// RequestDispatcher disp = null;
 
