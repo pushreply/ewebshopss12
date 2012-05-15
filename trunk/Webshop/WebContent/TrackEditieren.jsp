@@ -29,11 +29,11 @@
       <td><input type="text" name="genre" value="<c:out value="${track.trackGenre}"  default="N/A" />" /></td>
     </tr>
     <tr>
-      <td align="right">Trackanzahl:</td>
+      <td align="right">TrackNr.:</td>
       <td><input type="text" name="trackanzahl" value="<c:out value="${track.trackNumber}"  default="N/A" />" /></td>
     </tr>
     <tr>
-      <td align="right">Diskanzahl:</td>
+      <td align="right">DiskNr.:</td>
       <td><input type="text" name="diskanzahl" value="<c:out value="${track.trackDiskNumber}"  default="N/A" />" /></td>
     </tr>
   </table>
