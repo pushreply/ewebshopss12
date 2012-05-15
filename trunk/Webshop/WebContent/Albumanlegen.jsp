@@ -6,22 +6,6 @@
 <head>
 <title>Album anlegen</title>
 </head>
-<script language="javascript" type="text/javascript">
-   function boxcheck()
-  	{
-  	var auswahl = "";
-  	
-  	for(var i = 0; i < document.checkin.category.length; i++)
-  	{
-  		if(document.checkin.category[i].checked)
-  		{
-  		auswahl = auswahl + document.checkin.category[i].value + ";";
-  		}
-  	}
- 	document.checkin.categoryies.value = auswahl;
-  }
-  //-->
-  </script>
 <body>
   <h3>Album anlegen</h3>
 
