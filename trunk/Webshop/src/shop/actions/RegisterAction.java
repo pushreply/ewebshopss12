@@ -38,7 +38,7 @@ public class RegisterAction extends AbstractAction {
 		 * REGISTRATION: registration -> OK -> index.jsp
 		 * registration -> ERROR: "username not available" -> redo registration
 		 */
-		String newUsername = request.getParameter("username").toLowerCase().trim();
+		String newUsername = request.getParameter("username").trim();
 		String newPassword1 = request.getParameter("pw1").trim();
 		String newPassword2 = request.getParameter("pw2").trim();
 		boolean match = false;
