@@ -104,17 +104,17 @@ public class TestDaten {
 		daoCustomer.create(customer5);
 
 		// Track
-//		String path = "";
-//		for (int i = 1; i <= 10; i++) {
-//			// set path for next iteration
-//			path = "WebContent/images/Alb1_Disc" + (i <= 5 ? "1" : "2")
-//					+ "_Track" + i + ".mp3";
-//			try {
-//				daoTrack.create(Trackfactory.createTrack(new File(path)));
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
+		String path = "";
+		for (int i = 1; i <= 10; i++) {
+			// set path for next iteration
+			path = "WebContent/images/Alb1_Disc" + (i <= 5 ? "1" : "2")
+					+ "_Track" + i + ".mp3";
+			try {
+				daoTrack.create(Trackfactory.createTrack(new File(path)));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		// Categories
 		String[] categories = { "Rock", "Pop", "HipHop", "Rock'n'Roll", "Rap",
@@ -132,30 +132,30 @@ public class TestDaten {
 		}
 
 		// Albums
-		// load existing keywords, categories and tracks to put in the albums
-//		List<DBKeyword> allKeywords = null;
-//		List<DBCategory> allCategories = null;
-//		List<DBTrack> allTracks = null;
-//		try {
-//			allKeywords = daoKeyword.readAll();
-//			allCategories = daoCategory.readAll();
-//			allTracks = daoTrack.readAll();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		// pick random keywords, categories & tracks and adds them to album
-//		for (int i = 0; i < 5; i++) {
-//			List<DBKeyword> albumKeywords = addRandom(allKeywords);
-//			List<DBCategory> albumCategories = addRandom(allCategories);
-//			List<DBTrack> albumTracks = addRandom(allTracks);
-//
-//			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
-//					+ i + "_" + i, (int) (Math.random() * 2+1), (int) (Math.random() * 20)+1,
-//					(int) (Math.random() * 500)+1, (int) albumTracks.size(),
-//					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
-//					albumCategories, albumTracks));
-//		}
+//		 load existing keywords, categories and tracks to put in the albums
+		List<DBKeyword> allKeywords = null;
+		List<DBCategory> allCategories = null;
+		List<DBTrack> allTracks = null;
+		try {
+			allKeywords = daoKeyword.readAll();
+			allCategories = daoCategory.readAll();
+			allTracks = daoTrack.readAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// pick random keywords, categories & tracks and adds them to album
+		for (int i = 0; i < 5; i++) {
+			List<DBKeyword> albumKeywords = addRandom(allKeywords);
+			List<DBCategory> albumCategories = addRandom(allCategories);
+			List<DBTrack> albumTracks = addRandom(allTracks);
+
+			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
+					+ i + "_" + i, (int) (Math.random() * 2+1), (int) (Math.random() * 20)+1,
+					(int) (Math.random() * 500)+1, (int) albumTracks.size(),
+					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
+					albumCategories, albumTracks));
+		}
 		db.close();
 		System.out.println("Testdaten wurden geschrieben");
 	}
