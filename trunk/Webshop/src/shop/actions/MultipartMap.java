@@ -34,7 +34,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.MultipartConfigElement;
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.annotation.MultipartConfig;
@@ -62,6 +61,7 @@ import javax.servlet.http.Part;
  * @author BalusC
  * @link http://balusc.blogspot.com/2009/12/uploading-files-in-servlet-30.html
  */
+@SuppressWarnings("serial")
 public class MultipartMap extends HashMap<String, Object> {
 
     // Constants ----------------------------------------------------------------------------------
@@ -119,7 +119,6 @@ public class MultipartMap extends HashMap<String, Object> {
             throws ServletException, IOException
     {
         multipartRequest.setAttribute(ATTRIBUTE_NAME, this);
-
         this.encoding = multipartRequest.getCharacterEncoding();
         if (this.encoding == null) {
             multipartRequest.setCharacterEncoding(this.encoding = DEFAULT_ENCODING);
