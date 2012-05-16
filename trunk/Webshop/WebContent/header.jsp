@@ -54,6 +54,7 @@
 			<div id="search">
 				<!-- just for displaying purposes, not linked with bean so far -->
 				<input id="searchfield" type="text" /><input type="button" value="Suchen" />
+				<ul><li><a href="${simplesearch}">Einfache Suche</a></li></ul>
 			</div>
 			<!-- search -->
 		</div>
