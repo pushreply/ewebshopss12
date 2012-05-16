@@ -10,24 +10,30 @@
   <h3>Einfache Suche</h3>
   <form action="controller" method="post">
   	<table>
-  		<tr>
-  			<td>Title:</td>
-			<td><input type="text" name="albumtitle" value=""></td>
-		</tr>
-		<tr>
-			<td>Interpreter:</td>
-			<td><input type="text" name="albumartist" value=""></td>
-		</tr>
-		<tr>
-			<td>Genre:</td>
-			<td><input type="text" name="albumcategory" value=""></td>
-		</tr>
-		<tr>
-			<td>Schlagwort:</td>
-			<td><input type="text" name="albumkeyword" value=""></td>
-		</tr>
-		<tr>
-			<td><input type="hidden" name="action" value="albumsearch"></td> 
+		    <tr>
+      		<td class="table-label">Titel:</td>
+      		<td><input type="text" name="titel" type="text"></td>
+   		</tr>
+   		 <tr>
+     		 <td  class="table-label">Artist:</td>
+     		 <td><input type="text" name="artist" type="text"></td>
+   		</tr>
+    <tr>
+    	 <td  class="table-label">Kategorie: </td>
+        <td><c:forEach items="${categories}" var="category">
+    	<li><input type="checkbox" id="{category.categoryName}" name="category" value="${category.identifier}">
+    	<c:out value = "${category.categoryName}"/></li>
+    </c:forEach>
+    </tr>
+    <tr>
+				<td class="table-label">Schlagw&ouml;rter:</td>
+				<td><ul class="bulletless-list"><c:forEach items="${keywordies}" var="keyword">
+    	<li><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.identifier}">
+    	<c:out value = "${keyword.keywordName}"/></li>
+    </c:forEach></ul></td>
+    </tr>
+			<td><input type="hidden" name="action" value="albumsearch"></td>
+			<td  class="table-label"></td>
 			<td><input type="submit" value="Suchen"></td>
 		<tr>
 	</table>
