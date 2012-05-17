@@ -15,7 +15,7 @@
 
 <img src="images/bild.jpg" width=120 height=130 alt="bild">
 
-<form action="controller" method="get" enctype="multipart/form-data" onSubmit="return validate(this,var_1,msg_1)">
+<form name="Formular" action="controller" method="get" enctype="multipart/form-data" onsubmit="checkAlbumInput()">
 
 	<ul>
 		<li><div class="label">Titel:</div> <input type="text"
@@ -67,10 +67,9 @@
 
 	</ul>
 
-	<input type="hidden" name="action" value="album"> <input
-		type="hidden" name="updateAlbum"
-		value="<c:out value="${album.identifier}"/>" /> <input type="submit"
-		value="Speichern">
+	<input type="hidden" name="action" value="album"> 
+	<input type="hidden" name="updateAlbum" value="<c:out value="${album.identifier}"/>" /> 
+	<input type="submit" value="Speichern">
 </form>
 
 <c:import url="footer.jsp" />
