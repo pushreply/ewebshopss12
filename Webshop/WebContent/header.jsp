@@ -19,7 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>${param.title}</title>
 <link rel="stylesheet" href="stylesheet/style.css" type="text/css"></link>
-<script type="text/javascript" src="javaScript/albumDatenAuwerten.js"></script>
+<script type="text/JavaScript" src="js/albumDatenAuswerten.js"></script>
 
 </head>
 <body>
