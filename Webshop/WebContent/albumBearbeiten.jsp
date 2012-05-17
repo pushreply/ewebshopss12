@@ -24,7 +24,7 @@
 		title="${album.albumTitel} - ${album.artist}" />
 </c:if>
 
-<form name="Formular" action="controller" method="get" enctype="multipart/form-data" onsubmit="checkAlbumInput()">
+<form name="Formular" action="controller" method="get" enctype="multipart/form-data" onSubmit="return validate(this,var_1)"">
 
 	<ul>
 		<li><div class="label">Titel:</div> <input type="text"
@@ -78,7 +78,7 @@
 
 	<input type="hidden" name="action" value="album"> 
 	<input type="hidden" name="updateAlbum" value="<c:out value="${album.identifier}"/>" /> 
-	<input type="submit" value="Speichern">
+	<input type="submit" value="Speichern" onclick="return validate(this.form,var_1,msg_1)">
 </form>
 
 <c:import url="footer.jsp" />
