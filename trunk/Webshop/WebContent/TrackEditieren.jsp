@@ -30,11 +30,11 @@
     </tr>
     <tr>
       <td align="right">TrackNr.:</td>
-      <td><input type="text" name="trackanzahl" value="<c:out value="${track.trackNumber}"  default="N/A" />" /></td>
+      <td><input type="text" name="trackAnzahl" value="<c:out value="${track.trackNumber}"  default="N/A" />" /></td>
     </tr>
     <tr>
       <td align="right">DiskNr.:</td>
-      <td><input type="text" name="diskanzahl" value="<c:out value="${track.trackDiskNumber}"  default="N/A" />" /></td>
+      <td><input type="text" name="diskAnzahl" value="<c:out value="${track.trackDiskNumber}"  default="N/A" />" /></td>
     </tr>
   </table>
   <input type="submit" value="Speichern">
