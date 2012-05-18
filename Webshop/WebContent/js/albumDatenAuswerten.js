@@ -5,10 +5,10 @@
 var var_1 = new Array()
 var_1[0] = new Array('titel','e','','Sie haben kein Titel angegeben','');
 var_1[1] = new Array('artist','e','','Sie haben kein Artist angegeben','');
-var_1[2] = new Array('diskAnzahl','e','n','Sie haben keine Anzahl der Disks angegeben','ist keine ZAhl');
-var_1[3] = new Array('preis','e','p.','Sie haben kein Preis angegeben','ist kein gültiger Preis');
-var_1[4] = new Array('anzahl','e','n','Sie haben keine Anzahl der Alben angegeben','ist keine ZAhl');
-var_1[5] = new Array('trackAnzahl','e','n','Sie haben kein Anzahl der Tacks angegeben','ist kein Zahl');
+var_1[2] = new Array('diskanzahl','e','n','Sie haben keine Anzahl der Disks angegeben','ist keine ZAhl');
+var_1[3] = new Array('price','e','p.','Sie haben kein Preis angegeben','ist kein gültiger Preis');
+var_1[4] = new Array('albumanzahl','e','n','Sie haben keine Anzahl der Alben angegeben','ist keine ZAhl');
+var_1[5] = new Array('trackanzahl','e','n','Sie haben kein Anzahl der Tacks angegeben','ist kein Zahl');
 var_1[6] = new Array('label','e','','Sie haben kein Label angegeben');
 
 var msg_1 = 'Fehler:';

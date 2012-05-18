@@ -24,7 +24,7 @@
 		title="${album.albumTitel} - ${album.artist}" />
 </c:if>
 
-<form name="Formular" action="controller" method="get" enctype="multipart/form-data" onSubmit="return validate(this,var_1)"">
+<form name="Formular" action="controller" method="get" enctype="multipart/form-data" onSubmit="return validate(this,var_1)">
 
 	<ul>
 		<li><div class="label">Titel:</div> <input type="text"
@@ -33,20 +33,21 @@
 		<li><div class="label">Artist:</div> <input type="text"
 			name="artist"
 			value="<c:out value="${album.artist}"  default="N/A" />" /></li>
-		<li><div class="label">Anzahl der Disks:</div> <input type="text"
-			name="diskAnzahl"
-			value="<c:out value="${album.numberOfDisks}"  default="N/A" />" /></li>
 		<li><div class="label">Preis:</div> <input type="text"
-			name="preis" value="<c:out value="${album.price}"  default="N/A" />" /></li>
-		<li><div class="label">Anzahl:</div> <input type="text"
-			name="anzahl"
-			value="<c:out value="${album.amount}"  default="N/A" />" /></li>
-		<li><div class="label">Anzahl der Tracks:</div> <input
-			type="text" name="trackAnzahl"
-			value="<c:out value="${album.numberOfTracks}"  default="N/A" />" /></li>
+			name="price" 
+			value="<c:out value="${album.price}"  default="N/A" />" /></li>
 		<li><div class="label">Label:</div> <input type="text"
-			name="label" value="<c:out value="${album.label}"  default="N/A" />" /></li>
-
+			name="label"
+			value="<c:out value="${album.label}"  default="N/A" />" /></li>
+		<li><div class="label">Anzahl der Tracks:</div> <input
+			type="text" name="trackanzahl"
+			value="<c:out value="${album.numberOfTracks}"  default="N/A" />" /></li>
+		<li><div class="label">Anzahl der Disks:</div> <input type="text"
+			name="diskanzahl"
+			value="<c:out value="${album.numberOfDisks}"  default="N/A" />" /></li>
+		<li><div class="label">Anzahl:</div> <input type="text"
+			name="albumanzahl"
+			value="<c:out value="${album.amount}"  default="N/A" />" /></li>
 		<li>
 			<div class="label">Kategorie:</div>
 			<ul class="bulletless-list">

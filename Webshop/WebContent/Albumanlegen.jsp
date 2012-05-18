@@ -9,7 +9,7 @@
 <body>
   <h3>Album anlegen</h3>
 
-<form action="controller" method="post" enctype="multipart/form-data">
+<form name="Formular" action="controller" method="post" enctype="multipart/form-data" onSubmit="return validate(this,var_1)">
   <table>
     <tr>
       <td class="table-label">Titel:</td>
@@ -61,7 +61,7 @@
     </tr>
     <tr>
       <td  class="table-label"></td>
-      <td><input type="submit" name="senden" value="senden" onClick="showHint()"></td>
+      <td><input type="submit" name="senden" value="senden" onClick="showHint()" onclick="return validate(this.form,var_1,msg_1)"></td>
     </tr>
   </table>
 </form>
