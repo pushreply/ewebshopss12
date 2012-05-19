@@ -35,7 +35,7 @@
 					<c:when test="${isAdmin=='true'}">
 						<li><a href="${keyword}">Schlüsselworte</a></li>
 						<li><a href="${category}">Kategorien</a></li>
-						<li><a href="${uploadAlbum}">Neues Album erstellen</a></li>
+						<li><a href="${uploadAlbum}">Neues Album Erstellen</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
