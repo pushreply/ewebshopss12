@@ -37,7 +37,7 @@
 	einblenden</a>
 <a href="javascript:ausblenden('element');"> oder ausblenden</a>
 
-<div id="element" style="display: none">
+<div id="element" style="display:none">
 	<%@ include file="urlVariables.jsp"%>
 	<ul>
 		<li><a href="${trackShow}">Alle Tracks anzeigen</a></li>
