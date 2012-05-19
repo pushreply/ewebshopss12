@@ -45,7 +45,16 @@
 	<c:param name="action" value="album" />
 	<c:param name="upload" value="true" />
 </c:url>
+
 <c:url var="simplesearch" value="controller">
 	<c:param name="action" value="albumsearch" />
 	<c:param name="upload" value="true" />
 </c:url>
+
+<c:url var="customer" value="controller">
+	<c:param name="action" value="address" />
+	<c:param name="show" value="all" />
+	<c:param name="edit" value="true" />
+</c:url>
+
+
