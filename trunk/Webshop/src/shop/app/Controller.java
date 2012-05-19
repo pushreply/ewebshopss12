@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.AbstractAction;
+import shop.actions.AddressAction;
 import shop.actions.AlbumAction;
 import shop.actions.CategoryAction;
 import shop.actions.HomeAction;
@@ -60,7 +61,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("register", new RegisterAction());
 		actionMap.put("album", new AlbumAction());
 		actionMap.put("albumsearch", new SearchAction());
-		
+		actionMap.put("address", new AddressAction());
 		// more "put" go here
 	}
 
