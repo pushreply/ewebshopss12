@@ -52,6 +52,7 @@ public class StartServer implements ServerInfo, MessageRecipient {
         synchronized (this) {
             ServerConfiguration config = Db4oClientServer.newServerConfiguration();
             
+            config.common().messageLevel(0);
             
             // Klasse Address
             config.common().objectClass(DBAddress.class).cascadeOnUpdate(true);
