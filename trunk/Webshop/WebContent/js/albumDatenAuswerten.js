@@ -6,10 +6,12 @@ var var_1 = new Array()
 var_1[0] = new Array('titel','e','','Sie haben kein Titel angegeben','');
 var_1[1] = new Array('artist','e','','Sie haben kein Artist angegeben','');
 var_1[2] = new Array('diskanzahl','e','n','Sie haben keine Anzahl der Disks angegeben','ist keine ZAhl');
-var_1[3] = new Array('price','e','p.','Sie haben kein Preis angegeben','ist kein gültiger Preis');
+var_1[3] = new Array('price','e','p','Sie haben kein Preis angegeben','ist kein gültiger Preis');
 var_1[4] = new Array('albumanzahl','e','n','Sie haben keine Anzahl der Alben angegeben','ist keine ZAhl');
 var_1[5] = new Array('trackanzahl','e','n','Sie haben kein Anzahl der Tacks angegeben','ist kein Zahl');
-var_1[6] = new Array('label','e','','Sie haben kein Label angegeben');
+var_1[6] = new Array('label','e','','Sie haben kein Label angegeben','');
+var_1[7] = new Array('category','ch','','Sie haben kein Kategory angegeben','');
+
 
 var msg_1 = 'Fehler:';
 
@@ -29,8 +31,28 @@ for (i=0;i<myarray.length;i++){
     }
   }
 
+  /*Überprüft, ob mindestens einer der checkboxes gecheckt ist */
+  else if (myarray[i][1].indexOf('ch')>-1){
+	  for (j = 0; j < field.length; j++)
+		  {
+			if(field[j].checked == true)
+			{
+				error = false;
+				break;
+			}
+			else{
+				error = true;
+			}
+		  }
+      if (error = true)
+      {
+    	 //alert("Das ist es");
+         err_msg.push(myarray[i][3]);
+      }
+    }
+  
 /*Überprüft Felder, deren Wert eine Zahl sein muss */
-  else if (myarray[i][1].indexOf('n')>-1) {
+  else if (myarray[i][2].indexOf('n')>-1) {
     var num_error = false;
     if(field.value) {
       var myvalue = field.value;
@@ -57,7 +79,7 @@ for (i=0;i<myarray.length;i++){
   }
   
 /*Überprüft Felder, die als Preis formatiert sein müssen, ändert die Formatierung eventuell */
-  else if (myarray[i][1].indexOf('p')>-1) {
+  else if (myarray[i][2].indexOf('p')>-1) {
     var myvalue = field.value;
     var reg = /,-{1,}|\.-{1,}/;
     var nantest_value = myvalue.replace(reg,"");
@@ -101,3 +123,43 @@ Formular ohne Beanstandung ist, wird es übertragen */
     return true;
   }
 }
+
+
+
+//
+var var_2 = new Array()
+var_2[0] = new Array('titel','e','','Sie haben kein Titel angegeben','');
+var_2[1] = new Array('artist','e','','Sie haben kein Artist angegeben','');
+var_2[2] = new Array('date','e','n','Sie haben kein Aufnahmedatum angegeben','ist keine ZAhl');
+var_2[3] = new Array('genre','e','p.','Sie haben kein genre angegeben','ist kein gültiger Preis');
+var_2[4] = new Array('trackAnzahl','e','n','Sie haben keine Nummer des Tracks angegeben','ist keine ZAhl');
+var_2[5] = new Array('diskAnzahl','e','n','Sie haben kein Diskzahl angegeben','ist kein Zahl');
+
+function validateTrack(sender,myarray,err_hd){
+
+	var err_msg = !err_hd?new Array('Folgende Fehler sind aufgetreten:\n'):new Array(err_hd+'\n');
+	var error = false;
+
+	for (i=0;i<myarray.length;i++){
+	  field = document.forms[sender.name].elements[myarray[i][0]];
+
+	/*Überprüft Felder, die ausgefüllt sein müssen */
+	  if (myarray[i][1].indexOf('e')>-1){
+		    if (!field.value){
+		      error = true;
+		      err_msg.push(myarray[i][3]);
+		    }
+	 }
+ }
+
+	/* im Fehlerfall werden hier die gesammelten Fehlermeldungen verarbeitet und angezeigt. Wenn das
+	Formular ohne Beanstandung ist, wird es übertragen */
+	  if (error) {
+	    err_msg = err_msg.join('\n\xB7 ');
+	    alert(err_msg);
+	    return false;
+	  }
+	  else {
+	    return true;
+	  }
+	}
