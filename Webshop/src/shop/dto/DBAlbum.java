@@ -4,8 +4,6 @@
 package shop.dto;
 
 import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @author roha0001,Mukunzi
  *
@@ -20,17 +18,17 @@ public class DBAlbum extends DBUUIDBase{
 	private int numberOfTracks;
 	private String label;
 	
-	List<DBKeyword> keywords = new LinkedList<DBKeyword>();
-	List<DBCategory> categories = new LinkedList<DBCategory>();
-	List<DBTrack> tracks = new LinkedList<DBTrack>();
+	LinkedList<DBKeyword> keywords = new LinkedList<DBKeyword>();
+	LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
+	LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
 	
 	//default constructor
 	public DBAlbum(){}
 
 	public DBAlbum(byte[] cover, String albumTitel,
 			String artist, int numberOfDisks, double price, int amount,
-			int numberOfTracks, String label, List<DBKeyword> keywords,
-			List<DBCategory> categories, List<DBTrack> tracks) {
+			int numberOfTracks, String label, LinkedList<DBKeyword> keywords,
+			LinkedList<DBCategory> categories, LinkedList<DBTrack> tracks) {
 		super();
 		this.cover = cover;
 		this.albumTitel = albumTitel;
@@ -109,23 +107,23 @@ public class DBAlbum extends DBUUIDBase{
 		this.label = label;
 	}
 
-	public List<DBKeyword> getKeywords() {
+	public LinkedList<DBKeyword> getKeywords() {
 		return keywords;
 	}
 
-	public void setKeywords(List<DBKeyword> keywords) {
+	public void setKeywords(LinkedList<DBKeyword> keywords) {
 		this.keywords = keywords;
 	}
 
-	public List<DBCategory> getCategories() {
+	public LinkedList<DBCategory> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(List<DBCategory> categories) {
+	public void setCategories(LinkedList<DBCategory> categories) {
 		this.categories = categories;
 	}
 
-	public List<DBTrack> getTracks() {
+	public LinkedList<DBTrack> getTracks() {
 		return tracks;
 	}
 
