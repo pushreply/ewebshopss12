@@ -126,7 +126,7 @@ public class UploadMusicFile {
 
 			DBAlbum dbalbum = new DBAlbum();
 
-			List<DBCategory> categories = new LinkedList<DBCategory>();
+			LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
 			String[] category = map.getParameterValues("category");
 			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(
 					DBCategory.class, db);
@@ -137,7 +137,7 @@ public class UploadMusicFile {
 			// Category in DBAlbum reinsetzen
 			dbalbum.setCategories(categories);
 
-			List<DBKeyword> keywordies = new LinkedList<DBKeyword>();
+			LinkedList<DBKeyword> keywordies = new LinkedList<DBKeyword>();
 			String[] keyword = map.getParameterValues("keyword");
 
 			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
