@@ -14,14 +14,14 @@ import com.db4o.query.Query;
  * @author: roha0001
  */
 
-public class DAOCustomer extends DBCustomer{
+public class DAOCustomer{
 	
 	DBCustomer result = null;
 	
 	/*
 	 * default constructor
 	 */
-	public DAOCustomer() { }
+	public DAOCustomer() { super(); }
 	
 	/* 
 	 * NQ.
@@ -71,6 +71,39 @@ public class DAOCustomer extends DBCustomer{
 		else{
 			return null;
 		}
+	}
+	
+	/*
+	 * read user data: gender, firstname, lastname, address (street, country) 
+	 */
+	public DBCustomer readUserData(String uName, ObjectContainer db){
+		Query query = db.query();
+		query.constrain(DBCustomer.class);
+		DBCustomer user = new DBCustomer();
+		user.setUsername(uName); 
+//		query.descend("username").descend("address").constrain(user);
+		ObjectSet<DBCustomer> result = null;//query.execute();
+		result= db.queryByExample(user);
+		if(result.hasNext()){
+			return result.next();
+		}
+		else{
+			return null;
+		}
+	}
+	
+	/*
+	 * update user data, based on username: FirstName, LastName
+	 */
+	public static void updateUserData_name(String uName, String uLastName, String uFirstName, ObjectContainer db){
+		
+	}
+	
+	/*
+	 * update user data, based on username: Address
+	 */
+	public static void updateUserData_address(String uName, String uStreet, String uCountry, ObjectContainer db){
+		
 	}
 	
 }

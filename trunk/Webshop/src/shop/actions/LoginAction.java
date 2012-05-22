@@ -17,7 +17,11 @@ import shop.dto.DBCustomer;
 import com.db4o.ObjectContainer;
 
 /**
- * This Action handles LOGIN Function
+ * This Action handles the LOGIN Function
+ * Successful login will be forwarded to user profile page (profileview.jsp)
+ * Possible Errors:
+ * - username/password is false
+ * - username/password is empty
  * 
  * @author roha0001
  * 
@@ -31,30 +35,31 @@ public class LoginAction extends AbstractAction {
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 
-		DAOCustomer customer = new DAOCustomer();
-
-		/*
-		 * LOGIN: Login ok -> index.jsp Login error (username/password is
-		 * wrong/empty) -> loginerror.jsp -> login.jsp
-		 */
-
-		String loginUsername = request.getParameter("username").trim();
-		String loginPassword = request.getParameter("password").trim();
+		String loginUsername, loginPassword;
 		boolean match = false;
-		// RequestDispatcher disp = null;
-
-		System.out.println("Login parameters are set: " + loginUsername + ":"
-				+ loginPassword);
+		DBCustomer user = new DBCustomer();
+		 DAOCustomer daoCustomer = new DAOCustomer();
 		try {
-			match = customer.isMatchUser(loginUsername, loginPassword, db);
-
-			System.out.println("Comparing data from DB and user input");
-			System.out.println("login OK, return to index.jsp");
+			
+			loginUsername = request.getParameter("username").trim();
+			loginPassword = request.getParameter("password").trim();
+			System.out.println("Login parameters are set: " + loginUsername + ":" + loginPassword);
+		
+			match = daoCustomer.isMatchUser(loginUsername, loginPassword, db);
+			System.out.println("Login OK.");
+			
+			//get users' data
+			for (int i = 0; i < daoCustomer.readUserData(loginUsername, db).getAddresses().size(); i++) {
+				user = daoCustomer.readUserData(loginUsername, db);
+			}
+			
+			request.setAttribute("userprofile", user);	
+			//set session
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", loginUsername);
-			RequestDispatcher disp = request
-					.getRequestDispatcher("controller?action=home");
-
+//			session.setAttribute("userprofile", user);
+			RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");
+			
 			disp.forward(request, response);
 		} catch (Exception e) {
 			errorHandler.toUser("Benutzername oder Passwort ist falsch.", e);
