@@ -3,6 +3,9 @@
  */
 package shop.dto;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author roha0001
  * @author mukunzi
@@ -11,6 +14,7 @@ package shop.dto;
 public class DBKeyword extends DBUUIDBase {
 	
 	private String keywordName;
+	private List<DBAlbum> kalbum = new LinkedList<DBAlbum>();
 	
 	//default constructor
 	public DBKeyword(){}
@@ -19,8 +23,15 @@ public class DBKeyword extends DBUUIDBase {
 	public DBKeyword(String keywordName) {
 		super();
 		this.keywordName = keywordName;
+		this.kalbum = new LinkedList<DBAlbum>();
 	}
-
+	
+	public DBKeyword(String keywordName, List<DBAlbum> kalbum)
+	{
+		this.keywordName = keywordName;
+		this.kalbum = kalbum;
+	}
+	
 	public String getKeywordName() {
 		return keywordName;
 	}
@@ -29,6 +40,21 @@ public class DBKeyword extends DBUUIDBase {
 	public void setKeywordName(String keywordName) {
 		this.keywordName = keywordName;
 	}
+	
+	public List<DBAlbum> getAlbums() {
+		return kalbum;
+	}
+
+	public void setAlbums(List<DBAlbum> kalbum) {
+		this.kalbum = kalbum;
+	}
+	
+	public void setAlbum(DBAlbum album)
+	{
+		this.kalbum.add(album);
+	}
+
+
 
 	@Override
 	public String toString() {
