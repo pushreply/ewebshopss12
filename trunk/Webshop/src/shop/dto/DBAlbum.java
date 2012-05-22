@@ -4,8 +4,10 @@
 package shop.dto;
 
 import java.util.LinkedList;
+import java.util.List;
 /**
  * @author roha0001,Mukunzi
+ * @author sesc0009
  *
  */
 public class DBAlbum extends DBUUIDBase{
@@ -18,9 +20,9 @@ public class DBAlbum extends DBUUIDBase{
 	private int numberOfTracks;
 	private String label;
 	
-	LinkedList<DBKeyword> keywords = new LinkedList<DBKeyword>();
-	LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
-	LinkedList<DBTrack> tracks = new LinkedList<DBTrack>();
+	List<DBKeyword> keywords = new LinkedList<DBKeyword>();
+	List<DBCategory> categories = new LinkedList<DBCategory>();
+	List<DBTrack> tracks = new LinkedList<DBTrack>();
 	
 	//default constructor
 	public DBAlbum(){}
@@ -107,7 +109,7 @@ public class DBAlbum extends DBUUIDBase{
 		this.label = label;
 	}
 
-	public LinkedList<DBKeyword> getKeywords() {
+	public List<DBKeyword> getKeywords() {
 		return keywords;
 	}
 
@@ -115,7 +117,7 @@ public class DBAlbum extends DBUUIDBase{
 		this.keywords = keywords;
 	}
 
-	public LinkedList<DBCategory> getCategories() {
+	public List<DBCategory> getCategories() {
 		return categories;
 	}
 
@@ -123,7 +125,7 @@ public class DBAlbum extends DBUUIDBase{
 		this.categories = categories;
 	}
 
-	public LinkedList<DBTrack> getTracks() {
+	public List<DBTrack> getTracks() {
 		return tracks;
 	}
 
