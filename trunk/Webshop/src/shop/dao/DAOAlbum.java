@@ -7,6 +7,9 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 
 import shop.dto.DBAlbum;
+import shop.dto.DBCategory;
+import shop.dto.DBCustomer;
+import shop.dto.DBKeyword;
 
 public class DAOAlbum extends DBAlbum {
 	
@@ -84,20 +87,407 @@ public class DAOAlbum extends DBAlbum {
 	}
 	
 	@SuppressWarnings("unused")
-	public LinkedList<DBAlbum> findAlbumbyTitleArtistCategory(String albumtitle, String albumartist, String[] categorys, ObjectContainer db)
-	{
+	public LinkedList<DBAlbum> findAlbumbyCategory(String[] categorys,
+			ObjectContainer db) {
+		
 		LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
+		Query empQuery = query.descend("categories");
+		empQuery.constrain(DBCategory.class);
+		Query nameQuery = empQuery.descend("categoryName");
 		for (String category : categorys) {
 			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
-			query.descend("albumTitel").constrain(albumtitle).like();
-			query.descend("artist").constrain(albumartist).like();
-			query.descend("category").descend("identifier").constrain(category).like();
+			System.out.println();
+			System.out.println("ich bin suche nach categorys");
+			nameQuery.constrain(category);
 			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
 			while(result.hasNext())
 			{
 				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyTitleCategory(String albumtitle,
+			String[] categorys, ObjectContainer db) {
+		LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("albumTitel").descend(albumtitle);
+		Query empQuery = query.descend("categories");
+		empQuery.constrain(DBCategory.class);
+		Query nameQuery = empQuery.descend("categoryName");
+		for (String category : categorys) {
+			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
+			System.out.println();
+			System.out.println("ich bin suche nach categorys");
+			nameQuery.constrain(category);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyArtistCategory(String albumartist,
+			String[] categorys, ObjectContainer db) {
+		LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("artist").descend(albumartist);
+		Query empQuery = query.descend("categories");
+		empQuery.constrain(DBCategory.class);
+		Query nameQuery = empQuery.descend("categoryName");
+		for (String category : categorys) {
+			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
+			System.out.println();
+			System.out.println("ich bin suche nach categorys");
+			nameQuery.constrain(category);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyTitleArtistCategory(String albumtitle, String albumartist, String[] categorys, ObjectContainer db)
+	{
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("albumTitel").descend(albumtitle);
+		query.descend("artist").descend(albumartist);
+		Query empQuery = query.descend("categories");
+		empQuery.constrain(DBCategory.class);
+		Query nameQuery = empQuery.descend("categoryName");
+		for (String category : categorys) {
+			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
+			System.out.println();
+			System.out.println("ich bin suche nach categorys");
+			nameQuery.constrain(category);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyKeyword(String[] keywords,
+			ObjectContainer db) {
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		Query empQuery = query.descend("keywords");
+		empQuery.constrain(DBKeyword.class);
+		Query nameQuery = empQuery.descend("keywordName");
+		for (String keyword : keywords) {
+			nameQuery.constrain(keyword);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyTitleKeyword(String albumtitle, String[] keywords,
+			ObjectContainer db) {
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("albumTitel").descend(albumtitle);
+		Query empQuery = query.descend("keywords");
+		empQuery.constrain(DBKeyword.class);
+		Query nameQuery = empQuery.descend("keywordName");
+		for (String keyword : keywords) {
+			nameQuery.constrain(keyword);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyArtistKeyword(String albumartist,
+			String[] keywords, ObjectContainer db) {
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("artist").descend(albumartist);
+		Query empQuery = query.descend("keywords");
+		empQuery.constrain(DBKeyword.class);
+		Query nameQuery = empQuery.descend("keywordName");
+		for (String keyword : keywords) {
+			nameQuery.constrain(keyword);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyTitleArtistKeyword(String albumtitle,
+			String albumartist, String[] keywords, ObjectContainer db) {
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("albumTitel").descend(albumtitle);
+		query.descend("artist").descend(albumartist);
+		Query empQuery = query.descend("keywords");
+		empQuery.constrain(DBKeyword.class);
+		Query nameQuery = empQuery.descend("keywordName");
+		for (String keyword : keywords) {
+			nameQuery.constrain(keyword);
+			ObjectSet<DBAlbum> result = query.execute();
+			System.out.println(result.size() );
+			while(result.hasNext())
+			{
+				dbalbumlist.add(result.next());
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyCategoryKeyword(String[] categorys,
+			String[] keywords, ObjectContainer db) {
+		
+		LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		Query keyQuery = query.descend("keywords");
+		Query catQuery = query.descend("categories");
+		keyQuery.constrain(DBKeyword.class);
+		catQuery.constrain(DBCategory.class);
+		Query knameQuery = keyQuery.descend("keywordName");
+		Query cnameQuery = catQuery.descend("categoryName");
+		for (String keyword : keywords) {
+			knameQuery.constrain(keyword);
+			System.out.println(keyword);
+			for (String category : categorys) {
+				cnameQuery.constrain(category);
+				ObjectSet<DBAlbum> result = query.execute();
+				System.out.println(result.size() );
+				while(result.hasNext())
+				{
+					dbalbumlist.add(result.next());
+				}
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyTitleCategoryKeyword(String albumtitle,
+			String[] categorys, String[] keywords,
+			ObjectContainer db) {
+		
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("albumTitel").descend(albumtitle);
+		Query keyQuery = query.descend("keywords");
+		Query catQuery = query.descend("categories");
+		keyQuery.constrain(DBKeyword.class);
+		catQuery.constrain(DBCategory.class);
+		Query knameQuery = keyQuery.descend("keywordName");
+		Query cnameQuery = catQuery.descend("categoryName");
+		for (String keyword : keywords) {
+			knameQuery.constrain(keyword);
+			for (String category : categorys) {
+				cnameQuery.constrain(category);
+				ObjectSet<DBAlbum> result = query.execute();
+				System.out.println(result.size() );
+				while(result.hasNext())
+				{
+					dbalbumlist.add(result.next());
+				}
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+	
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyArtistCategoryKeyword(String albumartist,
+			String[] categorys, String[] keywords,
+			ObjectContainer db) {
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("artist").descend(albumartist);
+		Query keyQuery = query.descend("keywords");
+		Query catQuery = query.descend("categories");
+		keyQuery.constrain(DBKeyword.class);
+		catQuery.constrain(DBCategory.class);
+		Query knameQuery = keyQuery.descend("keywordName");
+		Query cnameQuery = catQuery.descend("categoryName");
+		for (String keyword : keywords) {
+			knameQuery.constrain(keyword);
+			for (String category : categorys) {
+				cnameQuery.constrain(category);
+				ObjectSet<DBAlbum> result = query.execute();
+				System.out.println(result.size() );
+				while(result.hasNext())
+				{
+					dbalbumlist.add(result.next());
+				}
+			}
+		}
+	    
+	    if(dbalbumlist != null)
+	    {
+	    	return dbalbumlist;
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
+
+	@SuppressWarnings("unused")
+	public LinkedList<DBAlbum> findAlbumbyTitleArtistCategoryKeyword(String albumtitle,
+			String albumartist, String[] categorys,
+			String[] keywords, ObjectContainer db) {
+	LinkedList<DBAlbum> dbalbumlist = new LinkedList<DBAlbum>();
+		
+		Query query = db.query();
+		query.constrain(DBAlbum.class);
+		query.descend("albumTitel").descend(albumtitle);
+		query.descend("artist").descend(albumartist);
+		Query keyQuery = query.descend("keywords");
+		Query catQuery = query.descend("categories");
+		keyQuery.constrain(DBKeyword.class);
+		catQuery.constrain(DBCategory.class);
+		Query knameQuery = keyQuery.descend("keywordName");
+		Query cnameQuery = catQuery.descend("categoryName");
+		for (String keyword : keywords) {
+			knameQuery.constrain(keyword);
+			for (String category : categorys) {
+				cnameQuery.constrain(category);
+				ObjectSet<DBAlbum> result = query.execute();
+				System.out.println(result.size() );
+				while(result.hasNext())
+				{
+					dbalbumlist.add(result.next());
+				}
 			}
 		}
 	    
