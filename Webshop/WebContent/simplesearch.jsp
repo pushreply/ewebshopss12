@@ -21,18 +21,19 @@
     <tr>
     	 <td  class="table-label">Kategorie: </td>
         <td><c:forEach items="${categories}" var="category">
-    	<li><input type="checkbox" id="{category.categoryName}" name="category" value="${category.identifier}">
+    	<li><input type="checkbox" id="{category.categoryName}" name="category" value="${category.categoryName}">
     	<c:out value = "${category.categoryName}"/></li>
     </c:forEach>
     </tr>
     <tr>
 				<td class="table-label">Schlagw&ouml;rter:</td>
 				<td><ul class="bulletless-list"><c:forEach items="${keywordies}" var="keyword">
-    	<li><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.identifier}">
+    	<li><input type="checkbox" id="{keyword.keywordName}" name="keyword" value="${keyword.keywordName}">
     	<c:out value = "${keyword.keywordName}"/></li>
     </c:forEach></ul></td>
     </tr>
 			<td><input type="hidden" name="action" value="albumsearch"></td>
+			<td><input type="hidden" name="search" value="true"><td>
 			<td  class="table-label"></td>
 			<td><input type="submit" value="Suchen"></td>
 		<tr>
