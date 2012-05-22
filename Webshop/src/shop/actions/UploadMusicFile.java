@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -119,7 +120,6 @@ public class UploadMusicFile {
 	protected void albumprocess(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
-		System.out.println("ich bin albumprocess");
 
 		try {
 			MultipartMap map = new MultipartMap(request, this);
@@ -127,17 +127,20 @@ public class UploadMusicFile {
 			DBAlbum dbalbum = new DBAlbum();
 
 			LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
+			
 			String[] category = map.getParameterValues("category");
-			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(
-					DBCategory.class, db);
+			
+			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class, db);
+			
 			for (int i = 0; i <= category.length - 1; i++) {
 				categories.add(daoc.read(category[i]));
 			}
-
+			
 			// Category in DBAlbum reinsetzen
 			dbalbum.setCategories(categories);
 
 			LinkedList<DBKeyword> keywordies = new LinkedList<DBKeyword>();
+			
 			String[] keyword = map.getParameterValues("keyword");
 
 			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
@@ -149,23 +152,39 @@ public class UploadMusicFile {
 
 			dbalbum.setKeywords(keywordies);
 
+			
 			dbalbum.setAlbumTitel(map.getParameter("titel"));
 			dbalbum.setArtist(map.getParameter("artist"));
 			dbalbum.setPrice(Double.parseDouble(map.getParameter("price")));
 			dbalbum.setLabel(map.getParameter("label"));
-			dbalbum.setNumberOfTracks(Integer.parseInt(map
-					.getParameter("trackanzahl")));
-			dbalbum.setNumberOfDisks(Integer.parseInt(map
-					.getParameter("diskanzahl")));
+			dbalbum.setNumberOfTracks(Integer.parseInt(map.getParameter("trackanzahl")));
+			dbalbum.setNumberOfDisks(Integer.parseInt(map.getParameter("diskanzahl")));
 			dbalbum.setAmount(Integer.parseInt(map.getParameter("albumanzahl")));
-
-			dbalbum.setCover(ByteArray.getBytesFromFile(map
-					.getFile("coverpage")));
-			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(
-					DBAlbum.class, db);
+			dbalbum.setCover(ByteArray.getBytesFromFile(map.getFile("coverpage")));
+			
+			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
+			
+			
 			String identifier = daoAlbum.create(dbalbum);
+			
+			LinkedList<DBAlbum> ldbalbum = new LinkedList<DBAlbum>();
+			ldbalbum.add(dbalbum);
+			for(int i = 0; i < categories.size(); i++)
+			{
+				categories.get(i).setAlbums(ldbalbum);
+			    daoc.update(categories.get(i));
+			}
+			
+			for(int i = 0; i < keywordies.size(); i++)
+			{
+				keywordies.get(i).setAlbums(ldbalbum);
+				daok.update(keywordies.get(i));
+			}
+			
 			request.setAttribute("isAdmin", true);
 			request.setAttribute("album", daoAlbum.read(identifier));
+			
+			
 			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
 					response);
 		} catch (Exception e) {
