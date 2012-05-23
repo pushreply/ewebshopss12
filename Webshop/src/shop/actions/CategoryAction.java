@@ -1,6 +1,5 @@
 package shop.actions;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +12,6 @@ import shop.dao.IGenericDao;
 import shop.dto.DBCategory;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.Db4oIOException;
 
 /**
  * This Action handles all needs of categories
@@ -46,6 +43,7 @@ public class CategoryAction extends AbstractAction {
 			category.setCategoryName(request.getParameter("addCategory").trim());
 			dao.create(category);
 			loadCategories(request, dao);
+			
 		}
 
 		// delete a category
