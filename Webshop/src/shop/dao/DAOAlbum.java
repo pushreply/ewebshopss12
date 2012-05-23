@@ -98,9 +98,6 @@ public class DAOAlbum extends DBAlbum {
 		empQuery.constrain(DBCategory.class);
 		Query nameQuery = empQuery.descend("categoryName");
 		for (String category : categorys) {
-			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
-			System.out.println();
-			System.out.println("ich bin suche nach categorys");
 			nameQuery.constrain(category);
 			ObjectSet<DBAlbum> result = query.execute();
 			System.out.println(result.size() );
@@ -127,14 +124,11 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("albumTitel").descend(albumtitle);
+		query.descend("albumTitel").constrain(albumtitle).like();
 		Query empQuery = query.descend("categories");
 		empQuery.constrain(DBCategory.class);
 		Query nameQuery = empQuery.descend("categoryName");
 		for (String category : categorys) {
-			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
-			System.out.println();
-			System.out.println("ich bin suche nach categorys");
 			nameQuery.constrain(category);
 			ObjectSet<DBAlbum> result = query.execute();
 			System.out.println(result.size() );
@@ -161,14 +155,11 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("artist").descend(albumartist);
+		query.descend("artist").constrain(albumartist).like();
 		Query empQuery = query.descend("categories");
 		empQuery.constrain(DBCategory.class);
 		Query nameQuery = empQuery.descend("categoryName");
 		for (String category : categorys) {
-			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
-			System.out.println();
-			System.out.println("ich bin suche nach categorys");
 			nameQuery.constrain(category);
 			ObjectSet<DBAlbum> result = query.execute();
 			System.out.println(result.size() );
@@ -195,15 +186,12 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("albumTitel").descend(albumtitle);
-		query.descend("artist").descend(albumartist);
+		query.descend("albumTitel").constrain(albumtitle).like();
+		query.descend("artist").constrain(albumartist).like();
 		Query empQuery = query.descend("categories");
 		empQuery.constrain(DBCategory.class);
 		Query nameQuery = empQuery.descend("categoryName");
 		for (String category : categorys) {
-			System.out.println("ich bin hier so vielmal durchgelaufen: "+category);
-			System.out.println();
-			System.out.println("ich bin suche nach categorys");
 			nameQuery.constrain(category);
 			ObjectSet<DBAlbum> result = query.execute();
 			System.out.println(result.size() );
@@ -260,7 +248,7 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("albumTitel").descend(albumtitle);
+		query.descend("albumTitel").constrain(albumtitle).like();
 		Query empQuery = query.descend("keywords");
 		empQuery.constrain(DBKeyword.class);
 		Query nameQuery = empQuery.descend("keywordName");
@@ -291,7 +279,7 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("artist").descend(albumartist);
+		query.descend("artist").constrain(albumartist).like();
 		Query empQuery = query.descend("keywords");
 		empQuery.constrain(DBKeyword.class);
 		Query nameQuery = empQuery.descend("keywordName");
@@ -322,8 +310,8 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("albumTitel").descend(albumtitle);
-		query.descend("artist").descend(albumartist);
+		query.descend("albumTitel").constrain(albumtitle).like();
+		query.descend("artist").constrain(albumartist).like();
 		Query empQuery = query.descend("keywords");
 		empQuery.constrain(DBKeyword.class);
 		Query nameQuery = empQuery.descend("keywordName");
@@ -394,7 +382,7 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("albumTitel").descend(albumtitle);
+		query.descend("albumTitel").constrain(albumtitle).like();
 		Query keyQuery = query.descend("keywords");
 		Query catQuery = query.descend("categories");
 		keyQuery.constrain(DBKeyword.class);
@@ -432,7 +420,7 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("artist").descend(albumartist);
+		query.descend("artist").constrain(albumartist).like();
 		Query keyQuery = query.descend("keywords");
 		Query catQuery = query.descend("categories");
 		keyQuery.constrain(DBKeyword.class);
@@ -470,8 +458,8 @@ public class DAOAlbum extends DBAlbum {
 		
 		Query query = db.query();
 		query.constrain(DBAlbum.class);
-		query.descend("albumTitel").descend(albumtitle);
-		query.descend("artist").descend(albumartist);
+		query.descend("albumTitel").constrain(albumtitle).like();
+		query.descend("artist").constrain(albumartist).like();
 		Query keyQuery = query.descend("keywords");
 		Query catQuery = query.descend("categories");
 		keyQuery.constrain(DBKeyword.class);
