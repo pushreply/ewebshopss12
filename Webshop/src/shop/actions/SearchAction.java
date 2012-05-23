@@ -7,12 +7,12 @@ package shop.actions;
  * 
  */
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import shop.dao.DAOAlbum;
 import shop.dao.GenericDaoImpl;
@@ -21,8 +21,11 @@ import shop.dto.DBCategory;
 import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 public class SearchAction extends AbstractAction {
 	
+
 
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
@@ -34,23 +37,22 @@ public class SearchAction extends AbstractAction {
 		System.out.println("der album albumseach: "+request.getParameter("upload"));
 		
 		if (request.getParameter("upload") != null) {
-			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class, db);
-			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(DBKeyword.class, db);
 			
-			List<DBCategory> categories = null;
-			List<DBKeyword> keywordies = null;
-			try {
-				categories = daoc.readAll();
-				keywordies = daok.readAll();
-
-			} catch (Exception e) {
-				errorHandler
-						.toUser("Beim Laden der Kategorie und Keyword ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
-								e);
-			}
-			request.setAttribute("keywordies", keywordies);
-			request.setAttribute("categories", categories);
-			disp = request.getRequestDispatcher("/simplesearch.jsp");
+				Query cquery = db.query();
+				cquery.constrain(DBCategory.class);
+				ObjectSet<DBCategory> cres = cquery.execute();
+			
+				Query kquery = db.query();
+				kquery.constrain(DBKeyword.class);
+				ObjectSet<DBKeyword> kres = kquery.execute();
+			
+//				HttpSession session = request.getSession(true);
+//				session.setAttribute("categories", cres);
+//				session.setAttribute("keywordies", kres);
+				
+				request.setAttribute("keywordies", kres);
+				request.setAttribute("categories", cres);
+				disp = request.getRequestDispatcher("/simplesearch.jsp");
 
 		}
 		
