@@ -3,6 +3,7 @@
  */
 package shop.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,12 @@ import java.util.List;
  * @author sesc0009
  *
  */
-public class DBCategory extends DBUUIDBase {
+public class DBCategory extends DBUUIDBase implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String categoryName;
 	private List<DBAlbum> calbum;

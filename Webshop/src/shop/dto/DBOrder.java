@@ -1,4 +1,5 @@
 package shop.dto;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -9,7 +10,7 @@ import java.util.LinkedList;
  *
  */
 
-public class DBOrder extends DBUUIDBase {
+public class DBOrder extends DBUUIDBase implements Serializable{
 		
 		private Date datum;
 		private int state;

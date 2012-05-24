@@ -150,11 +150,11 @@ public class TestDaten {
 			List<DBCategory> albumCategories = addRandom(allCategories);
 			List<DBTrack> albumTracks = addRandom(allTracks);
 
-			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
-					+ i + "_" + i, (int) (Math.random() * 2+1), (int) (Math.random() * 20)+1,
-					(int) (Math.random() * 500)+1, (int) albumTracks.size(),
-					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
-					albumCategories, albumTracks));
+//			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
+//					+ i + "_" + i, (int) (Math.random() * 2+1), (int) (Math.random() * 20)+1,
+//					(int) (Math.random() * 500)+1, (int) albumTracks.size(),
+//					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
+//					albumCategories, albumTracks));
 		}
 		db.close();
 		System.out.println("Testdaten wurden geschrieben");

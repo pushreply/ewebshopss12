@@ -3,11 +3,18 @@
  */
 package shop.dto;
 
+import java.io.Serializable;
+
 /**
  * @author roha0001,Mukunzi
  *
  */
-public class DBAddress extends DBUUIDBase{
+public class DBAddress extends DBUUIDBase implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String street;
 	private String country; 
 	private String firstName;

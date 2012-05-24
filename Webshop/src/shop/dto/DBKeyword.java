@@ -3,6 +3,7 @@
  */
 package shop.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,12 @@ import java.util.List;
  * @author mukunzi
  *
  */
-public class DBKeyword extends DBUUIDBase {
+public class DBKeyword extends DBUUIDBase implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String keywordName;
 	private List<DBAlbum> kalbum = new LinkedList<DBAlbum>();

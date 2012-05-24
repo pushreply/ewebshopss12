@@ -1,12 +1,18 @@
 package shop.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  * @author roha0001,Mukunzi
  * 
  */
-public class DBCustomer extends DBUUIDBase{
+public class DBCustomer extends DBUUIDBase implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String username;
 	private String password;
 	// A Customer has one or more addresses

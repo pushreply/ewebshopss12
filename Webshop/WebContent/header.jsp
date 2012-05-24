@@ -51,10 +51,26 @@
 				</c:choose>
 			</div>
 
+			<div style="position: absolute; top: 120px; right: 220px;">
+				<jsp:useBean id="orderedAlben" scope="session"
+					class="java.util.LinkedList" />
+				Warenkorb<br> 
+				<strong> 
+				    <c:out value='${orderedAlben.size()}' />
+				</strong>Artikeln
+
+					<form action="bestellungsUebersicht.jsp" method="post"> 
+						<input type="submit" value="Zur Übersicht">
+					</form>
+			</div>
+
 			<div id="search">
 				<!-- just for displaying purposes, not linked with bean so far -->
-				<input id="searchfield" type="text" /><input type="button" value="Suchen" />
-				<ul><li><a href="${simplesearch}">Einfache Suche</a></li></ul>
+				<input id="searchfield" type="text" /><input type="button"
+					value="Suchen" />
+				<ul>
+					<li><a href="${simplesearch}">Einfache Suche</a></li>
+				</ul>
 			</div>
 			<!-- search -->
 		</div>

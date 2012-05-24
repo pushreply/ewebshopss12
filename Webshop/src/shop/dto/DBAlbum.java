@@ -3,6 +3,7 @@
  */
 package shop.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 /**
@@ -10,7 +11,12 @@ import java.util.List;
  * @author sesc0009
  *
  */
-public class DBAlbum extends DBUUIDBase{
+public class DBAlbum extends DBUUIDBase implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private byte[] cover;
 	private String albumTitel;
 	private String artist;
