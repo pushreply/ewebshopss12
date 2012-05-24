@@ -3,6 +3,7 @@
  */
 package shop.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -10,7 +11,12 @@ import java.util.LinkedList;
  * @author mukunzi
  *
  */
-public class DBItems extends DBUUIDBase {
+public class DBItems extends DBUUIDBase implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int orderAmount;	
 	//an item has one or many album
 	LinkedList<DBAlbum> album = new LinkedList<DBAlbum>();

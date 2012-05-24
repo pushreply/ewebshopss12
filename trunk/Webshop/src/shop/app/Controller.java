@@ -28,6 +28,7 @@ import shop.actions.HomeAction;
 import shop.actions.KeywordAction;
 import shop.actions.LoginAction;
 import shop.actions.LogoutAction;
+import shop.actions.OrderAction;
 import shop.actions.RegisterAction;
 import shop.actions.SearchAction;
 import shop.actions.TrackAction;
@@ -61,6 +62,7 @@ public class Controller extends HttpServlet {
 		actionMap.put("register", new RegisterAction());
 		actionMap.put("album", new AlbumAction());
 		actionMap.put("albumsearch", new SearchAction());
+		actionMap.put("orderalbum", new OrderAction());
 	//	actionMap.put("address", new AddressAction());
 		// more "put" go here
 	}

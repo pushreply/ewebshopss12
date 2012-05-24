@@ -1,5 +1,6 @@
 package shop.dto;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -8,7 +9,12 @@ import java.util.Arrays;
  * @author mukunzi
  *
  */
-public class DBTrack extends DBUUIDBase{
+public class DBTrack extends DBUUIDBase implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private byte[] file;
 	private String trackTitle;
 	private String trackArtist;

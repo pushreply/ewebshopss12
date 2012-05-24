@@ -1,6 +1,7 @@
 package shop.actions;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import shop.dao.DAOCustomer;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
+import shop.dto.DBAlbum;
 import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
@@ -53,10 +55,16 @@ public class LoginAction extends AbstractAction {
 				user = daoCustomer.readUserData(loginUsername, db);
 			}
 			
-			request.setAttribute("userprofile", user);	
+			request.setAttribute("userprofile", user);
+			
 			//set session
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", loginUsername);
+			
+			//Session für Warenkorb beim Anmelden setzen
+			LinkedList<DBAlbum> alben = new LinkedList<DBAlbum>();
+			request.getSession().setAttribute("orderedAlben", alben);
+			
 //			session.setAttribute("userprofile", user);
 			RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");
 			

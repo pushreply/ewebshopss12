@@ -34,12 +34,18 @@
 					type="hidden" name="changeAlbumInfo" value="${album.identifier}">
 				<input type="submit" value="Bearbeiten">
 			</form></li>
+			
 		<li><form action="controller" method="post">
 				<input type="hidden" name="action" value="album"> <input
 					type="hidden" name="delete" value="${album.identifier}"> <input
 					type="submit" value="Album l&ouml;schen">
 			</form></li>
 	</c:if>
+	<li><form action="controller" method="get">
+				<input type="hidden" name="action" value="orderalbum"> 
+				<input type="hidden" name="albumID" value="${album.identifier}">
+				<input type="submit" value="In den Warenkorb legen ">
+			</form></li>
 </ul>
 
 <c:if test="${isAdmin=='true'}">
