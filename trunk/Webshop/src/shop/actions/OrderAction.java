@@ -50,7 +50,7 @@ public class OrderAction extends AbstractAction {
 
 					System.out.println("Bisher bestellte Alben:"+ sessinAlbumen.size());
 					
-					request.setAttribute("test", null);
+					//request.setAttribute("test", null);
 					disp = request.getRequestDispatcher("/controller?action=album&show=all");
 					System.out.println("Das ist ok!");
 				} else {
@@ -65,6 +65,17 @@ public class OrderAction extends AbstractAction {
 
 		}
 		
+		
+		
+		try {
+			disp.forward(request, response);
+		} catch (Exception e) {
+			errorHandler.toUser(
+					"Etwas mit der Weiterleitung ist schief gelaufen", e);
+		}
+		
+		
 	}
+	
 
 }
