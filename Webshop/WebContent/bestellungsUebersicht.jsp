@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="shop.dto.DBAlbum" %>
+<%@ page import="java.util.LinkedList" %>
 
 <c:import url="header.jsp">
 	<c:param name="title" value="Alle Alben anzeigen" />
@@ -7,28 +9,32 @@
 
 <h1>Bestellungsübersicht</h1>
 
+<jsp:useBean id="orderedAlben" scope="session" class="java.util.LinkedList" />
+
 <table border="1">
     <tr>
       <th>Albumtitel</th>
       <th>Artist</th>
       <th>Betrag</th>
     </tr>
- 
+    <%! int betrag = 0; %>
+    <c:forEach items="${sessionScope.orderedAlben}" var="album">
+
     <tr>
-      <td>1.Album</td>
-      <td>1.Artist</td>
-      <td>1.Betrag</td>
+      <td><c:out value="${album.albumTitel}" /></td>
+      <td><c:out value="${album.artist}" /></td>
+      <td><c:out value="${album.price}" /></td>
     </tr>
+    </c:forEach>
+    
     <tr>
-      <td>2.Album</td>
-      <td>2.Artist</td>
-      <td>2.Betrag</td>
-    </tr>
-    <tr>
-      <td>3.Album</td>
-      <td>4.Artist</td>
-      <td>5.Betrag</td>
+      <td></td>
+      <td align="right"><Strong>Gesammtbetrag</Strong></td>
+      <td></td>
     </tr>
 </table>
+<br>
+
+<input type="button" value="Weitere Alben bestellen" onClick="history.back()">
 
 <c:import url="footer.jsp" />

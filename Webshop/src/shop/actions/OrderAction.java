@@ -30,9 +30,6 @@ public class OrderAction extends AbstractAction {
 
 		if (request.getParameter("albumID") != null) {
 
-			System.out.println("AlbumID des bestellten Albums:"
-					+ request.getParameter("albumID"));
-
 			DBAlbum album = new DBAlbum();
 
 			try {
@@ -47,12 +44,9 @@ public class OrderAction extends AbstractAction {
 					sessinAlbumen.add(album);
 					
 					request.getSession().setAttribute("orderedAlben", sessinAlbumen);
-
-					System.out.println("Bisher bestellte Alben:"+ sessinAlbumen.size());
 					
-					//request.setAttribute("test", null);
 					disp = request.getRequestDispatcher("/controller?action=album&show=all");
-					System.out.println("Das ist ok!");
+
 				} else {
 					errorHandler.toUser("Dieses Album gibt es nicht mehr in unser Lager!",null);
 					disp = request.getRequestDispatcher("/error.jsp");
@@ -63,10 +57,7 @@ public class OrderAction extends AbstractAction {
 								e);
 			}
 
-		}
-		
-		
-		
+		}		
 		try {
 			disp.forward(request, response);
 		} catch (Exception e) {
