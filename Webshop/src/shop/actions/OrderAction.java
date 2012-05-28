@@ -27,38 +27,102 @@ public class OrderAction extends AbstractAction {
 
 		IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(
 				DBAlbum.class, db);
-
-		if (request.getParameter("albumID") != null) {
+        
+		//Artikel in Warenkorb legen
+		if (request.getParameter("PutAlbumInSessionID") != null) {
 
 			DBAlbum album = new DBAlbum();
 
 			try {
-				album = daoAlbum.read(request.getParameter("albumID"));
-
-				if (album.getAmount() != 0) {
-					album.setAmount(album.getAmount() - 1);
+				album = daoAlbum.read(request.getParameter("PutAlbumInSessionID"));
+				
+				if(album.getAmount() <=5)
+				{
+					album.setAmount(30);
 					daoAlbum.update(album);
-
-					@SuppressWarnings("unchecked")
-					LinkedList<DBAlbum> sessinAlbumen = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
-					sessinAlbumen.add(album);
-					
-					request.getSession().setAttribute("orderedAlben", sessinAlbumen);
-					
-					disp = request.getRequestDispatcher("/controller?action=album&show=all");
-
-				} else {
-					errorHandler.toUser("Dieses Album gibt es nicht mehr in unser Lager!",null);
-					disp = request.getRequestDispatcher("/error.jsp");
 				}
+				
+				album.setAmount(album.getAmount() - Integer.parseInt(request.getParameter("anzahl")));
+				daoAlbum.update(album);
+
+				//@SuppressWarnings("unchecked")
+				album.setAmount(Integer.parseInt(request.getParameter("anzahl")));
+				LinkedList<DBAlbum> sessionAlbumen = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
+				sessionAlbumen.add(album);
+				//sessionAlbumen.
+					
+				request.getSession().setAttribute("orderedAlben", sessionAlbumen);
+					
+				disp = request.getRequestDispatcher("/controller?action=album&show=all");
 
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Loaden eines Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
 								e);
 			}
 
-		}		
+		}
+		
+		
+		//Gewünschter Artikel aus warenkorb entfernen
+		if (request.getParameter("DeleteAlbumFromSessionID") != null) {
+
+
+			try {
+				
+					LinkedList<DBAlbum> sessionAlben = new LinkedList<DBAlbum>();
+					sessionAlben = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
+					
+					for (DBAlbum album : sessionAlben) {
+						if((album.getIdentifier().toString()).equals(request.getParameter("DeleteAlbumFromSessionID")))
+						{
+							 sessionAlben.remove(album);
+						}
+						
+					}
+
+					request.getSession().setAttribute("orderedAlben", sessionAlben);
+					
+					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
+                    System.out.println("bestellungsUebersicht -seite aufgerufen!");
+				 
+			} catch (Exception e) {
+				errorHandler.toUser("Beim Löschen des Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+								e);
+			}
+
+		}
+		
+		
+		//Artikel in warenkorn zum Anzeigen vorbereiten
+		if (request.getParameter("warenkorb") != null) {
+
+
+			try {
+				
+					LinkedList<DBAlbum> sessionAlben = new LinkedList<DBAlbum>();
+					sessionAlben = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
+					float gesammtpreis = 0;
+					
+					for (DBAlbum album : sessionAlben) {
+											
+                         gesammtpreis += album.getPrice() * album.getAmount();					
+						
+					}
+					
+					request.setAttribute("gesammtpreis", gesammtpreis);
+					
+					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
+                    System.out.println("bestellungsUebersicht -seite aufgerufen!");
+				 
+			} catch (Exception e) {
+				errorHandler.toUser("Beim Löschen des Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+								e);
+			}
+
+		}
+		
 		try {
+			 System.out.println("auch hier");
 			disp.forward(request, response);
 		} catch (Exception e) {
 			errorHandler.toUser(

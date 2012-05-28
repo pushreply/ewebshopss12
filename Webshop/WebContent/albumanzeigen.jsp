@@ -41,9 +41,17 @@
 					type="submit" value="Album l&ouml;schen">
 			</form></li>
 	</c:if>
+	<br>
 	<li><form action="controller" method="get">
+	         <select name = anzahl>
+                <option value = "1">1 Album</option>
+                <option value = "2">2 Alben</option>
+                <option value = "3">3 Alben</option>
+                <option value = "4">4 Alben</option>
+                <option value = "5">5 Alben</option>
+              </select>
 				<input type="hidden" name="action" value="orderalbum"> 
-				<input type="hidden" name="albumID" value="${album.identifier}">
+				<input type="hidden" name="PutAlbumInSessionID" value="${album.identifier}">
 				<input type="submit" value="In den Warenkorb legen ">
 			</form></li>
 </ul>
