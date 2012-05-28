@@ -11,28 +11,47 @@
 
 <jsp:useBean id="orderedAlben" scope="session" class="java.util.LinkedList" />
 
+<c:choose>
+       <c:when test="${empty sessionScope.orderedAlben}">
+           <p>Sie haben keinen Artikel im Warenkorb gelegt!</p>
+       </c:when>
+    <c:otherwise>
+    
 <table border="1">
     <tr>
       <th>Albumtitel</th>
       <th>Artist</th>
-      <th>Betrag</th>
+      <th>Anzahl</th>
+      <th>Srückpreis</th>
+      <th>Preis</th>
+      <th>Artikel entferen</th>
     </tr>
-    <%! int betrag = 0; %>
+    
     <c:forEach items="${sessionScope.orderedAlben}" var="album">
 
     <tr>
       <td><c:out value="${album.albumTitel}" /></td>
       <td><c:out value="${album.artist}" /></td>
+      <td><c:out value="${album.amount}" /></td>
       <td><c:out value="${album.price}" /></td>
+      <td><c:out value="${album.price * album.amount}" /></td>
+      <td>
+          <form action="controller" method="get">
+             <input type="hidden" name="action" value="orderalbum"> 
+			 <input type="hidden" name="DeleteAlbumFromSessionID" value="${album.identifier}"> 
+			 <input type="submit" value="Löschen">
+		  </form>
+      </td>
     </tr>
-    </c:forEach>
-    
-    <tr>
-      <td></td>
-      <td align="right"><Strong>Gesammtbetrag</Strong></td>
-      <td></td>
-    </tr>
+ </c:forEach>
+ 
 </table>
+
+</c:otherwise>
+</c:choose>
+
+<br>
+<p>Gesamtbetrag:<c:out value = "${gesammtpreis}" /></p>
 <br>
 
 <input type="button" value="Weitere Alben bestellen" onClick="history.back()">

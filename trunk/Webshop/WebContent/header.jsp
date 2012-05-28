@@ -59,7 +59,9 @@
 				    <c:out value='${orderedAlben.size()}' />
 				</strong>Artikeln
 
-					<form action="bestellungsUebersicht.jsp" method="post"> 
+					<form action="controller" method="post"> 
+					    <input type="hidden" name="action" value="orderalbum">
+					    <input type="hidden" name="warenkorb" value="show">
 						<input type="submit" value="Zur Übersicht">
 					</form>
 			</div>
