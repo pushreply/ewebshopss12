@@ -7,6 +7,9 @@
 </c:import>
 
 
-<h1>Alle Bestellungent</h1>
+<h1>Alle Bestellungen</h1>
+
+
+
 
 <c:import url="footer.jsp" />
