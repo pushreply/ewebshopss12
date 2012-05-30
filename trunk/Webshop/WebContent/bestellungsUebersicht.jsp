@@ -10,6 +10,7 @@
 <h1>Bestellungsübersicht</h1>
 
 <jsp:useBean id="orderedAlben" scope="session" class="java.util.LinkedList" />
+<jsp:useBean id="username" scope="session" class="java.lang.String" />
 
 <c:choose>
        <c:when test="${empty sessionScope.orderedAlben}">
@@ -55,5 +56,16 @@
 <br>
 
 <input type="button" value="Weitere Alben bestellen" onClick="history.back()">
-
+<c:choose>
+   <c:when test="${not empty sessionScope.username}">
+     <form action="controller" method="get">
+             <input type="hidden" name="action" value="orderalbum"> 
+			 <input type="hidden" name="order" value="alben"> 
+			 <input type="submit" value="Bestellen">
+     </form>
+  </c:when>
+  <c:otherwise>
+      <p>Um die Bestellung aufzugeben, melden sie sich bitte an!</p>
+   </c:otherwise>
+</c:choose>
 <c:import url="footer.jsp" />

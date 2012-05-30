@@ -36,6 +36,7 @@
 						<li><a href="${keyword}">Schlüsselworte</a></li>
 						<li><a href="${category}">Kategorien</a></li>
 						<li><a href="${uploadAlbum}">Neues Album Erstellen</a></li>
+						<li><a href="${alleBestellungen}">Alle Bestellungen</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
@@ -59,7 +60,7 @@
 				    <c:out value='${orderedAlben.size()}' />
 				</strong>Artikeln
 
-					<form action="controller" method="post"> 
+					<form action="controller" method="get"> 
 					    <input type="hidden" name="action" value="orderalbum">
 					    <input type="hidden" name="warenkorb" value="show">
 						<input type="submit" value="Zur Übersicht">
