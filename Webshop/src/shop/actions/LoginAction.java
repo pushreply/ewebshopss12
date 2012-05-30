@@ -61,9 +61,9 @@ public class LoginAction extends AbstractAction {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", loginUsername);
 			
-			//Session für Warenkorb beim Anmelden setzen
-			LinkedList<DBAlbum> alben = new LinkedList<DBAlbum>();
-			request.getSession().setAttribute("orderedAlben", alben);
+//			//Session für Warenkorb beim Anmelden setzen
+//			LinkedList<DBAlbum> alben = new LinkedList<DBAlbum>();
+//			request.getSession().setAttribute("orderedAlben", alben);
 			
 //			session.setAttribute("userprofile", user);
 			RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");

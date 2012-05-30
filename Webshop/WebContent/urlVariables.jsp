@@ -57,4 +57,10 @@
 	<c:param name="edit" value="true" />
 </c:url>
 
+<c:url var="alleBestellungen" value="controller">
+	<c:param name="action" value="orderalbum" />
+	<c:param name="allOrder" value="all" />
+	<c:param name="edit" value="true" />
+</c:url>
+
 

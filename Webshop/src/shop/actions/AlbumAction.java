@@ -1,11 +1,13 @@
 package shop.actions;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
@@ -28,6 +30,12 @@ public class AlbumAction extends AbstractAction {
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
+		
+//		//Session für Warenkorb setzen
+//		HttpSession session = request.getSession(true);
+//		LinkedList<DBAlbum> alben = new LinkedList<DBAlbum>();
+//		request.getSession().setAttribute("orderedAlben", alben);
+		
 		RequestDispatcher disp = null;
 
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class,
