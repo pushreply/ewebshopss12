@@ -113,7 +113,7 @@ public class OrderAction extends AbstractAction {
                          gesammtpreis += album.getPrice() * album.getAmount();					
 						
 					}
-					
+					gesammtpreis = (float) (Math.round(gesammtpreis * 100) / 100.0);
 					request.setAttribute("gesammtpreis", gesammtpreis);
 					
 					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
@@ -185,17 +185,15 @@ public class OrderAction extends AbstractAction {
                     request.setAttribute("order", order);				
 					
 					disp = request.getRequestDispatcher("/alleBestellungen.jsp");
-                    System.out.println("bestellungAufgeben -seite aufgerufen!");
 				 
 			} catch (Exception e) {
-				errorHandler.toUser("Beim Löschen des Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+				errorHandler.toUser("Beim Laden der Bestellungen ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
 								e);
 			}
 
 		}
 		
 		try {
-			 System.out.println("auch hier");
 			disp.forward(request, response);
 		} catch (Exception e) {
 			errorHandler.toUser(
