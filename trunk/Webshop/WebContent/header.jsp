@@ -22,7 +22,7 @@
 <script type="text/JavaScript" src="js/albumDatenAuswerten.js"></script>
 
 </head>
-<body>
+<body >
 	<!-- ending tag in footer.jsp -->
 	<div id=wrapper>
 		<div id="top">
@@ -46,8 +46,8 @@
 			Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 					</c:when>
 					<c:when test="${not empty username}">
-			Sie sind als <strong>${username}</strong> angemeldet.
-						<a href="${logout}">Logout</a>
+			 Ich bin <a href="controller?action=customer&show=profile"><strong>${username}</strong></a>.
+						<a href="${logout}">(Ausloggen)</a>
 					</c:when>
 				</c:choose>
 			</div>
@@ -69,11 +69,12 @@
 
 			<div id="search">
 				<!-- just for displaying purposes, not linked with bean so far -->
-				<input id="searchfield" type="text" /><input type="button"
+				<!-- <input id="searchfield" type="text" /><input type="button"
 					value="Suchen" />
-				<ul>
-					<li><a href="${simplesearch}">Einfache Suche</a></li>
-				</ul>
+				<!--<ul>-->
+					<!--<li><a href="${simplesearch}">Einfache Suche</a></li>-->
+					<a href="${simplesearch}">Einfache Suche</a>
+				<!--</ul>-->
 			</div>
 			<!-- search -->
 		</div>
