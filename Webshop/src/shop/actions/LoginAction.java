@@ -66,7 +66,7 @@ public class LoginAction extends AbstractAction {
 //			request.getSession().setAttribute("orderedAlben", alben);
 			
 //			session.setAttribute("userprofile", user);
-			RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/reloadmenu.jsp");
 			
 			disp.forward(request, response);
 		} catch (Exception e) {

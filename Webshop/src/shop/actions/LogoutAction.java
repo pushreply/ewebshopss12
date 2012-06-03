@@ -31,7 +31,7 @@ public class LogoutAction  extends AbstractAction{
 			throws ServletException, IOException {
 
 		if (request.getParameter("logout") != null) {
-			RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/reloadmenu.jsp");
 			try {
 				
 				HttpSession session = request.getSession(false);
