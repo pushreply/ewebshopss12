@@ -5,12 +5,13 @@
 var var_1 = new Array()
 var_1[0] = new Array('titel','e','','Sie haben kein Titel angegeben','');
 var_1[1] = new Array('artist','e','','Sie haben kein Artist angegeben','');
-var_1[2] = new Array('diskanzahl','e','n','Sie haben keine Anzahl der Disks angegeben','ist keine ZAhl');
+var_1[2] = new Array('diskanzahl','e','n','Sie haben keine Anzahl der Disks angegeben','ist keine Zahl');
 var_1[3] = new Array('price','e','p','Sie haben kein Preis angegeben','ist kein gültiger Preis');
-var_1[4] = new Array('albumanzahl','e','n','Sie haben keine Anzahl der Alben angegeben','ist keine ZAhl');
+var_1[4] = new Array('albumanzahl','e','n','Sie haben keine Anzahl der Alben angegeben','ist keine Zahl');
 var_1[5] = new Array('trackanzahl','e','n','Sie haben kein Anzahl der Tacks angegeben','ist kein Zahl');
 var_1[6] = new Array('label','e','','Sie haben kein Label angegeben','');
-var_1[7] = new Array('category','ch','','Sie haben kein Kategory angegeben','');
+
+//var_1[7] = new Array('category','ch','','Sie haben kein Kategory angegeben','');
 
 
 var msg_1 = 'Fehler:';
@@ -31,26 +32,26 @@ for (i=0;i<myarray.length;i++){
     }
   }
 
-  /*Überprüft, ob mindestens einer der checkboxes gecheckt ist */
-  else if (myarray[i][1].indexOf('ch')>-1){
-	  for (j = 0; j < field.length; j++)
-		  {
-			if(field[j].checked == true)
-			{
-				error = false;
-				break;
-			}
-			else{
-				error = true;
-			}
-		  }
-      if (error = true)
-      {
-    	 //alert("Das ist es");
-         err_msg.push(myarray[i][3]);
-      }
-    }
-  
+//  /*Überprüft, ob mindestens einer der checkboxes gecheckt ist */
+//  else if (myarray[i][1].indexOf('ch')>-1){
+//	  for (j = 0; j < field.length; j++)
+//		  {
+//			if(field[j].checked == true)
+//			{
+//				error = false;
+//				break;
+//			}
+//			else{
+//				error = true;
+//			}
+//		  }
+//      if (error = true)
+//      {
+//    	 //alert("Das ist es");
+//         err_msg.push(myarray[i][3]);
+//      }
+//    }
+//  
 /*Überprüft Felder, deren Wert eine Zahl sein muss */
   else if (myarray[i][2].indexOf('n')>-1) {
     var num_error = false;

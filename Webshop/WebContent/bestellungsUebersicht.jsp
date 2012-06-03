@@ -14,7 +14,7 @@
 
 <c:choose>
        <c:when test="${empty sessionScope.orderedAlben}">
-           <p>Sie haben keinen Artikel im Warenkorb gelegt!</p>
+           <p>Sie haben keinen Artikel in den Warenkorb gelegt!</p>
        </c:when>
     <c:otherwise>
     
