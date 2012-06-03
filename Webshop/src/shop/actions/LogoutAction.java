@@ -30,7 +30,7 @@ public class LogoutAction  extends AbstractAction{
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 
-		if (request.getParameter("logout") != null) {
+//		if (request.getParameter("logout") != null) {
 			RequestDispatcher disp = request.getRequestDispatcher("/reloadmenu.jsp");
 			try {
 				
@@ -43,7 +43,7 @@ public class LogoutAction  extends AbstractAction{
 			} catch (Exception e) {
 				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen.", e);
 			}
-		}
+//		}
 		
 		
 	}
