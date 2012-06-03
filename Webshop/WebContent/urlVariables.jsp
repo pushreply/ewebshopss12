@@ -29,7 +29,6 @@
 
 <c:url var="logout" value="controller">
 	<c:param name="action" value="logout" />
-	<c:param name="logout" value="logout"/>
 </c:url>
 
 <c:url var="register" value="controller">
@@ -52,9 +51,10 @@
 </c:url>
 
 <c:url var="customer" value="controller">
-	<c:param name="action" value="address" />
-	<c:param name="show" value="all" />
-	<c:param name="edit" value="true" />
+	<c:param name="action" value="customer" />
+	<c:param name="show" value="profile" />
+	<c:param name="address" value="addnew" />
+	<c:param name="address" value="delete" />
 </c:url>
 
 <c:url var="alleBestellungen" value="controller">
