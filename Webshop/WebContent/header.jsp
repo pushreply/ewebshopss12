@@ -55,16 +55,16 @@
 			<div style="position: absolute; top: 120px; right: 220px;">
 				<jsp:useBean id="orderedAlben" scope="session"
 					class="java.util.LinkedList" />
-				Warenkorb<br> 
+				<a href="controller?action=orderalbum&warenkorb=show">Warenkorb</a><br> 
 				<strong> 
 				    <c:out value='${orderedAlben.size()}' />
 				</strong>Artikeln
 
-					<form action="controller" method="get"> 
-					    <input type="hidden" name="action" value="orderalbum">
-					    <input type="hidden" name="warenkorb" value="show">
-						<input type="submit" value="Zur Übersicht">
-					</form>
+<!-- 					<form action="controller" method="get">  -->
+<!-- 					    <input type="hidden" name="action" value="orderalbum"> -->
+<!-- 					    <input type="hidden" name="warenkorb" value="show"> -->
+<!-- 						<input type="submit" value="Zur Übersicht"> -->
+<!-- 					</form> -->
 			</div>
 
 			<div id="search">
