@@ -49,13 +49,13 @@ public class LoginAction extends AbstractAction {
 		
 			match = daoCustomer.isMatchUser(loginUsername, loginPassword, db);
 			System.out.println("Login OK.");
-			
-			//get users' data
-			for (int i = 0; i < daoCustomer.readUserData(loginUsername, db).getAddresses().size(); i++) {
-				user = daoCustomer.readUserData(loginUsername, db);
-			}
-			
-			request.setAttribute("userprofile", user);
+//			
+//			//get users' data
+//			for (int i = 0; i < daoCustomer.readUserData(loginUsername, db).getAddresses().size(); i++) {
+//				user = daoCustomer.readUserData(loginUsername, db);
+//			}
+//			
+//			request.setAttribute("userprofile", user);
 			
 			//set session
 			HttpSession session = request.getSession(true);
