@@ -53,8 +53,11 @@
 <c:url var="customer" value="controller">
 	<c:param name="action" value="customer" />
 	<c:param name="show" value="profile" />
+</c:url>
+
+<c:url var="address" value="controller">
+	<c:param name="action" value="address" />
 	<c:param name="address" value="addnew" />
-	<c:param name="address" value="delete" />
 </c:url>
 
 <c:url var="alleBestellungen" value="controller">

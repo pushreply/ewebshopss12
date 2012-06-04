@@ -32,10 +32,10 @@ Vorname:
 Nachname:
 <li><input name="lname" type="text"/>
 <input name="action" type="hidden" value="register"/></li>
-Strasse und HausNr.:
+Strasse und Hausnummer (Beispiel: Amerikastr. 1):
 <li><input name="street" type="text"/>
 <input name="action" type="hidden" value="register"/></li>
-PLZ und Land:
+PLZ und Land (Beispiel: 66482 Zweibrücken):
 <li><input name="country" type="text"/>
 <input name="action" type="hidden" value="register"/></li>
 
