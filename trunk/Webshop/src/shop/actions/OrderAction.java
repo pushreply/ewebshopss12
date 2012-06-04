@@ -68,6 +68,21 @@ public class OrderAction extends AbstractAction {
 		}
 		
 		
+		//Weitere Alben in Warenkorb legen
+				if (request.getParameter("weiterealben") != null) {
+
+					try {
+							
+						disp = request.getRequestDispatcher("/controller?action=album&show=all");
+
+					} catch (Exception e) {
+						errorHandler.toUser("Beim Loaden eines Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+										e);
+					}
+
+				}
+		
+		
 		//Gewünschter Artikel aus warenkorb entfernen
 		if (request.getParameter("DeleteAlbumFromSessionID") != null) {
 
@@ -84,10 +99,22 @@ public class OrderAction extends AbstractAction {
 						}
 						
 					}
-
-					request.getSession().setAttribute("orderedAlben", sessionAlben);
+					
+                    float gesammtpreis = 0;
+					
+					for (DBAlbum album : sessionAlben) {
+											
+                         gesammtpreis += album.getPrice() * album.getAmount();					
+						
+					}
+					gesammtpreis = (float) (Math.round(gesammtpreis * 100) / 100.0);
+					request.setAttribute("gesammtpreis", gesammtpreis);
 					
 					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
+
+//					request.getSession().setAttribute("orderedAlben", sessionAlben);
+//					
+//					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
 
 				 
 			} catch (Exception e) {
