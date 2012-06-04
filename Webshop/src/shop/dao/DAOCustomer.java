@@ -27,7 +27,7 @@ public class DAOCustomer{
 	 * NQ.
 	 * match username and password, for login process, return boolean value
 	 */
-	public boolean isMatchUser(final String username, final String password, ObjectContainer db){
+	public static boolean isMatchUser(final String username, final String password, ObjectContainer db){
 		List<DBCustomer> customerlist = db.query(new Predicate<DBCustomer>() {
 			/**
 			 * 
@@ -60,10 +60,10 @@ public class DAOCustomer{
 	/*
 	 * find customer by username
 	 */
-	public DBCustomer findUser(String username, ObjectContainer db){
+	public DBCustomer findUserbyUUID(String username, ObjectContainer db){
 		Query query = db.query();
 		query.constrain(DBCustomer.class);
-		query.descend("username").constrain(username); //query.descend("table_column").constrain(param);
+		query.descend("identifier").constrain(username); //query.descend("table_column").constrain(param);
 		ObjectSet<DBCustomer> result = query.execute();
 		if(result.hasNext()){
 			return result.next();
@@ -95,14 +95,14 @@ public class DAOCustomer{
 	/*
 	 * update user data, based on username: FirstName, LastName
 	 */
-	public static void updateUserData_name(String uName, String uLastName, String uFirstName, ObjectContainer db){
+	public void updateUserData_name(String uName, String uLastName, String uFirstName, ObjectContainer db){
 		
 	}
 	
 	/*
 	 * update user data, based on username: Address
 	 */
-	public static void updateUserData_address(String uName, String uStreet, String uCountry, ObjectContainer db){
+	public void updateUserData_address(String uName, String uStreet, String uCountry, ObjectContainer db){
 		
 	}
 	
