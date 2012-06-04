@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import shop.actions.AbstractAction;
 //import shop.actions.AddressAction;
+import shop.actions.AddressAction;
 import shop.actions.AlbumAction;
 import shop.actions.CategoryAction;
 import shop.actions.HomeAction;
@@ -29,6 +30,7 @@ import shop.actions.KeywordAction;
 import shop.actions.LoginAction;
 import shop.actions.LogoutAction;
 import shop.actions.OrderAction;
+import shop.actions.ProfileAction;
 import shop.actions.RegisterAction;
 import shop.actions.SearchAction;
 import shop.actions.TrackAction;
@@ -63,7 +65,9 @@ public class Controller extends HttpServlet {
 		actionMap.put("album", new AlbumAction());
 		actionMap.put("albumsearch", new SearchAction());
 		actionMap.put("orderalbum", new OrderAction());
-	//	actionMap.put("address", new AddressAction());
+		actionMap.put("customer", new ProfileAction());
+		actionMap.put("address", new AddressAction());
+		
 		// more "put" go here
 	}
 
