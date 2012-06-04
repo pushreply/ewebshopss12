@@ -55,7 +55,12 @@
 <p>Gesamtbetrag:<c:out value = "${gesammtpreis}" /></p>
 <br>
 
-<input type="button" value="Weitere Alben bestellen" onClick="history.back()">
+<form action="controller" method="get">
+   <input type="hidden" name="action" value="orderalbum"> 
+   <input type="hidden" name="weiterealben" value="alben"> 
+   <input type="submit" value="Weitere Alben bestellen">
+</form>
+
 <c:choose>
    <c:when test="${not empty sessionScope.username}">
      <form action="controller" method="get">
