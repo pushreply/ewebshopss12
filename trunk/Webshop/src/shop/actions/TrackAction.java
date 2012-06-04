@@ -58,9 +58,9 @@ public class TrackAction extends AbstractAction{
 			int date = Integer.parseInt((request.getParameter("date")));
 			String genre = request.getParameter("genre");
 			int trackanzahl = Integer.parseInt(request
-					.getParameter("trackanzahl"));
+					.getParameter("trackAnzahl"));
 			int diskanzahl = Integer.parseInt(request
-					.getParameter("diskanzahl"));
+					.getParameter("diskAnzahl"));
 			track.setTrackTitle(titel);
 			track.setTrackArtist(artist);
 			track.setTrackDate(date);
@@ -69,7 +69,6 @@ public class TrackAction extends AbstractAction{
 			track.setTrackDiskNumber(diskanzahl);
 			
 			dao.update(track);
-			
 			disp = request.getRequestDispatcher("controller?action=album&show=" + request.getParameter("albumIdentifier"));
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
