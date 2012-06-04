@@ -66,7 +66,6 @@ public class RegisterAction extends AbstractAction {
 			 * check whether the passwords are identical.
 			 */
 			if (newPassword1.equals(newPassword2)) {
-				System.out.println("Passwords are identical. Now trying to compare proposed username to DB..");
 				available = newRegistration.isMatchUser(newUsername, db);
 				System.out.println("Proposed username is" + available + ", prepare values");
 				/*
@@ -86,7 +85,6 @@ public class RegisterAction extends AbstractAction {
 						System.out.println("New User is created, go to profileview.jsp");
 						disp.forward(request, response);
 					} catch (Db4oException e) {
-						System.out.println("Database error, data could not be saved.");
 						errorHandler.toUser("Database error, data could not be saved.", e);
 					} catch (IOException e) {
 						errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen.", e);
