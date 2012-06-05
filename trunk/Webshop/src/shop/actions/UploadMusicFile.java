@@ -2,13 +2,12 @@ package shop.actions;
 
 /**
  * @author Schneider Sergej
+ * 
+ * 
  */
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -33,16 +32,22 @@ import de.vdheide.mp3.ID3v2IllegalVersionException;
 import de.vdheide.mp3.ID3v2WrongCRCException;
 import de.vdheide.mp3.NoMP3FrameException;
 
+
+/** upload path definition **/
+/** and File Size with 10 MB **/
 @WebServlet(urlPatterns = { "/upload" })
 @MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L)
 // 10MB.
 public class UploadMusicFile {
 
+	/** Variablen festlegung fuer UplaodMisikFile **/
+	
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	protected ObjectContainer db;
 	ErrorHandler errorHandler = new ErrorHandler();
 
+	/** Konstruktor für UplaodMusikFiele **/
 	public UploadMusicFile(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
@@ -50,8 +55,7 @@ public class UploadMusicFile {
 		this.response = response;
 		this.db = db;
 
-		System.out.println("parameter ausgabe: "
-				+ request.getParameter("senden"));
+		/** **/
 		if (request.getParameter("senden") != null
 				&& "senden".equals(request.getParameter("senden"))) {
 			albumprocess(request, response, db);
@@ -70,9 +74,9 @@ public class UploadMusicFile {
 			HttpServletResponse response, ObjectContainer db) throws ServletException {
 		try {
 			MultipartMap map = new MultipartMap(request, this);
+			
 			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 			
-			System.out.println(map.getParameter("albumid"));
 			DBAlbum dbalbum = daoAlbum.read(map.getParameter("albumid"));
 
 			dbalbum.setCover(ByteArray.getBytesFromFile(map.getFile("coverpage")));
@@ -87,7 +91,7 @@ public class UploadMusicFile {
 			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
 					response);
 		} catch (Exception e) {
-			errorHandler.toUser("Bitte geben Sie eine MP3 Datei an", e);
+			errorHandler.toUser("Bitte geben neues Cover ein", e);
 		}
 			
 		
