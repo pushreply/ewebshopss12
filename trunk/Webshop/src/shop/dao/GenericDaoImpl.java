@@ -4,14 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import shop.dto.DBKeyword;
 import shop.dto.DBUUIDBase;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.Db4oIOException;
-import com.db4o.internal.activation.DescendingActivationDepth;
 import com.db4o.query.Query;
 
 /**

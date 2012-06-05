@@ -1,17 +1,18 @@
 package shop.util;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * handles Exceptions, flushed messages are shown on errorPage.jsp
+ * @author Andreas
+ *
+ */
 public class ErrorHandler {
 	 Log logger = LogFactory.getLog(ErrorHandler.class);
 

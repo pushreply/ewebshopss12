@@ -50,6 +50,9 @@ public class Controller extends HttpServlet {
 	private ObjectContainer db = null;
 	private static Map<String, AbstractAction> actionMap = new HashMap<String, AbstractAction>();
 
+	/**
+	 * @author Andreas
+	 */
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -96,7 +99,7 @@ public class Controller extends HttpServlet {
 		 */
 
 		else if (ServletFileUpload.isMultipartContent(request)) {
-			UploadMusicFile up = new UploadMusicFile(request, response, db);
+			new UploadMusicFile(request, response, db);
 		} 
 		if (db != null)
 			db.close();

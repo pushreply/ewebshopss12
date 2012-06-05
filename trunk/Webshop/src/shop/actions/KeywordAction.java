@@ -29,23 +29,23 @@ public class KeywordAction extends AbstractAction {
 		IGenericDao<DBKeyword> dao = new GenericDaoImpl<DBKeyword>(
 				DBKeyword.class, db);
 
-		// read all categories for initial JSP d7isplaying purposes
+		// read all categories for initial JSP displaying purposes
 		loadKeywords(request, dao);
 
 		// add a new category
 		String add = null;
 		try {
 			add = request.getParameter("addKeyword");
+			if (!(add == null || add.isEmpty() || dao.existByAttribute(
+					"keywordName", add))) {
+				DBKeyword keyword = new DBKeyword(add);
+				dao.create(keyword);
+				loadKeywords(request, dao);
+			}
 		} catch (Exception e) {
 			errorHandler
 					.toUser("Das Schlüsselwort konnte aus unbekannten Gründen nicht hinzugefügt werden",
 							e);
-		}
-		if (!(add == null || add.isEmpty() || dao.existByAttribute(
-				"keywordName", add))) {
-			DBKeyword keyword = new DBKeyword(add);
-			dao.create(keyword);
-			loadKeywords(request, dao);
 		}
 
 		// delete a category
@@ -58,7 +58,7 @@ public class KeywordAction extends AbstractAction {
 			}
 		} catch (Exception e) {
 			errorHandler
-					.toUser("Beim Löschen des Schlüsselwort ist en Fehler aufgetreten, bitte versuchen Sie es später wieder",
+					.toUser("Beim Löschen des Schlüsselwort ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
 							e);
 		}
 

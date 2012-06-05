@@ -1,11 +1,7 @@
 package shop.dao.jtest;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +11,6 @@ import shop.dao.DBObject;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBCategory;
-import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ext.DatabaseClosedException;
