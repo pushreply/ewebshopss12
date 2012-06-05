@@ -15,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.omg.Dynamic.Parameter;
+
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
@@ -55,39 +57,65 @@ public class UploadMusicFile {
 		this.response = response;
 		this.db = db;
 
-		/** **/
+		/** Weiter Leitung an jeweilige Bestimmung
+		    Cover aendern
+		    Album hochladen
+		    Track hochladden **/
+		// Weiterletung an Album hochladen
 		if (request.getParameter("senden") != null
 				&& "senden".equals(request.getParameter("senden"))) {
 			albumprocess(request, response, db);
+			
+			// Weiterleitung an Cover aendern
 		} else if (request.getParameter("senden") != null
 				&& "coverchange".equals(request.getParameter("senden"))){
 				coverchange(request, response, db);
-			
+				
+			// Weiterleitung an Track hochladen
 		} else
 		{
 			process(request, response, db);
 		}
 
 	}
-
+	
+	/** Funktion Cover aendern 
+	 * Bekommt {@link HttpServletRequest} {@link HttpServletResponse} und {@link ObjectContainer}
+	 * mit der {@link MultipartMap} werden alle {@link Parameter} zerlegt und Bild hochgeladen.
+	 * {@link IGenericDao} wird eine Verbindung zur Datenbank aufgebaut und mit der funktion daoAlbum.read wird bestimmter
+	 * Album geholt die dieser ID. Setzen wir ein neuer Cover dbalbum.setCover(ByteArray.getBytesFromFile(map.getFile("coverpage")));
+	 * und speichern mit der Funktion daoAlbum.update(dbalbum)
+	 *  
+	 * Weiterleitung an die Album einzeigen jsp
+	 * 
+	 * */
 	protected void coverchange(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db) throws ServletException {
 		try {
+			
+			// File Hochladen
 			MultipartMap map = new MultipartMap(request, this);
 			
+			// Eine verbildung mit Datenbank aufbauen
 			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 			
+			// Aus Datenbank Album auslesen mit ID
 			DBAlbum dbalbum = daoAlbum.read(map.getParameter("albumid"));
 
+			// Cover ins ByteArray umwandeln und in die Klasse Albumt setzen
 			dbalbum.setCover(ByteArray.getBytesFromFile(map.getFile("coverpage")));
 			
+			// File loeschen
+			map.getFile("coverpage").delete();
+			
+			// Album updaten
 			daoAlbum.update(dbalbum);
 			
 			
 			request.setAttribute("isAdmin", true);
 			request.setAttribute("album", dbalbum);
 			
-			
+			// Weiterletung an Album einzeigen jsp
 			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
 					response);
 		} catch (Exception e) {
