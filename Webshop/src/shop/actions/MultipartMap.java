@@ -59,6 +59,8 @@ import javax.servlet.http.Part;
  * it in the JSTL <code>fn:contains</code> function.
  *
  * @author BalusC
+ * @author Sergej Schneider
+ * 
  * @link http://balusc.blogspot.com/2009/12/uploading-files-in-servlet-30.html
  */
 @SuppressWarnings("serial")
