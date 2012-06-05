@@ -40,7 +40,8 @@ public class RegisterAction extends AbstractAction {
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 
-		IGenericDao<DBCustomer> dao = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
+		IGenericDao<DBCustomer> daoCustomer = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
+		IGenericDao<DBAddress> daoAddress = new GenericDaoImpl<DBAddress>(DBAddress.class, db);
 		DAOCustomer newRegistration = new DAOCustomer();
 
 		String newUsername, newPassword1, newPassword2, gender, firstName, lastName, street, country, art;
@@ -73,12 +74,23 @@ public class RegisterAction extends AbstractAction {
 				 */
 				if (available == true) {
 					DBAddress address = new DBAddress(street, country, firstName, lastName, gender, art = "delivery");
+					//alternative:
+//					DBAddress address = new DBAddress();
+//					address.setFirstName(firstName);
+//					address.setLastName(lastName);
+//					address.setGender(gender);
 					LinkedList<DBAddress> useraddress = new LinkedList<DBAddress>();
 					useraddress.add(address);
 					DBCustomer user = new DBCustomer(newUsername, newPassword1, useraddress);
+					//alternative:
+//					DBCustomer user = new DBCustomer();
+//					user.setUsername(newUsername);
+//					user.setPassword(newPassword1);
+					
 					RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");
 					try {
-						dao.create(user); // save to DB
+						daoAddress.create(address);
+						daoCustomer.create(user); 
 						request.setAttribute("userprofile", user);
 						HttpSession session = request.getSession(true);
 						session.setAttribute("username", user.getUsername());
