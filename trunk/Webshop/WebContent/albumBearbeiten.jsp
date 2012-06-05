@@ -82,8 +82,7 @@
 	</ul>
 
 	<input type="hidden" name="action" value="album"> <input
-		type="hidden" name="updateAlbum"
-		value="<c:out value="${album.identifier}"/>" /> <input type="submit"
+		type="hidden" name="updateAlbum" value="<c:out value="${album.identifier}"/>" /> <input type="submit"
 		value="Speichern" onclick="return validate(this.form,var_1,msg_1)">
 </form>
 
