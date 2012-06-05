@@ -223,6 +223,9 @@ public class UploadMusicFile {
 			dbalbum.setAmount(Integer.parseInt(map.getParameter("albumanzahl")));
 			dbalbum.setCover(ByteArray.getBytesFromFile(map.getFile("coverpage")));
 			
+			// Cover loeschen
+			map.getFile("coverpage").delete();
+			
 			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 			
 			
