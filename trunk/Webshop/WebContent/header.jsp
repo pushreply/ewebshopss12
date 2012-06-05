@@ -59,11 +59,6 @@
 				    <c:out value='${orderedAlben.size()}' />
 				</strong>Artikeln
 
-<!-- 					<form action="controller" method="get">  -->
-<!-- 					    <input type="hidden" name="action" value="orderalbum"> -->
-<!-- 					    <input type="hidden" name="warenkorb" value="show"> -->
-<!-- 						<input type="submit" value="Zur Übersicht"> -->
-<!-- 					</form> -->
 			</div>
 
 			<div id="search">
