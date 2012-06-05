@@ -45,7 +45,7 @@
 			Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 					</c:when>
 					<c:when test="${not empty username}">
-			 Ich bin <a href="controller?action=customer&show=profile"><strong>${username}</strong></a>.
+			 Sie sind <a href="controller?action=customer&show=profile"><strong>${username}</strong></a>.
 						<a href="${logout}">(Ausloggen)</a>
 					</c:when>
 				</c:choose>
