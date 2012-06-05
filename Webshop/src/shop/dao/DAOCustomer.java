@@ -27,7 +27,7 @@ public class DAOCustomer{
 	 * NQ.
 	 * match username and password, for login process, return boolean value
 	 */
-	public static boolean isMatchUser(final String username, final String password, ObjectContainer db){
+	public boolean isMatchUser(final String username, final String password, ObjectContainer db){
 		List<DBCustomer> customerlist = db.query(new Predicate<DBCustomer>() {
 			/**
 			 * 
@@ -60,10 +60,10 @@ public class DAOCustomer{
 	/*
 	 * find customer by username
 	 */
-	public DBCustomer findUserbyUUID(String username, ObjectContainer db){
+	public DBCustomer findUser(String username, ObjectContainer db){
 		Query query = db.query();
 		query.constrain(DBCustomer.class);
-		query.descend("identifier").constrain(username); //query.descend("table_column").constrain(param);
+		query.descend("username").constrain(username); //query.descend("table_column").constrain(param);
 		ObjectSet<DBCustomer> result = query.execute();
 		if(result.hasNext()){
 			return result.next();
