@@ -4,8 +4,7 @@ import java.util.UUID;
 
 /**
  * The mother of all persistent Objects; it provides an unique identifier. If
- * you want to use the IGenericDao you have to extend your persistent Object
- * from this class.
+ * you want to use the features of IGenericDao you have to extend DBUUIDBase.
  * 
  * @author Andreas
  * 
