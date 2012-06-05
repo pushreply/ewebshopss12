@@ -7,8 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import shop.dao.DAOKeyword;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
+import shop.dto.DBCategory;
 import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
@@ -23,12 +25,13 @@ public class KeywordAction extends AbstractAction {
 
 	@Override
 	public void process(HttpServletRequest request,
-			HttpServletResponse response, ObjectContainer db) throws ServletException {
+			HttpServletResponse response, ObjectContainer db)
+			throws ServletException {
 
 		IGenericDao<DBKeyword> dao = new GenericDaoImpl<DBKeyword>(
 				DBKeyword.class, db);
 
-		// read all categories for initial JSP displaying purposes
+		// read all categories for initial JSP d7isplaying purposes
 		loadKeywords(request, dao);
 
 		// add a new category
@@ -36,11 +39,13 @@ public class KeywordAction extends AbstractAction {
 		try {
 			add = request.getParameter("addKeyword");
 		} catch (Exception e) {
-			errorHandler.toUser("Das Schlüsselwort konnte aus unbekannten Gründen nicht hinzugefügt werden", e);
+			errorHandler
+					.toUser("Das Schlüsselwort konnte aus unbekannten Gründen nicht hinzugefügt werden",
+							e);
 		}
-		if (!(add == null || add.isEmpty())) {
-			DBKeyword keyword = new DBKeyword();
-			keyword.setKeywordName(request.getParameter("addKeyword").trim());
+		if (!(add == null || add.isEmpty() || dao.existByAttribute(
+				"keywordName", add))) {
+			DBKeyword keyword = new DBKeyword(add);
 			dao.create(keyword);
 			loadKeywords(request, dao);
 		}
@@ -49,29 +54,34 @@ public class KeywordAction extends AbstractAction {
 		String toDelete = null;
 		try {
 			toDelete = request.getParameter("deleteKeyword");
-		if (!(toDelete == null || toDelete.isEmpty())) {
-			dao.delete(toDelete);
-			loadKeywords(request, dao);
-		}
+			if (!(toDelete == null || toDelete.isEmpty())) {
+				dao.delete(toDelete);
+				loadKeywords(request, dao);
+			}
 		} catch (Exception e) {
-			errorHandler.toUser("Beim Löschen des Schlüsselwort ist en Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+			errorHandler
+					.toUser("Beim Löschen des Schlüsselwort ist en Fehler aufgetreten, bitte versuchen Sie es später wieder",
+							e);
 		}
 
 		// forwarding to same page again
-		RequestDispatcher disp = request
-				.getRequestDispatcher("/keyword.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/keyword.jsp");
 		try {
 			disp.forward(request, response);
 		} catch (Exception e) {
-			errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
+			errorHandler.toUser(
+					"Etwas mit der Weiterleitung ist schief gelaufen", e);
 		}
 	}
 
 	/**
-	 * read all categories from database and loads them into the request 
-	 * @param request the request to write the loaded files in
-	 * @param dao the DAO to read the categories from DB
-	 * @throws ServletException 
+	 * read all categories from database and loads them into the request
+	 * 
+	 * @param request
+	 *            the request to write the loaded files in
+	 * @param dao
+	 *            the DAO to read the categories from DB
+	 * @throws ServletException
 	 */
 	private void loadKeywords(HttpServletRequest request,
 			IGenericDao<DBKeyword> dao) throws ServletException {
@@ -79,7 +89,9 @@ public class KeywordAction extends AbstractAction {
 		try {
 			keyword = dao.readAll();
 		} catch (Exception e) {
-			errorHandler.toUser("Beim Lesen des Schlüsselwort ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+			errorHandler
+					.toUser("Beim Lesen des Schlüsselwort ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
+							e);
 		}
 		request.setAttribute("keywords", keyword);
 	}

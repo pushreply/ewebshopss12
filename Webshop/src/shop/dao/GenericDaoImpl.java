@@ -4,12 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import shop.dto.DBKeyword;
 import shop.dto.DBUUIDBase;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.Db4oIOException;
+import com.db4o.internal.activation.DescendingActivationDepth;
+import com.db4o.query.Query;
 
 /**
  * 
@@ -74,5 +77,27 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		T o = read(uuid);
 		delete(o);
 		db.commit();
+	}
+	
+	public boolean existByAttribute(String attribute, String value) {
+		Query query = db.query();
+		query.constrain(type);
+		query.descend(attribute).constrain(value);
+		if (query.execute().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean existByTwoAttributes(String attribute1, String value1, String attribute2, String value2) {
+		Query query = db.query();
+		query.constrain(type);
+		query.descend(attribute1).constrain(value1).and(query.descend(attribute2).constrain(value2));
+		if (query.execute().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
