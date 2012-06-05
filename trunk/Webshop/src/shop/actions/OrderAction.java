@@ -1,5 +1,6 @@
 /**
  * @author mukunzi
+ * @author Benjamin
  */
 
 package shop.actions;
@@ -186,8 +187,7 @@ public class OrderAction extends AbstractAction {
 					order.setCustomers(customers);
 					//order.setState(0);
 					//order.setDatum(datum);
-					
-					db.store(order);					
+									
 					
 					disp = request.getRequestDispatcher("/bestellungAufgeben.jsp");
 
