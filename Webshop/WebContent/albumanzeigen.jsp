@@ -28,26 +28,39 @@
 	<li><div class="label">Anzahl:</div> ${album.amount}</li>
 	<li><div class="label">Anzahl der Tracks:</div>${album.numberOfTracks}</li>
 	<li><div class="label">Label:</div> ${album.label}</li>
+	<li><div class="label">Kategorien:</div>
+		<ul>
+			<c:forEach items="${album.categories}" var="category">
+				<li><c:out value="${category.categoryName}" /></li>
+			</c:forEach>
+		</ul></li>
+	<li><div class="label">Schlüsselwörter:</div>
+		<ul>
+			<c:forEach items="${album.keywords}" var="keyword">
+				<li><c:out value="${keyword.keywordName}" /></li>
+			</c:forEach>
+		</ul></li>
+
+
 	<c:if test="${isAdmin=='true'}">
 		<li><form action="controller" method="get">
 				<input type="hidden" name="action" value="album"> <input
 					type="hidden" name="changeAlbumInfo" value="${album.identifier}">
 				<input type="submit" value="Bearbeiten">
 			</form></li>
-			
+
 		<li><form action="controller" method="post">
 				<input type="hidden" name="action" value="album"> <input
 					type="hidden" name="delete" value="${album.identifier}"> <input
 					type="submit" value="Album l&ouml;schen">
 			</form></li>
 	</c:if>
-	<br>
 	<li><form action="controller" method="get">
-	            <input type="text" name="anzahl" value="1">
-				<input type="hidden" name="action" value="orderalbum"> 
-				<input type="hidden" name="PutAlbumInSessionID" value="${album.identifier}">
-				<input type="submit" value="In den Warenkorb legen ">
-			</form></li>
+			<input type="text" name="anzahl" value="1"> <input
+				type="hidden" name="action" value="orderalbum"> <input
+				type="hidden" name="PutAlbumInSessionID" value="${album.identifier}">
+			<input type="submit" value="In den Warenkorb legen ">
+		</form></li>
 </ul>
 
 <c:if test="${isAdmin=='true'}">

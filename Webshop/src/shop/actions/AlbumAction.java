@@ -111,7 +111,7 @@ public class AlbumAction extends AbstractAction {
 				try {
 					request.setAttribute("album",
 							dao.read(request.getParameter("show")));
-
+					
 				} catch (Exception e) {
 					errorHandler
 							.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
@@ -164,12 +164,10 @@ public class AlbumAction extends AbstractAction {
 				LinkedList<DBCategory> newCategory = new LinkedList<DBCategory>();
 				
 				String[] keywordValues = request.getParameterValues("keyword");
-				System.out.println("anzahl von gewählten Keywords  = "+ keywordValues.length); 
 				for (String string : keywordValues) {
 					newKeywords.add(daok.read(string));
 				}
 				String[] categoryValues = request.getParameterValues("category");
-				System.out.println("anzahl von gewählten Category  = "+ categoryValues.length);
 				for (String id : categoryValues) {
 					newCategory.add(daoc.read(id));
 				}

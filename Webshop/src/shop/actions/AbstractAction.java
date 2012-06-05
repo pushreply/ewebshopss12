@@ -52,11 +52,8 @@ public abstract class AbstractAction {
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 		try {
-			if (request.getSession() != null
-					&& request.getSession().getAttribute("username") != null
-					&& request.getSession().getAttribute("username")
-							.equals("Admin"))
-				request.setAttribute("isAdmin", true);
+			preprocess(request);
+			//calls abstract process 
 			process(request, response, db);
 		} catch (ServletException e) {
 			throw e;
@@ -66,6 +63,15 @@ public abstract class AbstractAction {
 		} finally {
 			if (db != null)
 				db.close();
+		}
+	}
+
+	private void preprocess(HttpServletRequest request) {
+		if (request.getSession() != null
+				&& request.getSession().getAttribute("username") != null
+				&& request.getSession().getAttribute("username")
+						.equals("Admin")) {
+			request.setAttribute("isAdmin", true);
 		}
 	}
 }

@@ -1,5 +1,6 @@
-/*
- * author: Benjamin
+/**
+ * @author Benjamin
+ * @author Andreas
  */
 
 package shop.db4oserver;
@@ -13,11 +14,11 @@ import shop.dto.DBKeyword;
 import shop.dto.DBOrder;
 import shop.dto.DBTrack;
 
-import com.db4o.*;
-import com.db4o.cs.*;
-import com.db4o.cs.config.*;
-import com.db4o.ext.ExtObjectServer;
-import com.db4o.messaging.*;
+import com.db4o.ObjectServer;
+import com.db4o.cs.Db4oClientServer;
+import com.db4o.cs.config.ServerConfiguration;
+import com.db4o.messaging.MessageContext;
+import com.db4o.messaging.MessageRecipient;
 
 /**
 * starts a db4o server with the settings from {@link ServerInfo}. <br>

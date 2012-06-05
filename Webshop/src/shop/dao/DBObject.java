@@ -13,12 +13,9 @@ import shop.dto.DBKeyword;
 import shop.dto.DBOrder;
 import shop.dto.DBTrack;
 
-import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
-import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.cs.Db4oClientServer;
 import com.db4o.cs.config.ClientConfiguration;
-import com.db4o.ext.DatabaseFileLockedException;
 
 public class DBObject {
 	

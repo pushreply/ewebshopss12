@@ -36,16 +36,16 @@ public class CategoryAction extends AbstractAction {
 		String add = null;
 		try {
 			add = request.getParameter("addCategory");
+			if (!(add == null || add.isEmpty() || dao.existByAttribute(
+					"categoryName", add))) {
+				DBCategory category = new DBCategory(add);
+				dao.create(category);
+				loadCategories(request, dao);
+			}
 		} catch (Exception e) {
 			errorHandler
 					.toUser("Die Kategorie konnte aus unbekannten Gründen nicht hinzugefügt werden",
 							e);
-		}
-		if (!(add == null || add.isEmpty() || dao.existByAttribute(
-				"categoryName", add))) {
-			DBCategory category = new DBCategory(add);
-			dao.create(category);
-			loadCategories(request, dao);
 		}
 
 		// delete a category
