@@ -19,6 +19,7 @@ import com.db4o.ObjectContainer;
 
 public class OrderAction extends AbstractAction {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
@@ -57,10 +58,10 @@ public class OrderAction extends AbstractAction {
 				//@SuppressWarnings("unchecked")
 				int anzahl = Integer.parseInt(request.getParameter("anzahl"));
 				album.setAmount(anzahl);
-				LinkedList<DBAlbum> sessionAlbumen = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
-				sessionAlbumen.add(album);		        
+				LinkedList<DBAlbum> sessionAlben = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
+				sessionAlben.add(album);		        
 				
-				request.getSession().setAttribute("orderedAlben", sessionAlbumen);
+				request.getSession().setAttribute("orderedAlben", sessionAlben);
 
 					
 				disp = request.getRequestDispatcher("/controller?action=album&show=all");
@@ -114,6 +115,8 @@ public class OrderAction extends AbstractAction {
 					}
 					gesammtpreis = (float) (Math.round(gesammtpreis * 100) / 100.0);
 					request.setAttribute("gesammtpreis", gesammtpreis);
+					
+					request.getSession().setAttribute("orderedAlben", sessionAlben);
 					
 					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
 
