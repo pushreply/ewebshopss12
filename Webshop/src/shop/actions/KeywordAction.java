@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import shop.dao.DAOKeyword;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBCategory;
