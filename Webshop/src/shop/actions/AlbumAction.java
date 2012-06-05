@@ -149,7 +149,9 @@ public class AlbumAction extends AbstractAction {
 			disp = request.getRequestDispatcher("/albumBearbeiten.jsp");
 		}
 
-		// Album updaten
+		// Album editieren
+		/** This feature album edit and upload forwarding to another cover. **/
+		
 		else if ((request.getParameter("updateAlbum") != null)) {
 			try {
 				dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
@@ -189,7 +191,7 @@ public class AlbumAction extends AbstractAction {
 				dao.update(album);
 				request.setAttribute("album", dao.read(identifier));
 				System.out.println(request.getParameter("coverchange"));
-				if(request.getParameter("coverchange") != null && "coverchange".equals(request.getParameter("coverchange")))
+				if(request.getParameter("coverchange") != null && "Cover ändern".equals(request.getParameter("coverchange")))
 				{
 					disp = request.getRequestDispatcher("/coverchange.jsp");
 				}

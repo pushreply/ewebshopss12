@@ -57,6 +57,7 @@ public class StartServer implements ServerInfo, MessageRecipient {
             config.common().bTreeNodeSize(64);
             config.common().optimizeNativeQueries();
             config.common().maxStackDepth();
+            config.common().activationDepth(2);
             
             // Klasse Address
             config.common().objectClass(DBAddress.class).cascadeOnUpdate(true);
@@ -72,7 +73,6 @@ public class StartServer implements ServerInfo, MessageRecipient {
     		config.common().objectClass(DBCategory.class).cascadeOnUpdate(true);
     		config.common().objectClass(DBCategory.class).cascadeOnDelete(true);
     		config.common().objectClass(DBCategory.class).maximumActivationDepth(0);
-    		config.common().objectClass(DBCategory.class).minimumActivationDepth(0);
     		config.common().objectClass(DBCategory.class).objectField("identifier").indexed(true);
     		
     		// Klasse Customer
