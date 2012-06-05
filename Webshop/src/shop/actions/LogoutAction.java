@@ -37,7 +37,6 @@ public class LogoutAction  extends AbstractAction{
 				HttpSession session = request.getSession(false);
 				if (session != null) {
 					session.invalidate();
-					System.out.println("Logging out");
 					disp.forward(request, response);
 				}
 			} catch (Exception e) {
