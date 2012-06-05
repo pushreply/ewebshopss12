@@ -2,7 +2,6 @@ package shop.actions;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -68,25 +67,14 @@ public class RegisterAction extends AbstractAction {
 			 */
 			if (newPassword1.equals(newPassword2)) {
 				available = newRegistration.isMatchUser(newUsername, db);
-				System.out.println("Proposed username is" + available + ", prepare values");
 				/*
 				 * check if the username is available
 				 */
 				if (available == true) {
 					DBAddress address = new DBAddress(street, country, firstName, lastName, gender, art = "delivery");
-					//alternative:
-//					DBAddress address = new DBAddress();
-//					address.setFirstName(firstName);
-//					address.setLastName(lastName);
-//					address.setGender(gender);
 					LinkedList<DBAddress> useraddress = new LinkedList<DBAddress>();
 					useraddress.add(address);
 					DBCustomer user = new DBCustomer(newUsername, newPassword1, useraddress);
-					//alternative:
-//					DBCustomer user = new DBCustomer();
-//					user.setUsername(newUsername);
-//					user.setPassword(newPassword1);
-					
 					RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");
 					try {
 						daoAddress.create(address);
