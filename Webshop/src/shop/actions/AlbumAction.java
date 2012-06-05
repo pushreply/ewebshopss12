@@ -32,11 +32,6 @@ public class AlbumAction extends AbstractAction {
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 		
-//		//Session für Warenkorb setzen
-//		HttpSession session = request.getSession(true);
-//		LinkedList<DBAlbum> alben = new LinkedList<DBAlbum>();
-//		request.getSession().setAttribute("orderedAlben", alben);
-		
 		RequestDispatcher disp = null;
 
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class,

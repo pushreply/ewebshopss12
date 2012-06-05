@@ -40,20 +40,19 @@ public class OrderAction extends AbstractAction {
 				
 				if(album.getAmount() < Integer.parseInt(request.getParameter("anzahl")))
 				{					
-					//String meldung = "Leider zu wenig Alben vorhanden";
-					//request.setAttribute("meldung", meldung);
+					String meldung = "Leider zu wenig Alben vorhanden";
+					request.setAttribute("meldung", meldung);
 					
-					//disp = request.getRequestDispatcher("/bestellungError.jsp");
-					
+					disp = request.getRequestDispatcher("/bestellungError.jsp");
+					disp.forward(request, response);
+					return;
 				}
 				
 				 else if(album.getAmount() <=5)
 					{
 						album.setAmount(30);
 						daoAlbum.update(album);
-					}
-				 
-				
+					}				
                 
 				//@SuppressWarnings("unchecked")
 				int anzahl = Integer.parseInt(request.getParameter("anzahl"));
@@ -171,7 +170,7 @@ public class OrderAction extends AbstractAction {
 					
 				}	
 				
-				//session leern
+				//session leeren
 				alben.remove();
 				request.getSession().setAttribute("orderedAlben", alben);
 				
