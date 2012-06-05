@@ -1,9 +1,5 @@
 package shop.actions;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.UUID;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import shop.dao.DAOCustomer;
-import shop.dao.GenericDaoImpl;
-import shop.dao.IGenericDao;
-import shop.dto.DBAlbum;
 import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
@@ -39,8 +32,8 @@ public class LoginAction extends AbstractAction {
 
 		String loginUsername, loginPassword;
 		boolean match = false;
-		DBCustomer user = new DBCustomer();
-		 DAOCustomer daoCustomer = new DAOCustomer();
+
+		DAOCustomer daoCustomer = new DAOCustomer();
 		try {
 			
 			loginUsername = request.getParameter("username").trim();
@@ -49,23 +42,11 @@ public class LoginAction extends AbstractAction {
 		
 			match = daoCustomer.isMatchUser(loginUsername, loginPassword, db);
 			System.out.println("Login OK.");
-//			
-//			//get users' data
-//			for (int i = 0; i < daoCustomer.readUserData(loginUsername, db).getAddresses().size(); i++) {
-//				user = daoCustomer.readUserData(loginUsername, db);
-//			}
-//			
-//			request.setAttribute("userprofile", user);
 			
 			//set session
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", loginUsername);
 			
-//			//Session für Warenkorb beim Anmelden setzen
-//			LinkedList<DBAlbum> alben = new LinkedList<DBAlbum>();
-//			request.getSession().setAttribute("orderedAlben", alben);
-			
-//			session.setAttribute("userprofile", user);
 			RequestDispatcher disp = request.getRequestDispatcher("/reloadmenu.jsp");
 			
 			disp.forward(request, response);
