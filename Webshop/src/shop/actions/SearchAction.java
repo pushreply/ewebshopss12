@@ -31,8 +31,9 @@ public class SearchAction extends AbstractAction {
 		
 		DAOAlbum daoalbum = new DAOAlbum();
 		
-		System.out.println("der album albumseach: "+request.getParameter("upload"));
 		
+		/** Feature category and keyword to the search output jsp **/
+		/** With all the quary fetched category and keyword. **/
 		if (request.getParameter("upload") != null) {
 			
 				Query cquery = db.query();
@@ -48,6 +49,8 @@ public class SearchAction extends AbstractAction {
 				disp = request.getRequestDispatcher("/simplesearch.jsp");
 
 		}
+		
+		
 		
 		if(request.getParameter("search") != null)
 		{
