@@ -30,8 +30,7 @@ import com.db4o.ext.Db4oIOException;
  * The customer has to provide an address at the order process.
  * 
  * Functionality:
- * + show 
- * + update 
+ * + add
  * + delete
  * 
  * @param street, country, art, firstName, lastName
@@ -41,22 +40,19 @@ import com.db4o.ext.Db4oIOException;
  */
 public class AddressAction extends AbstractAction {
 
-	
-
 	@Override
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 
 		IGenericDao<DBAddress> dao = new GenericDaoImpl<DBAddress>(DBAddress.class, db);
+		IGenericDao<DBCustomer> genericDaoCustomer = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
 		
-		/*
-		 * load all addresses that belong to the username
-		 */
-//		loadAddress(request, dao);
-		
+		DAOCustomer daoCustomer = new DAOCustomer();
 		String street, country, art, firstName, lastName, gender;
-		String username = (String) request.getSession().getAttribute("username");
+		String username = (String) request.getSession().getAttribute("username"); //aktuelle username (in session)
+		DBCustomer user = new DBCustomer();
+		user = daoCustomer.findUser(username, db);
 		
 		street = request.getParameter("street"); 
 		country = request.getParameter("country");
@@ -68,23 +64,21 @@ public class AddressAction extends AbstractAction {
 		HttpSession session = request.getSession(true);
 		session.getAttribute("username");
 		
-		DAOCustomer daoCustomer = new DAOCustomer();
-		DBCustomer user = new DBCustomer();
-		LinkedList<DBAddress> addresses = new LinkedList<DBAddress>();
+		System.out.println("session set.");
+		
 		/*
 		 * adding new address, or updating an edited address 
 		 */
-		if (request.getParameter("address")!=null) {
+		if (request.getParameter("address")!=null &&
+				request.getParameter("address").equals("addnew")) {
 			try {
 				System.out.println("adding new address");
 				
 				System.out.println(street+country+firstName+lastName+gender+art);
 				DBAddress address = new DBAddress(street, country, firstName, lastName, gender, art);
-				addresses.add(address);
-				user.setUsername(username);
-				user.setAddresses(addresses);
-				
+				user.getAddresses().add(address);
 				dao.create(address);
+				genericDaoCustomer.update(user);
 				
 				request.setAttribute("userprofile", user);
 				RequestDispatcher disp = request.getRequestDispatcher("controller?action=customer&show=profile");  
@@ -108,31 +102,26 @@ public class AddressAction extends AbstractAction {
 				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
 			}		
 		}
-		
 		/*
-		 * Edit actual address, forward to editing page: show the actual address and the editing form 
+		 * delete address, forward to editing page: show the actual address
 		 */
-//		else if (request.getParameter("edit").equals("edit"))
-//		{
-//			try{
-//				RequestDispatcher disp = request.getRequestDispatcher("controller?action=address&edit=true");  //"Edit" address
-//				disp.forward(request, response);
-//			}catch (Exception e) {
-//				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
-//			}
-//		}
-	}
-
-	/*
-	 * read all address from the customer
-	 */
-	public void loadAddress(HttpServletRequest request, IGenericDao<DBAddress> dao) throws ServletException {
-		List<DBAddress> adr = null;
-		try {
-			adr = dao.readAll();
-		} catch (Exception e) {
-			errorHandler.toUser("Beim Lesen des Schlüsselwort ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
+		else if (request.getParameter("delete")!=null && !request.getParameter("delete").isEmpty())
+		{
+			try{
+				System.out.println("delete an address");
+				
+				System.out.println("id = " + request.getParameter("delete").toString());
+								
+				user.getAddresses().remove(dao.read(request.getParameter("delete")));
+				dao.delete(request.getParameter("delete"));
+				genericDaoCustomer.update(user);
+				
+				request.setAttribute("userprofile", user);
+				RequestDispatcher disp = request.getRequestDispatcher("controller?action=customer&show=profile");  
+				disp.forward(request, response);
+			}catch (Exception e) {
+				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
+			}
 		}
-		request.setAttribute("address", adr);
 	}
 }
