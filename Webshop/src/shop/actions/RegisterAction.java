@@ -82,7 +82,7 @@ public class RegisterAction extends AbstractAction {
 						request.setAttribute("userprofile", user);
 						HttpSession session = request.getSession(true);
 						session.setAttribute("username", user.getUsername());
-						System.out.println("New User is created, go to profileview.jsp");
+
 						disp.forward(request, response);
 					} catch (Db4oException e) {
 						errorHandler.toUser("Database error, data could not be saved.", e);
@@ -90,7 +90,7 @@ public class RegisterAction extends AbstractAction {
 						errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen.", e);
 					}
 				} else {
-					System.out.println("Registration failed, username is taken.");
+//					System.out.println("Registration failed, username is taken.");
 					RequestDispatcher disp = request.getRequestDispatcher("/registererror.jsp");
 					try {
 						disp.forward(request, response);
@@ -99,7 +99,7 @@ public class RegisterAction extends AbstractAction {
 					}
 				}
 			} else {
-				System.out.println("Passwords are not identical!");
+//				System.out.println("Passwords are not identical!");
 				RequestDispatcher disp = request.getRequestDispatcher("/registererror.jsp");
 				try {
 					disp.forward(request, response);
@@ -108,7 +108,7 @@ public class RegisterAction extends AbstractAction {
 				}
 			}
 		} else {
-			System.out.println("Username/Password is empty!");
+//			System.out.println("Username/Password is empty!");
 			RequestDispatcher disp = request.getRequestDispatcher("/registererror.jsp");
 			try {
 				disp.forward(request, response);
