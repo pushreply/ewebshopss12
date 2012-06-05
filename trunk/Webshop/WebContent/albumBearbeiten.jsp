@@ -51,10 +51,11 @@
 			<div class="label">Kategorie:</div>
 			<ul class="bulletless-list">
 				<c:forEach items="${categories}" var="category">
-					<li><input type="checkbox" id="{category.categoryName}"
-						name="category" value="${category.identifier}"
-						${fn:contains(parts.category, '{category.identifier}') ? 'categoried' : ''}>
-						<c:out value="${category.categoryName}" /></li>
+					<li><input type="checkbox" id="{category.key.indentifier}"
+						value="${category.key.identifier}"
+						name="category"
+						<c:if test="${category.value}">checked</c:if> >
+						<c:out value="${category.key.categoryName}" /></li>
 				</c:forEach>
 			</ul>
 		</li>
