@@ -20,12 +20,12 @@
 <body onLoad="setTimeout('delayer()', 1000)">
 	<c:choose>
 		<c:when test="${empty username}">
-			Sie sind ausgeloggt.</a>
+			Sie sind nun ausgeloggt und </a>
 		</c:when>
 		<c:when test="${not empty username}">
-			Willkommen <strong>${username}</strong>,
+			Willkommen <strong>${username}</strong>, Sie 
 		</c:when>
 	</c:choose>
-	Sie werden weitergeleitet..
+	werden weitergeleitet..
 </body>
 </html>

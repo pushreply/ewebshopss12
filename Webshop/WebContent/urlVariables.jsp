@@ -23,6 +23,11 @@
 	<c:param name="action" value="category" />
 </c:url>
 
+<c:url var="order" value="controller">
+	<c:param name="action" value="orderalbum" />
+	<c:param name="warenkorb" value="show" />
+</c:url>
+
 <c:url var="login" value="controller">
 	<c:param name="action" value="login" />
 </c:url>

@@ -3,24 +3,24 @@
 <%@ page import="java.util.LinkedList" %>
 
 <c:import url="header.jsp">
-	<c:param name="title" value="Alle Alben anzeigen" />
+	<c:param name="title" value="Warenkorb" />
 </c:import>
 
 
-<h1>Bestellungsübersicht</h1>
+<h1>Warenkorb</h1>
 
 <jsp:useBean id="orderedAlben" scope="session" class="java.util.LinkedList" />
 <jsp:useBean id="username" scope="session" class="java.lang.String" />
 
 <c:choose>
        <c:when test="${empty sessionScope.orderedAlben}">
-           <p>Sie haben keinen Artikel in den Warenkorb gelegt!</p>
+           <p>Ihr Warenkorb ist leer.</p>
        </c:when>
     <c:otherwise>
     
 <table border="1">
     <tr>
-      <th>Albumtitel</th>
+      <th>Titel</th>
       <th>Artist</th>
       <th>Anzahl</th>
       <th>Srückpreis</th>

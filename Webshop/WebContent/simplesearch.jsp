@@ -4,10 +4,10 @@
 	<c:param name="title" value="Einfache Suche" />
 </c:import>
 <head>
-<title>Einfach Suche</title>
+<title>Suche</title>
 </head>
 <body>
-  <h3>Einfache Suche</h3>
+  <h3>Suche</h3>
   <form action="controller" method="post">
   	<table>
 		    <tr>

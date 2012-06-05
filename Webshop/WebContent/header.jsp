@@ -22,20 +22,21 @@
 <script type="text/JavaScript" src="js/albumDatenAuswerten.js"></script>
 
 </head>
-<body >
+<body>
 	<!-- ending tag in footer.jsp -->
 	<div id=wrapper>
 		<div id="top">
 			<!-- include all urls according to URL-Rewriting rules -->
 			<%@ include file="urlVariables.jsp"%>
 			<ul id="topmenue">
-				<li><a href="${home}">Home</a></li>
-				<li><a href="${alben}">Alben Ansehen</a></li>
+				<li><a href="${home}">Startseite</a></li>
+				<li><a href="${alben}">Alben durchstöbern</a></li>
+				<li><a href="${order}">Warenkorb (<strong><c:out value='${orderedAlben.size()}' /></strong> Artikel)</a></li>
 				<c:choose>
 					<c:when test="${isAdmin=='true'}">
 						<li><a href="${keyword}">Schlüsselworte</a></li>
 						<li><a href="${category}">Kategorien</a></li>
-						<li><a href="${uploadAlbum}">Neues Album Erstellen</a></li>
+						<li><a href="${uploadAlbum}">Neues Album anlegen</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
@@ -45,20 +46,11 @@
 			Sie sind als Gast angemeldet. <a href="login.jsp">Hier anmelden.</a>
 					</c:when>
 					<c:when test="${not empty username}">
-			 Sie sind <a href="controller?action=customer&show=profile"><strong>${username}</strong></a>.
-						<a href="${logout}">(Ausloggen)</a>
+			 Sie sind als <a href="controller?action=customer&show=profile"><strong>${username}</strong></a> angemeldet.
+			 <br />
+						<a href="${logout}">Sind Sie nicht ${username}?</a>
 					</c:when>
 				</c:choose>
-			</div>
-
-			<div style="position: absolute; top: 120px; right: 220px;">
-				<jsp:useBean id="orderedAlben" scope="session"
-					class="java.util.LinkedList" />
-				<a href="controller?action=orderalbum&warenkorb=show">Warenkorb</a><br> 
-				<strong> 
-				    <c:out value='${orderedAlben.size()}' />
-				</strong>Artikeln
-
 			</div>
 
 			<div id="search">
@@ -66,8 +58,8 @@
 				<!-- <input id="searchfield" type="text" /><input type="button"
 					value="Suchen" />
 				<!--<ul>-->
-					<!--<li><a href="${simplesearch}">Einfache Suche</a></li>-->
-					<a href="${simplesearch}">Einfache Suche</a>
+				<!--<li><a href="${simplesearch}">Einfache Suche</a></li>-->
+				<a href="${simplesearch}">Zur Suche</a>
 				<!--</ul>-->
 			</div>
 			<!-- search -->

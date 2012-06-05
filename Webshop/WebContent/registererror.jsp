@@ -10,9 +10,9 @@
 <ul>
 Bitte wählen Sie einen anderen Benutzernamen: 
 <li><input name="username" type="text"/></li>
-und einen Kenntwort: 
+und ein Kennwort: 
 <li><input name="pw1" type="password" value=""/></li>
-Bitte den Kenntwort noch mal bestätigen:
+Bitte das Kennwort bestätigen:
 <li><input name="pw2" type="password"/></li>
 </ul>
 
