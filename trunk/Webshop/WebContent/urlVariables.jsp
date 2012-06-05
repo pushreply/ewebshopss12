@@ -57,7 +57,7 @@
 
 <c:url var="address" value="controller">
 	<c:param name="action" value="address" />
-	<c:param name="address" value="addnew" />
+
 </c:url>
 
 <c:url var="alleBestellungen" value="controller">
