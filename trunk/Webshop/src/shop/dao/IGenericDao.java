@@ -44,4 +44,23 @@ public interface IGenericDao <T extends DBUUIDBase> {
      * @throws IllegalAccessException 
      * @throws InstantiationException */
     void delete(String id) throws InstantiationException, IllegalAccessException;
+    
+    /**
+     * checks wheater an object already exists in the database. Good for checks like "is this name already in use?"
+     * @param attribute the attribute you want to check (eg. identifier, name, according to your DTO)
+     * @param value the concrete value of the attribute you want to check
+     * @return true if any item has the attribute with the value, else false
+     */
+    boolean existByAttribute(String attribute, String value);
+    
+    /**
+     * checks wheater an object already exists in the database according to two attributes.
+     * Good for checks like "Does this name and password combination exist?"
+     * @param attribute1
+     * @param value1
+     * @param attribute2
+     * @param value2
+     * @return
+     */
+    boolean existByTwoAttributes(String attribute1, String value1, String attribute2, String value2) ;
 }
