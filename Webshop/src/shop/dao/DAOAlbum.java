@@ -1,5 +1,9 @@
 package shop.dao;
 
+/**
+ * @author Schneider Sergej
+ */
+
 import java.util.LinkedList;
 
 import com.db4o.ObjectContainer;
