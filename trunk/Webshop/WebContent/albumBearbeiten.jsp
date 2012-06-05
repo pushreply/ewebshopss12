@@ -24,7 +24,8 @@
 		title="${album.albumTitel} - ${album.artist}" />
 </c:if>
 
-<form name="Formular" action="controller" method="get" enctype="multipart/form-data" onSubmit="return validate(this,var_1)">
+<form name="Formular" action="controller" method="get"
+	enctype="multipart/form-data" onSubmit="return validate(this,var_1)">
 
 	<ul>
 		<li><div class="label">Titel:</div> <input type="text"
@@ -34,19 +35,17 @@
 			name="artist"
 			value="<c:out value="${album.artist}"  default="N/A" />" /></li>
 		<li><div class="label">Preis:</div> <input type="text"
-			name="price" 
-			value="<c:out value="${album.price}"  default="N/A" />" /></li>
+			name="preis" value="<c:out value="${album.price}"  default="N/A" />" /></li>
 		<li><div class="label">Label:</div> <input type="text"
-			name="label"
-			value="<c:out value="${album.label}"  default="N/A" />" /></li>
+			name="label" value="<c:out value="${album.label}"  default="N/A" />" /></li>
 		<li><div class="label">Anzahl der Tracks:</div> <input
-			type="text" name="trackanzahl"
+			type="text" name="trackAnzahl"
 			value="<c:out value="${album.numberOfTracks}"  default="N/A" />" /></li>
 		<li><div class="label">Anzahl der Disks:</div> <input type="text"
-			name="diskanzahl"
+			name="diskAnzahl"
 			value="<c:out value="${album.numberOfDisks}"  default="N/A" />" /></li>
 		<li><div class="label">Anzahl:</div> <input type="text"
-			name="albumanzahl"
+			name="albumAnzahl"
 			value="<c:out value="${album.amount}"  default="N/A" />" /></li>
 		<li>
 			<div class="label">Kategorie:</div>
@@ -63,10 +62,12 @@
 			<div class="label">Schlagw&ouml;rter:</div>
 			<ul class="bulletless-list">
 				<c:forEach items="${keywordies}" var="keyword">
-					<li><input type="checkbox" id="{keyword.keywordName}"
-						name="keyword" value="${keyword.identifier}"
-						${fn:contains(parts.keyword, '{keyword.identifier}') ? 'keywordied' : ''}>
-						<c:out value="${keyword.keywordName}" /></li>
+					<li><input type="checkbox" id="${keyword.key.identifier}"
+						value="${keyword.key.identifier}"
+						name="keyword"
+						<c:if test="${keyword.value}">checked</c:if> >
+						
+						<c:out value="${keyword.key.keywordName}" /></li>
 				</c:forEach>
 			</ul>
 		</li>
@@ -77,9 +78,10 @@
 
 	</ul>
 
-	<input type="hidden" name="action" value="album"> 
-	<input type="hidden" name="updateAlbum" value="<c:out value="${album.identifier}"/>" /> 
-	<input type="submit" value="Speichern" onclick="return validate(this.form,var_1,msg_1)">
+	<input type="hidden" name="action" value="album"> <input
+		type="hidden" name="updateAlbum"
+		value="<c:out value="${album.identifier}"/>" /> <input type="submit"
+		value="Speichern" onclick="return validate(this.form,var_1,msg_1)">
 </form>
 
 <c:import url="footer.jsp" />

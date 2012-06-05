@@ -1,7 +1,10 @@
 package shop.actions;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,6 +43,10 @@ public class AlbumAction extends AbstractAction {
 
 		IGenericDao<DBAlbum> dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class,
 				db);
+		IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(
+				DBCategory.class, db);
+		IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
+				DBKeyword.class, db);
 
 		if (request.getParameter("delete") != null) {
 			DBAlbum dbalbum = null;
@@ -71,10 +78,6 @@ public class AlbumAction extends AbstractAction {
 		}
 
 		if (request.getParameter("upload") != null) {
-			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(
-					DBCategory.class, db);
-			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
-					DBKeyword.class, db);
 			List<DBCategory> categories = null;
 			List<DBKeyword> keywordies = null;
 			try {
@@ -122,24 +125,26 @@ public class AlbumAction extends AbstractAction {
 
 		// Album in Felder
 		else if ((request.getParameter("changeAlbumInfo") != null)) {
-			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(
-					DBCategory.class, db);
-			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
-					DBKeyword.class, db);
 			List<DBCategory> categories = null;
 			List<DBKeyword> keywordies = null;
+			DBAlbum album = null;
+			Map<DBKeyword,Boolean> checkedKeywords = new HashMap<DBKeyword, Boolean>();
+			
 			try {
+				album = dao.read(request.getParameter("changeAlbumInfo"));
 				categories = daoc.readAll();
 				keywordies = daok.readAll();
-				request.setAttribute("album",
-						dao.read(request.getParameter("changeAlbumInfo")));
+				request.setAttribute("album",album);
+				for (DBKeyword dbKeyword : keywordies) {
+					checkedKeywords.put(dbKeyword, album.getKeywords().contains(dbKeyword));
+				}
 
 			} catch (Exception e) {
 				errorHandler
 						.toUser("Beim Laden der Kategorie und Keyword ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
 								e);
 			}
-			request.setAttribute("keywordies", keywordies);
+			request.setAttribute("keywordies", checkedKeywords);
 			request.setAttribute("categories", categories);
 
 			disp = request.getRequestDispatcher("/albumBearbeiten.jsp");
@@ -151,14 +156,21 @@ public class AlbumAction extends AbstractAction {
 				dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 				String identifier = request.getParameter("updateAlbum");
 				DBAlbum album = dao.read(identifier);
-
+				LinkedList<DBKeyword> newKeywords = new LinkedList<DBKeyword>();
+				
+				String[] keywordValues = request.getParameterValues("keyword");
+				System.out.println("anzahl von gewählten Keywords  = "+ keywordValues.length); 
+				for (String string : keywordValues) {
+					newKeywords.add(daok.read(string));
+				}
+				
 				String titel = request.getParameter("titel");
 				String artist = request.getParameter("artist");
 				int diskAnzahl = Integer.parseInt((request
 						.getParameter("diskAnzahl")));
 				Double preis = Double.parseDouble((request
 						.getParameter("preis")));
-				int anzahl = Integer.parseInt(request.getParameter("anzahl"));
+				int anzahl = Integer.parseInt(request.getParameter("albumAnzahl"));
 				int trackAnzahl = Integer.parseInt(request
 						.getParameter("trackAnzahl"));
 				String label = request.getParameter("label");
@@ -169,6 +181,7 @@ public class AlbumAction extends AbstractAction {
 				album.setAmount(anzahl);
 				album.setNumberOfTracks(trackAnzahl);
 				album.setLabel(label);
+				album.setKeywords(newKeywords);
 				dao.update(album);
 				request.setAttribute("album", dao.read(identifier));
 				disp = request.getRequestDispatcher("/albumanzeigen.jsp");
