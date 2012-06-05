@@ -12,11 +12,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import shop.dao.DAOAlbum;
-import shop.dao.GenericDaoImpl;
-import shop.dao.IGenericDao;
 import shop.dto.DBCategory;
 import shop.dto.DBKeyword;
 
