@@ -24,7 +24,7 @@
 		<li><div class="label">Title:</div> ${album.albumTitel}</li>
 		<li><div class="label">Artist:</div> ${album.artist}<li><div class="label">Disk Anzahl:</div> ${album.numberOfDisks}</li>
 		<li><div class="label">Preis:</div> ${album.price}</li>
-	<li><div class="label">Anzahl:</div> ${album.amount}</li>
+	<li><div class="label">Lagerbestand:</div> ${album.amount}</li>
 	<li><div class="label">Anzahl der Tracks:</div>${album.numberOfTracks}</li>
 	<li><div class="label">Label:</div> ${album.label}</li>
 	<li><div class="label">Kategorien:</div>
@@ -33,9 +33,7 @@
 				<li><c:out value="${category.categoryName}" /></li>
 			</c:forEach>
 		</ul></li>
-		
-	
-		<li><div class="label">Schlüsselwörter:</div>
+		<li><div class="label">Schlagwörter:</div>
 		<ul class="album-sublist">
 			<c:forEach items="${album.keywords}" var="keyword">
 				<li><c:out value="${keyword.keywordName}" /></li>
@@ -61,7 +59,7 @@
 			<input type="text" name="anzahl" value="1"> <input
 				type="hidden" name="action" value="orderalbum"> <input
 				type="hidden" name="PutAlbumInSessionID" value="${album.identifier}">
-			<input type="submit" value="In den Warenkorb legen ">
+			<input type="submit" value="In den Warenkorb">
 		</form></li>
 </ul>
 

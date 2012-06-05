@@ -14,6 +14,6 @@
 	</ul>
 	<input type="submit" name="action" value="Login" />
 	<p>
-		<a href="register.jsp">oder Registrieren</a>
+		<a href="register.jsp">Jetzt kostenlos Registrieren</a>
 
 		<c:import url="footer.jsp" />

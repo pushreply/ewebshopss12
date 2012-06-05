@@ -44,7 +44,7 @@
 		<li><div class="label">Anzahl der Disks:</div> <input type="text"
 			name="diskAnzahl"
 			value="<c:out value="${album.numberOfDisks}"  default="N/A" />" /></li>
-		<li><div class="label">Anzahl:</div> <input type="text"
+		<li><div class="label">Lagerbestand:</div> <input type="text"
 			name="albumAnzahl"
 			value="<c:out value="${album.amount}"  default="N/A" />" /></li>
 		<li>

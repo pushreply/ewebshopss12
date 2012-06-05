@@ -23,7 +23,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Price:</td>
+				<td class="table-label">Preis:</td>
 				<td><input type="text" name="price" type="text">
 				</td>
 			</tr>
@@ -33,17 +33,17 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Trackanzahl:</td>
+				<td class="table-label">Anzahl der Tracks:</td>
 				<td><input type="text" name="trackanzahl" type="text">
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Diskanzahl:</td>
+				<td class="table-label">Anzahl der Disks:</td>
 				<td><input type="text" name="diskanzahl" type="text">
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Album Anzahl</td>
+				<td class="table-label">Lagerbestand</td>
 				<td><input type="text" name="albumanzahl" type="text">
 				</td>
 			</tr>

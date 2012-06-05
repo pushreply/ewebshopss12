@@ -7,9 +7,9 @@
 <p>
 	auf musik.to !<br /> Auf dieser Seite können Sie sich durch eine
 	willkürlich ausgewählte und außerdem sehr geringe Auswahl von mp3s
-	wühlen und zu ihrem Warenkorb hinzufügen und herunterladen. Wenn Sie
+	wühlen und zu ihrem Warenkorb hinzufügen. Wenn Sie
 	bereits wissen was Sie möchten, benutzen Sie am besten gleich die
-	Suche.
+	Suche. Eine Liedervorschau ist ein wichtiger Bestandteil der Seite.
 </p>
 
 <p>Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
