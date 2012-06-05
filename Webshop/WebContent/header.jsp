@@ -28,10 +28,14 @@
 		<div id="top">
 			<!-- include all urls according to URL-Rewriting rules -->
 			<%@ include file="urlVariables.jsp"%>
+			<jsp:useBean id="orderedAlben" scope="session"
+				class="java.util.LinkedList" />
 			<ul id="topmenue">
 				<li><a href="${home}">Startseite</a></li>
 				<li><a href="${alben}">Alben durchstöbern</a></li>
-				<li><a href="${order}">Warenkorb (<strong><c:out value='${orderedAlben.size()}' /></strong> Artikel)</a></li>
+				<li><a href="${order}">Warenkorb (<strong><c:out
+								value='${orderedAlben.size()}' /></strong> Artikel)
+				</a></li>
 				<c:choose>
 					<c:when test="${isAdmin=='true'}">
 						<li><a href="${keyword}">Schlüsselworte</a></li>
@@ -52,7 +56,6 @@
 					</c:when>
 				</c:choose>
 			</div>
-
 			<div id="search">
 				<!-- just for displaying purposes, not linked with bean so far -->
 				<!-- <input id="searchfield" type="text" /><input type="button"
