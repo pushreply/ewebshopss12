@@ -3,7 +3,7 @@ package shop.actions;
 /**
  * This Action handles all needs of search
  * 
- * @author sesc0009
+ * @author sesc0009 Sergej Schneider
  * 
  */
 import java.io.IOException;
@@ -45,10 +45,6 @@ public class SearchAction extends AbstractAction {
 				Query kquery = db.query();
 				kquery.constrain(DBKeyword.class);
 				ObjectSet<DBKeyword> kres = kquery.execute();
-			
-//				HttpSession session = request.getSession(true);
-//				session.setAttribute("categories", cres);
-//				session.setAttribute("keywordies", kres);
 				
 				request.setAttribute("keywordies", kres);
 				request.setAttribute("categories", cres);
@@ -60,7 +56,7 @@ public class SearchAction extends AbstractAction {
 		{
 			// 1
 			//Search Album by Title
-			if (request.getParameter("titel") != null && request.getParameter("artist").equals("") && 
+			if (request.getParameter("titel") != ""  && request.getParameter("artist").equals("") && 
 					request.getParameter("category") == null && request.getParameter("keyword") == null){
 				try {
 					System.out.println("ich suche nach Title");
@@ -75,7 +71,7 @@ public class SearchAction extends AbstractAction {
 			
 			// 2
 			// Search Album by Artist
-			if (request.getParameter("artist") != null && request.getParameter("titel").equals("") && 
+			if (request.getParameter("artist") != "" && request.getParameter("titel").equals("") && 
 					request.getParameter("category") == null && request.getParameter("keyword") == null){
 				System.out.println(request.getParameter("artist"));
 				try {
@@ -91,7 +87,7 @@ public class SearchAction extends AbstractAction {
 			
 			// 3
 			// Search Album by Title and Artist
-			if (request.getParameter("titel") != null && request.getParameter("artist") != null && 
+			if (request.getParameter("titel") != "" && request.getParameter("artist") != "" && 
 					request.getParameter("category") == null && request.getParameter("keyword") == null){
 				try {
 					System.out.println("ich suche nach Title und Artist");
