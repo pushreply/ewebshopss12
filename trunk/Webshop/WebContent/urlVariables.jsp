@@ -60,9 +60,4 @@
 
 </c:url>
 
-<c:url var="alleBestellungen" value="controller">
-	<c:param name="action" value="orderalbum" />
-	<c:param name="allOrder" value="all" />
-</c:url>
-
 

@@ -14,14 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
-import shop.dto.DBAddress;
 import shop.dto.DBAlbum;
-import shop.dto.DBCustomer;
-import shop.dto.DBItems;
-import shop.dto.DBOrder;
-
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
 
 public class OrderAction extends AbstractAction {
 
@@ -40,29 +34,40 @@ public class OrderAction extends AbstractAction {
 
 			DBAlbum album = new DBAlbum();
 
+
 			try {
 				album = daoAlbum.read(request.getParameter("PutAlbumInSessionID"));
 				
-				if(album.getAmount() <=5)
-				{
-					album.setAmount(30);
-					daoAlbum.update(album);
+				if(album.getAmount() < Integer.parseInt(request.getParameter("anzahl")))
+				{					
+					//String meldung = "Leider zu wenig Alben vorhanden";
+					//request.setAttribute("meldung", meldung);
+					
+					//disp = request.getRequestDispatcher("/bestellungError.jsp");
+					
 				}
 				
-				album.setAmount(album.getAmount() - Integer.parseInt(request.getParameter("anzahl")));
-				daoAlbum.update(album);
-
+				 else if(album.getAmount() <=5)
+					{
+						album.setAmount(30);
+						daoAlbum.update(album);
+					}
+				 
+				
+                
 				//@SuppressWarnings("unchecked")
-				album.setAmount(Integer.parseInt(request.getParameter("anzahl")));
+				int anzahl = Integer.parseInt(request.getParameter("anzahl"));
+				album.setAmount(anzahl);
 				LinkedList<DBAlbum> sessionAlbumen = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
 				sessionAlbumen.add(album);		        
 				
 				request.getSession().setAttribute("orderedAlben", sessionAlbumen);
+
 					
 				disp = request.getRequestDispatcher("/controller?action=album&show=all");
 
 			} catch (Exception e) {
-				errorHandler.toUser("Beim Loaden eines Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+				errorHandler.toUser("Beim Laden eines Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
 								e);
 			}
 
@@ -77,7 +82,7 @@ public class OrderAction extends AbstractAction {
 						disp = request.getRequestDispatcher("/controller?action=album&show=all");
 
 					} catch (Exception e) {
-						errorHandler.toUser("Beim Loaden eines Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+						errorHandler.toUser("Bei der Bestellung weiteren Alben ist ein Fehler aufgetretten, Bitte versuchen sie es später wieder",
 										e);
 					}
 
@@ -113,10 +118,6 @@ public class OrderAction extends AbstractAction {
 					
 					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
 
-//					request.getSession().setAttribute("orderedAlben", sessionAlben);
-//					
-//					disp = request.getRequestDispatcher("/bestellungsUebersicht.jsp");
-
 				 
 			} catch (Exception e) {
 				errorHandler.toUser("Beim Löschen des Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
@@ -148,77 +149,42 @@ public class OrderAction extends AbstractAction {
 
 				 
 			} catch (Exception e) {
-				errorHandler.toUser("Beim Löschen des Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+				errorHandler.toUser("Beim Anzeigen des gewünschten Albums ist ein Fehler aufgetretten, Bitte versuchen sie es später wieder",
 								e);
 			}
 
 		}
 		
 		
-		//Bestellungen in der DB speichern
+		//Bestellen
 		if (request.getParameter("order") != null) {
 
-
 			try {
+				LinkedList<DBAlbum> alben = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
+				
+				for(DBAlbum albumsession : alben){
 				   
-				   LinkedList<DBItems> items = new LinkedList<DBItems>();
-				   LinkedList<DBCustomer> customers = new LinkedList<DBCustomer>();
-				   				   
-				   DBOrder order = new DBOrder();
-				   DBItems item = new DBItems();
-				   
-				    //Bestellte Alben
-				    LinkedList<DBAlbum> sessionAlben = new LinkedList<DBAlbum>();
-				    sessionAlben = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
-				   
-                    //Alben zu Items hinzufügen
-					item.setOrderAmount(sessionAlben.size());
-					item.setAlbum(sessionAlben);
-					items.add(item);
+					DBAlbum album = daoAlbum.read(albumsession.getIdentifier().toString());
+				  	
+					album.setAmount(album.getAmount() - albumsession.getAmount());
+					daoAlbum.update(album);	
 					
-                    //Customerdaten
-					String username = (String)request.getSession().getAttribute("username");
-					ObjectSet result = db.queryByExample(new DBCustomer(username, null, null));
-					DBCustomer customer = (DBCustomer)result.next();
-					customers.add(customer);
-					
-					//DBOrder-Objekt mit Daten füllen
-					order.setItems(items);
-					order.setCustomers(customers);
-					//order.setState(0);
-					//order.setDatum(datum);
-									
-					
-					disp = request.getRequestDispatcher("/bestellungAufgeben.jsp");
+				}	
+				
+				//session leern
+				alben.remove();
+				request.getSession().setAttribute("orderedAlben", alben);
+				
+				disp = request.getRequestDispatcher("/bestellungAufgeben.jsp");
 
 				 
 			} catch (Exception e) {
-				errorHandler.toUser("Beim Löschen des Albums ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
+				errorHandler.toUser("Beim Bestellen ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
 								e);
 			}
 
 		}
 		
-		
-		//Alle Bestellungen
-		if (request.getParameter("allOrder")!= null) {
-
-			try {
-				   				   
-					DBOrder order = new DBOrder();
-					ObjectSet result = db.queryByExample(order);
-					order = (DBOrder)result.next();
-					
-                    request.setAttribute("order", order);				
-					
-					disp = request.getRequestDispatcher("/alleBestellungen.jsp");
-				 
-			} catch (Exception e) {
-				errorHandler.toUser("Beim Laden der Bestellungen ist ein Fehler aufgetretten Bitte versuchen sie es später wieder",
-								e);
-			}
-
-		}
 		
 		try {
 			disp.forward(request, response);
