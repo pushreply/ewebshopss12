@@ -154,7 +154,6 @@ public class AlbumAction extends AbstractAction {
 		
 		else if ((request.getParameter("updateAlbum") != null)) {
 			try {
-				dao = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 				String identifier = request.getParameter("updateAlbum");
 				DBAlbum album = dao.read(identifier);
 				LinkedList<DBKeyword> newKeywords = new LinkedList<DBKeyword>();
@@ -189,6 +188,28 @@ public class AlbumAction extends AbstractAction {
 				album.setKeywords(newKeywords);
 				album.setCategories(newCategory);
 				dao.update(album);
+
+				LinkedList<DBAlbum> ldbalbum = new LinkedList<DBAlbum>();
+				
+				ldbalbum.add(album);
+				
+				// Album zur Kategorie hinzufuegen
+				for(int i = 0; i < newCategory.size(); i++)
+				{	
+					DBCategory temp = newCategory.get(i);
+					temp.setAlbums(ldbalbum);
+				    daoc.update(newCategory.get(i));
+				}
+				
+				// Album zur Schlagwoerter hinzufuegen
+				for(int i = 0; i < newKeywords.size(); i++)
+				{
+					DBKeyword temp = newKeywords.get(i);
+					temp.setAlbums(ldbalbum);
+					daok.update(newKeywords.get(i));
+				}
+				
+				
 				request.setAttribute("album", dao.read(identifier));
 				System.out.println(request.getParameter("coverchange"));
 				if(request.getParameter("coverchange") != null && "Cover ändern".equals(request.getParameter("coverchange")))

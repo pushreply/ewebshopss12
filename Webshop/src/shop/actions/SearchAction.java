@@ -59,7 +59,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != ""  && request.getParameter("artist").equals("") && 
 					request.getParameter("category") == null && request.getParameter("keyword") == null){
 				try {
-					System.out.println("ich suche nach Title");
+					
 					request.setAttribute("Alben", daoalbum.findAlbumbyTitle(request.getParameter("titel"), db));
 				} catch (Exception e) {
 					errorHandler
@@ -75,7 +75,7 @@ public class SearchAction extends AbstractAction {
 					request.getParameter("category") == null && request.getParameter("keyword") == null){
 				System.out.println(request.getParameter("artist"));
 				try {
-					System.out.println("ich suche nach Artist");
+					
 					request.setAttribute("Alben", daoalbum.findAlbumbyArtist(request.getParameter("artist"), db));
 				} catch (Exception e) {
 					errorHandler
@@ -90,7 +90,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist") != "" && 
 					request.getParameter("category") == null && request.getParameter("keyword") == null){
 				try {
-					System.out.println("ich suche nach Title und Artist");
+					
 					request.setAttribute("Alben", daoalbum.findAlbumbyTitleArtist(request.getParameter("titel"), request.getParameter("artist"), db));
 				} catch (Exception e) {
 					errorHandler
@@ -105,7 +105,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel").equals("") && request.getParameter("artist").equals("") && 
 					request.getParameter("category") != null && request.getParameter("keyword") == null){
 					try {
-						System.out.println("ich suche nach Category");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyCategory(request.getParameterValues("category"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -120,7 +120,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist").equals("") && 
 					request.getParameter("category") != null && request.getParameter("keyword") == null){
 					try {
-						System.out.println("ich suche nach Title und Category");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyTitleCategory(request.getParameter("titel"), request.getParameterValues("category"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -135,7 +135,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel").equals("") && request.getParameter("artist") != "" && 
 					request.getParameter("category") != null && request.getParameter("keyword") == null){
 					try {
-						System.out.println("ich suche nach Artist und Category");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyArtistCategory(request.getParameter("artist"), request.getParameterValues("category"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -150,7 +150,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist") != "" && 
 					request.getParameter("category") != null && request.getParameter("keyword") == null){
 					try {
-						System.out.println("ich suche nach Title Artist und Category");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyTitleArtistCategory(request.getParameter("titel"), request.getParameter("artist"), request.getParameterValues("category"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -165,7 +165,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel").equals("") && request.getParameter("artist").equals("") && 
 					request.getParameter("category") == null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Keyword");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyKeyword(request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -180,7 +180,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist").equals("") && 
 					request.getParameter("category") == null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Title und Keyword");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyTitleKeyword(request.getParameter("titel"),request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -195,7 +195,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel").equals("") && request.getParameter("artist") != "" && 
 					request.getParameter("category") == null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Artist und Keyword");
+						
 						request.setAttribute("Alben", daoalbum.findAlbumbyArtistKeyword(request.getParameter("artist"), request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -210,7 +210,6 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist") != "" && 
 					request.getParameter("category") == null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Title Artist und Keyword");
 						request.setAttribute("Alben", daoalbum.findAlbumbyTitleArtistKeyword(request.getParameter("titel"), request.getParameter("artist"), request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -225,7 +224,6 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel").equals("") && request.getParameter("artist").equals("") && 
 					request.getParameter("category") != null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Category und Keyword");
 						request.setAttribute("Alben", daoalbum.findAlbumbyCategoryKeyword(request.getParameterValues("category"), request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -240,7 +238,6 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist").equals("") && 
 					request.getParameter("category") != null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Title Category and Keyword");
 						request.setAttribute("Alben", daoalbum.findAlbumbyTitleCategoryKeyword(request.getParameter("titel"), request.getParameterValues("category"), request.getParameterValues("keyword"),db));
 					} catch (Exception e) {
 						errorHandler
@@ -255,7 +252,6 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel").equals("") && request.getParameter("artist") != "" && 
 					request.getParameter("category") != null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Artist, Category and Keyword");
 						request.setAttribute("Alben", daoalbum.findAlbumbyArtistCategoryKeyword(request.getParameter("artist"), request.getParameterValues("category"), request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
@@ -270,7 +266,7 @@ public class SearchAction extends AbstractAction {
 			if (request.getParameter("titel") != "" && request.getParameter("artist") != "" && 
 					request.getParameter("category") != null && request.getParameter("keyword") != null){
 					try {
-						System.out.println("ich suche nach Title Artist Category und Keyword");
+
 						request.setAttribute("Alben", daoalbum.findAlbumbyTitleArtistCategoryKeyword(request.getParameter("titel"), request.getParameter("artist"), request.getParameterValues("category"), request.getParameterValues("keyword"), db));
 					} catch (Exception e) {
 						errorHandler
