@@ -2,6 +2,14 @@ package shop.dto;
 
 import java.util.UUID;
 
+/**
+ * The mother of all persistent Objects; it provides an unique identifier. If
+ * you want to use the IGenericDao you have to extend your persistent Object
+ * from this class.
+ * 
+ * @author Andreas
+ * 
+ */
 public abstract class DBUUIDBase {
 	private UUID identifier;
 
@@ -12,5 +20,5 @@ public abstract class DBUUIDBase {
 	public void setIdentifier(UUID identifier) {
 		this.identifier = identifier;
 	}
-	
+
 }
