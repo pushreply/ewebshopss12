@@ -3,7 +3,10 @@ package shop.actions;
 /**
  * @author Schneider Sergej
  * 
- * 
+ * Funktion
+ * Track hochladen trackadd
+ * Album hochladen albumadd
+ * Cover aendern coverchange
  */
 
 import java.io.IOException;
@@ -64,7 +67,7 @@ public class UploadMusicFile {
 		// Weiterletung an Album hochladen
 		if (request.getParameter("senden") != null
 				&& "senden".equals(request.getParameter("senden"))) {
-			albumprocess(request, response, db);
+			albumadd(request, response, db);
 			
 			// Weiterleitung an Cover aendern
 		} else if (request.getParameter("senden") != null
@@ -74,12 +77,15 @@ public class UploadMusicFile {
 			// Weiterleitung an Track hochladen
 		} else
 		{
-			process(request, response, db);
+			trackadd(request, response, db);
 		}
 
 	}
 	
-	/** Funktion Cover aendern 
+	/**
+	 * @author Sergej Schneider
+	 *  
+	 * Funktion Cover aendern 
 	 * Bekommt {@link HttpServletRequest} {@link HttpServletResponse} und {@link ObjectContainer}
 	 * mit der {@link MultipartMap} werden alle {@link Parameter} zerlegt und Bild hochgeladen.
 	 * {@link IGenericDao} wird eine Verbindung zur Datenbank aufgebaut und mit der funktion daoAlbum.read wird bestimmter
@@ -124,14 +130,34 @@ public class UploadMusicFile {
 			
 		
 	}
+	
+	/**
+	 * @author Sergej Schneider
+	 * @param request
+	 * @param response
+	 * @param db
+	 * @throws ServletException
+	 * 
+	 * Funktion Track zum Album hochladen
+	 * 
+	 */
 
-	protected void process(HttpServletRequest request,
+	protected void trackadd(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
+		
+		// Variablen werden festgeledt
 		MultipartMap map = null;
 		DBTrack dbTrack = null;
+		
+		
 		try {
+			
+			// Formular und File hochladen mir zerlegt
 			map = new MultipartMap(request, this);
+			
+			// Mp3 File wird an die Klasse Trackfactory uebergeben
+			// und ins Objekt Track reigesetzt
 			dbTrack = Trackfactory.createTrack(map.getFile("file"));
 		} catch (ID3v2WrongCRCException e) {
 			errorHandler.toUser("Falscher CRC, wasauchimmerdasist", e);
@@ -146,19 +172,37 @@ public class UploadMusicFile {
 			errorHandler.toUser("Bitte wählen Sie eine MP3 Datei aus", e);
 		}
 
+		// Verbindung mit Datenbank mit Track
 		IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class,
 				db);
+		
+		// Verbindung mit Datanbank mit Album
 		IGenericDao<DBAlbum> daoa = new GenericDaoImpl<DBAlbum>(DBAlbum.class,
 				db);
+		
+		// Leeres Albumt wird erzeugt
 		DBAlbum dbalbum = null;
+		
 		try {
 			if (map.getParameter("identifier") != null
 					&& !map.getParameter("identifier").isEmpty()) {
+				
+				// Album nach id aus Datenbank ausgelesen
 				dbalbum = daoa.read(map.getParameter("identifier"));
+				
+				// Neues Track wird gespeichert
 				dao.create(dbTrack);
+				
+				// Neues Track wird zur Album hinzufuegt
 				dbalbum.setTracks(dbTrack);
+				
+				// Album wird update
 				daoa.update(dbalbum);
+				
+				// File wird geloescht
 				map.getFile("file").delete();
+				
+				// Attribute werden gesetzt
 				request.setAttribute("album", dbalbum);
 				request.setAttribute("track", dbalbum.getTracks());
 			}
@@ -170,6 +214,8 @@ public class UploadMusicFile {
 		}
 		try {
 			request.setAttribute("isAdmin", true);
+			
+			// Weiterleitung an Album anzeigen jsp
 			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
 					response);
 		} catch (IOException e) {
@@ -177,22 +223,36 @@ public class UploadMusicFile {
 					"Es tut uns leid, wir haben ein internes Problem", e);
 		}
 	}
+	
+	/**
+	 * @author Sergej Schneider
+	 * @param request
+	 * @param response
+	 * @param db
+	 * @throws ServletException
+	 * 
+	 * Funtion neues Album Hochladen
+	 */
 
-	protected void albumprocess(HttpServletRequest request,
+	protected void albumadd(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 
 		try {
 			MultipartMap map = new MultipartMap(request, this);
 
+			// Leeres Object von Klasse Album
 			DBAlbum dbalbum = new DBAlbum();
 
 			LinkedList<DBCategory> categories = new LinkedList<DBCategory>();
 			
+			// Kategorie aus Parameter auslesen
 			String[] category = map.getParameterValues("category");
 			
+			// Verbindung mit Datenbank durch Klasse Kategory
 			IGenericDao<DBCategory> daoc = new GenericDaoImpl<DBCategory>(DBCategory.class, db);
 			
+			// Kategory auslesen
 			for (int i = 0; i <= category.length - 1; i++) {
 				categories.add(daoc.read(category[i]));
 			}
@@ -202,18 +262,22 @@ public class UploadMusicFile {
 
 			LinkedList<DBKeyword> keywordies = new LinkedList<DBKeyword>();
 			
+			// Schagwoerter auslesen aus der Parameter
 			String[] keyword = map.getParameterValues("keyword");
 
+			// Verbindung mit Datanbank durch Schlagwoerter
 			IGenericDao<DBKeyword> daok = new GenericDaoImpl<DBKeyword>(
 					DBKeyword.class, db);
 
+			// Schlagwoerte auslesen
 			for (int i = 0; i <= keyword.length - 1; i++) {
 				keywordies.add(daok.read(keyword[i]));
 			}
 
+			// Schlagwoerter setzen
 			dbalbum.setKeywords(keywordies);
 
-			
+			// Parameter auslesen und zur Album hinzufuegen
 			dbalbum.setAlbumTitel(map.getParameter("titel"));
 			dbalbum.setArtist(map.getParameter("artist"));
 			dbalbum.setPrice(Double.parseDouble(map.getParameter("price")));
@@ -226,29 +290,35 @@ public class UploadMusicFile {
 			// Cover loeschen
 			map.getFile("coverpage").delete();
 			
+			// Verbindung mit Datanbank durch Album
 			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
 			
-			
+			//Speicher neues Album in Datenbank
 			String identifier = daoAlbum.create(dbalbum);
 			
 			LinkedList<DBAlbum> ldbalbum = new LinkedList<DBAlbum>();
+			
 			ldbalbum.add(dbalbum);
+			
+			// Album zur Kategorie hinzufuegen
 			for(int i = 0; i < categories.size(); i++)
 			{
 				categories.get(i).setAlbums(ldbalbum);
 			    daoc.update(categories.get(i));
 			}
 			
+			// Album zur Schlagwoerter hinzufuegen
 			for(int i = 0; i < keywordies.size(); i++)
 			{
 				keywordies.get(i).setAlbums(ldbalbum);
 				daok.update(keywordies.get(i));
 			}
 			
+			// Variablen festlegen
 			request.setAttribute("isAdmin", true);
 			request.setAttribute("album", daoAlbum.read(identifier));
 			
-			
+			// Weiterleitung an Album anzeigen jps
 			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
 					response);
 		} catch (Exception e) {
