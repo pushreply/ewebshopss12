@@ -14,7 +14,7 @@
 			<li>Jean-Paul Mukunzi</li>
 		</ul>
 	</div>
-	<img id="logo" src="FH-Kaiserslautern-Logo.jpg" alt="Bild" height="80px">
+	<img id="logo" src="images/FH-Kaiserslautern-Logo.jpg" alt="Bild" height="80px">
 </div>
 </div><!-- wrapper //begins in header -->
 </body>
