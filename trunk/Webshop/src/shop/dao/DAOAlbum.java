@@ -8,11 +8,14 @@ import com.db4o.query.Query;
 
 import shop.dto.DBAlbum;
 import shop.dto.DBCategory;
-import shop.dto.DBCustomer;
 import shop.dto.DBKeyword;
 
 public class DAOAlbum extends DBAlbum {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	DBAlbum dbalbum = null;
 
 	
