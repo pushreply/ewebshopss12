@@ -7,41 +7,43 @@
 
 <h1>${album.albumTitel}</h1>
 
-<!--  <img src="images/bild.jpg" width=120 height=130 alt="bild"> -->
-
-<c:if test="${empty album.cover}">
-	<img src="images/bild.jpg" width=120 height=130 alt="bild"
-		alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
-</c:if>
-<c:if test="${ not empty album.cover}">
-	<img
-		src="imageDisplayProcess?identifier=<c:out value="${album.identifier}"/>"
-		width=120 height=130 alt="${album.albumTitel} - ${album.artist}"
-		title="${album.albumTitel} - ${album.artist}" />
-</c:if>
-
-<ul>
-	<li class="label">Title: ${album.albumTitel}</li>
-	<li><div class="label">Artist:</div> ${album.artist}
-	<li><div class="label">Disk Anzahl:</div> ${album.numberOfDisks}</li>
-	<li><div class="label">Preis:</div> ${album.price}</li>
+<div id="albumpage-top">
+	<div id="album-image">
+		<c:if test="${empty album.cover}">
+			<img src="images/bild.jpg" width=120 height=130 alt="bild"
+				alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
+		</c:if>
+		<c:if test="${ not empty album.cover}">
+			<img
+				src="imageDisplayProcess?identifier=<c:out value="${album.identifier}"/>"
+				width=120 height=130 alt="${album.albumTitel} - ${album.artist}"
+				title="${album.albumTitel} - ${album.artist}" />
+		</c:if>
+	</div>
+	<ul id="album-info">
+		<li><div class="label">Title:</div> ${album.albumTitel}</li>
+		<li><div class="label">Artist:</div> ${album.artist}<li><div class="label">Disk Anzahl:</div> ${album.numberOfDisks}</li>
+		<li><div class="label">Preis:</div> ${album.price}</li>
 	<li><div class="label">Anzahl:</div> ${album.amount}</li>
 	<li><div class="label">Anzahl der Tracks:</div>${album.numberOfTracks}</li>
 	<li><div class="label">Label:</div> ${album.label}</li>
 	<li><div class="label">Kategorien:</div>
-		<ul>
+		<ul class="album-sublist">
 			<c:forEach items="${album.categories}" var="category">
 				<li><c:out value="${category.categoryName}" /></li>
 			</c:forEach>
 		</ul></li>
-	<li><div class="label">Schlüsselwörter:</div>
-		<ul>
+		
+	
+		<li><div class="label">Schlüsselwörter:</div>
+		<ul class="album-sublist">
 			<c:forEach items="${album.keywords}" var="keyword">
 				<li><c:out value="${keyword.keywordName}" /></li>
 			</c:forEach>
 		</ul></li>
-
-
+</ul>
+</div>
+<ul id="album-features">
 	<c:if test="${isAdmin=='true'}">
 		<li><form action="controller" method="get">
 				<input type="hidden" name="action" value="album"> <input
@@ -63,6 +65,7 @@
 		</form></li>
 </ul>
 
+<div id="albumpage-tracks">
 <c:if test="${isAdmin=='true'}">
 	<h2>Neue Tracks hinzufügen</h2>
 	<form action="controller" method="post" enctype="multipart/form-data">
@@ -122,5 +125,6 @@
 		</c:forEach>
 	</table>
 </c:forEach>
+</div>
 
 <c:import url="footer.jsp" />

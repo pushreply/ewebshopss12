@@ -6,13 +6,13 @@
 </c:url>
 
 <c:url var="trackUpload" value="controller">
-	<c:param name="action" value="track" />
+	<c:param name="action" value="album" />
 	<c:param name="upload" value="true" />
 </c:url>
 
 <c:url var="trackShow" value="controller">
-	<c:param name="action" value="track" />
-	<c:param name="show" value="true" />
+	<c:param name="action" value="album" />
+	<c:param name="show" value="all" />
 </c:url>
 
 <c:url var="keyword" value="controller">
