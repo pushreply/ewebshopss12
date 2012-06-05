@@ -129,6 +129,7 @@ public class AlbumAction extends AbstractAction {
 			List<DBKeyword> keywordies = null;
 			DBAlbum album = null;
 			Map<DBKeyword,Boolean> checkedKeywords = new HashMap<DBKeyword, Boolean>();
+			Map<DBCategory,Boolean> checkedCategory = new HashMap<DBCategory, Boolean>();
 			
 			try {
 				album = dao.read(request.getParameter("changeAlbumInfo"));
@@ -138,6 +139,11 @@ public class AlbumAction extends AbstractAction {
 				for (DBKeyword dbKeyword : keywordies) {
 					checkedKeywords.put(dbKeyword, album.getKeywords().contains(dbKeyword));
 				}
+				
+				for (DBCategory dbCategory : categories)
+				{
+					checkedCategory.put(dbCategory, album.getCategories().contains(dbCategory));
+				}
 
 			} catch (Exception e) {
 				errorHandler
@@ -145,7 +151,7 @@ public class AlbumAction extends AbstractAction {
 								e);
 			}
 			request.setAttribute("keywordies", checkedKeywords);
-			request.setAttribute("categories", categories);
+			request.setAttribute("categories", checkedCategory);
 
 			disp = request.getRequestDispatcher("/albumBearbeiten.jsp");
 		}
@@ -157,11 +163,17 @@ public class AlbumAction extends AbstractAction {
 				String identifier = request.getParameter("updateAlbum");
 				DBAlbum album = dao.read(identifier);
 				LinkedList<DBKeyword> newKeywords = new LinkedList<DBKeyword>();
+				LinkedList<DBCategory> newCategory = new LinkedList<DBCategory>();
 				
 				String[] keywordValues = request.getParameterValues("keyword");
 				System.out.println("anzahl von gewählten Keywords  = "+ keywordValues.length); 
 				for (String string : keywordValues) {
 					newKeywords.add(daok.read(string));
+				}
+				String[] categoryValues = request.getParameterValues("category");
+				System.out.println("anzahl von gewählten Category  = "+ categoryValues.length);
+				for (String id : categoryValues) {
+					newCategory.add(daoc.read(id));
 				}
 				
 				String titel = request.getParameter("titel");
@@ -182,6 +194,7 @@ public class AlbumAction extends AbstractAction {
 				album.setNumberOfTracks(trackAnzahl);
 				album.setLabel(label);
 				album.setKeywords(newKeywords);
+				album.setCategories(newCategory);
 				dao.update(album);
 				request.setAttribute("album", dao.read(identifier));
 				disp = request.getRequestDispatcher("/albumanzeigen.jsp");
