@@ -1,5 +1,9 @@
 package shop.dao.jtest;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,6 +15,7 @@ import shop.dao.DBObject;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBCategory;
+import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ext.DatabaseClosedException;
@@ -20,49 +25,64 @@ import com.db4o.foundation.ChainedRuntimeException;
 /**
  * 
  * @author Andreas
- *
+ * 
  */
 public class DAOCategoryTest {
 
 	ObjectContainer db;
-	
+
 	@Before
-	public void before(){
+	public void before() {
 		db = new DBObject().getConnection();
 	}
-	
+
 	@After
-	public void after(){
+	public void after() {
 		db.close();
 	}
-	
-//	@Test
-//	public void test() {
-//
-//		DBCategory newCat = new DBCategory("asd");
-//		DAOCategory.insertCategory(newCat, db);
-//	}
-//
-//	@Test
-//	public void test2() {
-//		ObjectSet<DBCategory> categories = DAOCategory.retrieveAllCategories(db);
-//		for (int i = 0; i < categories.size(); i++) {
-//			DBCategory cat = (DBCategory) categories.get(i);
-//			String out = cat.getCategoryName();
-//			System.err.println(out);
-//		}
-//	}
-	
+
 	@Test
 	public void create() {
 		DBCategory newCat = new DBCategory("testCategoryName");
-		IGenericDao<DBCategory> underTest = new GenericDaoImpl<DBCategory>(DBCategory.class,db);
+		IGenericDao<DBCategory> underTest = new GenericDaoImpl<DBCategory>(
+				DBCategory.class, db);
 		String newId = underTest.create(newCat);
 		System.err.println(newId);
 	}
 
 	@Test
-	public void readAll() throws ChainedRuntimeException, DatabaseClosedException, InstantiationException, IllegalAccessException {
+	public void asdad() {
+		IGenericDao<DBCategory> underTest = new GenericDaoImpl<DBCategory>(
+				DBCategory.class, db);
+		List<DBCategory> listCategories = new LinkedList<DBCategory>();
+		try {
+			listCategories = underTest.readAll();
+		} catch (Db4oIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatabaseClosedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DBCategory item = listCategories.get(3);
+		System.err.println("ist drin " + listCategories.contains(item));
+		DBCategory item2 = new DBCategory("asdasd");
+		System.err.println("asdasd ist drin " + listCategories.contains(item2));
+		DBCategory item3 = new DBCategory("HipHop");
+		System.err.println("HipHop ist drin " + listCategories.contains(item3));
+	}
+
+	@Test
+	public void readAll() throws ChainedRuntimeException,
+			DatabaseClosedException, InstantiationException,
+			IllegalAccessException {
 		IGenericDao<DBCategory> dao = new GenericDaoImpl<DBCategory>(
 				DBCategory.class, db);
 		List<DBCategory> asd = dao.readAll();
@@ -70,12 +90,14 @@ public class DAOCategoryTest {
 			System.err.println(dbCategory.getCategoryName());
 		}
 	}
-	
+
 	@Test
-	public void read() throws InstantiationException, IllegalAccessException{
+	public void read() throws InstantiationException, IllegalAccessException {
 		GenericDaoImpl<DBCategory> underTest = new GenericDaoImpl<DBCategory>(
 				DBCategory.class, db);
-		DBCategory category = underTest.read("9a73c6e2-f7ac-49e4-945b-486916c26e22");
+		DBCategory category = underTest
+				.read("be707880-3d68-4a35-9b10-00cc7ccd7142");
 		System.err.println(category.getCategoryName());
+
 	}
 }

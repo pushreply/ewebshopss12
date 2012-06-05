@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
-import shop.dto.DBCategory;
 import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
