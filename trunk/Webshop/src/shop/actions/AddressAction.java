@@ -1,8 +1,6 @@
 package shop.actions;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,12 +13,9 @@ import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAddress;
 import shop.dto.DBCustomer;
-import shop.dto.DBKeyword;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.Db4oException;
-import com.db4o.ext.Db4oIOException;
 
 /**
  * This Action handles customer's (delivery) addresses.
@@ -63,18 +58,13 @@ public class AddressAction extends AbstractAction {
 		
 		HttpSession session = request.getSession(true);
 		session.getAttribute("username");
-		
-		System.out.println("session set.");
-		
+	
 		/*
 		 * adding new address, or updating an edited address 
 		 */
 		if (request.getParameter("address")!=null &&
 				request.getParameter("address").equals("addnew")) {
-			try {
-				System.out.println("adding new address");
-				
-				System.out.println(street+country+firstName+lastName+gender+art);
+			try {				
 				DBAddress address = new DBAddress(street, country, firstName, lastName, gender, art);
 				user.getAddresses().add(address);
 				dao.create(address);
@@ -95,16 +85,10 @@ public class AddressAction extends AbstractAction {
 		 */
 		else if (request.getParameter("delete")!=null && !request.getParameter("delete").isEmpty())
 		{
-			try{
-				System.out.println("delete an address");
-				
-				System.out.println("id = " + request.getParameter("delete").toString());
-								
+			try{				
 				user.getAddresses().remove(dao.read(request.getParameter("delete")));
 				dao.delete(request.getParameter("delete"));
 				genericDaoCustomer.update(user);
-				System.out.println("address deleted");
-				
 				request.setAttribute("userprofile", user);
 				RequestDispatcher disp = request.getRequestDispatcher("controller?action=customer&show=profile");  
 				disp.forward(request, response);
