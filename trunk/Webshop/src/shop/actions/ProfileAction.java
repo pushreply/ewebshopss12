@@ -30,7 +30,7 @@ public class ProfileAction extends AbstractAction {
 			RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");
 			// get users' data
 			if (!loginUsername.isEmpty()) {
-				for (int i = 0; i < daoCustomer.readUserData(loginUsername, db).getAddresses().size(); i++) {
+				for (int i = 0; i <= daoCustomer.readUserData(loginUsername, db).getAddresses().size(); i++) {
 					user = daoCustomer.readUserData(loginUsername, db);
 				}
 

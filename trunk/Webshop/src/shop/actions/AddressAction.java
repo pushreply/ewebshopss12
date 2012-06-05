@@ -89,19 +89,7 @@ public class AddressAction extends AbstractAction {
 				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen.", e);
 			}	
 		} 
-		else if(request.getParameter("show")!=null){
-			try {
-				session.getAttribute("username");
-				for (int i = 0; i < daoCustomer.readUserData(username, db).getAddresses().size(); i++) {
-					user = daoCustomer.readUserData(username, db);
-				}
-				request.setAttribute("userprofile", user);	
-				RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");  
-				disp.forward(request, response);
-			} catch (Exception e) {
-				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
-			}		
-		}
+
 		/*
 		 * delete address, forward to editing page: show the actual address
 		 */
@@ -115,6 +103,7 @@ public class AddressAction extends AbstractAction {
 				user.getAddresses().remove(dao.read(request.getParameter("delete")));
 				dao.delete(request.getParameter("delete"));
 				genericDaoCustomer.update(user);
+				System.out.println("address deleted");
 				
 				request.setAttribute("userprofile", user);
 				RequestDispatcher disp = request.getRequestDispatcher("controller?action=customer&show=profile");  
@@ -122,6 +111,20 @@ public class AddressAction extends AbstractAction {
 			}catch (Exception e) {
 				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
 			}
+		}
+		
+		else if(request.getParameter("show")!=null){
+			try {
+				session.getAttribute("username");
+				for (int i = 0; i < daoCustomer.readUserData(username, db).getAddresses().size(); i++) {
+					user = daoCustomer.readUserData(username, db);
+				}
+				request.setAttribute("userprofile", user);	
+				RequestDispatcher disp = request.getRequestDispatcher("/profileview.jsp");  
+				disp.forward(request, response);
+			} catch (Exception e) {
+				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen", e);
+			}		
 		}
 	}
 }
