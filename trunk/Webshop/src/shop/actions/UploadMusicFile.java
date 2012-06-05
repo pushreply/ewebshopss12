@@ -55,18 +55,47 @@ public class UploadMusicFile {
 		if (request.getParameter("senden") != null
 				&& "senden".equals(request.getParameter("senden"))) {
 			albumprocess(request, response, db);
-		} else {
-			System.out.println("parameter mp3: "
-					+ request.getParameter("uploadFileSubmitButton"));
+		} else if (request.getParameter("senden") != null
+				&& "coverchange".equals(request.getParameter("senden"))){
+				coverchange(request, response, db);
+			
+		} else
+		{
 			process(request, response, db);
 		}
 
 	}
 
+	protected void coverchange(HttpServletRequest request,
+			HttpServletResponse response, ObjectContainer db) throws ServletException {
+		try {
+			MultipartMap map = new MultipartMap(request, this);
+			IGenericDao<DBAlbum> daoAlbum = new GenericDaoImpl<DBAlbum>(DBAlbum.class, db);
+			
+			System.out.println(map.getParameter("albumid"));
+			DBAlbum dbalbum = daoAlbum.read(map.getParameter("albumid"));
+
+			dbalbum.setCover(ByteArray.getBytesFromFile(map.getFile("coverpage")));
+			
+			daoAlbum.update(dbalbum);
+			
+			
+			request.setAttribute("isAdmin", true);
+			request.setAttribute("album", dbalbum);
+			
+			
+			request.getRequestDispatcher("/albumanzeigen.jsp").forward(request,
+					response);
+		} catch (Exception e) {
+			errorHandler.toUser("Bitte geben Sie eine MP3 Datei an", e);
+		}
+			
+		
+	}
+
 	protected void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
-		System.out.println("ich bin in prozess");
 		MultipartMap map = null;
 		DBTrack dbTrack = null;
 		try {

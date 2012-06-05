@@ -197,7 +197,15 @@ public class AlbumAction extends AbstractAction {
 				album.setCategories(newCategory);
 				dao.update(album);
 				request.setAttribute("album", dao.read(identifier));
-				disp = request.getRequestDispatcher("/albumanzeigen.jsp");
+				System.out.println(request.getParameter("coverchange"));
+				if(request.getParameter("coverchange") != null && "coverchange".equals(request.getParameter("coverchange")))
+				{
+					disp = request.getRequestDispatcher("/coverchange.jsp");
+				}
+				else
+				{
+					disp = request.getRequestDispatcher("/albumanzeigen.jsp");
+				}
 			} catch (Exception e) {
 				errorHandler
 						.toUser("Beim Laden der MP3 ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
