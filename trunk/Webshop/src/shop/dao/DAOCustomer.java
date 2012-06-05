@@ -92,18 +92,4 @@ public class DAOCustomer{
 		}
 	}
 	
-	/*
-	 * update user data, based on username: FirstName, LastName
-	 */
-	public void updateUserData_name(String uName, String uLastName, String uFirstName, ObjectContainer db){
-		
-	}
-	
-	/*
-	 * update user data, based on username: Address
-	 */
-	public void updateUserData_address(String uName, String uStreet, String uCountry, ObjectContainer db){
-		
-	}
-	
 }
