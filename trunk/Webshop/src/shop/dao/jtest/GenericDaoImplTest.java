@@ -1,5 +1,8 @@
 package shop.dao.jtest;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -10,6 +13,8 @@ import shop.dao.DBObject;
 import shop.dao.GenericDaoImpl;
 import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
+import shop.dto.DBCustomer;
+import shop.dto.DBKeyword;
 import shop.dto.DBTrack;
 import shop.util.Trackfactory;
 
@@ -77,5 +82,33 @@ public class GenericDaoImplTest {
 		}
 		System.err.println("---END OF READ ALBUM---");
 	}
-
+	
+	@Test
+	public void testExistByAttribute_DOES_EXIST() {
+		ObjectContainer db = new DBObject().getConnection();
+		IGenericDao<DBKeyword> underTest = new GenericDaoImpl<DBKeyword>(DBKeyword.class, db);
+		assertTrue(underTest.existByAttribute("keywordName", "Sommer 2012"));
+	}
+	
+	@Test
+	public void testExistByAttribute_DOES_NOT_EXIST() {
+		ObjectContainer db = new DBObject().getConnection();
+		IGenericDao<DBKeyword> underTest = new GenericDaoImpl<DBKeyword>(DBKeyword.class, db);
+		assertFalse(underTest.existByAttribute("keywordName", "dieses keyword sollte nicht existieren"));
+	}
+	
+	
+	@Test
+	public void testExistByTwoAttributes_DOES_EXIST() {
+		ObjectContainer db = new DBObject().getConnection();
+		IGenericDao<DBCustomer> underTest = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
+		assertTrue(underTest.existByTwoAttributes("username", "Admin", "password", "Admin"));
+	}
+	
+	@Test
+	public void testExistByTwoAttributes_DOES_NOT_EXIST() {
+		ObjectContainer db = new DBObject().getConnection();
+		IGenericDao<DBCustomer> underTest = new GenericDaoImpl<DBCustomer>(DBCustomer.class, db);
+		assertFalse(underTest.existByTwoAttributes("username", "ungültiger Benutzername", "password", "Admin"));
+	}
 }
