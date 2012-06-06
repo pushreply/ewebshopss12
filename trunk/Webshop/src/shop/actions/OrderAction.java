@@ -59,7 +59,16 @@ public class OrderAction extends AbstractAction {
 				int anzahl = Integer.parseInt(request.getParameter("anzahl"));
 				album.setAmount(anzahl);
 				LinkedList<DBAlbum> sessionAlben = (LinkedList<DBAlbum>) request.getSession().getAttribute("orderedAlben");
-				sessionAlben.add(album);		        
+				boolean found = false;
+				for (DBAlbum dbAlbum : sessionAlben) {
+					if(!found && dbAlbum.getAlbumTitel().equals(album.getAlbumTitel())){
+						dbAlbum.setAmount(dbAlbum.getAmount() + album.getAmount());	
+						found = true;
+					}
+				}
+				if (!found) {
+					sessionAlben.add(album);		        
+				}
 				
 				request.getSession().setAttribute("orderedAlben", sessionAlben);
 
