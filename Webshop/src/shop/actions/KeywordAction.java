@@ -36,7 +36,7 @@ public class KeywordAction extends AbstractAction {
 		String add = null;
 		try {
 			add = request.getParameter("addKeyword");
-			if (!(add == null || add.isEmpty() || dao.existByAttribute(
+			if (!(add == null || add.isEmpty() || dao.existByAttributes(
 					"keywordName", add))) {
 				DBKeyword keyword = new DBKeyword(add);
 				dao.create(keyword);

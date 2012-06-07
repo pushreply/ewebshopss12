@@ -1,4 +1,4 @@
-package shop.dao.jtest;
+package shop.dao;
 
 /**
  * @author mukunzi
@@ -9,7 +9,6 @@ import com.db4o.ObjectContainer;
 
 import org.junit.Test;
 
-import shop.dao.DBObject;
 
 public class TestDBOBject {
 

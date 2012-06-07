@@ -1,4 +1,4 @@
-package shop.dao.jtest;
+package shop.db4oserver;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -18,13 +18,13 @@ import shop.util.Trackfactory;
 import com.db4o.ObjectContainer;
 
 /**
- * 
+ * Initialize an empty Database with predefined Objects for demonstration purposes. 
  * @author mukunzi
  * @author Andreas
  * 
  */
 
-public class TestDaten {
+public class DemoDaten {
 
 	public static void main(String[] arg) {
 
@@ -54,7 +54,7 @@ public class TestDaten {
 		adresses.add(new DBAddress("Amerikastrasse 1", "Deutschland", "Kevin",
 				" Schneider", "M", "delivery"));
 		adresses.add(new DBAddress("Pfaffplatz 10", "Deutschland", "kevin",
-				" Schneider", "M", "belling"));
+				" Schneider", "M", "billing"));
 		adresses.add(new DBAddress("Polizeipresidium 14", "Deutschland",
 				"Risa", " Stefanie", "W", "delivery"));
 		adresses.add(new DBAddress("Poststr. 12", "Deutschland", "Risa",
@@ -132,7 +132,7 @@ public class TestDaten {
 		}
 
 		// Albums
-//		 load existing keywords, categories and tracks to put in the albums
+		// load existing keywords, categories and tracks to put in the albums
 		List<DBKeyword> allKeywords = null;
 		List<DBCategory> allCategories = null;
 		List<DBTrack> allTracks = null;
@@ -150,11 +150,13 @@ public class TestDaten {
 			List<DBCategory> albumCategories = addRandom(allCategories);
 			List<DBTrack> albumTracks = addRandom(allTracks);
 
-//			daoAlbum.create(new DBAlbum(null, i + ". Album Title", "Artist_"
-//					+ i + "_" + i, (int) (Math.random() * 2+1), (int) (Math.random() * 20)+1,
-//					(int) (Math.random() * 500)+1, (int) albumTracks.size(),
-//					"Label_" + i + " " + i + 1 + " " + i + 2, albumKeywords,
-//					albumCategories, albumTracks));
+			byte[] bytes = null;
+			daoAlbum.create(new DBAlbum(bytes, i + ". Album Title", "Artist"
+					+ i + " " + i, (int) (Math.random() * 2 + 1),
+					(double) (Math.random() * 20) + 1,
+					(int) (Math.random() * 500) + 1, i + 5, "Label" + i + " "
+							+ i + 1 + " " + i + 2, albumKeywords,
+					albumCategories, albumTracks));
 		}
 		db.close();
 		System.out.println("Testdaten wurden geschrieben");

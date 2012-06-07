@@ -35,8 +35,8 @@ public class DBAlbum extends DBUUIDBase implements Serializable{
 
 	public DBAlbum(byte[] cover, String albumTitel,
 			String artist, int numberOfDisks, double price, int amount,
-			int numberOfTracks, String label, LinkedList<DBKeyword> keywords,
-			LinkedList<DBCategory> categories, LinkedList<DBTrack> tracks) {
+			int numberOfTracks, String label, List<DBKeyword> keywords,
+			List<DBCategory> categories, List<DBTrack> tracks) {
 		super();
 		this.cover = cover;
 		this.albumTitel = albumTitel;
