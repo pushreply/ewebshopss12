@@ -26,16 +26,6 @@ public class TrackAction extends AbstractAction{
 		
 		IGenericDao<DBTrack> dao = new GenericDaoImpl<DBTrack>(DBTrack.class, db);
 
-//		//GIBT ES SO NICHTMEHR, WAR NUR ZUM AUSPROBIEREN AM ANFANG (Alle Tracks anzeigen)
-//		else if ((request.getParameter("show") != null)) {
-//			try {
-//				request.setAttribute("AlbumTracks", dao.readAll());
-//			}catch (Exception e) {
-//				errorHandler.toUser("Beim Hochladen ihrer MP3 ist en Fehler aufgetreten, bitte versuchen Sie es später wieder", e);
-//			}
-//			disp = request.getRequestDispatcher("/track.jsp");
-//		} 
-//		
 		//Track- Attributen in Felder
 		if ((request.getParameter("changeTrackData") != null)) {
 			try {
