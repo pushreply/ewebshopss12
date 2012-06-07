@@ -16,8 +16,7 @@ import com.db4o.query.Query;
  * 
  * @author Andreas
  * @author Benjamin
- * @param <T>
- *            The DAO Classtype you want this Instance to work for
+ * @param <T> The DAO Classtype you want this Instance to work for
  */
 public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 	private Class<T> type;
@@ -38,7 +37,8 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		return o.getIdentifier().toString();
 	}
 
-	public T read(String uuid) throws InstantiationException, IllegalAccessException {
+	public T read(String uuid) throws InstantiationException,
+			IllegalAccessException {
 		T example = null;
 		example = type.newInstance();
 
@@ -71,31 +71,19 @@ public class GenericDaoImpl<T extends DBUUIDBase> implements IGenericDao<T> {
 		db.commit();
 	}
 
-	public void delete(String uuid) throws InstantiationException, IllegalAccessException {
+	public void delete(String uuid) throws InstantiationException,
+			IllegalAccessException {
 		T o = read(uuid);
 		delete(o);
 		db.commit();
 	}
-	
-	public boolean existByAttribute(String attribute, String value) {
+
+	public boolean existByAttributes(String... attribute) {
 		Query query = db.query();
 		query.constrain(type);
-		query.descend(attribute).constrain(value);
-		if (query.execute().isEmpty()) {
-			return false;
-		} else {
-			return true;
+		for (int i = 0; i < attribute.length; i+=2) {
+			query.descend(attribute[i]).constrain(attribute[i+1]);
 		}
-	}
-	
-	public boolean existByTwoAttributes(String attribute1, String value1, String attribute2, String value2) {
-		Query query = db.query();
-		query.constrain(type);
-		query.descend(attribute1).constrain(value1).and(query.descend(attribute2).constrain(value2));
-		if (query.execute().isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
+		return !query.execute().isEmpty();
 	}
 }

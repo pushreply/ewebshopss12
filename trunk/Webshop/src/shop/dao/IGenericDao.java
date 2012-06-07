@@ -51,16 +51,5 @@ public interface IGenericDao <T extends DBUUIDBase> {
      * @param value the concrete value of the attribute you want to check
      * @return true if any item has the attribute with the value, else false
      */
-    boolean existByAttribute(String attribute, String value);
-    
-    /**
-     * checks wheater an object already exists in the database according to two attributes.
-     * Good for checks like "Does this name and password combination exist?"
-     * @param attribute1
-     * @param value1
-     * @param attribute2
-     * @param value2
-     * @return
-     */
-    boolean existByTwoAttributes(String attribute1, String value1, String attribute2, String value2) ;
+    boolean existByAttributes(String... attribute);
 }

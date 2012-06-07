@@ -36,7 +36,7 @@ public class CategoryAction extends AbstractAction {
 		String add = null;
 		try {
 			add = request.getParameter("addCategory");
-			if (!(add == null || add.isEmpty() || dao.existByAttribute(
+			if (!(add == null || add.isEmpty() || dao.existByAttributes(
 					"categoryName", add))) {
 				DBCategory category = new DBCategory(add);
 				dao.create(category);
@@ -88,7 +88,7 @@ public class CategoryAction extends AbstractAction {
 			categories = dao.readAll();
 		} catch (Exception e) {
 			errorHandler
-					.toUser("Beim Laden der Kategorien ist en Fehler aufgetreten, bitte versuchen Sie es später wieder",
+					.toUser("Beim Laden der Kategorien ist ein Fehler aufgetreten, bitte versuchen Sie es später wieder",
 							e);
 		}
 		request.setAttribute("categories", categories);
