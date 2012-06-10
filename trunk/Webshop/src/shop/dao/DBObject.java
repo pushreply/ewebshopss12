@@ -1,7 +1,7 @@
 package shop.dao;
 
 /**
- * @author mukunzi, Benjamin
+ * @author Benjamin, mukunzi
  */
 
 import shop.dto.DBAddress;
