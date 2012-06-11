@@ -43,7 +43,7 @@ public class RegisterAction extends AbstractAction {
 		IGenericDao<DBAddress> daoAddress = new GenericDaoImpl<DBAddress>(DBAddress.class, db);
 		DAOCustomer newRegistration = new DAOCustomer();
 
-		String newUsername, newPassword1, newPassword2, gender, firstName, lastName, street, country, art;
+		String newUsername, newPassword1, newPassword2, gender, firstName, lastName, street, country;
 		boolean available;
 
 		newUsername = request.getParameter("username").trim();
@@ -69,9 +69,10 @@ public class RegisterAction extends AbstractAction {
 				available = newRegistration.isMatchUser(newUsername, db);
 				/*
 				 * check if the username is available
+				 * insert "delivery" as "art" of address as the default value
 				 */
 				if (available == true) {
-					DBAddress address = new DBAddress(street, country, firstName, lastName, gender, art = "delivery");
+					DBAddress address = new DBAddress(street, country, firstName, lastName, gender, "delivery");
 					LinkedList<DBAddress> useraddress = new LinkedList<DBAddress>();
 					useraddress.add(address);
 					DBCustomer user = new DBCustomer(newUsername, newPassword1, useraddress);
