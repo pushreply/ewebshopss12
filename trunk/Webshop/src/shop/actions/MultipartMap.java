@@ -92,7 +92,7 @@ public class MultipartMap extends HashMap<String, Object> {
      * @throws ServletException If something fails at Servlet level.
      * @throws IOException If something fails at I/O level.
      */
-    public MultipartMap(HttpServletRequest multipartRequest, UploadAction uploadMusicFile)
+    public MultipartMap(HttpServletRequest multipartRequest, UploadFile uploadMusicFile)
         throws ServletException, IOException
     {
         this(multipartRequest, new MultipartConfigElement(

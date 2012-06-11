@@ -43,7 +43,7 @@ import de.vdheide.mp3.NoMP3FrameException;
 @WebServlet(urlPatterns = { "/upload" })
 @MultipartConfig(location = "C:\\projekt", maxFileSize = 10485760L)
 // 10MB.
-public class UploadAction {
+public class UploadFile {
 
 	/** Variablen festlegung fuer UplaodMisikFile **/
 	
@@ -53,7 +53,7 @@ public class UploadAction {
 	ErrorHandler errorHandler = new ErrorHandler();
 
 	/** Konstruktor für UplaodMusikFiele **/
-	public UploadAction(HttpServletRequest request,
+	public UploadFile(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 		this.request = request;
