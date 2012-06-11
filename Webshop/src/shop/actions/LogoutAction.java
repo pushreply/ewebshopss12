@@ -1,7 +1,6 @@
 package shop.actions;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,15 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import shop.dao.DAOCustomer;
-import shop.dao.GenericDaoImpl;
-import shop.dao.IGenericDao;
-import shop.dto.DBCustomer;
-
 import com.db4o.ObjectContainer;
 
 /**
- * This Action handles LOGOUT
+ * This Action handles LOGOUT. 
  * 
  * @author roha0001
  * 
@@ -30,7 +24,6 @@ public class LogoutAction  extends AbstractAction{
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 
-//		if (request.getParameter("logout") != null) {
 			RequestDispatcher disp = request.getRequestDispatcher("/reloadmenu.jsp");
 			try {
 				
@@ -42,8 +35,6 @@ public class LogoutAction  extends AbstractAction{
 			} catch (Exception e) {
 				errorHandler.toUser("Etwas mit der Weiterleitung ist schief gelaufen.", e);
 			}
-//		}
-		
 		
 	}
 

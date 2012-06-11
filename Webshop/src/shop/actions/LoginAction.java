@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import shop.dao.DAOCustomer;
-import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
 
@@ -38,10 +37,8 @@ public class LoginAction extends AbstractAction {
 			
 			loginUsername = request.getParameter("username").trim();
 			loginPassword = request.getParameter("password").trim();
-			System.out.println("Login parameters are set: " + loginUsername + ":" + loginPassword);
 		
 			match = daoCustomer.isMatchUser(loginUsername, loginPassword, db);
-			System.out.println("Login OK.");
 			
 			//set session
 			HttpSession session = request.getSession(true);
