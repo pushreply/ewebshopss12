@@ -34,7 +34,7 @@ import shop.actions.ProfileAction;
 import shop.actions.RegisterAction;
 import shop.actions.SearchAction;
 import shop.actions.TrackAction;
-import shop.actions.UploadAction;
+import shop.actions.UploadFile;
 import shop.dao.DBObject;
 import shop.util.ErrorHandler;
 
@@ -99,7 +99,7 @@ public class Controller extends HttpServlet {
 		 */
 
 		else if (ServletFileUpload.isMultipartContent(request)) {
-			new UploadAction(request, response, db);
+			new UploadFile(request, response, db);
 		} 
 		if (db != null)
 			db.close();
