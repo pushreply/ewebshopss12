@@ -12,6 +12,10 @@ import java.util.LinkedList;
 
 public class DBOrder extends DBUUIDBase implements Serializable{
 		
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8817496821081855118L;
 		private Date datum;
 		private int state;
 

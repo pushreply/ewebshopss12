@@ -30,7 +30,6 @@ public class LoginAction extends AbstractAction {
 			throws ServletException {
 
 		String loginUsername, loginPassword;
-		boolean match = false;
 
 		DAOCustomer daoCustomer = new DAOCustomer();
 		try {
@@ -38,7 +37,7 @@ public class LoginAction extends AbstractAction {
 			loginUsername = request.getParameter("username").trim();
 			loginPassword = request.getParameter("password").trim();
 		
-			match = daoCustomer.isMatchUser(loginUsername, loginPassword, db);
+			daoCustomer.isMatchUser(loginUsername, loginPassword, db);
 			
 			//set session
 			HttpSession session = request.getSession(true);
