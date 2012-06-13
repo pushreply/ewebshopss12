@@ -23,6 +23,11 @@ import com.db4o.ObjectContainer;
  * @author Mukunzi
  * @author Sergej Schneider
  * 
+ * +add
+ * +delete
+ * +show
+ * +update
+ * 
  */
 
 public class AlbumAction extends AbstractAction {
