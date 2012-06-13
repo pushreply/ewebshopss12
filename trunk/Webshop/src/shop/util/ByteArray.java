@@ -18,15 +18,7 @@ import java.io.InputStream;
 
 public class ByteArray {
 	
-/*	
- * eine Datei in Byte-Array umwandlen
- * try {
-        FileInputStream file = new FileInputStream("C:/Users/HP-Master/Desktop/FH/"+sDateiname);
-        bytesarray = ByteArray.inputStreamToByteArray(file);
-    } catch (FileNotFoundException e) { 
-        e.printStackTrace(); 
-    }
- */ 
+
 	// Returns the contents of the file in a byte array.
 		public static byte[] getBytesFromFile(File file) throws IOException {
 			InputStream is = new FileInputStream(file);
