@@ -20,11 +20,11 @@ import shop.dto.DBKeyword;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
-public class SearchAction extends AbstractAction {
+public class SearchAction implements IAction {
 	
 
 
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 		RequestDispatcher disp = null;

@@ -20,12 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import shop.actions.AbstractAction;
-//import shop.actions.AddressAction;
 import shop.actions.AddressAction;
 import shop.actions.AlbumAction;
 import shop.actions.CategoryAction;
 import shop.actions.HomeAction;
+import shop.actions.IAction;
 import shop.actions.KeywordAction;
 import shop.actions.LoginAction;
 import shop.actions.LogoutAction;
@@ -48,7 +47,9 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = -3188047853265442959L;
 
 	private ObjectContainer db = null;
-	private static Map<String, AbstractAction> actionMap = new HashMap<String, AbstractAction>();
+	private static Map<String, IAction> actionMap = new HashMap<String, IAction>();
+
+	ErrorHandler errorHandler = new ErrorHandler();
 
 	/**
 	 * @author Andreas
@@ -70,8 +71,15 @@ public class Controller extends HttpServlet {
 		actionMap.put("orderalbum", new OrderAction());
 		actionMap.put("customer", new ProfileAction());
 		actionMap.put("address", new AddressAction());
-		
+
 		// more "put" go here
+	}
+
+	@Override
+	public void destroy() {
+		super.destroy();
+		if (db != null)
+			db.close();
 	}
 
 	/**
@@ -79,7 +87,6 @@ public class Controller extends HttpServlet {
 	 */
 	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		ErrorHandler errorHandler = new ErrorHandler();
 
 		// DBObject baut eine Verbindung zur DB auf
 		try {
@@ -87,22 +94,41 @@ public class Controller extends HttpServlet {
 		} catch (Exception e) {
 			errorHandler.toUser("Datenbankserver ist nicht erreichbar", e);
 		}
-
+		
+		preprocess(request);
+		
 		// Aufruf des passenden Controllers
-		AbstractAction action = actionMap.get(request.getParameter("action"));
-		if (action != null)
-			action.processAndClose(request, response, db);
-
+		IAction action = actionMap.get(request.getParameter("action"));
+		if (action != null) {
+			try {
+				// calls abstract process
+				action.process(request, response, db);
+			} catch (ServletException e) {
+				throw e;
+			} catch (Exception e) {
+				errorHandler.toUser(
+						"Die von Ihnen gewählte Aktion existiert nicht", e);
+			}
+		}
 		/**
 		 * @author Schneider
 		 * @author Sergej
 		 */
-
 		else if (ServletFileUpload.isMultipartContent(request)) {
 			new UploadFile(request, response, db);
-		} 
+		}
+		
 		if (db != null)
 			db.close();
 	} // Ende der service-Methode
+
+	private void preprocess(HttpServletRequest request) {
+		if (request.getSession() != null
+				&& request.getSession().getAttribute("username") != null
+				&& request.getSession().getAttribute("username")
+						.equals("Admin")) {
+			request.setAttribute("isAdmin", true);
+		}
+	}
 
 } // Ende Klasse Controller

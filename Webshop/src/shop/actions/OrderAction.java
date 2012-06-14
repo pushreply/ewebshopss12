@@ -17,7 +17,7 @@ import shop.dao.IGenericDao;
 import shop.dto.DBAlbum;
 import com.db4o.ObjectContainer;
 
-public class OrderAction extends AbstractAction {
+public class OrderAction implements IAction {
 
 	@SuppressWarnings("unchecked")
 	@Override

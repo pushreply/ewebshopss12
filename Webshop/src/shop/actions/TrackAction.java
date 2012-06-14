@@ -17,10 +17,10 @@ import com.db4o.ObjectContainer;
  *
  */
 
-public class TrackAction extends AbstractAction{
+public class TrackAction implements IAction{
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db) throws ServletException{
 		RequestDispatcher disp = null;
 		

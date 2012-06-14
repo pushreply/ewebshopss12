@@ -33,10 +33,10 @@ import com.db4o.ext.Db4oException;
  * @author roha0001
  * 
  */
-public class AddressAction extends AbstractAction {
+public class AddressAction implements IAction {
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 

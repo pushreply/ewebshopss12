@@ -30,10 +30,10 @@ import com.db4o.ObjectContainer;
  * 
  */
 
-public class AlbumAction extends AbstractAction {
+public class AlbumAction implements IAction {
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 		

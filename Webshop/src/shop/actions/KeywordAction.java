@@ -19,7 +19,7 @@ import com.db4o.ObjectContainer;
  * @author Andreas
  * 
  */
-public class KeywordAction extends AbstractAction {
+public class KeywordAction implements IAction {
 
 	@Override
 	public void process(HttpServletRequest request,

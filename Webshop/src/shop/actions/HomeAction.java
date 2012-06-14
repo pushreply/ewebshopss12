@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.db4o.ObjectContainer;
 
-public class HomeAction extends AbstractAction {
+public class HomeAction implements IAction{
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
