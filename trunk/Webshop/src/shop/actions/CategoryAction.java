@@ -19,7 +19,7 @@ import com.db4o.ObjectContainer;
  * @author Andreas
  * 
  */
-public class CategoryAction extends AbstractAction {
+public class CategoryAction implements IAction {
 
 	@Override
 	public void process(HttpServletRequest request,

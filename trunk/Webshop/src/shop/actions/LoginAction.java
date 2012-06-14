@@ -22,10 +22,10 @@ import com.db4o.ObjectContainer;
  * 
  */
 
-public class LoginAction extends AbstractAction {
+public class LoginAction implements IAction {
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 

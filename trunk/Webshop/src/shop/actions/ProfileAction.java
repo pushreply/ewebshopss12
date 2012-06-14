@@ -12,12 +12,12 @@ import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
 
-public class ProfileAction extends AbstractAction {
+public class ProfileAction implements IAction{
 
 	private DBCustomer user;
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException, IOException {
 

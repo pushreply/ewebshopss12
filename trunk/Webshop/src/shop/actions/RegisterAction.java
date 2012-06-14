@@ -32,10 +32,10 @@ import com.db4o.ext.Db4oException;
  * 
  */
 
-public class RegisterAction extends AbstractAction {
+public class RegisterAction implements IAction{
 
 	@Override
-	protected void process(HttpServletRequest request,
+	public void process(HttpServletRequest request,
 			HttpServletResponse response, ObjectContainer db)
 			throws ServletException {
 
