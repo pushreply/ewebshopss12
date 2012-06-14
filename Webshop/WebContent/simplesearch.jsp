@@ -32,13 +32,12 @@
     	<c:out value = "${keyword.keywordName}"/></li>
     </c:forEach></ul></td>
     </tr>
-			<td><input type="hidden" name="action" value="albumsearch"></td>
-			<td><input type="hidden" name="search" value="true"><td>
-			<td  class="table-label"></td>
-			<td><input type="submit" value="Suchen"></td>
 		<tr>
 	</table>
-		</form>
+		<input type="hidden" name="action" value="albumsearch"> <input
+			type="hidden" name="search" value="true"> <input type="submit"
+			value="Suchen">
+	</form>
 </body>
 <c:import url="footer.jsp" />
 </html>

@@ -13,7 +13,7 @@
 			type="password" /> <input name="action" type="hidden" value="login" /></li>
 	</ul>
 	<input type="submit" name="action" value="Login" />
-	<p>
-		<a href="register.jsp">Jetzt kostenlos Registrieren</a>
+</form>
+<a href="register.jsp">Jetzt kostenlos Registrieren</a>
 
-		<c:import url="footer.jsp" />
+<c:import url="footer.jsp" />

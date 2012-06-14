@@ -8,12 +8,9 @@
 
 <form action="controller" method="post">
 <ul>
-Bitte wählen Sie einen anderen Benutzernamen: 
-<li><input name="username" type="text"/></li>
-und ein Kennwort: 
-<li><input name="pw1" type="password" value=""/></li>
-Bitte das Kennwort bestätigen:
-<li><input name="pw2" type="password"/></li>
+<li><div class="label">Wählen Sie einen anderen Benutzernamen:</div> <input name="username" type="text"/></li>
+<li><div class="label">und ein Kennwort:</div> <input name="pw1" type="password" value=""/></li>
+<li><div class="label">Bitte bestätigen Sie das Kennwort erneut:</div><input name="pw2" type="password"/></li>
 </ul>
 
 <input type="submit" name="action" value="Registrieren" > 
