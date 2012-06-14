@@ -8,33 +8,26 @@
 <strong>Neue Registrierung </strong>
 <p>
 <ul>
-Wählen Sie einen Benutzernamen:
-<li><input name="username" type="text"/>
-<input name="action" type="hidden" value="register"/>
-</li>
-und ein Kennwort: 
-<li><input name="pw1" type="password" value=""/>
-<input name="action" type="hidden" value="register" />
-</li>
-Bitte bestätigen Sie das Kennwort erneut:
-<li><input name="pw2" type="password"/></li>
-<p>
+<li><div class="label">Wählen Sie einen Benutzernamen:</div> <input name="username" type="text"/></li>
+<li><div class="label">und ein Kennwort:</div> <input name="pw1" type="password" value=""/></li>
+<li><div class="label">Bitte bestätigen Sie das Kennwort erneut:</div><input name="pw2" type="password"/></li>
+
+<li>
 <strong>Wir benötigen folgende Angaben von Ihnen:</strong>
-<p>
+
+<li><div class="label">
 Anrede: 
+</div>
 <li><input type="radio" name="gender" value="male" /> Herr &nbsp;
 <input type="radio" name="gender" value="female" checked="checked" />Frau</li>
-Vorname:
-<li><input name="fname" type="text"/></li>
-Nachname:
-<li><input name="lname" type="text"/></li>
-Strasse und Hausnummer (Beispiel: Amerikastr. 1):
-<li><input name="street" type="text"/></li>
-PLZ und Land (Beispiel: 66482 Zweibrücken):
-<li><input name="country" type="text"/></li>
+
+<li><div class="label">Vorname:</div><input name="fname" type="text"/></li>
+<li><div class="label">Nachname:</div><input name="lname" type="text"/></li>
+<li><div class="label">Strasse und Hausnummer (Beispiel: Amerikastr. 1):</div><input name="street" type="text"/></li>
+<li><div class="label">PLZ und Stadt (Beispiel: 66482 Zweibrücken):</div><input name="country" type="text"/></li>
 
 </ul>
-<input type="submit" name="action" value="Registrieren" > 
+<input type="submit" value="Registrieren" > 
 <input type="hidden" name="action"value="register"/>
 	<input type="reset" value="Reset">
 </form>

@@ -20,7 +20,7 @@
 <body onLoad="setTimeout('delayer()', 1000)">
 	<c:choose>
 		<c:when test="${empty username}">
-			Sie sind nun ausgeloggt und </a>
+			Sie sind nun ausgeloggt und 
 		</c:when>
 		<c:when test="${not empty username}">
 			Willkommen <strong>${username}</strong>, Sie 
