@@ -21,6 +21,7 @@ import com.db4o.ObjectContainer;
  * Initialize an empty Database with predefined Objects for demonstration purposes. 
  * @author mukunzi
  * @author Andreas
+ * @author Benjamin
  * 
  */
 
@@ -102,8 +103,10 @@ public class DemoDaten {
 		addresses5.add(adresses.get(9));
 		DBCustomer customer5 = new DBCustomer("oct234", "weru5", addresses5);
 		daoCustomer.create(customer5);
+		
+		
 
-		// Track
+		/*// Track
 		String path = "";
 		for (int i = 1; i <= 10; i++) {
 			// set path for next iteration
@@ -118,7 +121,7 @@ public class DemoDaten {
 
 		// Categories
 		String[] categories = { "Rock", "Pop", "HipHop", "Rock'n'Roll", "Rap",
-				"Romance", "Opera", "Schlager", "Metal" };
+				"Romance", "Opera", "Schlager", "Metal", "Techno", "House"};
 		for (String categorie : categories) {
 			daoCategory.create(new DBCategory(categorie));
 		}
@@ -157,7 +160,7 @@ public class DemoDaten {
 					(int) (Math.random() * 500) + 1, i + 5, "Label" + i + " "
 							+ i + 1 + " " + i + 2, albumKeywords,
 					albumCategories, albumTracks));
-		}
+		}*/
 		db.close();
 		System.out.println("Testdaten wurden geschrieben");
 	}
@@ -167,7 +170,7 @@ public class DemoDaten {
 	 * @param allItems
 	 * @return
 	 */
-	private static <T> List<T> addRandom(List<T> allItems) {
+	/*private static <T> List<T> addRandom(List<T> allItems) {
 		List<T> tempItemsCopy = allItems;
 		List<T> albumItem = new LinkedList<T>();
 		// ensures that at least one item is in the album
@@ -179,5 +182,5 @@ public class DemoDaten {
 				albumItem.add(item);
 		}
 		return albumItem;
-	}
+	}*/
 }
