@@ -34,8 +34,8 @@
     </tr>
 		<tr>
 	</table>
-		<input type="hidden" name="action" value="albumsearch"> <input
-			type="hidden" name="search" value="true"> <input type="submit"
+		<inputtype="hidden" name="action" value="albumsearch"> <input
+			type="hidden" name="search" value="true"> <input  class="userbutton" type="submit"
 			value="Suchen">
 	</form>
 </body>
