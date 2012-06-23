@@ -13,17 +13,17 @@
 		enctype="multipart/form-data" onSubmit="return validate(this,var_1)">
 		<table>
 			<tr>
-				<td class="table-label">Titel:</td>
+				<td class="table-label">Titel: </td>
 				<td><input type="text" name="titel" type="text">
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Artist:</td>
+				<td class="table-label">Artist: </td>
 				<td><input type="text" name="artist" type="text">
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Preis:</td>
+				<td class="table-label">Preis: </td>
 				<td><input type="text" name="price" type="text">
 				</td>
 			</tr>
@@ -33,17 +33,17 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Anzahl der Tracks:</td>
+				<td class="table-label">Anzahl der Tracks: </td>
 				<td><input type="text" name="trackanzahl" type="text">
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Anzahl der Disks:</td>
+				<td class="table-label">Anzahl der Disks: </td>
 				<td><input type="text" name="diskanzahl" type="text">
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Lagerbestand</td>
+				<td class="table-label">Lagerbestand: </td>
 				<td><input type="text" name="albumanzahl" type="text">
 				</td>
 			</tr>
