@@ -9,6 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.db4o.ObjectContainer;
 
+/**
+ * Handles "Home" Button:
+ * forward link "Home" to index.jsp.
+ * 
+ * @author Hasiholan
+ */
+
 public class HomeAction implements IAction{
 
 	@Override

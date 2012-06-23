@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * @author roha0001
+ * @author Hasiholan
  * @author Andreas
  * @author mukunzi
  *

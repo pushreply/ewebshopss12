@@ -6,7 +6,7 @@ package shop.dto;
 import java.io.Serializable;
 
 /**
- * @author roha0001,Mukunzi
+ * @author Hasiholan, Mukunzi
  *
  */
 public class DBAddress extends DBUUIDBase implements Serializable{

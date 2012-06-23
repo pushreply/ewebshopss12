@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
- * @author roha0001
+ * @author Hasiholan
  * @author mukunzi
  *
  */

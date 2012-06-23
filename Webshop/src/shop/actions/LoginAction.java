@@ -17,7 +17,7 @@ import com.db4o.ObjectContainer;
  * - username/password is false
  * - username/password is empty
  * 
- * @author roha0001
+ * @author Hasiholan
  * 
  * 
  */

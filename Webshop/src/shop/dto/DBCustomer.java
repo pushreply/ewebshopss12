@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
- * @author roha0001,Mukunzi
+ * @author Hasiholan, Mukunzi
  * 
  */
 public class DBCustomer extends DBUUIDBase implements Serializable{
