@@ -12,6 +12,13 @@ import shop.dto.DBCustomer;
 
 import com.db4o.ObjectContainer;
 
+/**
+ * This action handles User profile
+ * Function: show profile: first-lastname and addresses.
+ * 
+ * @author Hasiholan
+ * 
+ */
 public class ProfileAction implements IAction{
 
 	private DBCustomer user;

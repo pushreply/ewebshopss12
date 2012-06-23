@@ -10,30 +10,28 @@ import com.db4o.ext.Db4oException;
 import com.db4o.query.Predicate;
 import com.db4o.query.Query;
 
-/*
- * @author: roha0001
+/**
+ * This Class handles DB queries for login, registration and user addresses 
+ * 
+ * @author Hasiholan
  */
 
 public class DAOCustomer{
 	
 	DBCustomer result = null;
 	
-	/*
-	 * default constructor
+	/**
+	 * Default constructor
 	 */
 	public DAOCustomer() { super(); }
 	
-	/* 
-	 * NQ.
+	/**
+	 * Native Query:
 	 * match username and password, for login process, return boolean value
 	 */
 	public boolean isMatchUser(final String username, final String password, ObjectContainer db){
 		List<DBCustomer> customerlist = db.query(new Predicate<DBCustomer>() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = -6286611367952498800L;
-
 			public boolean match(DBCustomer candidate) {
 				return candidate.getUsername().equals(username) && candidate.getPassword().equals(password);
 			}
@@ -43,9 +41,9 @@ public class DAOCustomer{
 	}
 	
 	
-	/*
-	 * SODA.
-	 * match username, check whether the username is taken (for registration process), return boolean value
+	/**
+	 * SODA Query
+	 * try to match username, check whether the username is taken (for registration process), return boolean value
 	 */
 	public boolean isMatchUser(String username, ObjectContainer db){
 		Query query = db.query();
@@ -57,7 +55,7 @@ public class DAOCustomer{
 	}
 	
 	
-	/*
+	/**
 	 * find customer by username
 	 */
 	public DBCustomer findUser(String username, ObjectContainer db){
@@ -73,7 +71,7 @@ public class DAOCustomer{
 		}
 	}
 	
-	/*
+	/**
 	 * read user data: gender, firstname, lastname, address (street, country) 
 	 */
 	public DBCustomer readUserData(String uName, ObjectContainer db){

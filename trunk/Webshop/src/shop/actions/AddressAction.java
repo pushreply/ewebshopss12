@@ -30,7 +30,7 @@ import com.db4o.ext.Db4oException;
  * 
  * @param street, country, art, firstName, lastName
  * 
- * @author roha0001
+ * @author Hasiholan
  * 
  */
 public class AddressAction implements IAction {
@@ -58,12 +58,13 @@ public class AddressAction implements IAction {
 		
 		HttpSession session = request.getSession(true);
 		session.getAttribute("username");
-	
+		
 		/*
 		 * adding new address, or updating an edited address 
 		 */
 		if (request.getParameter("address")!=null &&
-				request.getParameter("address").equals("addnew")) {
+				request.getParameter("address").equals("addnew")) 
+		{
 			try {				
 				DBAddress address = new DBAddress(street, country, firstName, lastName, gender, art);
 				user.getAddresses().add(address);

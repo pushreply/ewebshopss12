@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 import com.db4o.ObjectContainer;
 
 /**
- * This Action handles LOGOUT. 
+ * This Action handles LOGOUT by invalidating the user session
  * 
- * @author roha0001
+ * @author Hasiholan
  * 
  * 
  */
