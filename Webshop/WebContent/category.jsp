@@ -9,7 +9,7 @@
 		<form action="controller" method="post">
 			<input type="text" name="addCategory" value=""> <input
 				type="hidden" name="action" value="category"> <input
-				type="submit" value="Hinzufügen">
+				class="userbutton" type="submit" value="Hinzufügen">
 		</form>
 	</c:when>
 </c:choose>

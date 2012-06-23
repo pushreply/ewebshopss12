@@ -16,29 +16,32 @@
 		<c:if test="${ not empty album.cover}">
 			<img
 				src="imageDisplayProcess?identifier=<c:out value="${album.identifier}"/>"
-				width=120 height=130 alt="${album.albumTitel} - ${album.artist}"
+				width=160 height=160 alt="${album.albumTitel} - ${album.artist}"
 				title="${album.albumTitel} - ${album.artist}" />
 		</c:if>
 	</div>
 	<ul id="album-info">
-		<li><div class="label">Title:</div> ${album.albumTitel}</li>
-		<li><div class="label">Artist:</div> ${album.artist}<li><div class="label">Disk Anzahl:</div> ${album.numberOfDisks}</li>
-		<li><div class="label">Preis:</div> ${album.price}</li>
-	<li><div class="label">Lagerbestand:</div> ${album.amount}</li>
-	<li><div class="label">Anzahl der Tracks:</div>${album.numberOfTracks}</li>
-	<li><div class="label">Label:</div> ${album.label}</li>
-	<li><div class="label">Kategorien:</div>
-		<ul class="album-sublist">
+		<li><div class="albumlabel">Title:</div> ${album.albumTitel}</li>
+		<li><div class="albumlabel">Artist:</div> ${album.artist}
+		<li><div class="albumlabel">Disk Anzahl:</div> ${album.numberOfDisks}</li>
+		<li><div class="albumlabel">Preis:</div> ${album.price}</li>
+	<li><div class="albumlabel">Lagerbestand:</div> ${album.amount}</li>
+	<li><div class="albumlabel">Anzahl der Tracks:</div>${album.numberOfTracks}</li>
+	<li><div class="albumlabel">Label:</div> ${album.label}</li>
+	<li><div class="albumlabel">Kategorien:</div>
+<!-- 		<ul class="album-sublist"> -->
 			<c:forEach items="${album.categories}" var="category">
 				<li><c:out value="${category.categoryName}" /></li>
 			</c:forEach>
-		</ul></li>
-		<li><div class="label">Schlagwörter:</div>
-		<ul class="album-sublist">
+<!-- 		</ul></li> -->
+<!-- 		<li> -->
+	
+		<div class="albumlabel">Schlagwörter:</div>
+<!-- 		<ul class="album-sublist"> -->
 			<c:forEach items="${album.keywords}" var="keyword">
-				<li><c:out value="${keyword.keywordName}" /></li>
+				<c:out value="${keyword.keywordName}" />
 			</c:forEach>
-		</ul></li>
+<!-- 		</ul></li> -->
 </ul>
 </div>
 <ul id="album-features">
@@ -46,20 +49,20 @@
 		<li><form action="controller" method="get">
 				<input type="hidden" name="action" value="album"> <input
 					type="hidden" name="changeAlbumInfo" value="${album.identifier}">
-				<input type="submit" value="Bearbeiten">
+				<input  class="userbutton"  type="submit" value="Bearbeiten">
 			</form></li>
 
 		<li><form action="controller" method="post">
 				<input type="hidden" name="action" value="album"> <input
 					type="hidden" name="delete" value="${album.identifier}"> <input
-					type="submit" value="Album l&ouml;schen">
+					 class="delbutton" type="submit" value="Album l&ouml;schen">
 			</form></li>
 	</c:if>
 	<li><form action="controller" method="get">
 			<input type="text" name="anzahl" value="1"> <input
 				type="hidden" name="action" value="orderalbum"> <input
 				type="hidden" name="PutAlbumInSessionID" value="${album.identifier}">
-			<input type="submit" value="In den Warenkorb">
+			<input  class="userbutton" type="submit" value="In den Warenkorb">
 		</form></li>
 </ul>
 
@@ -68,7 +71,7 @@
 	<h2>Neue Tracks hinzufügen</h2>
 	<form action="controller" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="identifier" value="${album.identifier}">
-		<input type="file" name="file" id="file"> <input type=submit
+		<input type="file" name="file" id="file"> <input class="userbutton" type=submit
 			value='Upload File'>
 	</form>
 </c:if>
@@ -103,7 +106,7 @@
 					<td>
 						<form action="loadtrack" method="get">
 							<input type="hidden" name="identifier"
-								value="${track.identifier}"> <input type="submit"
+								value="${track.identifier}"> <input class="userbutton" type="submit"
 								value="Abspielen">
 						</form>
 					</td>
@@ -114,7 +117,7 @@
 									type="hidden" name="changeTrackData"
 									value="${track.identifier}"> <input type="hidden"
 									name="albumIdentifier" value="${album.identifier}"> <input
-									type="submit" value="Editieren">
+									 class="userbutton" type="submit" value="Editieren">
 							</form>
 						</td>
 					</c:if>

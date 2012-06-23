@@ -40,7 +40,7 @@
           <form action="controller" method="get">
              <input type="hidden" name="action" value="orderalbum"> 
 			 <input type="hidden" name="DeleteAlbumFromSessionID" value="${album.identifier}"> 
-			 <input type="submit" value="Löschen">
+			 <input class="delbutton" type="submit" value="Löschen">
 		  </form>
       </td>
     </tr>
@@ -58,15 +58,15 @@
 <form action="controller" method="get">
    <input type="hidden" name="action" value="orderalbum"> 
    <input type="hidden" name="weiterealben" value="alben"> 
-   <input type="submit" value="Weitere Alben bestellen">
+   <input class="userbutton" type="submit" value="Weitere Alben bestellen">
 </form>
-
+<p>
 <c:choose>
    <c:when test="${not empty sessionScope.username}">
      <form action="controller" method="get">
              <input type="hidden" name="action" value="orderalbum"> 
 			 <input type="hidden" name="order" value="alben"> 
-			 <input type="submit" value="Bestellen">
+			 <input class="userbutton" type="submit" value="Bestellen">
      </form>
   </c:when>
   <c:otherwise>

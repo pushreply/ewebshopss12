@@ -32,22 +32,20 @@
 <p>
 <h3>Neue Adresse hinzufügen </h3>
 <form action="controller" method="post">
+
 <ul>
-	<li><input type="radio" name="art" value="delivery" checked="checked"/> Lieferadresse &nbsp;
+	<li><input type="radio" name="art" value="delivery" checked="checked"/>Lieferadresse &nbsp;
 		<input type="radio" name="art" value="billing" />Rechnungsadresse
 	</li>
-	<li>Vorname:</li>
-	<li><input name="firstName" type="text"/></li>
-	<li>Nachname:</li>
-	<li><input name="lastName" type="text"/></li>
-	<li>Strasse - HausNr.:</li>
-	<li><input name="street" type="text"/></li>
-	<li>PLZ - Land:</li>
-	<li><input name="country" type="text"/></li>
-</ul>
-	<input type="submit" value="Adresse Speichern">
+	<li><div class="labeluser">Vorname:</div><input name="firstName" type="text"/></li>
+	<li><div class="labeluser">Nachname:</div><input name="lastName" type="text"/></li>
+	<li><div class="labeluser">Strasse - HausNr.:</div><input name="street" type="text"/></li>
+	<li><div class="labeluser">PLZ - Stadt:</div><input name="country" type="text"/></li>
+</ul> 
+	<input class="userbutton" type="submit" value="Adresse Speichern">
 	<input type="hidden" name="action" value="address"> 
 	<input name="address" type="hidden" value="addnew"/>
+	
 </form>
 				
 <c:import url="footer.jsp" />

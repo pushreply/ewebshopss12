@@ -48,35 +48,43 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="table-label">Kategorie:</td>
-				<td><c:forEach items="${categories}" var="category">
+			<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				<fieldset>
+			<legend>Kategorie:</legend>
+			<c:forEach items="${categories}" var="category">
 						<li><input type="checkbox" id="{category.categoryName}"
 							name="category" value="${category.identifier}"${fn:contains(parts.category, '{category.identifier}') ? 'categoried' : ''}>
 							<c:out value="${category.categoryName}" />
 						</li>
-					</c:forEach>
-			</tr>
-			<tr>
-				<td class="table-label">Schlagw&ouml;rter:</td>
-				<td><ul class="bulletless-list">
+					</c:forEach></fieldset>
+			
+				<td></td>
+				<td>
+				<fieldset>
+					<legend>Schlagw&ouml;rter:</legend>
 						<c:forEach items="${keywordies}" var="keyword">
 							<li><input type="checkbox" id="{keyword.keywordName}"
 								name="keyword" value="${keyword.identifier}"${fn:contains(parts.keyword, '{keyword.identifier}') ? 'keywordied' : ''}>
 								<c:out value="${keyword.keywordName}" />
 							</li>
 						</c:forEach>
-					</ul>
+				</fieldset>
 				</td>
+				
 			</tr>
 			<tr>
 				<td class="table-label">Cover:</td>
-				<td><input type="file" name="coverpage" value="Datei auswählen"
+				<td><input class="userbutton" type="file" name="coverpage" value="Datei auswählen"
 					type="text">
 				</td>
 			</tr>
 			<tr>
 				<td class="table-label"></td>
-				<td><input type="submit" name="senden" value="senden"
+				<td><input class="userbutton" type="submit" name="senden" value="Senden"
 					onClick="showHint()"
 					onclick="return validate(this.form,var_1,msg_1)">
 				</td>
