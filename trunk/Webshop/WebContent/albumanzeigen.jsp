@@ -10,7 +10,7 @@
 <div id="albumpage-top">
 	<div id="album-image">
 		<c:if test="${empty album.cover}">
-			<img src="images/bild.jpg" width=120 height=130 alt="bild"
+			<img src="images/bild.jpg" width=160 height=160 alt="bild"
 				alt="Kein Bild vorhanden" title="Kein Bild vorhanden">
 		</c:if>
 		<c:if test="${ not empty album.cover}">
