@@ -84,7 +84,7 @@
 			</tr>
 			<tr>
 				<td class="table-label"></td>
-				<td><input class="userbutton" type="submit" name="senden" value="Senden"
+				<td><input class="userbutton" type="submit" name="senden" value="senden"
 					onClick="showHint()"
 					onclick="return validate(this.form,var_1,msg_1)">
 				</td>
